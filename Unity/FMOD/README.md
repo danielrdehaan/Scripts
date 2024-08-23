@@ -28,38 +28,54 @@ Before using these scripts, ensure your Unity project is connected to an FMOD pr
 
 ### FMODAnimationEventTriggers
 
-**General Setup:**
-1. Add the `FMODAnimationEventTriggers` script to the Player GameObject.
-2. In the Inspector, configure the `AnimationEventTriggerPairs`:
-   - Click the plus button to add a new pair.
-   - Set "Event Name" to the identifying word that will be called via a function call from the desired animation timeline.
-   - Select the desired FMOD event.
-3. Configure the animation:
-   - Open the game object's Animator or Animation window.
-   - Select the desired animation and scrub through the timeline to the desired moment for the sound to be triggered.
-   - Add an animation event at this frame and set "FMODAnimationEventTrigger" as the function name with whatever string you set as the "Event Name" in step 2.
+**Setup:**
+1. Add the Script to the desired GameObject**:
+2. Configure the Script in the Inspector:
+    - In the Inspector, you'll see the `AnimationEventTriggerPairs` array. Click on the plus button to add a new element to this list.
+    - For each element:
+        - Enter an indentifying string as the event name (e.g. "Step").
+        - Use the magnifying glass icon to locate and select the desired FMOD event.
+3. Set Up Animation Events:
+    - Navigate to the gameObject's Animator or Animation window (depending on your setup).
+    - Select the desired animation and scrub through the animation timeline to find the moment you want the FMOD sound to be triggered.
+    - Under Events in the Animation window, click the plus button to add a new event at the specific frame.
+    - Enter "FMODAnimationEventTrigger" as the function name and the identifying string (e.g. "Step") as the parameter. 
+    - Link the animation event to the GameObject that contains the `FMODAnimationEventTriggers` script component by dragging it from the Project panel.
+4. Add any additional events to the animation timeline following these same steps.
 
 ### FMODButtonEventControl
 
-**General Setup:**
+**Setup:**
 1. Attach the `FMODButtonEventControl` script to a GameObject managing UI, such as the canvas.
-2. In the Inspector, configure the `buttonEventPairs` array:
-   - For each button, drag it into the `button` field.
-   - Assign the FMOD event for hover to `FmodHoverEvent` and for click to `FmodClickEvent`.
+2. Increase the size of this array to match the number of buttons you want to enhance with sound.
+3. For each element in the array:
+    - Drag the corresponding UI button from the Hierarchy into the `button` field.
+    - Use the magnifying glass icon to assign the FMOD event for hover to the `FmodHoverEvent` field.
+    - Similarly, assign the FMOD event for click to the `FmodClickEvent` field.
 
 ### FMODSliderParameterControl
 
-**General Setup:**
-1. Add the `FMODSliderParameterControl` script to a GameObject managing audio parameters.
-2. In the Inspector, configure the `SliderParameterPairs` array:
-   - Link each slider to an FMOD parameter, ensuring the parameter names match exactly.
+**Setup:**
+1. Add the Script to a GameObject:
+    - Select a GameObject in your scene where you want to manage audio parameters. This could be a dedicated audio control panel or any other GameObject. Add the `FMODSliderParameterControl` script to this GameObject.
+2. Configure the Script in the Inspector:
+    - With the GameObject selected, go to the Inspector where the `FMODSliderParameterControl` script is attached. You will see the `SliderParameterPairs` array. Set the size of this array to match the number of sliders you intend to use for controlling FMOD parameters.
+    - For each element in the array:
+        - Drag the corresponding slider from the Hierarchy into the `soundSlider` field.
+        - Enter the name of the FMOD parameter that this slider will control into the `fmodParameterName` field. **It's crucial that the parameter name exactly matches the one defined in FMOD**.
+        - In addition, since this script does not currently support any value scaling, care should be taken to match min/max values between the slider in Unity and the parameter in FMOD
 
 ### FMODToggleParameterControl
 
-**General Setup:**
-1. Attach the `FMODToggleParameterControl` script to a GameObject for managing binary audio parameters.
-2. In the Inspector, configure the `ToggleParameterPairs` array:
-   - Link each toggle and set the corresponding FMOD parameter name.
+**Setup:**
+1. Add the Script to a GameObject:
+    - Select a GameObject in your scene where you want to manage audio parameters. This could be a dedicated audio control panel or any other GameObject. Add the `FMODSliderParameterControl` script to this GameObject.
+2. Configure the Script in the Inspector:
+    - With the GameObject selected, go to the Inspector where the `FMODSliderParameterControl` script is attached. You will see the `SliderParameterPairs` array. Set the size of this array to match the number of sliders you intend to use for controlling FMOD parameters.
+    - For each element in the array:
+        - Drag the corresponding slider from the Hierarchy into the `soundSlider` field.
+        - Enter the name of the FMOD parameter that this slider will control into the `fmodParameterName` field. It's crucial that the parameter name exactly matches the one defined in FMOD.
+        - In additions, since this script does not currently support any value scaling, care should be taken to match these values between the slider in Unity and the parameter in FMOD
 
 ## Conclusion
 
