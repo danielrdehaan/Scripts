@@ -5,10 +5,10 @@ Welcome to the FMOD Unity Audio Control Scripts repository! This collection of c
 ## Scripts Overview
 
 This repository includes scripts for:
--   **FMODAnimationEventTriggers**: Trigger FMOD events based on Unity animations.
--   **FMODButtonEventControl**: Assign FMOD events to UI button interactions (hover and click).
--   **FMODSliderParameterControl**: Dynamically adjust FMOD parameters using Unity UI sliders.
--   **FMODToggleParameterControl**: Manage binary FMOD parameters with Unity UI toggles.
+-    **FMODAnimationEventTriggers**: Trigger FMOD events based on Unity animations.
+-    **FMODButtonEventControl**: Assign FMOD events to UI button interactions (hover and click).
+-    **FMODSliderParameterControl**: Dynamically adjust FMOD parameters using Unity UI sliders.
+-    **FMODToggleParameterControl**: Manage binary FMOD parameters with Unity UI toggles.
 
 These scripts are developed to be reusable components, enabling quick and efficient integration of sophisticated audio controls in any game or interactive application.
 
@@ -39,17 +39,6 @@ Before using these scripts, ensure your Unity project is connected to an FMOD pr
    - Select the desired animation and scrub through the timeline to the desired moment for the sound to be triggered.
    - Add an animation event at this frame and set "FMODAnimationEventTrigger" as the function name with whatever string you set as the "Event Name" in step 2.
 
-**Example Setup:**
--   **Objective:** Trigger sound effects synchronously with the player's walking animation.
--   **Step 1:** Add the `FMODAnimationEventTriggers` script to the Player GameObject.
--   **Step 2:** Configure `AnimationEventTriggerPairs` in the Inspector:
-  - Add a new pair, setting "Event Name" as "Step".
-  - Select the FMOD event for footsteps.
--   **Step 3:** Configure the walking animation:
-  - Open the Animator window and select the walking animation.
-  - Scrub to the frame where a foot touches the ground and add an animation event.
-  - Set "FMODAnimationEventTrigger" as the function name and "Step" as the parameter.
-
 ### FMODButtonEventControl
 
 **General Setup:**
@@ -58,13 +47,6 @@ Before using these scripts, ensure your Unity project is connected to an FMOD pr
    - For each button, drag it into the `button` field.
    - Assign the FMOD event for hover to `FmodHoverEvent` and for click to `FmodClickEvent`.
 
-**Example Setup:**
--   **Objective:** Enhance UI button interactions with audio feedback.
--   **Step 1:** Add the `FMODButtonEventControl` script to a UI manager GameObject.
--   **Step 2:** Configure `buttonEventPairs`:
-  - Link a menu button to the `button` field.
-  - Set `FmodHoverEvent` to a subtle hover sound and `FmodClickEvent` to a distinct click sound.
-
 ### FMODSliderParameterControl
 
 **General Setup:**
@@ -72,24 +54,12 @@ Before using these scripts, ensure your Unity project is connected to an FMOD pr
 2. In the Inspector, configure the `SliderParameterPairs` array:
    - Link each slider to an FMOD parameter, ensuring the parameter names match exactly.
 
-**Example Setup:**
--   **Objective:** Use sliders to control background music volume.
--   **Step 1:** Attach the `FMODSliderParameterControl` script to an audio settings panel.
--   **Step 2:** Configure `SliderParameterPairs`:
-  - Link a volume slider to control the FMOD parameter for music volume.
-
 ### FMODToggleParameterControl
 
 **General Setup:**
 1. Attach the `FMODToggleParameterControl` script to a GameObject for managing binary audio parameters.
 2. In the Inspector, configure the `ToggleParameterPairs` array:
    - Link each toggle and set the corresponding FMOD parameter name.
-
-**Example Setup:**
--   **Objective:** Toggle background music on and off.
--   **Step 1:** Add the `FMODToggleParameterControl` script to a settings menu GameObject.
--   **Step 2:** Configure `ToggleParameterPairs`:
-  - Link a music on/off toggle to control the FMOD parameter for enabling/disabling music.
 
 ## Conclusion
 
