@@ -18,6 +18,8 @@ These scripts are developed to be reusable components, enabling quick and effici
 
 Before using these scripts, ensure your Unity project is connected to an FMOD project with all necessary events and parameters set up.
 
+These scripts were developed using Unity Editor version `2022.3.10f1` for FMOD 2.02.20, 64-Bit, Build #139017.
+
 ### Installation
 
 1. Clone this repository or download the ZIP file.
