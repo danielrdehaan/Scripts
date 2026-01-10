@@ -10,6 +10,27 @@ This repository includes scripts for:
 -    **FMODSliderParameterControl**: Dynamically adjust FMOD parameters using Unity UI sliders.
 -    **FMODToggleParameterControl**: Manage binary FMOD parameters with Unity UI toggles.
 
+## Editor Tools
+
+### FMOD Scene Manager
+
+A dockable Editor window that scans all loaded scenes and displays every FMOD reference in one place.
+
+**Open via:** `Tools > FMOD > Scene Manager` (or `Ctrl+Shift+F`)
+
+**Features:**
+- Scans all loaded scenes for FMOD-related fields and components
+- Detects EventReference, BankReference, BusReference, parameter names, and string paths
+- Supports both built-in FMOD components (StudioEventEmitter, StudioBankLoader, StudioListener) and custom scripts
+- Two view modes: flat table (sortable) or hierarchy tree
+- Search and filter by type (Events, Banks, Buses, Parameters, Invalid)
+- Click to select GameObject, double-click to ping in Scene view
+- Preview events directly from the window (requires FMOD project connection)
+- Highlights invalid/missing references
+
+**Installation:**
+Import the `Editor/` folder into your Unity project's Assets. The scripts will be available in the Unity Editor only (excluded from builds).
+
 These scripts are developed to be reusable components, enabling quick and efficient integration of sophisticated audio controls in any game or interactive application.
 
 ## Getting Started

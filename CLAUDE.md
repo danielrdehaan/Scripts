@@ -14,6 +14,11 @@ A collection of scripts for audio workflow enhancement across Unity (FMOD integr
   - `FMODToggleParameterControl.cs` - Control binary FMOD parameters via toggles
   - `FMODAnimationEventTriggers.cs` - Trigger FMOD events from animation timeline
 
+- **Unity/FMOD/Editor/**: Editor-only tools (excluded from builds)
+  - `FMODSceneManager.cs` - Dockable window showing all FMOD references across loaded scenes
+  - `FMODSceneScanner.cs` - Reflection-based scanner for detecting FMOD fields
+  - `FMODFieldInfo.cs` - Data model for scan results
+
 - **Reaper/**: Lua scripts for Reaper DAW
   - `DRD_Open-Original-Reaper-Project-From-Path-In-BWF-Metadata.lua` - Opens source project from BWF metadata
 
