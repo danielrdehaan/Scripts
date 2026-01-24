@@ -21,6 +21,7 @@ A collection of scripts for audio workflow enhancement across Unity (FMOD integr
 
 - **FMOD/**: JavaScript scripts for FMOD Studio
   - `FMOD_CSV_Exporter.js` - Exports all project events to CSV with metadata (banks, parameters, 2D/3D, loop type, etc.)
+  - `FMOD_Obsidian_Sync.js` - Syncs event data to Obsidian vault as markdown files with YAML frontmatter
 
 - **Reaper/**: Lua scripts for Reaper DAW
   - `DRD_Open-Original-Reaper-Project-From-Path-In-BWF-Metadata.lua` - Opens source project from BWF metadata
@@ -47,6 +48,13 @@ using UnityEngine.EventSystems;  // EventTrigger
 **Pattern**: Scripts use the `studio.` API for project access, UI dialogs, and file operations. Menu items are registered via `studio.menu.addMenuItem()`.
 
 **CSV Exporter columns**: Banks, Folder Path, Event Name, Full Path, GUID, Loop Type (One-shot/Loop), Space (2D/3D), Max Voices, Is Default, Notes, User Properties, Parameters, Parameter Details.
+
+**Obsidian Sync**: Exports FMOD events to markdown files with YAML frontmatter for use with Obsidian. Features:
+- Bi-directional workflow: create notes in Obsidian first (planned events), then link when created in FMOD
+- GUID-based matching for established events, name-based matching for new links
+- Preserves user-added frontmatter properties and markdown sections
+- Configuration stored in `{PROJECT_DIR}/.fmod-obsidian/config.json`
+- Works offline with local files, no cloud authentication required
 
 ## Reaper Scripts
 

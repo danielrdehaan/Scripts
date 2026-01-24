@@ -1,0 +1,19 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git -C /Users/danielrdehaan/Documents/GitHub/Scripts status)",
+      "Bash(git -C /Users/danielrdehaan/Documents/GitHub/Scripts diff CLAUDE.md)",
+      "Bash(git -C /Users/danielrdehaan/Documents/GitHub/Scripts log --oneline -5)",
+      "Bash(git -C /Users/danielrdehaan/Documents/GitHub/Scripts add CLAUDE.md)",
+      "Bash(git -C /Users/danielrdehaan/Documents/GitHub/Scripts commit -m \"$\\(cat <<''EOF''\nUpdate CLAUDE.md to document FMOD Studio scripts\n\nAdd documentation for the new FMOD/ folder containing FMOD Studio\nJavaScript scripts, specifically the CSV Exporter tool.\n\nCo-Authored-By: Claude Opus 4.5 <noreply@anthropic.com>\nEOF\n\\)\")",
+      "Bash(git -C /Users/danielrdehaan/Documents/GitHub/Scripts add FMOD/)",
+      "Bash(git -C /Users/danielrdehaan/Documents/GitHub/Scripts commit -m \"$\\(cat <<''EOF''\nAdd FMOD Studio CSV Exporter script\n\nExports all project events to CSV with metadata including banks,\nparameters, 2D/3D spatialisation, loop type, user properties, and more.\n\nCo-Authored-By: Claude Opus 4.5 <noreply@anthropic.com>\nEOF\n\\)\")",
+      "Bash(git -C /Users/danielrdehaan/Documents/GitHub/Scripts push)",
+      "WebSearch",
+      "WebFetch(domain:www.fmod.com)",
+      "Bash(chmod:*)",
+      "Bash(python3:*)",
+      "Bash(xxd:*)"
+    ]
+  }
+}
