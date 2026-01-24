@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Repository Overview
 
-A collection of scripts for audio workflow enhancement across Unity (FMOD integration) and Reaper.
+A collection of scripts for audio workflow enhancement across Unity (FMOD integration), FMOD Studio, and Reaper.
 
 ## Structure
 
@@ -18,6 +18,9 @@ A collection of scripts for audio workflow enhancement across Unity (FMOD integr
   - `FMODSceneManager.cs` - Dockable window showing all FMOD references across loaded scenes
   - `FMODSceneScanner.cs` - Reflection-based scanner for detecting FMOD fields
   - `FMODFieldInfo.cs` - Data model for scan results
+
+- **FMOD/**: JavaScript scripts for FMOD Studio
+  - `FMOD_CSV_Exporter.js` - Exports all project events to CSV with metadata (banks, parameters, 2D/3D, loop type, etc.)
 
 - **Reaper/**: Lua scripts for Reaper DAW
   - `DRD_Open-Original-Reaper-Project-From-Path-In-BWF-Metadata.lua` - Opens source project from BWF metadata
@@ -36,6 +39,14 @@ using UnityEngine.EventSystems;  // EventTrigger
 **Pattern**: All FMOD scripts use serializable structs with arrays for Inspector configuration, linking UI elements to FMOD events/parameters at runtime.
 
 **Important**: FMOD parameter names must exactly match those defined in the FMOD project. Slider/toggle value ranges should match FMOD parameter ranges (no value scaling is implemented).
+
+## FMOD Studio Scripts
+
+**Installation**: Copy `.js` files to FMOD Studio's Scripts folder and restart FMOD Studio. Scripts appear in the Scripts menu.
+
+**Pattern**: Scripts use the `studio.` API for project access, UI dialogs, and file operations. Menu items are registered via `studio.menu.addMenuItem()`.
+
+**CSV Exporter columns**: Banks, Folder Path, Event Name, Full Path, GUID, Loop Type (One-shot/Loop), Space (2D/3D), Max Voices, Is Default, Notes, User Properties, Parameters, Parameter Details.
 
 ## Reaper Scripts
 
