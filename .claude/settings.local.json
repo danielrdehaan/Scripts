@@ -13,7 +13,9 @@
       "WebFetch(domain:www.fmod.com)",
       "Bash(chmod:*)",
       "Bash(python3:*)",
-      "Bash(xxd:*)"
+      "Bash(xxd:*)",
+      "Bash(npm install:*)",
+      "Bash(npm run build:*)"
     ]
   }
 }

@@ -1,0 +1,9 @@
+/* FMOD Sync Plugin Styles */
+
+.fmod-sync-settings .setting-item-info {
+	flex: 1;
+}
+
+.fmod-sync-settings .setting-item-control {
+	flex: 2;
+}

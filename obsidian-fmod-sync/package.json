@@ -1,0 +1,25 @@
+{
+	"name": "obsidian-fmod-sync",
+	"version": "1.0.0",
+	"description": "Import FMOD Studio events from JSON and create markdown notes",
+	"main": "main.js",
+	"scripts": {
+		"dev": "node esbuild.config.mjs",
+		"build": "node esbuild.config.mjs production"
+	},
+	"keywords": [
+		"obsidian",
+		"fmod",
+		"audio",
+		"game-development"
+	],
+	"author": "Daniel de Haan",
+	"license": "MIT",
+	"devDependencies": {
+		"@types/node": "^20.11.0",
+		"builtin-modules": "^3.3.0",
+		"esbuild": "^0.20.0",
+		"obsidian": "latest",
+		"typescript": "^5.3.0"
+	}
+}

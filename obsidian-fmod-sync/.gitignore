@@ -1,0 +1,14 @@
+# Dependencies
+node_modules/
+
+# Build output
+main.js
+
+# IDE
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db

@@ -1,0 +1,10 @@
+{
+	"id": "fmod-sync",
+	"name": "FMOD Sync",
+	"version": "1.0.0",
+	"minAppVersion": "1.0.0",
+	"description": "Import FMOD Studio events from JSON and create markdown notes with folder structure mirroring.",
+	"author": "Daniel de Haan",
+	"authorUrl": "https://github.com/danielrdehaan",
+	"isDesktopOnly": true
+}
