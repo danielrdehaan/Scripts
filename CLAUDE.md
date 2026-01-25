@@ -76,9 +76,18 @@ JSON structure:
 3. Enable in Obsidian Settings > Community plugins
 
 **Settings**:
-- JSON file path: Path to exported `obsidian-sync.json`
-- Output folder: Where to create event notes (default: "FMOD Events")
 - Mirror folder structure: Match FMOD folder hierarchy (default: true)
+- Projects: List of FMOD projects, each with:
+  - Name: Display name for the project
+  - Output folder: Vault folder where event notes are created (with folder picker)
+  - JSON file path: Path to exported `obsidian-sync.json` (with native file picker)
+  - Enabled: Toggle to include/exclude from sync
+
+**Multi-Project Support**:
+- Each project has its own independent output folder
+- Single project: Syncs directly on command
+- Multiple projects: Shows fuzzy picker with "Sync All" option or individual project selection
+- Notes include `project` frontmatter property for filtering/grouping
 
 **Features**:
 - GUID-based matching for established events, name-based matching for new links

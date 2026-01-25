@@ -1,5 +1,6 @@
 import {
 	App,
+	FuzzySuggestModal,
 	Notice,
 	Plugin,
 	PluginSettingTab,
@@ -10,6 +11,10 @@ import {
 } from "obsidian";
 import * as fs from "fs";
 import * as path from "path";
+
+// Electron remote for native file dialogs
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const { remote } = require("electron");
 
 // ============================================================================
 // Types
@@ -52,9 +57,16 @@ interface FMODExportData {
 	events: FMODEvent[];
 }
 
-interface FMODSyncSettings {
+interface FMODProjectConfig {
+	id: string;
+	name: string;
 	jsonFilePath: string;
 	outputFolder: string;
+	enabled: boolean;
+}
+
+interface FMODSyncSettings {
+	projects: FMODProjectConfig[];
 	mirrorFolders: boolean;
 }
 
@@ -76,10 +88,14 @@ interface SyncStats {
 // ============================================================================
 
 const DEFAULT_SETTINGS: FMODSyncSettings = {
-	jsonFilePath: "",
-	outputFolder: "FMOD Events",
+	projects: [],
 	mirrorFolders: true,
 };
+
+interface ProjectPickerItem {
+	type: "all" | "single";
+	project?: FMODProjectConfig;
+}
 
 // ============================================================================
 // Main Plugin
@@ -122,33 +138,123 @@ export default class FMODSyncPlugin extends Plugin {
 	// ========================================================================
 
 	async runSync(): Promise<void> {
-		const { jsonFilePath, outputFolder, mirrorFolders } = this.settings;
+		const enabledProjects = this.settings.projects.filter((p) => p.enabled);
+
+		if (enabledProjects.length === 0) {
+			new Notice(
+				"FMOD Sync: No projects configured. Add projects in settings."
+			);
+			return;
+		}
+
+		if (enabledProjects.length === 1) {
+			// Single project - sync directly
+			await this.syncSingleProject(enabledProjects[0]);
+		} else {
+			// Multiple projects - show picker
+			new ProjectPickerModal(this.app, enabledProjects, async (item) => {
+				if (item.type === "all") {
+					await this.syncProjects(enabledProjects);
+				} else if (item.project) {
+					await this.syncSingleProject(item.project);
+				}
+			}).open();
+		}
+	}
+
+	async syncProjects(projects: FMODProjectConfig[]): Promise<void> {
+		const totalStats: SyncStats = {
+			created: 0,
+			updated: 0,
+			moved: 0,
+			skipped: 0,
+			errors: 0,
+		};
+
+		let successCount = 0;
+		let failCount = 0;
+
+		for (const project of projects) {
+			const stats = await this.syncSingleProject(project, true);
+			if (stats) {
+				successCount++;
+				totalStats.created += stats.created;
+				totalStats.updated += stats.updated;
+				totalStats.moved += stats.moved;
+				totalStats.skipped += stats.skipped;
+				totalStats.errors += stats.errors;
+			} else {
+				failCount++;
+			}
+		}
+
+		const summary = [
+			`FMOD Sync Complete!`,
+			`Projects: ${successCount} synced${failCount > 0 ? `, ${failCount} failed` : ""}`,
+			`Created: ${totalStats.created}`,
+			`Updated: ${totalStats.updated}`,
+			`Moved: ${totalStats.moved}`,
+			`Skipped: ${totalStats.skipped}`,
+			totalStats.errors > 0 ? `Errors: ${totalStats.errors}` : "",
+		]
+			.filter(Boolean)
+			.join("\n");
+
+		new Notice(summary, 5000);
+	}
+
+	async syncSingleProject(
+		project: FMODProjectConfig,
+		silent = false
+	): Promise<SyncStats | null> {
+		const { mirrorFolders } = this.settings;
 
 		// Validate settings
-		if (!jsonFilePath) {
-			new Notice("FMOD Sync: No JSON file path configured. Check settings.");
-			return;
+		if (!project.jsonFilePath) {
+			if (!silent) {
+				new Notice(
+					`FMOD Sync: No JSON file path configured for "${project.name}". Check settings.`
+				);
+			}
+			return null;
+		}
+
+		if (!project.outputFolder) {
+			if (!silent) {
+				new Notice(
+					`FMOD Sync: No output folder configured for "${project.name}". Check settings.`
+				);
+			}
+			return null;
 		}
 
 		// Read and parse JSON
 		let exportData: FMODExportData;
 		try {
-			exportData = await this.readJsonFile(jsonFilePath);
+			exportData = await this.readJsonFile(project.jsonFilePath);
 		} catch (error) {
-			new Notice(`FMOD Sync: Failed to read JSON file.\n${error}`);
-			return;
+			new Notice(
+				`FMOD Sync: Failed to read JSON for "${project.name}".\nPath: ${project.jsonFilePath}\n${error}`
+			);
+			return null;
 		}
 
 		// Validate JSON structure
 		if (!exportData.events || !Array.isArray(exportData.events)) {
-			new Notice("FMOD Sync: Invalid JSON structure - missing events array.");
-			return;
+			new Notice(
+				`FMOD Sync: Invalid JSON structure for "${project.name}" - missing events array.`
+			);
+			return null;
 		}
 
-		new Notice(`FMOD Sync: Processing ${exportData.events.length} events...`);
+		if (!silent) {
+			new Notice(
+				`FMOD Sync: Processing ${exportData.events.length} events for "${project.name}"...`
+			);
+		}
 
-		// Ensure output folder exists
-		const outputPath = normalizePath(outputFolder);
+		// Use project's output folder
+		const outputPath = normalizePath(project.outputFolder);
 		await this.ensureFolderExists(outputPath);
 
 		// Build index of existing notes by GUID and filename
@@ -156,15 +262,15 @@ export default class FMODSyncPlugin extends Plugin {
 		const notesByGuid = new Map<string, { path: string; content: string }>();
 		const notesByName = new Map<string, { path: string; content: string }>();
 
-		for (const [path, content] of existingNotes) {
+		for (const [notePath, content] of existingNotes) {
 			const frontmatter = this.parseFrontmatter(content);
 			const guid = frontmatter.properties["guid"] as string | undefined;
-			const filename = path.split("/").pop()?.replace(".md", "") || "";
+			const filename = notePath.split("/").pop()?.replace(".md", "") || "";
 
 			if (guid) {
-				notesByGuid.set(guid, { path, content });
+				notesByGuid.set(guid, { path: notePath, content });
 			}
-			notesByName.set(filename, { path, content });
+			notesByName.set(filename, { path: notePath, content });
 		}
 
 		// Process events
@@ -185,27 +291,35 @@ export default class FMODSyncPlugin extends Plugin {
 					notesByGuid,
 					notesByName,
 					exportData.exported_at,
+					project.name,
 					stats
 				);
 			} catch (error) {
-				console.error(`FMOD Sync: Error processing event ${event.name}:`, error);
+				console.error(
+					`FMOD Sync: Error processing event ${event.name}:`,
+					error
+				);
 				stats.errors++;
 			}
 		}
 
-		// Show summary
-		const summary = [
-			`FMOD Sync Complete!`,
-			`Created: ${stats.created}`,
-			`Updated: ${stats.updated}`,
-			`Moved: ${stats.moved}`,
-			`Skipped: ${stats.skipped}`,
-			stats.errors > 0 ? `Errors: ${stats.errors}` : "",
-		]
-			.filter(Boolean)
-			.join("\n");
+		// Show summary (only if not silent)
+		if (!silent) {
+			const summary = [
+				`FMOD Sync Complete for "${project.name}"!`,
+				`Created: ${stats.created}`,
+				`Updated: ${stats.updated}`,
+				`Moved: ${stats.moved}`,
+				`Skipped: ${stats.skipped}`,
+				stats.errors > 0 ? `Errors: ${stats.errors}` : "",
+			]
+				.filter(Boolean)
+				.join("\n");
 
-		new Notice(summary, 5000);
+			new Notice(summary, 5000);
+		}
+
+		return stats;
 	}
 
 	// ========================================================================
@@ -302,6 +416,7 @@ export default class FMODSyncPlugin extends Plugin {
 		notesByGuid: Map<string, { path: string; content: string }>,
 		notesByName: Map<string, { path: string; content: string }>,
 		exportedAt: string,
+		projectName: string,
 		stats: SyncStats
 	): Promise<void> {
 		const sanitizedName = this.sanitizeFilename(event.name);
@@ -356,7 +471,12 @@ export default class FMODSyncPlugin extends Plugin {
 		}
 
 		// Generate markdown content
-		const markdown = this.generateMarkdown(event, existingContent, exportedAt);
+		const markdown = this.generateMarkdown(
+			event,
+			existingContent,
+			exportedAt,
+			projectName
+		);
 
 		// Write or update file
 		if (needsMove && existingPath) {
@@ -387,7 +507,8 @@ export default class FMODSyncPlugin extends Plugin {
 	generateMarkdown(
 		event: FMODEvent,
 		existingContent: string | null,
-		exportedAt: string
+		exportedAt: string,
+		projectName: string
 	): string {
 		// Parse existing frontmatter to preserve user properties
 		const existing = existingContent
@@ -403,6 +524,7 @@ export default class FMODSyncPlugin extends Plugin {
 		const fmodProperties = [
 			"status",
 			"guid",
+			"project",
 			"banks",
 			"folder_path",
 			"full_path",
@@ -426,6 +548,7 @@ export default class FMODSyncPlugin extends Plugin {
 		// Then add FMOD properties
 		mergedProps["status"] = "exists";
 		mergedProps["guid"] = event.guid;
+		mergedProps["project"] = projectName;
 		if (event.banks.length > 0) {
 			mergedProps["banks"] = event.banks;
 		}
@@ -448,6 +571,7 @@ export default class FMODSyncPlugin extends Plugin {
 		const orderedKeys = [
 			"status",
 			"guid",
+			"project",
 			"banks",
 			"folder_path",
 			"full_path",
@@ -688,6 +812,90 @@ export default class FMODSyncPlugin extends Plugin {
 }
 
 // ============================================================================
+// Project Picker Modal
+// ============================================================================
+
+class ProjectPickerModal extends FuzzySuggestModal<ProjectPickerItem> {
+	private projects: FMODProjectConfig[];
+	private onChoose: (item: ProjectPickerItem) => void;
+
+	constructor(
+		app: App,
+		projects: FMODProjectConfig[],
+		onChoose: (item: ProjectPickerItem) => void
+	) {
+		super(app);
+		this.projects = projects;
+		this.onChoose = onChoose;
+		this.setPlaceholder("Select a project to sync...");
+	}
+
+	getItems(): ProjectPickerItem[] {
+		const items: ProjectPickerItem[] = [{ type: "all" }];
+		for (const project of this.projects) {
+			items.push({ type: "single", project });
+		}
+		return items;
+	}
+
+	getItemText(item: ProjectPickerItem): string {
+		if (item.type === "all") {
+			return `Sync All (${this.projects.length} projects)`;
+		}
+		return item.project?.name || "";
+	}
+
+	onChooseItem(item: ProjectPickerItem): void {
+		this.onChoose(item);
+	}
+}
+
+// ============================================================================
+// Folder Picker Modal
+// ============================================================================
+
+class FolderPickerModal extends FuzzySuggestModal<TFolder> {
+	private onChoose: (folder: TFolder) => void;
+	private folders: TFolder[];
+
+	constructor(app: App, onChoose: (folder: TFolder) => void) {
+		super(app);
+		this.onChoose = onChoose;
+		this.folders = this.getAllFolders();
+		this.setPlaceholder("Select a folder...");
+	}
+
+	private getAllFolders(): TFolder[] {
+		const folders: TFolder[] = [];
+		const rootFolder = this.app.vault.getRoot();
+
+		const collectFolders = (folder: TFolder): void => {
+			folders.push(folder);
+			for (const child of folder.children) {
+				if (child instanceof TFolder) {
+					collectFolders(child);
+				}
+			}
+		};
+
+		collectFolders(rootFolder);
+		return folders.sort((a, b) => a.path.localeCompare(b.path));
+	}
+
+	getItems(): TFolder[] {
+		return this.folders;
+	}
+
+	getItemText(folder: TFolder): string {
+		return folder.path || "/";
+	}
+
+	onChooseItem(folder: TFolder): void {
+		this.onChoose(folder);
+	}
+}
+
+// ============================================================================
 // Settings Tab
 // ============================================================================
 
@@ -706,33 +914,8 @@ class FMODSyncSettingTab extends PluginSettingTab {
 
 		containerEl.createEl("h2", { text: "FMOD Sync Settings" });
 
-		new Setting(containerEl)
-			.setName("JSON file path")
-			.setDesc(
-				"Path to the obsidian-sync.json file exported from FMOD Studio. Can be absolute path or relative to vault."
-			)
-			.addText((text) =>
-				text
-					.setPlaceholder("/path/to/obsidian-sync.json")
-					.setValue(this.plugin.settings.jsonFilePath)
-					.onChange(async (value) => {
-						this.plugin.settings.jsonFilePath = value;
-						await this.plugin.saveSettings();
-					})
-			);
-
-		new Setting(containerEl)
-			.setName("Output folder")
-			.setDesc("Folder within your vault where FMOD event notes will be created.")
-			.addText((text) =>
-				text
-					.setPlaceholder("FMOD Events")
-					.setValue(this.plugin.settings.outputFolder)
-					.onChange(async (value) => {
-						this.plugin.settings.outputFolder = value;
-						await this.plugin.saveSettings();
-					})
-			);
+		// Global settings section
+		containerEl.createEl("h3", { text: "Global Settings" });
 
 		new Setting(containerEl)
 			.setName("Mirror folder structure")
@@ -748,17 +931,189 @@ class FMODSyncSettingTab extends PluginSettingTab {
 					})
 			);
 
+		// Projects section
+		containerEl.createEl("h3", { text: "Projects" });
+
+		const projectsContainer = containerEl.createDiv({
+			cls: "fmod-projects-container",
+		});
+
+		this.renderProjects(projectsContainer);
+
+		// Add project button
+		new Setting(containerEl).addButton((button) =>
+			button
+				.setButtonText("Add Project")
+				.setCta()
+				.onClick(async () => {
+					const newProject: FMODProjectConfig = {
+						id: this.generateId(),
+						name: `Project ${this.plugin.settings.projects.length + 1}`,
+						jsonFilePath: "",
+						outputFolder: "",
+						enabled: true,
+					};
+					this.plugin.settings.projects.push(newProject);
+					await this.plugin.saveSettings();
+					this.display();
+				})
+		);
+
+		// Instructions section
 		containerEl.createEl("h3", { text: "How to use" });
 
 		const instructions = containerEl.createEl("ol");
 		instructions.createEl("li", {
-			text: 'In FMOD Studio, run "DRD > Export for Obsidian..." to generate the JSON file.',
+			text: 'In FMOD Studio, run "DRD > Export for Obsidian..." to generate a JSON file for each project.',
 		});
 		instructions.createEl("li", {
-			text: "Set the JSON file path above to point to the exported file.",
+			text: "Add each FMOD project above with a unique name and its JSON file path.",
 		});
 		instructions.createEl("li", {
 			text: 'Use the command "FMOD Sync: Import from JSON" or click the audio icon in the ribbon.',
 		});
+		instructions.createEl("li", {
+			text: "If you have multiple projects, a picker will let you sync individual projects or all at once.",
+		});
+	}
+
+	renderProjects(container: HTMLElement): void {
+		container.empty();
+
+		if (this.plugin.settings.projects.length === 0) {
+			container.createEl("p", {
+				text: "No projects configured. Click 'Add Project' to get started.",
+				cls: "fmod-no-projects",
+			});
+			return;
+		}
+
+		for (const project of this.plugin.settings.projects) {
+			this.renderProjectCard(container, project);
+		}
+	}
+
+	renderProjectCard(container: HTMLElement, project: FMODProjectConfig): void {
+		const card = container.createDiv({ cls: "fmod-project-card" });
+
+		// Header with toggle and delete
+		const header = card.createDiv({ cls: "fmod-project-header" });
+
+		// Enable toggle
+		new Setting(header)
+			.setName("Enabled")
+			.addToggle((toggle) =>
+				toggle.setValue(project.enabled).onChange(async (value) => {
+					project.enabled = value;
+					await this.plugin.saveSettings();
+				})
+			);
+
+		// Delete button
+		const deleteBtn = header.createEl("button", {
+			cls: "fmod-delete-btn",
+			text: "Delete",
+		});
+		deleteBtn.addEventListener("click", async () => {
+			const index = this.plugin.settings.projects.findIndex(
+				(p) => p.id === project.id
+			);
+			if (index >= 0) {
+				this.plugin.settings.projects.splice(index, 1);
+				await this.plugin.saveSettings();
+				this.display();
+			}
+		});
+
+		// Project name
+		new Setting(card)
+			.setName("Project name")
+			.setDesc("Display name for this project.")
+			.addText((text) =>
+				text
+					.setPlaceholder("My Game Audio")
+					.setValue(project.name)
+					.onChange(async (value) => {
+						// Check for duplicate names
+						const duplicate = this.plugin.settings.projects.find(
+							(p) => p.id !== project.id && p.name === value
+						);
+						if (duplicate) {
+							new Notice(
+								"A project with this name already exists. Please choose a different name."
+							);
+							return;
+						}
+						project.name = value;
+						await this.plugin.saveSettings();
+					})
+			);
+
+		// Output folder
+		new Setting(card)
+			.setName("Output folder")
+			.setDesc("Folder in your vault where event notes will be created.")
+			.addText((text) =>
+				text
+					.setPlaceholder("FMOD Events/MyProject")
+					.setValue(project.outputFolder)
+					.onChange(async (value) => {
+						project.outputFolder = value;
+						await this.plugin.saveSettings();
+					})
+			)
+			.addButton((button) =>
+				button
+					.setButtonText("Browse")
+					.onClick(() => {
+						new FolderPickerModal(this.app, async (folder) => {
+							project.outputFolder = folder.path || "";
+							await this.plugin.saveSettings();
+							this.display();
+						}).open();
+					})
+			);
+
+		// JSON file path
+		const jsonSetting = new Setting(card)
+			.setName("JSON file path")
+			.setDesc(
+				"Path to the obsidian-sync.json file exported from FMOD Studio."
+			);
+
+		const jsonTextComponent = jsonSetting.addText((text) =>
+			text
+				.setPlaceholder("/path/to/obsidian-sync.json")
+				.setValue(project.jsonFilePath)
+				.onChange(async (value) => {
+					project.jsonFilePath = value;
+					await this.plugin.saveSettings();
+				})
+		);
+
+		jsonSetting.addButton((button) =>
+			button
+				.setButtonText("Browse")
+				.onClick(async () => {
+					const result = await remote.dialog.showOpenDialog({
+						title: "Select FMOD Export JSON File",
+						properties: ["openFile"],
+						filters: [
+							{ name: "JSON Files", extensions: ["json"] },
+							{ name: "All Files", extensions: ["*"] },
+						],
+					});
+
+					if (!result.canceled && result.filePaths.length > 0) {
+						project.jsonFilePath = result.filePaths[0];
+						await this.plugin.saveSettings();
+						this.display();
+					}
+				})
+		);
+	}
+
+	generateId(): string {
+		return Date.now().toString(36) + Math.random().toString(36).substr(2);
 	}
 }

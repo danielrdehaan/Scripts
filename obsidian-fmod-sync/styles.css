@@ -7,3 +7,93 @@
 .fmod-sync-settings .setting-item-control {
 	flex: 2;
 }
+
+/* Projects container */
+.fmod-projects-container {
+	margin-bottom: 1rem;
+}
+
+.fmod-no-projects {
+	color: var(--text-muted);
+	font-style: italic;
+	padding: 1rem;
+	text-align: center;
+}
+
+/* Project card */
+.fmod-project-card {
+	border: 1px solid var(--background-modifier-border);
+	border-radius: 8px;
+	padding: 1rem;
+	margin-bottom: 1rem;
+	background: var(--background-secondary);
+}
+
+.fmod-project-card .setting-item {
+	border-top: none;
+	padding-top: 0.5rem;
+}
+
+.fmod-project-card .setting-item:first-child {
+	padding-top: 0;
+}
+
+/* Project header */
+.fmod-project-header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: 0.5rem;
+	padding-bottom: 0.5rem;
+	border-bottom: 1px solid var(--background-modifier-border);
+}
+
+.fmod-project-header .setting-item {
+	flex: 0 0 auto;
+	border: none;
+	padding: 0;
+	margin: 0;
+}
+
+.fmod-project-header .setting-item-info {
+	display: none;
+}
+
+.fmod-project-header .setting-item-control {
+	flex: 0 0 auto;
+}
+
+/* Delete button */
+.fmod-delete-btn {
+	background: transparent;
+	border: 1px solid var(--text-error);
+	color: var(--text-error);
+	padding: 4px 12px;
+	border-radius: 4px;
+	cursor: pointer;
+	font-size: 0.85rem;
+}
+
+.fmod-delete-btn:hover {
+	background: var(--text-error);
+	color: var(--background-primary);
+}
+
+/* Path input with browse button */
+.fmod-sync-settings .setting-item-control {
+	display: flex;
+	gap: 8px;
+}
+
+.fmod-sync-settings .setting-item-control input[type="text"] {
+	flex: 1;
+}
+
+.fmod-project-card .setting-item-control {
+	display: flex;
+	gap: 8px;
+}
+
+.fmod-project-card .setting-item-control input[type="text"] {
+	flex: 1;
+}
