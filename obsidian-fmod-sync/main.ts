@@ -30,6 +30,80 @@ const { promisify } = require("util");
 const execAsync = promisify(exec);
 
 // ============================================================================
+// FMOD Companion Script
+// ============================================================================
+
+const FMOD_SCRIPT_FILENAME = "FMOD_Obsidian_Sync.js";
+const FMOD_SCRIPT_URL = "https://raw.githubusercontent.com/danielrdehaan/Scripts/main/FMOD/FMOD_Obsidian_Sync.js";
+
+/**
+ * Get the FMOD Studio scripts folder path from the installation path.
+ * - macOS: <app>/Contents/Scripts/
+ * - Windows: <exe directory>/Scripts/
+ */
+function getFmodScriptsFolder(installationPath: string): string {
+	const platform = process.platform;
+	if (platform === "darwin") {
+		// macOS: Scripts folder is inside the .app bundle
+		if (installationPath.endsWith(".app")) {
+			return path.join(installationPath, "Contents", "Scripts");
+		}
+	} else if (platform === "win32") {
+		// Windows: Scripts folder is next to the exe
+		const exeDir = path.dirname(installationPath);
+		return path.join(exeDir, "Scripts");
+	}
+	return "";
+}
+
+/**
+ * Check if the companion script exists in the FMOD Studio scripts folder.
+ */
+function checkCompanionScriptExists(installationPath: string): boolean {
+	const scriptsFolder = getFmodScriptsFolder(installationPath);
+	if (!scriptsFolder) return false;
+	const scriptPath = path.join(scriptsFolder, FMOD_SCRIPT_FILENAME);
+	return fs.existsSync(scriptPath);
+}
+
+/**
+ * Install the companion script to the FMOD Studio scripts folder.
+ * Fetches the latest version from GitHub.
+ */
+async function installCompanionScript(installationPath: string): Promise<{ success: boolean; error?: string }> {
+	const scriptsFolder = getFmodScriptsFolder(installationPath);
+	if (!scriptsFolder) {
+		return { success: false, error: "Could not determine scripts folder path" };
+	}
+
+	// Ensure scripts folder exists
+	try {
+		if (!fs.existsSync(scriptsFolder)) {
+			fs.mkdirSync(scriptsFolder, { recursive: true });
+		}
+	} catch (err) {
+		return { success: false, error: `Could not create scripts folder: ${err}` };
+	}
+
+	// Fetch script from GitHub
+	try {
+		const response = await fetch(FMOD_SCRIPT_URL);
+		if (!response.ok) {
+			return { success: false, error: `Failed to fetch script: ${response.status} ${response.statusText}` };
+		}
+		const scriptContent = await response.text();
+
+		// Write script to file
+		const scriptPath = path.join(scriptsFolder, FMOD_SCRIPT_FILENAME);
+		fs.writeFileSync(scriptPath, scriptContent, "utf8");
+
+		return { success: true };
+	} catch (err) {
+		return { success: false, error: `Failed to install script: ${err}` };
+	}
+}
+
+// ============================================================================
 // Types
 // ============================================================================
 
@@ -1258,10 +1332,45 @@ class FMODSyncSettingTab extends PluginSettingTab {
 		const item = container.createDiv({ cls: "fmod-installation-item" });
 
 		// Version badge
-		const versionBadge = item.createEl("span", {
+		item.createEl("span", {
 			cls: "fmod-installation-version",
 			text: installation.version,
 		});
+
+		// Check if companion script is installed
+		const hasScript = checkCompanionScriptExists(installation.path);
+
+		// Script status indicator
+		if (hasScript) {
+			const statusEl = item.createEl("span", {
+				cls: "fmod-script-status fmod-script-installed",
+				attr: { "aria-label": "Export script installed" },
+			});
+			// Checkmark icon
+			statusEl.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>`;
+		} else {
+			// Install script button
+			const installBtn = item.createEl("button", {
+				cls: "fmod-install-script-btn",
+				text: "Install Export Script",
+				attr: { "aria-label": "Install the FMOD export script for this version" },
+			});
+			installBtn.addEventListener("click", async () => {
+				installBtn.disabled = true;
+				installBtn.textContent = "Installing...";
+
+				const result = await installCompanionScript(installation.path);
+
+				if (result.success) {
+					new Notice("Export script installed. Restart FMOD Studio to use it.");
+					this.display(); // Refresh to show installed status
+				} else {
+					new Notice(`Failed to install script: ${result.error}`);
+					installBtn.disabled = false;
+					installBtn.textContent = "Install Export Script";
+				}
+			});
+		}
 
 		// Path
 		item.createEl("span", {

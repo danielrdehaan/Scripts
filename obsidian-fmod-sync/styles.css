@@ -252,6 +252,45 @@
 	flex-shrink: 0;
 }
 
+/* Script status indicator */
+.fmod-script-status {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-shrink: 0;
+}
+
+.fmod-script-installed {
+	color: var(--text-success);
+}
+
+.fmod-script-installed svg {
+	width: 16px;
+	height: 16px;
+}
+
+/* Install script button */
+.fmod-install-script-btn {
+	font-size: 0.8rem;
+	padding: 4px 10px;
+	background: var(--interactive-accent);
+	color: var(--text-on-accent);
+	border: none;
+	border-radius: 4px;
+	cursor: pointer;
+	flex-shrink: 0;
+	transition: background 0.15s ease;
+}
+
+.fmod-install-script-btn:hover {
+	background: var(--interactive-accent-hover);
+}
+
+.fmod-install-script-btn:disabled {
+	opacity: 0.6;
+	cursor: not-allowed;
+}
+
 /* Version dropdown in project card */
 .fmod-version-container {
 	display: flex;
