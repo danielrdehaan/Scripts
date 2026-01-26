@@ -1204,9 +1204,6 @@ class FMODSyncSettingTab extends PluginSettingTab {
 		containerEl.empty();
 		containerEl.addClass("fmod-sync-settings");
 
-		// Check for newer exports immediately and start polling
-		this.startPolling();
-
 		containerEl.createEl("h2", { text: "FMOD Sync Settings" });
 
 		// FMOD Installations section
@@ -1294,22 +1291,8 @@ class FMODSyncSettingTab extends PluginSettingTab {
 				})
 		);
 
-		// Instructions section
-		containerEl.createEl("h3", { text: "How to use" });
-
-		const instructions = containerEl.createEl("ol");
-		instructions.createEl("li", {
-			text: 'In FMOD Studio, run "DRD > Export for Obsidian..." to generate a JSON file.',
-		});
-		instructions.createEl("li", {
-			text: "Click 'Add Project' above and configure the JSON file path and vault folder.",
-		});
-		instructions.createEl("li", {
-			text: "Run sync to import events. Project name, version, and export time will be extracted automatically.",
-		});
-		instructions.createEl("li", {
-			text: "Use the ribbon icon or command palette to sync. Multiple projects show a picker.",
-		});
+		// Start polling for newer exports AFTER initial render is complete
+		this.startPolling();
 	}
 
 	renderInstallations(container: HTMLElement): void {
@@ -1526,16 +1509,27 @@ class FMODSyncSettingTab extends PluginSettingTab {
 
 			// Find matching installation for this project's version
 			const installations = this.plugin.settings.fmodInstallations;
-			const projectVersion = project.fmodVersion;
+			const projectVersion = project.fmodVersion?.trim();
 			const matchingInstallation = projectVersion
-				? installations.find(i => i.version === projectVersion)
+				? installations.find(i => i.version?.trim() === projectVersion)
 				: null;
 
-			// Get selected installation (user override or matching)
-			const selectedId = project.selectedFmodInstallationId;
-			const selectedInstallation = selectedId
-				? installations.find(i => i.id === selectedId)
-				: matchingInstallation;
+			// Get selected installation
+			// Priority: matching version > user selection > first available
+			let selectedInstallation: FMODInstallation | undefined;
+
+			if (matchingInstallation) {
+				// Always prefer the matching version
+				selectedInstallation = matchingInstallation;
+				// Update saved selection if it doesn't match
+				if (project.selectedFmodInstallationId !== matchingInstallation.id) {
+					project.selectedFmodInstallationId = matchingInstallation.id;
+					this.plugin.saveSettings();
+				}
+			} else if (project.selectedFmodInstallationId) {
+				// Use user's previous selection if no match
+				selectedInstallation = installations.find(i => i.id === project.selectedFmodInstallationId);
+			}
 
 			// Show warning if:
 			// 1. Project version doesn't match any installation, OR
@@ -1559,14 +1553,14 @@ class FMODSyncSettingTab extends PluginSettingTab {
 			if (installations.length > 0) {
 				const select = versionContainer.createEl("select", { cls: "fmod-version-select" });
 
-				// Add placeholder option if no selection
-				if (!selectedInstallation) {
+				// Show "(missing)" placeholder only if project version doesn't match any installation
+				if (projectVersion && !matchingInstallation) {
 					const placeholderOpt = select.createEl("option", {
-						text: projectVersion ? `${projectVersion} (missing)` : "Select version",
+						text: `${projectVersion} (missing)`,
 						value: "",
 					});
 					placeholderOpt.disabled = true;
-					placeholderOpt.selected = true;
+					placeholderOpt.selected = !selectedInstallation;
 				}
 
 				// Add all installations
