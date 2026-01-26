@@ -24,59 +24,137 @@
 .fmod-project-card {
 	border: 1px solid var(--background-modifier-border);
 	border-radius: 8px;
-	padding: 1rem;
-	margin-bottom: 1rem;
+	margin-bottom: 0.75rem;
 	background: var(--background-secondary);
+	overflow: hidden;
 }
 
-.fmod-project-card .setting-item {
-	border-top: none;
-	padding-top: 0.5rem;
-}
-
-.fmod-project-card .setting-item:first-child {
-	padding-top: 0;
-}
-
-/* Project header */
+/* Project header - compact view */
 .fmod-project-header {
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-	margin-bottom: 0.5rem;
-	padding-bottom: 0.5rem;
-	border-bottom: 1px solid var(--background-modifier-border);
+	padding: 0.75rem 1rem;
+	gap: 1rem;
 }
 
-.fmod-project-header .setting-item {
-	flex: 0 0 auto;
-	border: none;
+.fmod-project-info {
+	flex: 1;
+	min-width: 0;
+}
+
+.fmod-project-name-row {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	margin-bottom: 2px;
+}
+
+.fmod-project-name {
+	font-weight: 600;
+	font-size: 1rem;
+}
+
+/* New export available badge */
+.fmod-new-export-badge {
+	font-size: 0.7rem;
+	padding: 2px 8px;
+	background: var(--interactive-accent);
+	color: var(--text-on-accent);
+	border-radius: 10px;
+	white-space: nowrap;
+}
+
+.fmod-project-meta {
+	font-size: 0.8rem;
+	color: var(--text-muted);
+	margin-bottom: 2px;
+}
+
+.fmod-project-path {
+	font-size: 0.75rem;
+	color: var(--text-faint);
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.fmod-not-configured {
+	font-style: italic;
+	color: var(--text-muted);
+}
+
+/* Action buttons */
+.fmod-project-actions {
+	display: flex;
+	align-items: center;
+	gap: 6px;
+	flex-shrink: 0;
+}
+
+.fmod-action-btn {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 32px;
+	height: 32px;
 	padding: 0;
-	margin: 0;
-}
-
-.fmod-project-header .setting-item-info {
-	display: none;
-}
-
-.fmod-project-header .setting-item-control {
-	flex: 0 0 auto;
-}
-
-/* Delete button */
-.fmod-delete-btn {
-	background: transparent;
-	border: 1px solid var(--text-error);
-	color: var(--text-error);
-	padding: 4px 12px;
-	border-radius: 4px;
+	background: var(--background-modifier-hover);
+	border: 1px solid var(--background-modifier-border);
+	border-radius: 6px;
 	cursor: pointer;
-	font-size: 0.85rem;
+	color: var(--text-muted);
+	transition: all 0.15s ease;
 }
 
-.fmod-delete-btn:hover {
+.fmod-action-btn:hover {
+	background: var(--background-modifier-border);
+	color: var(--text-normal);
+}
+
+.fmod-action-btn-active {
+	background: var(--interactive-accent);
+	border-color: var(--interactive-accent);
+	color: var(--text-on-accent);
+}
+
+.fmod-action-btn-active:hover {
+	background: var(--interactive-accent-hover);
+	color: var(--text-on-accent);
+}
+
+/* Sync button with update available */
+.fmod-action-btn-update {
+	background: var(--interactive-accent);
+	border-color: var(--interactive-accent);
+	color: var(--text-on-accent);
+}
+
+.fmod-action-btn-update:hover {
+	background: var(--interactive-accent-hover);
+	border-color: var(--interactive-accent-hover);
+	color: var(--text-on-accent);
+}
+
+.fmod-action-btn-danger:hover {
 	background: var(--text-error);
+	border-color: var(--text-error);
 	color: var(--background-primary);
+}
+
+/* Expandable settings section */
+.fmod-project-settings {
+	padding: 0 1rem 1rem 1rem;
+	border-top: 1px solid var(--background-modifier-border);
+}
+
+.fmod-project-settings .setting-item {
+	border-top: none;
+	padding-top: 0.75rem;
+}
+
+.fmod-project-settings .setting-item:first-child {
+	padding-top: 0.75rem;
 }
 
 /* Path input with browse button */
@@ -96,4 +174,119 @@
 
 .fmod-project-card .setting-item-control input[type="text"] {
 	flex: 1;
+}
+
+/* Folder status indicator */
+.fmod-folder-status {
+	width: 100%;
+	font-size: 0.85em;
+	margin-top: 4px;
+	padding-left: 2px;
+}
+
+/* Allow the control to wrap so status appears below input */
+.setting-item-control:has(.fmod-folder-status) {
+	flex-wrap: wrap;
+}
+
+.fmod-status-ok {
+	color: var(--text-success);
+}
+
+.fmod-status-warning {
+	color: var(--text-muted);
+}
+
+.fmod-status-error {
+	color: var(--text-error);
+}
+
+/* FMOD Installations section */
+.fmod-installations-container {
+	margin-bottom: 1rem;
+}
+
+.fmod-no-installations {
+	color: var(--text-muted);
+	font-style: italic;
+	padding: 0.75rem 1rem;
+	text-align: center;
+	background: var(--background-secondary);
+	border-radius: 6px;
+	border: 1px solid var(--background-modifier-border);
+}
+
+.fmod-installation-item {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	padding: 0.5rem 0.75rem;
+	margin-bottom: 0.5rem;
+	background: var(--background-secondary);
+	border: 1px solid var(--background-modifier-border);
+	border-radius: 6px;
+}
+
+.fmod-installation-version {
+	font-weight: 600;
+	font-size: 0.9rem;
+	padding: 2px 8px;
+	background: var(--interactive-accent);
+	color: var(--text-on-accent);
+	border-radius: 4px;
+	flex-shrink: 0;
+}
+
+.fmod-installation-path {
+	flex: 1;
+	font-size: 0.85rem;
+	color: var(--text-muted);
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.fmod-installation-delete {
+	width: 28px;
+	height: 28px;
+	flex-shrink: 0;
+}
+
+/* Version dropdown in project card */
+.fmod-version-container {
+	display: flex;
+	align-items: center;
+	gap: 4px;
+}
+
+.fmod-version-select {
+	font-size: 0.85rem;
+	padding: 4px 8px;
+	border-radius: 4px;
+	border: 1px solid var(--background-modifier-border);
+	background: var(--background-modifier-hover);
+	color: var(--text-normal);
+	cursor: pointer;
+	max-width: 100px;
+}
+
+.fmod-version-select:hover {
+	border-color: var(--interactive-accent);
+}
+
+.fmod-version-select:focus {
+	outline: none;
+	border-color: var(--interactive-accent);
+	box-shadow: 0 0 0 2px rgba(var(--interactive-accent-rgb), 0.2);
+}
+
+.fmod-version-warning {
+	display: flex;
+	align-items: center;
+	color: var(--text-warning);
+}
+
+.fmod-version-warning svg {
+	width: 16px;
+	height: 16px;
 }

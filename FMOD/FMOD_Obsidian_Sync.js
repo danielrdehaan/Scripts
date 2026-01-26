@@ -216,7 +216,7 @@ studio.menu.addMenuItem({
         }
 
         // -------------------------
-        // Timestamp helper
+        // Timestamp helpers
         // -------------------------
         function pad2(n) { return (n < 10 ? "0" : "") + n; }
 
@@ -224,6 +224,51 @@ studio.menu.addMenuItem({
             var now = new Date();
             return now.getFullYear() + "-" + pad2(now.getMonth() + 1) + "-" + pad2(now.getDate()) +
                    "T" + pad2(now.getHours()) + ":" + pad2(now.getMinutes()) + ":" + pad2(now.getSeconds());
+        }
+
+        function getFilenameTimestamp() {
+            var now = new Date();
+            return now.getFullYear() + "-" + pad2(now.getMonth() + 1) + "-" + pad2(now.getDate()) +
+                   "_" + pad2(now.getHours()) + pad2(now.getMinutes()) + pad2(now.getSeconds());
+        }
+
+        // -------------------------
+        // Settings persistence
+        // -------------------------
+
+        // Store preferences in project directory (add to .gitignore if needed)
+        function getPrefsFilePath(projectDir) {
+            return projectDir + "/.obsidian-fmod-sync-prefs";
+        }
+
+        function getLastExportDirectory(projectDir) {
+            var prefsPath = getPrefsFilePath(projectDir);
+            try {
+                var file = studio.system.getFile(prefsPath);
+                if (file.exists() && file.open(studio.system.openMode.ReadOnly)) {
+                    // readText requires a size argument - use file size or a large enough buffer
+                    var size = file.size();
+                    var content = file.readText(size);
+                    file.close();
+                    if (content && content.trim() !== "") {
+                        var prefs = JSON.parse(content);
+                        return prefs.lastExportDirectory || null;
+                    }
+                }
+            } catch (e) { }
+            return null;
+        }
+
+        function saveLastExportDirectory(projectDir, dir) {
+            try {
+                var prefsPath = getPrefsFilePath(projectDir);
+                var prefs = { lastExportDirectory: dir };
+                var file = studio.system.getFile(prefsPath);
+                if (file.open(studio.system.openMode.WriteOnly)) {
+                    file.writeText(JSON.stringify(prefs, null, 2));
+                    file.close();
+                }
+            } catch (e) { }
         }
 
         // -------------------------
@@ -235,10 +280,14 @@ studio.menu.addMenuItem({
         var projectDirectory = projectPath.substring(0, projectPath.lastIndexOf("/"));
         var projectName = projectPath.substring(projectPath.lastIndexOf("/") + 1).replace(/\.fspro$/i, "");
 
-        // Default output path
-        var outputPath = projectDirectory + "/obsidian-sync.json";
+        // Default output directory: use last export directory if available, otherwise project directory
+        var lastDir = getLastExportDirectory(projectDirectory);
+        var outputDirectory = lastDir || projectDirectory;
 
-        // Ask user for output location
+        // Generate filename preview
+        var filenamePreview = projectName + "_" + getFilenameTimestamp() + ".json";
+
+        // Ask user for output directory
         var cancelled = false;
         studio.ui.showModalDialog({
             windowTitle: "Export for Obsidian",
@@ -258,18 +307,26 @@ studio.menu.addMenuItem({
                 },
                 {
                     widgetType: studio.ui.widgetType.Label,
-                    text: "Output JSON file:"
+                    text: "Output directory:"
                 },
                 {
                     widgetType: studio.ui.widgetType.PathLineEdit,
-                    widgetId: "outputPath",
-                    windowTitle: "Save JSON file",
-                    text: outputPath,
+                    widgetId: "outputDirectory",
+                    windowTitle: "Select Output Directory",
+                    text: outputDirectory,
                     minimumWidth: 560,
                     sizePolicy: { horizontalPolicy: studio.ui.sizePolicy.MinimumExpanding },
-                    pathType: studio.ui.pathType.SaveFileName,
-                    nameFilter: "JSON files (*.json)",
-                    onEditingFinished: function () { outputPath = this.text(); }
+                    pathType: studio.ui.pathType.Directory,
+                    onEditingFinished: function () { outputDirectory = this.text(); }
+                },
+                {
+                    widgetType: studio.ui.widgetType.Label,
+                    text: " "
+                },
+                {
+                    widgetType: studio.ui.widgetType.Label,
+                    widgetId: "filenameLabel",
+                    text: "Filename: " + filenamePreview
                 },
                 {
                     widgetType: studio.ui.widgetType.Layout,
@@ -292,7 +349,7 @@ studio.menu.addMenuItem({
                             widgetType: studio.ui.widgetType.PushButton,
                             text: "Export",
                             onClicked: function () {
-                                try { outputPath = this.findWidget("outputPath").text(); } catch (e) { }
+                                try { outputDirectory = this.findWidget("outputDirectory").text(); } catch (e) { }
                                 this.closeDialog();
                             }
                         }
@@ -305,10 +362,14 @@ studio.menu.addMenuItem({
             return;
         }
 
-        if (!outputPath || outputPath.trim() === "") {
-            alert("No output path specified.");
+        if (!outputDirectory || outputDirectory.trim() === "") {
+            alert("No output directory specified.");
             return;
         }
+
+        // Generate the full output path with timestamp
+        var outputFilename = projectName + "_" + getFilenameTimestamp() + ".json";
+        var outputPath = outputDirectory + "/" + outputFilename;
 
         // Collect all FMOD events
         var allEvents = studio.project.model.Event.findInstances();
@@ -360,9 +421,52 @@ studio.menu.addMenuItem({
             }
         }
 
+        // Get FMOD Studio version
+        // Try to extract from project path first (most reliable)
+        // Path format: .../FMOD Studio/2.02.33/...
+        var fmodVersion = "";
+        try {
+            var versionMatch = projectPath.match(/FMOD Studio[\/\\](\d+\.\d+\.\d+)/i);
+            if (versionMatch && versionMatch[1]) {
+                fmodVersion = versionMatch[1];
+            }
+        } catch (err) { }
+
+        // Fallback: try studio.version API
+        if (!fmodVersion || fmodVersion === "") {
+            try {
+                if (studio.version) {
+                    // Try stringValue or toString() first
+                    if (studio.version.stringValue) {
+                        fmodVersion = studio.version.stringValue;
+                    } else if (typeof studio.version.toString === "function") {
+                        var verStr = studio.version.toString();
+                        if (verStr && verStr.indexOf(".") > 0) {
+                            fmodVersion = verStr;
+                        }
+                    }
+                    // Fallback to major.minor.patch construction
+                    if (!fmodVersion || fmodVersion === "" || fmodVersion === "[object Object]") {
+                        var major = studio.version.major || 0;
+                        var minor = studio.version.minor || 0;
+                        var patch = studio.version.patch || 0;
+                        if (major > 0 || minor > 0 || patch > 0) {
+                            var minorStr = (minor < 10) ? ("0" + minor) : ("" + minor);
+                            fmodVersion = major + "." + minorStr + "." + patch;
+                        }
+                    }
+                }
+            } catch (err) { }
+        }
+
+        if (!fmodVersion || fmodVersion === "") {
+            fmodVersion = "Unknown";
+        }
+
         // Build final JSON structure
         var exportData = {
             exported_at: getISOTimestamp(),
+            fmod_version: fmodVersion,
             project_name: projectName,
             project_path: projectPath,
             event_count: eventsData.length,
@@ -374,6 +478,9 @@ studio.menu.addMenuItem({
         if (file.open(studio.system.openMode.WriteOnly)) {
             file.writeText(JSON.stringify(exportData, null, 2));
             file.close();
+
+            // Remember this directory for next time
+            saveLastExportDirectory(projectDirectory, outputDirectory);
 
             var elapsedMs = Date.now() - t0;
 

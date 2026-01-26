@@ -1,4 +1,5 @@
 import {
+	addIcon,
 	App,
 	FuzzySuggestModal,
 	Notice,
@@ -9,16 +10,34 @@ import {
 	TFolder,
 	normalizePath,
 } from "obsidian";
+
+// FMOD logo SVG - cyan color (#6ECEF4)
+const FMOD_ICON_SVG = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <path fill="#6ECEF4" d="M 235.00 455.60 C178.64,446.91 128.15,416.19 103.89,375.82 C97.48,365.16 92.68,352.51 93.38,348.13 C94.34,342.09 99.87,338.00 107.08,338.00 C110.58,338.00 111.81,338.58 114.63,341.57 C116.48,343.54 118.00,345.77 118.00,346.54 C118.00,349.07 127.45,366.43 132.16,372.56 C155.41,402.78 200.08,426.38 242.88,431.05 C307.51,438.10 375.01,393.86 391.73,333.50 C394.25,324.42 394.50,321.99 394.48,307.00 C394.46,288.57 393.03,281.43 386.57,267.44 C375.72,243.96 353.61,222.46 327.49,209.99 C312.26,202.73 291.93,196.95 276.25,195.44 L 269.00 194.74 L 269.00 343.28 L 250.75 342.70 C236.81,342.26 229.66,341.53 220.47,339.60 C196.80,334.63 172.26,324.52 153.00,311.79 C140.06,303.24 121.23,284.50 113.23,272.22 C84.37,227.89 86.47,173.31 118.83,126.50 C127.20,114.40 147.34,94.85 160.41,86.13 C208.46,54.09 260.10,47.04 314.50,65.09 C349.20,76.60 381.76,98.56 400.87,123.33 C411.56,137.19 421.77,159.06 420.57,165.50 C419.31,172.21 411.05,177.16 404.65,175.05 C399.96,173.50 397.70,170.68 394.05,161.84 C379.77,127.24 342.20,98.03 296.50,86.00 C279.94,81.64 271.14,80.70 252.25,81.29 C228.58,82.02 215.31,85.28 194.50,95.47 C178.20,103.46 168.87,110.14 155.38,123.50 C129.65,148.98 118.59,173.71 118.71,205.50 C118.79,225.14 122.38,237.97 132.68,255.35 C138.64,265.43 157.14,284.39 167.92,291.47 C187.79,304.54 215.57,314.70 236.64,316.61 L 244.00 317.28 L 244.00 169.00 L 254.75 169.03 C334.67,169.22 401.89,214.64 417.11,278.73 C435.33,355.45 376.41,435.13 287.50,454.01 C274.77,456.72 247.57,457.54 235.00,455.60 Z"/>
+</svg>`;
 import * as fs from "fs";
 import * as path from "path";
 
-// Electron remote for native file dialogs
+// Electron remote for native file dialogs and shell
 // eslint-disable-next-line @typescript-eslint/no-var-requires
-const { remote } = require("electron");
+const { remote, shell } = require("electron");
+
+// Child process for launching FMOD Studio
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const { exec, spawn } = require("child_process");
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const { promisify } = require("util");
+const execAsync = promisify(exec);
 
 // ============================================================================
 // Types
 // ============================================================================
+
+interface FMODInstallation {
+	id: string;
+	path: string;           // Path to .app (macOS) or .exe (Windows)
+	version: string;        // Auto-detected version number
+}
 
 interface FMODParameter {
 	name: string;
@@ -51,6 +70,7 @@ interface FMODEvent {
 
 interface FMODExportData {
 	exported_at: string;
+	fmod_version?: string;
 	project_name: string;
 	project_path: string;
 	event_count: number;
@@ -59,15 +79,20 @@ interface FMODExportData {
 
 interface FMODProjectConfig {
 	id: string;
-	name: string;
 	jsonFilePath: string;
 	outputFolder: string;
-	enabled: boolean;
+	// Metadata extracted from JSON on sync
+	fmodProjectName?: string;  // Project name from JSON
+	fmodProjectPath?: string;  // Path to .fspro file
+	fmodVersion?: string;      // FMOD Studio version
+	lastExportedAt?: string;   // When JSON was exported
+	// Version override for opening project
+	selectedFmodInstallationId?: string;  // Override version for this project
 }
 
 interface FMODSyncSettings {
 	projects: FMODProjectConfig[];
-	mirrorFolders: boolean;
+	fmodInstallations: FMODInstallation[];
 }
 
 interface ParsedFrontmatter {
@@ -83,13 +108,94 @@ interface SyncStats {
 	errors: number;
 }
 
+interface NewerExportInfo {
+	filePath: string;
+	projectName: string;
+	exportDate: Date;
+}
+
+// ============================================================================
+// Newer Export Detection
+// ============================================================================
+
+/**
+ * Parse a timestamped export filename to extract project name and date.
+ * Expected format: ProjectName_YYYY-MM-DD_HHMMSS.json
+ */
+function parseExportFilename(filename: string): { projectName: string; date: Date } | null {
+	const baseName = filename.replace(/\.json$/i, "");
+	const match = baseName.match(/^(.+)_(\d{4}-\d{2}-\d{2})_(\d{6})$/);
+	if (!match) return null;
+
+	const [, projectName, dateStr, timeStr] = match;
+	const year = parseInt(dateStr.substring(0, 4));
+	const month = parseInt(dateStr.substring(5, 7)) - 1; // 0-indexed
+	const day = parseInt(dateStr.substring(8, 10));
+	const hour = parseInt(timeStr.substring(0, 2));
+	const minute = parseInt(timeStr.substring(2, 4));
+	const second = parseInt(timeStr.substring(4, 6));
+
+	return { projectName, date: new Date(year, month, day, hour, minute, second) };
+}
+
+/**
+ * Scan a directory for newer exports matching the same project name.
+ * Returns info about the newest file if it's newer than the current file.
+ */
+async function findNewerExport(currentPath: string): Promise<NewerExportInfo | null> {
+	if (!currentPath) return null;
+
+	const directory = path.dirname(currentPath);
+	const currentFilename = path.basename(currentPath);
+	const currentParsed = parseExportFilename(currentFilename);
+
+	if (!currentParsed) return null; // Current file doesn't match expected format
+
+	const currentProjectName = currentParsed.projectName;
+	const currentDate = currentParsed.date;
+
+	return new Promise((resolve) => {
+		fs.readdir(directory, (err, files) => {
+			if (err) {
+				resolve(null);
+				return;
+			}
+
+			let newestExport: NewerExportInfo | null = null;
+
+			for (const file of files) {
+				if (!file.endsWith(".json")) continue;
+
+				const parsed = parseExportFilename(file);
+				if (!parsed) continue;
+
+				// Only consider files from the same project
+				if (parsed.projectName !== currentProjectName) continue;
+
+				// Check if this file is newer than current
+				if (parsed.date > currentDate) {
+					if (!newestExport || parsed.date > newestExport.exportDate) {
+						newestExport = {
+							filePath: path.join(directory, file),
+							projectName: parsed.projectName,
+							exportDate: parsed.date,
+						};
+					}
+				}
+			}
+
+			resolve(newestExport);
+		});
+	});
+}
+
 // ============================================================================
 // Default Settings
 // ============================================================================
 
 const DEFAULT_SETTINGS: FMODSyncSettings = {
 	projects: [],
-	mirrorFolders: true,
+	fmodInstallations: [],
 };
 
 interface ProjectPickerItem {
@@ -98,17 +204,88 @@ interface ProjectPickerItem {
 }
 
 // ============================================================================
+// Version Detection
+// ============================================================================
+
+async function detectFmodVersion(appPath: string): Promise<string> {
+	const platform = process.platform;
+
+	try {
+		if (platform === "darwin") {
+			// macOS: Read version from revision_studio.txt in the app bundle
+			if (!appPath.endsWith(".app")) {
+				return "Unknown";
+			}
+
+			const revisionPath = path.join(appPath, "Contents", "Resources", "documentation", "revision_studio.txt");
+
+			// Read the revision file and find the first version line
+			const content = await new Promise<string>((resolve, reject) => {
+				fs.readFile(revisionPath, "utf8", (err: Error | null, data: string) => {
+					if (err) reject(err);
+					else resolve(data);
+				});
+			});
+
+			// Version line format: "13/1/26 2.02.33 - Studio Tool minor release (build 160335)"
+			const versionMatch = content.match(/^\d+\/\d+\/\d+\s+(\d+\.\d+\.\d+)\s+-/m);
+			if (versionMatch) {
+				return versionMatch[1];
+			}
+
+			return "Unknown";
+		} else if (platform === "win32") {
+			// Windows: Try revision file first (same location relative to exe)
+			const exeDir = path.dirname(appPath);
+			const revisionPath = path.join(exeDir, "documentation", "revision_studio.txt");
+
+			try {
+				const content = await new Promise<string>((resolve, reject) => {
+					fs.readFile(revisionPath, "utf8", (err: Error | null, data: string) => {
+						if (err) reject(err);
+						else resolve(data);
+					});
+				});
+
+				const versionMatch = content.match(/^\d+\/\d+\/\d+\s+(\d+\.\d+\.\d+)\s+-/m);
+				if (versionMatch) {
+					return versionMatch[1];
+				}
+			} catch {
+				// Fall back to PowerShell file version
+				const psCommand = `(Get-Item "${appPath}").VersionInfo.ProductVersion`;
+				const { stdout } = await execAsync(`powershell -Command "${psCommand}"`);
+				const version = stdout.trim();
+				return version || "Unknown";
+			}
+		}
+	} catch (error) {
+		console.error("Failed to detect FMOD version:", error);
+	}
+
+	return "Unknown";
+}
+
+// ============================================================================
 // Main Plugin
 // ============================================================================
 
 export default class FMODSyncPlugin extends Plugin {
 	settings: FMODSyncSettings = DEFAULT_SETTINGS;
+	private settingsTab: FMODSyncSettingTab | null = null;
+	newerExports: Map<string, NewerExportInfo> = new Map();
 
 	async onload(): Promise<void> {
 		await this.loadSettings();
 
+		// Check for newer exports on load (non-blocking)
+		this.checkForNewerExports();
+
+		// Register custom FMOD icon
+		addIcon("fmod-logo", FMOD_ICON_SVG);
+
 		// Add ribbon icon
-		this.addRibbonIcon("audio-file", "FMOD Sync", () => {
+		this.addRibbonIcon("fmod-logo", "FMOD Sync", () => {
 			this.runSync();
 		});
 
@@ -122,7 +299,8 @@ export default class FMODSyncPlugin extends Plugin {
 		});
 
 		// Add settings tab
-		this.addSettingTab(new FMODSyncSettingTab(this.app, this));
+		this.settingsTab = new FMODSyncSettingTab(this.app, this);
+		this.addSettingTab(this.settingsTab);
 	}
 
 	async loadSettings(): Promise<void> {
@@ -133,28 +311,53 @@ export default class FMODSyncPlugin extends Plugin {
 		await this.saveData(this.settings);
 	}
 
+	/**
+	 * Refresh the settings tab display if it's currently visible.
+	 * Called after sync to update project metadata shown in the UI.
+	 */
+	refreshSettingsTab(): void {
+		if (this.settingsTab) {
+			this.settingsTab.display();
+		}
+	}
+
+	/**
+	 * Check all projects for newer JSON exports in their directories.
+	 * Updates the newerExports Map with any found.
+	 */
+	async checkForNewerExports(): Promise<void> {
+		for (const project of this.settings.projects) {
+			const newer = await findNewerExport(project.jsonFilePath);
+			if (newer) {
+				this.newerExports.set(project.id, newer);
+			} else {
+				this.newerExports.delete(project.id);
+			}
+		}
+	}
+
 	// ========================================================================
 	// Main Sync Logic
 	// ========================================================================
 
 	async runSync(): Promise<void> {
-		const enabledProjects = this.settings.projects.filter((p) => p.enabled);
+		const projects = this.settings.projects;
 
-		if (enabledProjects.length === 0) {
+		if (projects.length === 0) {
 			new Notice(
 				"FMOD Sync: No projects configured. Add projects in settings."
 			);
 			return;
 		}
 
-		if (enabledProjects.length === 1) {
+		if (projects.length === 1) {
 			// Single project - sync directly
-			await this.syncSingleProject(enabledProjects[0]);
+			await this.syncSingleProject(projects[0]);
 		} else {
 			// Multiple projects - show picker
-			new ProjectPickerModal(this.app, enabledProjects, async (item) => {
+			new ProjectPickerModal(this.app, projects, async (item) => {
 				if (item.type === "all") {
-					await this.syncProjects(enabledProjects);
+					await this.syncProjects(projects);
 				} else if (item.project) {
 					await this.syncSingleProject(item.project);
 				}
@@ -201,19 +404,23 @@ export default class FMODSyncPlugin extends Plugin {
 			.join("\n");
 
 		new Notice(summary, 5000);
+
+		// Refresh settings tab to show updated project metadata
+		this.refreshSettingsTab();
 	}
 
 	async syncSingleProject(
 		project: FMODProjectConfig,
 		silent = false
 	): Promise<SyncStats | null> {
-		const { mirrorFolders } = this.settings;
+		// Helper to get display name for messages
+		const displayName = project.fmodProjectName || project.jsonFilePath.split("/").pop() || "Unknown";
 
 		// Validate settings
 		if (!project.jsonFilePath) {
 			if (!silent) {
 				new Notice(
-					`FMOD Sync: No JSON file path configured for "${project.name}". Check settings.`
+					`FMOD Sync: No JSON file path configured. Check settings.`
 				);
 			}
 			return null;
@@ -222,7 +429,7 @@ export default class FMODSyncPlugin extends Plugin {
 		if (!project.outputFolder) {
 			if (!silent) {
 				new Notice(
-					`FMOD Sync: No output folder configured for "${project.name}". Check settings.`
+					`FMOD Sync: No vault folder configured for "${displayName}". Check settings.`
 				);
 			}
 			return null;
@@ -234,7 +441,7 @@ export default class FMODSyncPlugin extends Plugin {
 			exportData = await this.readJsonFile(project.jsonFilePath);
 		} catch (error) {
 			new Notice(
-				`FMOD Sync: Failed to read JSON for "${project.name}".\nPath: ${project.jsonFilePath}\n${error}`
+				`FMOD Sync: Failed to read JSON.\nPath: ${project.jsonFilePath}\n${error}`
 			);
 			return null;
 		}
@@ -242,14 +449,23 @@ export default class FMODSyncPlugin extends Plugin {
 		// Validate JSON structure
 		if (!exportData.events || !Array.isArray(exportData.events)) {
 			new Notice(
-				`FMOD Sync: Invalid JSON structure for "${project.name}" - missing events array.`
+				`FMOD Sync: Invalid JSON structure - missing events array.`
 			);
 			return null;
 		}
 
+		// Save all FMOD metadata from the JSON
+		project.fmodProjectName = exportData.project_name;
+		project.fmodProjectPath = exportData.project_path;
+		project.fmodVersion = exportData.fmod_version;
+		project.lastExportedAt = exportData.exported_at;
+		await this.saveSettings();
+
+		const projectName = project.fmodProjectName || displayName;
+
 		if (!silent) {
 			new Notice(
-				`FMOD Sync: Processing ${exportData.events.length} events for "${project.name}"...`
+				`FMOD Sync: Processing ${exportData.events.length} events for "${projectName}"...`
 			);
 		}
 
@@ -287,11 +503,10 @@ export default class FMODSyncPlugin extends Plugin {
 				await this.processEvent(
 					event,
 					outputPath,
-					mirrorFolders,
 					notesByGuid,
 					notesByName,
 					exportData.exported_at,
-					project.name,
+					projectName,
 					stats
 				);
 			} catch (error) {
@@ -306,7 +521,7 @@ export default class FMODSyncPlugin extends Plugin {
 		// Show summary (only if not silent)
 		if (!silent) {
 			const summary = [
-				`FMOD Sync Complete for "${project.name}"!`,
+				`FMOD Sync Complete for "${projectName}"!`,
 				`Created: ${stats.created}`,
 				`Updated: ${stats.updated}`,
 				`Moved: ${stats.moved}`,
@@ -317,6 +532,9 @@ export default class FMODSyncPlugin extends Plugin {
 				.join("\n");
 
 			new Notice(summary, 5000);
+
+			// Refresh settings tab to show updated project metadata
+			this.refreshSettingsTab();
 		}
 
 		return stats;
@@ -412,7 +630,6 @@ export default class FMODSyncPlugin extends Plugin {
 	async processEvent(
 		event: FMODEvent,
 		outputPath: string,
-		mirrorFolders: boolean,
 		notesByGuid: Map<string, { path: string; content: string }>,
 		notesByName: Map<string, { path: string; content: string }>,
 		exportedAt: string,
@@ -421,9 +638,9 @@ export default class FMODSyncPlugin extends Plugin {
 	): Promise<void> {
 		const sanitizedName = this.sanitizeFilename(event.name);
 
-		// Calculate target path
+		// Calculate target path (always mirrors FMOD folder structure)
 		let targetPath: string;
-		if (mirrorFolders && event.folder_path) {
+		if (event.folder_path) {
 			const sanitizedFolder = event.folder_path
 				.split("/")
 				.map((s) => this.sanitizeFilename(s))
@@ -842,7 +1059,7 @@ class ProjectPickerModal extends FuzzySuggestModal<ProjectPickerItem> {
 		if (item.type === "all") {
 			return `Sync All (${this.projects.length} projects)`;
 		}
-		return item.project?.name || "";
+		return item.project?.fmodProjectName || item.project?.jsonFilePath.split("/").pop() || "Unknown";
 	}
 
 	onChooseItem(item: ProjectPickerItem): void {
@@ -901,6 +1118,7 @@ class FolderPickerModal extends FuzzySuggestModal<TFolder> {
 
 class FMODSyncSettingTab extends PluginSettingTab {
 	plugin: FMODSyncPlugin;
+	private pollingIntervalId: ReturnType<typeof setInterval> | null = null;
 
 	constructor(app: App, plugin: FMODSyncPlugin) {
 		super(app, plugin);
@@ -912,24 +1130,69 @@ class FMODSyncSettingTab extends PluginSettingTab {
 		containerEl.empty();
 		containerEl.addClass("fmod-sync-settings");
 
+		// Check for newer exports immediately and start polling
+		this.startPolling();
+
 		containerEl.createEl("h2", { text: "FMOD Sync Settings" });
 
-		// Global settings section
-		containerEl.createEl("h3", { text: "Global Settings" });
+		// FMOD Installations section
+		containerEl.createEl("h3", { text: "FMOD Studio Installations" });
 
-		new Setting(containerEl)
-			.setName("Mirror folder structure")
-			.setDesc(
-				"When enabled, creates subfolders matching the FMOD event folder hierarchy."
-			)
-			.addToggle((toggle) =>
-				toggle
-					.setValue(this.plugin.settings.mirrorFolders)
-					.onChange(async (value) => {
-						this.plugin.settings.mirrorFolders = value;
+		const installationsContainer = containerEl.createDiv({
+			cls: "fmod-installations-container",
+		});
+
+		this.renderInstallations(installationsContainer);
+
+		// Add installation button
+		new Setting(containerEl).addButton((button) =>
+			button
+				.setButtonText("Add Installation")
+				.onClick(async () => {
+					const platform = process.platform;
+					const filters = platform === "darwin"
+						? [{ name: "Applications", extensions: ["app"] }]
+						: [{ name: "Executables", extensions: ["exe"] }];
+
+					const result = await remote.dialog.showOpenDialog({
+						title: "Select FMOD Studio Application",
+						properties: platform === "darwin" ? ["openDirectory", "treatPackageAsDirectory"] : ["openFile"],
+						filters: platform === "win32" ? filters : undefined,
+					});
+
+					if (!result.canceled && result.filePaths.length > 0) {
+						let selectedPath = result.filePaths[0];
+
+						// On macOS, ensure we have the .app bundle path
+						if (platform === "darwin" && !selectedPath.endsWith(".app")) {
+							// User might have selected something inside the bundle, try to find .app
+							const appMatch = selectedPath.match(/(.+\.app)/);
+							if (appMatch) {
+								selectedPath = appMatch[1];
+							}
+						}
+
+						// Detect version
+						const version = await detectFmodVersion(selectedPath);
+
+						const newInstallation: FMODInstallation = {
+							id: this.generateId(),
+							path: selectedPath,
+							version: version,
+						};
+
+						this.plugin.settings.fmodInstallations.push(newInstallation);
 						await this.plugin.saveSettings();
-					})
-			);
+						this.display();
+
+						if (version === "Unknown") {
+							new Notice("Added FMOD installation, but version could not be detected.");
+						} else {
+							new Notice(`Added FMOD Studio ${version}`);
+						}
+					}
+				})
+		);
 
 		// Projects section
 		containerEl.createEl("h3", { text: "Projects" });
@@ -948,10 +1211,8 @@ class FMODSyncSettingTab extends PluginSettingTab {
 				.onClick(async () => {
 					const newProject: FMODProjectConfig = {
 						id: this.generateId(),
-						name: `Project ${this.plugin.settings.projects.length + 1}`,
 						jsonFilePath: "",
 						outputFolder: "",
-						enabled: true,
 					};
 					this.plugin.settings.projects.push(newProject);
 					await this.plugin.saveSettings();
@@ -964,16 +1225,65 @@ class FMODSyncSettingTab extends PluginSettingTab {
 
 		const instructions = containerEl.createEl("ol");
 		instructions.createEl("li", {
-			text: 'In FMOD Studio, run "DRD > Export for Obsidian..." to generate a JSON file for each project.',
+			text: 'In FMOD Studio, run "DRD > Export for Obsidian..." to generate a JSON file.',
 		});
 		instructions.createEl("li", {
-			text: "Add each FMOD project above with a unique name and its JSON file path.",
+			text: "Click 'Add Project' above and configure the JSON file path and vault folder.",
 		});
 		instructions.createEl("li", {
-			text: 'Use the command "FMOD Sync: Import from JSON" or click the audio icon in the ribbon.',
+			text: "Run sync to import events. Project name, version, and export time will be extracted automatically.",
 		});
 		instructions.createEl("li", {
-			text: "If you have multiple projects, a picker will let you sync individual projects or all at once.",
+			text: "Use the ribbon icon or command palette to sync. Multiple projects show a picker.",
+		});
+	}
+
+	renderInstallations(container: HTMLElement): void {
+		container.empty();
+
+		if (this.plugin.settings.fmodInstallations.length === 0) {
+			container.createEl("p", {
+				text: "No FMOD Studio installations configured. Click 'Add Installation' to add one.",
+				cls: "fmod-no-installations",
+			});
+			return;
+		}
+
+		for (const installation of this.plugin.settings.fmodInstallations) {
+			this.renderInstallationItem(container, installation);
+		}
+	}
+
+	renderInstallationItem(container: HTMLElement, installation: FMODInstallation): void {
+		const item = container.createDiv({ cls: "fmod-installation-item" });
+
+		// Version badge
+		const versionBadge = item.createEl("span", {
+			cls: "fmod-installation-version",
+			text: installation.version,
+		});
+
+		// Path
+		item.createEl("span", {
+			cls: "fmod-installation-path",
+			text: installation.path,
+		});
+
+		// Delete button
+		const deleteBtn = item.createEl("button", {
+			cls: "fmod-action-btn fmod-action-btn-danger fmod-installation-delete",
+			attr: { "aria-label": "Remove installation" },
+		});
+		deleteBtn.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/></svg>`;
+		deleteBtn.addEventListener("click", async () => {
+			const index = this.plugin.settings.fmodInstallations.findIndex(
+				(i) => i.id === installation.id
+			);
+			if (index >= 0) {
+				this.plugin.settings.fmodInstallations.splice(index, 1);
+				await this.plugin.saveSettings();
+				this.display();
+			}
 		});
 	}
 
@@ -996,24 +1306,264 @@ class FMODSyncSettingTab extends PluginSettingTab {
 	renderProjectCard(container: HTMLElement, project: FMODProjectConfig): void {
 		const card = container.createDiv({ cls: "fmod-project-card" });
 
-		// Header with toggle and delete
+		// Compact header row
 		const header = card.createDiv({ cls: "fmod-project-header" });
 
-		// Enable toggle
-		new Setting(header)
-			.setName("Enabled")
-			.addToggle((toggle) =>
-				toggle.setValue(project.enabled).onChange(async (value) => {
-					project.enabled = value;
+		// Left side: project info
+		const info = header.createDiv({ cls: "fmod-project-info" });
+
+		// Parse JSON filename to extract project name and timestamp
+		// Format: ProjectName_YYYY-MM-DD_HHMMSS.json
+		const parseJsonFilename = (filePath: string): { name: string; date: Date | null } => {
+			const filename = filePath.split("/").pop()?.replace(".json", "") || "";
+			// Match pattern: name_YYYY-MM-DD_HHMMSS
+			const match = filename.match(/^(.+)_(\d{4}-\d{2}-\d{2})_(\d{6})$/);
+			if (match) {
+				const [, name, dateStr, timeStr] = match;
+				// Parse: YYYY-MM-DD and HHMMSS
+				const year = parseInt(dateStr.substring(0, 4));
+				const month = parseInt(dateStr.substring(5, 7)) - 1;
+				const day = parseInt(dateStr.substring(8, 10));
+				const hour = parseInt(timeStr.substring(0, 2));
+				const minute = parseInt(timeStr.substring(2, 4));
+				const second = parseInt(timeStr.substring(4, 6));
+				return { name, date: new Date(year, month, day, hour, minute, second) };
+			}
+			return { name: filename, date: null };
+		};
+
+		// Get display name - prefer FMOD project name, fallback to parsed filename
+		let displayName = "New Project";
+		let fileDate: Date | null = null;
+
+		if (project.fmodProjectName) {
+			displayName = project.fmodProjectName;
+		} else if (project.jsonFilePath) {
+			const parsed = parseJsonFilename(project.jsonFilePath);
+			displayName = parsed.name || "New Project";
+			fileDate = parsed.date;
+		}
+
+		const nameRow = info.createDiv({ cls: "fmod-project-name-row" });
+		nameRow.createEl("span", { cls: "fmod-project-name", text: displayName });
+
+		// Check for newer export and show badge
+		const newerExport = this.plugin.newerExports.get(project.id);
+		if (newerExport) {
+			const badge = nameRow.createEl("span", {
+				cls: "fmod-new-export-badge",
+				text: "New export available",
+			});
+			// Format the newer export date for tooltip
+			const formatted = newerExport.exportDate.toLocaleString(undefined, {
+				year: "numeric",
+				month: "short",
+				day: "numeric",
+				hour: "2-digit",
+				minute: "2-digit"
+			});
+			badge.setAttribute("aria-label", `Newer export from ${formatted}`);
+		}
+
+		// Metadata row
+		if (project.fmodProjectName) {
+			// Synced project - show export date and FMOD version
+			const metaInfo = [];
+			if (project.lastExportedAt) {
+				const date = new Date(project.lastExportedAt);
+				const formatted = date.toLocaleString(undefined, {
+					year: "numeric",
+					month: "short",
+					day: "numeric",
+					hour: "2-digit",
+					minute: "2-digit"
+				});
+				metaInfo.push(`Exported: ${formatted}`);
+			}
+			if (project.fmodVersion) {
+				metaInfo.push(`FMOD ${project.fmodVersion}`);
+			}
+			if (metaInfo.length > 0) {
+				info.createEl("div", { cls: "fmod-project-meta", text: metaInfo.join(" | ") });
+			}
+
+			// FMOD project path
+			if (project.fmodProjectPath) {
+				info.createEl("div", { cls: "fmod-project-path", text: project.fmodProjectPath });
+			}
+		} else if (project.jsonFilePath) {
+			// Not synced yet but has JSON file - show date from filename
+			if (fileDate) {
+				const formatted = fileDate.toLocaleString(undefined, {
+					year: "numeric",
+					month: "short",
+					day: "numeric",
+					hour: "2-digit",
+					minute: "2-digit"
+				});
+				info.createEl("div", { cls: "fmod-project-meta", text: `Exported: ${formatted}` });
+			}
+		} else {
+			// Not configured at all
+			info.createEl("div", { cls: "fmod-project-path fmod-not-configured", text: "Not configured - select JSON file and vault folder" });
+		}
+
+		// Right side: action buttons
+		const actions = header.createDiv({ cls: "fmod-project-actions" });
+
+		// Version dropdown (only show if project has been synced and has a version)
+		if (project.fmodProjectPath) {
+			const versionContainer = actions.createDiv({ cls: "fmod-version-container" });
+
+			// Find matching installation for this project's version
+			const installations = this.plugin.settings.fmodInstallations;
+			const projectVersion = project.fmodVersion;
+			const matchingInstallation = projectVersion
+				? installations.find(i => i.version === projectVersion)
+				: null;
+
+			// Get selected installation (user override or matching)
+			const selectedId = project.selectedFmodInstallationId;
+			const selectedInstallation = selectedId
+				? installations.find(i => i.id === selectedId)
+				: matchingInstallation;
+
+			// Show warning if:
+			// 1. Project version doesn't match any installation, OR
+			// 2. User selected a different version than the project's version
+			const versionMissing = projectVersion && !matchingInstallation && installations.length > 0;
+			const versionOverridden = projectVersion && selectedInstallation && selectedInstallation.version !== projectVersion;
+			const hasVersionMismatch = versionMissing || versionOverridden;
+
+			if (hasVersionMismatch) {
+				const warningMessage = versionMissing
+					? `Project requires FMOD ${projectVersion} (not installed)`
+					: `Project created with FMOD ${projectVersion}, using ${selectedInstallation?.version}`;
+				const warningIcon = versionContainer.createEl("span", {
+					cls: "fmod-version-warning",
+					attr: { "aria-label": warningMessage },
+				});
+				warningIcon.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg>`;
+			}
+
+			// Version dropdown
+			if (installations.length > 0) {
+				const select = versionContainer.createEl("select", { cls: "fmod-version-select" });
+
+				// Add placeholder option if no selection
+				if (!selectedInstallation) {
+					const placeholderOpt = select.createEl("option", {
+						text: projectVersion ? `${projectVersion} (missing)` : "Select version",
+						value: "",
+					});
+					placeholderOpt.disabled = true;
+					placeholderOpt.selected = true;
+				}
+
+				// Add all installations
+				for (const inst of installations) {
+					const opt = select.createEl("option", {
+						text: inst.version,
+						value: inst.id,
+					});
+					if (selectedInstallation && inst.id === selectedInstallation.id) {
+						opt.selected = true;
+					}
+				}
+
+				select.addEventListener("change", async () => {
+					project.selectedFmodInstallationId = select.value || undefined;
 					await this.plugin.saveSettings();
-				})
-			);
+					// Refresh to update warning icon
+					this.display();
+				});
+			}
+		}
+
+		// Open FMOD button (only show if project path is known)
+		if (project.fmodProjectPath) {
+			const openFmodBtn = actions.createEl("button", {
+				cls: "fmod-action-btn",
+				attr: { "aria-label": "Open FMOD Studio project" },
+			});
+			// FMOD logo icon - cyan color
+			openFmodBtn.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 512 512"><path fill="#6ECEF4" d="M 235.00 455.60 C178.64,446.91 128.15,416.19 103.89,375.82 C97.48,365.16 92.68,352.51 93.38,348.13 C94.34,342.09 99.87,338.00 107.08,338.00 C110.58,338.00 111.81,338.58 114.63,341.57 C116.48,343.54 118.00,345.77 118.00,346.54 C118.00,349.07 127.45,366.43 132.16,372.56 C155.41,402.78 200.08,426.38 242.88,431.05 C307.51,438.10 375.01,393.86 391.73,333.50 C394.25,324.42 394.50,321.99 394.48,307.00 C394.46,288.57 393.03,281.43 386.57,267.44 C375.72,243.96 353.61,222.46 327.49,209.99 C312.26,202.73 291.93,196.95 276.25,195.44 L 269.00 194.74 L 269.00 343.28 L 250.75 342.70 C236.81,342.26 229.66,341.53 220.47,339.60 C196.80,334.63 172.26,324.52 153.00,311.79 C140.06,303.24 121.23,284.50 113.23,272.22 C84.37,227.89 86.47,173.31 118.83,126.50 C127.20,114.40 147.34,94.85 160.41,86.13 C208.46,54.09 260.10,47.04 314.50,65.09 C349.20,76.60 381.76,98.56 400.87,123.33 C411.56,137.19 421.77,159.06 420.57,165.50 C419.31,172.21 411.05,177.16 404.65,175.05 C399.96,173.50 397.70,170.68 394.05,161.84 C379.77,127.24 342.20,98.03 296.50,86.00 C279.94,81.64 271.14,80.70 252.25,81.29 C228.58,82.02 215.31,85.28 194.50,95.47 C178.20,103.46 168.87,110.14 155.38,123.50 C129.65,148.98 118.59,173.71 118.71,205.50 C118.79,225.14 122.38,237.97 132.68,255.35 C138.64,265.43 157.14,284.39 167.92,291.47 C187.79,304.54 215.57,314.70 236.64,316.61 L 244.00 317.28 L 244.00 169.00 L 254.75 169.03 C334.67,169.22 401.89,214.64 417.11,278.73 C435.33,355.45 376.41,435.13 287.50,454.01 C274.77,456.72 247.57,457.54 235.00,455.60 Z"/></svg>`;
+			openFmodBtn.addEventListener("click", async () => {
+				const projectPath = project.fmodProjectPath!;
+
+				// Get the selected installation
+				const installations = this.plugin.settings.fmodInstallations;
+				const selectedId = project.selectedFmodInstallationId;
+				const projectVersion = project.fmodVersion;
+
+				// Find installation: first try selected, then try matching version
+				let installation: FMODInstallation | undefined;
+				if (selectedId) {
+					installation = installations.find(i => i.id === selectedId);
+				}
+				if (!installation && projectVersion) {
+					installation = installations.find(i => i.version === projectVersion);
+				}
+				if (!installation && installations.length > 0) {
+					installation = installations[0]; // Fallback to first available
+				}
+
+				if (installation) {
+					// Launch with specific FMOD version
+					const platform = process.platform;
+					try {
+						if (platform === "darwin") {
+							// macOS: use open -a
+							spawn("open", ["-a", installation.path, projectPath], { detached: true, stdio: "ignore" });
+						} else if (platform === "win32") {
+							// Windows: launch exe directly with project as argument
+							spawn(installation.path, [projectPath], { detached: true, stdio: "ignore" });
+						}
+					} catch (error) {
+						new Notice(`Failed to open FMOD project: ${error}`);
+					}
+				} else {
+					// No installations configured, fall back to default shell open
+					const result = await shell.openPath(projectPath);
+					if (result) {
+						new Notice(`Failed to open FMOD project: ${result}`);
+					}
+				}
+			});
+		}
+
+		// Sync button - highlight if newer export is available
+		const hasNewerExport = this.plugin.newerExports.has(project.id);
+		const syncBtn = actions.createEl("button", {
+			cls: hasNewerExport ? "fmod-action-btn fmod-action-btn-update" : "fmod-action-btn",
+			attr: { "aria-label": hasNewerExport ? "Sync with newer export" : "Sync this project" },
+		});
+		syncBtn.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.5 2v6h-6M2.5 22v-6h6M2 11.5a10 10 0 0 1 18.8-4.3M22 12.5a10 10 0 0 1-18.8 4.2"/></svg>`;
+		syncBtn.addEventListener("click", async () => {
+			// If newer export available, update the path first
+			const newerExportForSync = this.plugin.newerExports.get(project.id);
+			if (newerExportForSync) {
+				project.jsonFilePath = newerExportForSync.filePath;
+				await this.plugin.saveSettings();
+				// Clear the newer export indicator
+				this.plugin.newerExports.delete(project.id);
+			}
+			await this.plugin.syncSingleProject(project);
+		});
+
+		// Edit button
+		const editBtn = actions.createEl("button", {
+			cls: "fmod-action-btn",
+			attr: { "aria-label": "Edit project settings" },
+		});
+		editBtn.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/><path d="m15 5 4 4"/></svg>`;
 
 		// Delete button
-		const deleteBtn = header.createEl("button", {
-			cls: "fmod-delete-btn",
-			text: "Delete",
+		const deleteBtn = actions.createEl("button", {
+			cls: "fmod-action-btn fmod-action-btn-danger",
+			attr: { "aria-label": "Delete project" },
 		});
+		deleteBtn.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/><line x1="10" x2="10" y1="11" y2="17"/><line x1="14" x2="14" y1="11" y2="17"/></svg>`;
 		deleteBtn.addEventListener("click", async () => {
 			const index = this.plugin.settings.projects.findIndex(
 				(p) => p.id === project.id
@@ -1025,33 +1575,20 @@ class FMODSyncSettingTab extends PluginSettingTab {
 			}
 		});
 
-		// Project name
-		new Setting(card)
-			.setName("Project name")
-			.setDesc("Display name for this project.")
-			.addText((text) =>
-				text
-					.setPlaceholder("My Game Audio")
-					.setValue(project.name)
-					.onChange(async (value) => {
-						// Check for duplicate names
-						const duplicate = this.plugin.settings.projects.find(
-							(p) => p.id !== project.id && p.name === value
-						);
-						if (duplicate) {
-							new Notice(
-								"A project with this name already exists. Please choose a different name."
-							);
-							return;
-						}
-						project.name = value;
-						await this.plugin.saveSettings();
-					})
-			);
+		// Expandable settings section
+		const settingsSection = card.createDiv({ cls: "fmod-project-settings" });
+		settingsSection.style.display = "none";
 
-		// Output folder
-		new Setting(card)
-			.setName("Output folder")
+		// Toggle settings visibility
+		editBtn.addEventListener("click", () => {
+			const isVisible = settingsSection.style.display !== "none";
+			settingsSection.style.display = isVisible ? "none" : "block";
+			editBtn.classList.toggle("fmod-action-btn-active", !isVisible);
+		});
+
+		// Vault folder
+		const outputSetting = new Setting(settingsSection)
+			.setName("Vault folder")
 			.setDesc("Folder in your vault where event notes will be created.")
 			.addText((text) =>
 				text
@@ -1060,6 +1597,9 @@ class FMODSyncSettingTab extends PluginSettingTab {
 					.onChange(async (value) => {
 						project.outputFolder = value;
 						await this.plugin.saveSettings();
+						this.updateFolderStatus(statusEl, value);
+						// Update header path info
+						this.updateProjectPathInfo(card, project);
 					})
 			)
 			.addButton((button) =>
@@ -1074,20 +1614,26 @@ class FMODSyncSettingTab extends PluginSettingTab {
 					})
 			);
 
+		// Add status indicator below the input field
+		const statusEl = outputSetting.controlEl.createDiv({ cls: "fmod-folder-status" });
+		this.updateFolderStatus(statusEl, project.outputFolder);
+
 		// JSON file path
-		const jsonSetting = new Setting(card)
+		const jsonSetting = new Setting(settingsSection)
 			.setName("JSON file path")
 			.setDesc(
 				"Path to the obsidian-sync.json file exported from FMOD Studio."
 			);
 
-		const jsonTextComponent = jsonSetting.addText((text) =>
+		jsonSetting.addText((text) =>
 			text
 				.setPlaceholder("/path/to/obsidian-sync.json")
 				.setValue(project.jsonFilePath)
 				.onChange(async (value) => {
 					project.jsonFilePath = value;
 					await this.plugin.saveSettings();
+					// Update header path info
+					this.updateProjectPathInfo(card, project);
 				})
 		);
 
@@ -1111,6 +1657,87 @@ class FMODSyncSettingTab extends PluginSettingTab {
 					}
 				})
 		);
+	}
+
+	updateProjectPathInfo(card: HTMLElement, project: FMODProjectConfig): void {
+		const pathEl = card.querySelector(".fmod-project-path");
+		if (!pathEl) return;
+
+		const pathInfo = [];
+		if (project.outputFolder) {
+			pathInfo.push(`Vault: ${project.outputFolder}`);
+		}
+		if (project.jsonFilePath) {
+			const jsonName = project.jsonFilePath.split("/").pop() || project.jsonFilePath;
+			pathInfo.push(`JSON: ${jsonName}`);
+		}
+		pathEl.textContent = pathInfo.length > 0 ? pathInfo.join(" | ") : "Not configured";
+	}
+
+	updateFolderStatus(statusEl: HTMLElement, folderPath: string): void {
+		statusEl.empty();
+
+		if (!folderPath) {
+			statusEl.removeClass("fmod-status-ok", "fmod-status-error");
+			statusEl.addClass("fmod-status-warning");
+			statusEl.setText("No folder specified");
+			return;
+		}
+
+		const existing = this.app.vault.getAbstractFileByPath(folderPath);
+
+		if (existing instanceof TFolder) {
+			statusEl.removeClass("fmod-status-warning", "fmod-status-error");
+			statusEl.addClass("fmod-status-ok");
+			statusEl.setText("✓ Folder exists");
+		} else if (existing instanceof TFile) {
+			statusEl.removeClass("fmod-status-ok", "fmod-status-warning");
+			statusEl.addClass("fmod-status-error");
+			statusEl.setText("✗ Path is a file, not a folder");
+		} else {
+			statusEl.removeClass("fmod-status-ok", "fmod-status-error");
+			statusEl.addClass("fmod-status-warning");
+			statusEl.setText("ℹ Folder will be created on sync");
+		}
+	}
+
+	hide(): void {
+		this.stopPolling();
+	}
+
+	private startPolling(): void {
+		// Stop any existing polling
+		this.stopPolling();
+
+		// Check immediately
+		this.checkAndRefresh();
+
+		// Poll every 30 seconds
+		this.pollingIntervalId = setInterval(() => {
+			this.checkAndRefresh();
+		}, 30000);
+	}
+
+	private stopPolling(): void {
+		if (this.pollingIntervalId) {
+			clearInterval(this.pollingIntervalId);
+			this.pollingIntervalId = null;
+		}
+	}
+
+	private async checkAndRefresh(): Promise<void> {
+		const previousCount = this.plugin.newerExports.size;
+		await this.plugin.checkForNewerExports();
+		const newCount = this.plugin.newerExports.size;
+
+		// Only refresh if the count changed (avoids unnecessary re-renders)
+		if (previousCount !== newCount) {
+			// Re-render just the projects section
+			const projectsContainer = this.containerEl.querySelector(".fmod-projects-container");
+			if (projectsContainer instanceof HTMLElement) {
+				this.renderProjects(projectsContainer);
+			}
+		}
 	}
 
 	generateId(): string {
