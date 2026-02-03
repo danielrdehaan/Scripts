@@ -1,0 +1,81 @@
+\hypertarget{a01340}{}\doxysection{Cpp\+PTSLClient\+::Internal\+Data}
+\label{a01340}\index{CppPTSLClient::InternalData@{CppPTSLClient::InternalData}}
+
+
+{\ttfamily \#include $<$Cpp\+PTSLClient\+Internal.\+h$>$}
+
+
+
+\doxysubsection{Description}
+\mbox{\hyperlink{a01328}{Cpp\+PTSLClient}} data which can\textquotesingle{}t be used in public headers. \doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{a01344}{Rpc\+Context}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::unique\+\_\+ptr$<$ ptsl\+::\+PTSL\+::\+Stub $>$ \mbox{\hyperlink{a01340_a0fc444ee69b9559998df3b347f8f2b80}{m\+\_\+client}}
+\begin{DoxyCompactList}\small\item\em The ptsl\+::\+PTSL\+::\+Stub aka m\+\_\+client, our view of the server\textquotesingle{}s exposed services. \end{DoxyCompactList}\item 
+grpc\+::\+Completion\+Queue \mbox{\hyperlink{a01340_a982302f16a971792fdaaad4ab181e775}{m\+\_\+completion\+Queue}}
+\begin{DoxyCompactList}\small\item\em The producer-\/consumer queue we use to communicate asynchronously with the g\+RPC runtime. \end{DoxyCompactList}\item 
+std\+::map$<$ std\+::string, \mbox{\hyperlink{a02056}{ptsl\+::\+Response}} $>$ \mbox{\hyperlink{a01340_ae96d5e219b16ca286e670f8e9eea033b}{m\+\_\+response\+Pool}}
+\begin{DoxyCompactList}\small\item\em map a request ID to the response message \end{DoxyCompactList}\item 
+std\+::list$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{a01344}{Rpc\+Context}} $>$ $>$ \mbox{\hyperlink{a01340_a8dc00d62793ea3b1ce561c65dca48290}{m\+\_\+rpc\+Contexts}}
+\begin{DoxyCompactList}\small\item\em Active RPC calls. \end{DoxyCompactList}\item 
+std\+::mutex \mbox{\hyperlink{a01340_a4ac74d1a813d55c2f7650a86b253a2e0}{m\+\_\+rpc\+Contexts\+Mutex}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{a01340_a0fc444ee69b9559998df3b347f8f2b80}\label{a01340_a0fc444ee69b9559998df3b347f8f2b80}} 
+\index{CppPTSLClient::InternalData@{CppPTSLClient::InternalData}!m\_client@{m\_client}}
+\index{m\_client@{m\_client}!CppPTSLClient::InternalData@{CppPTSLClient::InternalData}}
+\doxysubsubsection{\texorpdfstring{m\_client}{m\_client}}
+{\footnotesize\ttfamily std\+::unique\+\_\+ptr$<$ptsl\+::\+PTSL\+::\+Stub$>$ m\+\_\+client}
+
+
+
+The ptsl\+::\+PTSL\+::\+Stub aka m\+\_\+client, our view of the server\textquotesingle{}s exposed services. 
+
+\mbox{\Hypertarget{a01340_a982302f16a971792fdaaad4ab181e775}\label{a01340_a982302f16a971792fdaaad4ab181e775}} 
+\index{CppPTSLClient::InternalData@{CppPTSLClient::InternalData}!m\_completionQueue@{m\_completionQueue}}
+\index{m\_completionQueue@{m\_completionQueue}!CppPTSLClient::InternalData@{CppPTSLClient::InternalData}}
+\doxysubsubsection{\texorpdfstring{m\_completionQueue}{m\_completionQueue}}
+{\footnotesize\ttfamily grpc\+::\+Completion\+Queue m\+\_\+completion\+Queue}
+
+
+
+The producer-\/consumer queue we use to communicate asynchronously with the g\+RPC runtime. 
+
+\mbox{\Hypertarget{a01340_ae96d5e219b16ca286e670f8e9eea033b}\label{a01340_ae96d5e219b16ca286e670f8e9eea033b}} 
+\index{CppPTSLClient::InternalData@{CppPTSLClient::InternalData}!m\_responsePool@{m\_responsePool}}
+\index{m\_responsePool@{m\_responsePool}!CppPTSLClient::InternalData@{CppPTSLClient::InternalData}}
+\doxysubsubsection{\texorpdfstring{m\_responsePool}{m\_responsePool}}
+{\footnotesize\ttfamily std\+::map$<$std\+::string, \mbox{\hyperlink{a02056}{ptsl\+::\+Response}}$>$ m\+\_\+response\+Pool}
+
+
+
+map a request ID to the response message 
+
+\mbox{\Hypertarget{a01340_a8dc00d62793ea3b1ce561c65dca48290}\label{a01340_a8dc00d62793ea3b1ce561c65dca48290}} 
+\index{CppPTSLClient::InternalData@{CppPTSLClient::InternalData}!m\_rpcContexts@{m\_rpcContexts}}
+\index{m\_rpcContexts@{m\_rpcContexts}!CppPTSLClient::InternalData@{CppPTSLClient::InternalData}}
+\doxysubsubsection{\texorpdfstring{m\_rpcContexts}{m\_rpcContexts}}
+{\footnotesize\ttfamily std\+::list$<$std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{a01344}{Rpc\+Context}}$>$ $>$ m\+\_\+rpc\+Contexts}
+
+
+
+Active RPC calls. 
+
+\mbox{\Hypertarget{a01340_a4ac74d1a813d55c2f7650a86b253a2e0}\label{a01340_a4ac74d1a813d55c2f7650a86b253a2e0}} 
+\index{CppPTSLClient::InternalData@{CppPTSLClient::InternalData}!m\_rpcContextsMutex@{m\_rpcContextsMutex}}
+\index{m\_rpcContextsMutex@{m\_rpcContextsMutex}!CppPTSLClient::InternalData@{CppPTSLClient::InternalData}}
+\doxysubsubsection{\texorpdfstring{m\_rpcContextsMutex}{m\_rpcContextsMutex}}
+{\footnotesize\ttfamily std\+::mutex m\+\_\+rpc\+Contexts\+Mutex}
+
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{a00044}{Cpp\+PTSLClient\+Internal.\+h}}\end{DoxyCompactItemize}

@@ -1,0 +1,50 @@
+\hypertarget{a01964}{}\doxysection{Media\+Time\+Position}
+\label{a01964}\index{MediaTimePosition@{MediaTimePosition}}
+
+
+{\ttfamily \#include $<$Cpp\+PTSLCommon.\+h$>$}
+
+
+
+\doxysubsection{Description}
+Structure that represents an internal position within a piece of media. 
+
+Not relative to the global timeline. Can only be expressed in fundamental units, depending on media type.
+
+\begin{DoxyRefDesc}{Deprecated}
+\item[\mbox{\hyperlink{a00467__deprecated000342}{Deprecated}}]All API-\/specific types in the C++ client lib are deprecated starting in Pro Tools 2024.\+10 since we introduced general JSON-\/based request/response. \end{DoxyRefDesc}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+int64\+\_\+t \mbox{\hyperlink{a01964_ab721ffe236ea5edc9d87f7ec484fff96}{position}}
+\begin{DoxyCompactList}\small\item\em Position, as appropriate for the unit. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{a00491_ad77427d31ed88c909fdd83fd14fbae65}{Basic\+Time\+Type}} \mbox{\hyperlink{a01964_a4b1236691a1956688c53ebe96c0d4d2d}{time\+Type}}
+\begin{DoxyCompactList}\small\item\em Type of the position time. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{a01964_ab721ffe236ea5edc9d87f7ec484fff96}\label{a01964_ab721ffe236ea5edc9d87f7ec484fff96}} 
+\index{MediaTimePosition@{MediaTimePosition}!position@{position}}
+\index{position@{position}!MediaTimePosition@{MediaTimePosition}}
+\doxysubsubsection{\texorpdfstring{position}{position}}
+{\footnotesize\ttfamily int64\+\_\+t position}
+
+
+
+Position, as appropriate for the unit. 
+
+\mbox{\Hypertarget{a01964_a4b1236691a1956688c53ebe96c0d4d2d}\label{a01964_a4b1236691a1956688c53ebe96c0d4d2d}} 
+\index{MediaTimePosition@{MediaTimePosition}!timeType@{timeType}}
+\index{timeType@{timeType}!MediaTimePosition@{MediaTimePosition}}
+\doxysubsubsection{\texorpdfstring{timeType}{timeType}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a00491_ad77427d31ed88c909fdd83fd14fbae65}{Basic\+Time\+Type}} time\+Type}
+
+
+
+Type of the position time. 
+
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{a00050}{Cpp\+PTSLCommon.\+h}}\end{DoxyCompactItemize}

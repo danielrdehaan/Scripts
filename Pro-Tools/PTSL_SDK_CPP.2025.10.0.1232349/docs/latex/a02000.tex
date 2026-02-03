@@ -1,0 +1,43 @@
+\hypertarget{a02000}{}\doxysection{File\+Script\+Parser}
+\label{a02000}\index{FileScriptParser@{FileScriptParser}}
+
+
+{\ttfamily \#include $<$File\+Script\+Parser.\+h$>$}
+
+
+
+\doxysubsection{Description}
+Class for parsing file script. 
+
+See \mbox{\hyperlink{a02000_a9f67db559db48252e620520670e2b430}{Parse()}}. \doxysubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static std\+::optional$<$ \mbox{\hyperlink{a01996}{Ptsl\+Cmd\+File\+Script}} $>$ \mbox{\hyperlink{a02000_a9f67db559db48252e620520670e2b430}{Parse}} (const std\+::string \&text)
+\begin{DoxyCompactList}\small\item\em Parses incoming text in the format of ptslcmd\textquotesingle{}s file script returning structured data. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{a02000_a9f67db559db48252e620520670e2b430}\label{a02000_a9f67db559db48252e620520670e2b430}} 
+\index{FileScriptParser@{FileScriptParser}!Parse@{Parse}}
+\index{Parse@{Parse}!FileScriptParser@{FileScriptParser}}
+\doxysubsubsection{\texorpdfstring{Parse()}{Parse()}}
+{\footnotesize\ttfamily std\+::optional$<$ \mbox{\hyperlink{a01996}{Ptsl\+Cmd\+File\+Script}} $>$ Parse (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{text }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Parses incoming text in the format of ptslcmd\textquotesingle{}s file script returning structured data. 
+
+
+
+References \mbox{\hyperlink{a01992_a178c5d13981efd2107b10d3c79d16393}{Constants\+::\+COMMAND\+\_\+\+ENCRYPTION\+\_\+\+KEY}}, \mbox{\hyperlink{a01992_a69bc22a99ad3b009b5d502598cd0f658}{Constants\+::\+COMMAND\+\_\+\+HEADER\+\_\+\+JSON\+\_\+\+TAG}}, \mbox{\hyperlink{a01992_a698670f04559aae35d5e9d149619a44a}{Constants\+::\+COMMAND\+\_\+\+NAME\+\_\+\+JSON\+\_\+\+TAG}}, \mbox{\hyperlink{a01992_a9525e1f6a3d18a9b5b391bd6dc90f6b9}{Constants\+::\+COMMAND\+\_\+\+REQUEST\+\_\+\+BODY\+\_\+\+JSON\+\_\+\+TAG}}, \mbox{\hyperlink{a01992_ad2ffe03310763eef51ee733e5190ca4d}{Constants\+::\+COMMAND\+\_\+\+VERSION\+\_\+\+JSON\+\_\+\+TAG}}, \mbox{\hyperlink{a02008_a02251a1ef8a48fc5a729db5b6228a481}{Ptsl\+Cmd\+Command\+Request\+::\+Command\+Name}}, \mbox{\hyperlink{a01992_a5842000ba30d1698a0b41dd5841452e1}{Constants\+::\+COMMANDS\+\_\+\+JSON\+\_\+\+TAG}}, \mbox{\hyperlink{a00493_aa640437fe1d526b26d996ede3cf8be8d}{comments\+::parser\+::comments\+\_\+filter}}, \mbox{\hyperlink{a02008_a62c7c5d7f8623d55fe132fc2beb4d9e7}{Ptsl\+Cmd\+Command\+Request\+::\+Encryption\+Key}}, \mbox{\hyperlink{a02008_a45c41baeff3328eb0ecefc56ab741fa8}{Ptsl\+Cmd\+Command\+Request\+::\+Request\+Body\+Json}}, \mbox{\hyperlink{a02008_a35a6472375d7fa65838c5de3a7960f22}{Ptsl\+Cmd\+Command\+Request\+::\+Version}}, and \mbox{\hyperlink{a02008_a208ceab3e07c508f70b57acab0da9655}{Ptsl\+Cmd\+Command\+Request\+::\+Versioned\+Header}}.
+
+
+
+Referenced by \mbox{\hyperlink{a02020_a20c4c340e8dfd65eb1f69fc1c40a509b}{Ptsl\+Cmd\+Command\+Runner\+::\+Run\+Script()}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{a00434}{File\+Script\+Parser.\+h}}\item 
+\mbox{\hyperlink{a00419}{File\+Script\+Parser.\+cpp}}\end{DoxyCompactItemize}

@@ -1,0 +1,841 @@
+// Copyright 2023 Avid Technology, Inc. 
+// All rights reserved.
+// 
+// CONFIDENTIAL: this document contains confidential information of Avid. Do not disclose
+// to any third party. Use of the information contained in this document is subject to an
+// Avid SDK license.
+
+/** @page release_notes_2022_12 2022.12 Release Notes
+
+@ingroup ptsl_version_2022_12
+
+@section release_notes_2022_12_compatibility Compatibility
+
+PTSL SDK 2022.12 uses @ref PTSL_VERSION 1 of the client interface
+
+Pro Tools 2022.12 is compatible with clients using @ref PTSL_VERSION 1 only
+
+*/
+
+
+/** @page release_notes_2023_03 2023.03 Release Notes
+
+@ingroup ptsl_version_2023_03
+
+@section release_notes_2023_03_compatibility Compatibility
+
+PTSL SDK 2023.03 uses @ref PTSL_VERSION 1 of the client interface
+
+Pro Tools 2023.3 is compatible with clients using @ref PTSL_VERSION 1 and higher
+
+@section release_notes_2023_03_changelog Changelog
+
+@subsection release_notes_2023_03_changelog_developer_certificates_have_been_deprecated Developer certificates have been deprecated
+
+You no longer need to obtain a developer certificate to establish a PTSL connection to Pro Tools.
+Use the new @ref PTSLC_CPP::CppPTSLClient::RegisterConnection "RegisterConnection" command to
+establish connections to Pro Tools 2023.3 and higher.
+
+@ref PTSLC_CPP::CppPTSLClient::AuthorizeConnection "AuthorizeConnection" has been deprecated. This
+command, which was used with certificates in previous versions of the scripting SDK, will continue
+to work but will be removed in a future release.
+
+@subsection release_notes_2023_03_changelog_command_changes Command changes
+
+- @ref PTSLC_CPP::CppPTSLClient::RenameTrack "RenameTrack" @c trackId is now deprecated. Use @c currentTrackName instead.
+- @ref PTSLC_CPP::CppPTSLClient::ExportMix "ExportMix" @c filesList is now deprecated. Use @c mixSourceList instead.
+
+*/
+
+
+/** @page release_notes_2023_06 2023.06 Release Notes
+
+@ingroup ptsl_version_2023_06
+
+@section release_notes_2023_06_compatibility Compatibility
+
+PTSL SDK 2023.06 uses @ref PTSL_VERSION 1 of the client interface
+
+Pro Tools 2023.6 is compatible with clients using @ref PTSL_VERSION 1 and higher
+
+@section release_notes_2023_06_changelog Changelog
+
+Reminder: @ref release_notes_2023_03_changelog_developer_certificates_have_been_deprecated
+
+@subsection release_notes_2023_06_changelog_command_changes Command changes
+
+- All commands that receive a @c Time location value as an input can now use a simplified @c BarsBeats format without additional spaces
+- @ref PTSLC_CPP::CppPTSLClient::EditMemoryLocation "EditMemoryLocation" command is updated with a possibility to create a new memory location if its ID doesn't exist
+- @ref PTSLC_CPP::CppPTSLClient::Import "Import" command can now import audio files. This command now supports @ref PTSLC_CPP::ImportType "ImportType::Audio" and has three new options for this type: @c locationOptions, @c locationType, @c locationValue
+
+Other command changes:
+- @ref PTSLC_CPP::CppPTSLClient::Spot "Spot" @c trackOffsetOptions is now deprecated. Use @c locationOptions instead.
+- @ref PTSLC_CPP::CppPTSLClient::EditMemoryLocation "EditMemoryLocation" and PTSLC_CPP::CppPTSLClient::CreateMemoryLocation "CreateMemoryLocation" @c reference is now deprecated. Use @c startTime instead.
+- @ref PTSLC_CPP::AudioOperations enumerator names have changed
+
+*/
+
+/** @page release_notes_2023_09 2023.09 Release Notes
+
+@ingroup ptsl_version_2023_09
+
+@section release_notes_2023_09_compatibility Compatibility
+
+PTSL SDK 2023.09 uses @ref PTSL_VERSION 1 of the client interface
+
+Pro Tools 2023.9 is compatible with clients using @ref PTSL_VERSION 1 and higher
+
+Reminder: @ref release_notes_2023_03_changelog_developer_certificates_have_been_deprecated
+
+Pro Tools 2023.9 is the last release to support @ref PTSLC_CPP::CppPTSLClient::AuthorizeConnection "AuthorizeConnection"
+
+The @ref PTSLC_CPP::CppPTSLClient::AuthorizeConnection "AuthorizeConnection" API has been superseded by the @ref PTSLC_CPP::CppPTSLClient::RegisterConnection "RegisterConnection" API, introduced in PT 2023.3. This new method no longer requires a certificate to authenticate with Pro Tools upon connection, and simply requires you provide the "companyName" and "applicationName" when sending commands from the SDK.
+
+For more details, see @ref PTSLC_CPP::RegisterConnectionRequest "RegisterConnectionRequest" and @ref PTSLC_CPP::RegisterConnectionResponse "RegisterConnectionResponse".
+
+@section release_notes_2023_09_changelog Changelog
+
+@subsection release_notes_2023_09_changelog_general_changes General changes
+
+- @c grpc for both C++ client and Pro Tools server is updated to 1.43.0 additionally with its dependencies (previously was 1.37.0)
+- @c protobuf for both C++ client and Pro Tools server is set to version 3.19.2 (previously was unspecified)
+
+@subsection release_notes_2023_09_changelog_command_changes Protocol changes
+
+New commands:
+- @ref ptsl::CreateNewTracks "CreateNewTracks"
+- @ref ptsl::SelectTracksByName "SelectTracksByName"
+- @ref ptsl::GetEditMode "GetEditMode"
+- @ref ptsl::SetEditMode "SetEditMode"
+- @ref ptsl::GetEditTool "GetEditTool"
+- @ref ptsl::SetEditTool "SetEditTool"
+- @ref ptsl::RecallZoomPreset "RecallZoomPreset"
+- @ref ptsl::GetEditModeOptions "GetEditModeOptions"
+- @ref ptsl::SetEditModeOptions "SetEditModeOptions"
+- @ref ptsl::SetTimelineSelection "SetTimelineSelection"
+- @ref ptsl::GetTimelineSelection "GetTimelineSelection"
+
+New possible errors:
+- @ref ptsl::PT_Forbidden "PT_Forbidden"
+- @ref ptsl::PT_NoTimelineFound "PT_NoTimelineFound"
+- @ref ptsl::PT_ArgumentOutOfRange "PT_ArgumentOutOfRange"
+
+New enumerations:
+- @ref ptsl::TrackFormat "TrackFormat"
+- @ref ptsl::TrackTimebase "TrackTimebase"
+- @ref ptsl::EditMode "EditMode"
+- @ref ptsl::EditTool "EditTool"
+- @ref ptsl::TimelineUpdateVideo "TimelineUpdateVideo"
+- @ref ptsl::SelectionMode "SelectionMode"
+
+New messages:
+- @ref ptsl::PaginationRequest "PaginationRequest"
+- @ref ptsl::PaginationResponse "PaginationResponse"
+- @ref ptsl::CreateNewTracksRequestBody "CreateNewTracksRequestBody" and @ref ptsl::CreateNewTracksResponseBody "CreateNewTracksResponseBody"
+- @ref ptsl::EditModeOptions "EditModeOptions"
+- @ref ptsl::GetEditModeResponseBody "GetEditModeResponseBody"
+- @ref ptsl::SetEditModeRequestBody "SetEditModeRequestBody"
+- @ref ptsl::GetEditToolResponseBody "GetEditToolResponseBody"
+- @ref ptsl::SetEditToolRequestBody "SetEditToolRequestBody"
+- @ref ptsl::RecallZoomPresetRequestBody "RecallZoomPresetRequestBody"
+- @ref ptsl::SetEditModeOptionsRequestBody "SetEditModeOptionsRequestBody"
+- @ref ptsl::GetEditModeOptionsResponseBody "GetEditModeOptionsResponseBody"
+- @ref ptsl::SetTimelineSelectionRequestBody "SetTimelineSelectionRequestBody"
+- @ref ptsl::GetTimelineSelectionRequestBody "GetTimelineSelectionRequestBody" and @ref ptsl::GetTimelineSelectionResponseBody "GetTimelineSelectionResponseBody"
+- @ref ptsl::SelectTracksByNameRequestBody "SelectTracksByNameRequestBody" and @ref ptsl::SelectTracksByNameResponseBody "SelectTracksByNameResponseBody"
+
+Existing command changes:
+- @ref ptsl::TrackType "TrackType" enumeration: added prefixes for values, non prefix values are deprecated
+- @ref ptsl::Pagination "Pagination" message is deprecated. Use @ref ptsl::PaginationRequest "PaginationRequest" instead
+- Changes in @ref ptsl::AudioData "AudioData" message
+    - @ref ptsl::AudioData::destination "destination" is deprecated. Use @ref ptsl::AudioData::audio_destination "audio_destination" instead
+    - @ref ptsl::AudioData::location "location" is deprecated. Use @ref ptsl::AudioData::audio_location "audio_location" instead
+- Changes in @ref ptsl::ImportResponseBody "ImportResponseBody" message
+    - @ref ptsl::ImportResponseBody::file_list "file_list", @ref ptsl::ImportResponseBody::audio_operations "audio_operations", @ref ptsl::ImportResponseBody::destination_path "destination_path" are deprecated. Use @ref ptsl::ImportResponseBody::audio_data "audio_data" instead
+    - The response is not fully implemented yet. The values are not expected to be returned at the moment.
+- Changes in @ref ptsl::GetTrackListRequestBody "GetTrackListRequestBody" message
+    - @ref ptsl::GetTrackListRequestBody::page_limit "page_limit" is deprecated. Use @ref ptsl::GetTrackListRequestBody::pagination_request "pagination_request" instead
+- Changes in @ref ptsl::GetTrackListResponseBody "GetTrackListResponseBody" message 
+    - @ref ptsl::GetTrackListResponseBody::stats "stats" is deprecated. Use @ref ptsl::GetTrackListResponseBody::pagination_response "pagination_response" instead
+- Changes in @ref ptsl::GetFileLocationRequestBody "GetFileLocationRequestBody" message
+    - @ref ptsl::GetFileLocationRequestBody::page_limit "page_limit" is deprecated. Use @ref ptsl::GetFileLocationRequestBody::pagination_request "pagination_request" instead
+- Changes in @ref ptsl::GetFileLocationResponseBody "GetFileLocationResponseBody" message
+    - @ref ptsl::GetFileLocationResponseBody::stats "stats" is deprecated. Use @ref ptsl::GetFileLocationResponseBody::pagination_response "pagination_response" instead
+
+@subsection release_notes_2023_09_changelog_cpp_changes C++ client changes
+
+- CMake 3.25.0 is the minimum requirement (previously was unspecified). The check is not enforced but it's not guaranteed to be compatible with older versions
+- @c C++17 is the minimum requirement (previously was C++14)
+- <tt>-arch armv8</tt> option is deprecated in @c build_cpp_ptsl_sdk.py. Use @c arm64 instead
+- <tt>-arch x86_64_arm64</tt> (universal binary) option is now the default option for MacOS in @c build_cpp_ptsl_sdk.py
+- @c find_package for the C++ client supports PTSLC_CPP_DEBUG_ROOT/PTSLC_CPP_RELEASE_ROOT CMake variables to hint additional search path in multi-config projects
+- Improved universal binary/cross-compilation (architecture) support for the C++ client
+- @ref PTSLC_CPP::CppPTSLClient::CreateFade "CreateFade" is deprecated. Use @ref PTSLC_CPP::CppPTSLClient::CreateFadesBasedOnPreset "CreateFadesBasedOnPreset"
+- @ref PTSLC_CPP::CppPTSLClient::RenameTrack "RenameTrack" is deprecated. Use @ref PTSLC_CPP::CppPTSLClient::RenameTargetTrack "RenameTargetTrack"
+
+*/
+
+/** @page release_notes_2023_12 2023.12 Release Notes
+
+@ingroup ptsl_version_2023_12
+
+@section release_notes_2023_12_compatibility Compatibility
+
+PTSL SDK 2023.12 uses @ref PTSL_VERSION 2 of the client interface
+
+Pro Tools 2023.12 is compatible with clients using @ref PTSL_VERSION 1 and higher
+
+DEVELOPER CERTIFICATES ARE NO LONGER SUPPORTED
+
+You no longer need to obtain a developer certificate to establish a PTSL connection to Pro Tools.
+Use the new @ref PTSLC_CPP::CppPTSLClient::RegisterConnection "RegisterConnection" command to
+establish connections to Pro Tools 2023.3 and higher.
+
+@section release_notes_2023_12_changelog Changelog
+
+@subsection release_notes_2023_12_changelog_command_changes Protocol changes
+
+New commands:
+- @ref ptsl::ImportVideo "ImportVideo"
+- @ref ptsl::SelectMemoryLocation "SelectMemoryLocation"
+- @ref ptsl::SetTrackMuteState "SetTrackMuteState"
+- @ref ptsl::SetTrackSoloState "SetTrackSoloState"
+- @ref ptsl::SetTrackSoloSafeState "SetTrackSoloSafeState"
+- @ref ptsl::SetTrackRecordEnableState "SetTrackRecordEnableState"
+- @ref ptsl::SetTrackRecordSafeEnableState "SetTrackRecordSafeEnableState"
+- @ref ptsl::SetTrackInputMonitorState "SetTrackInputMonitorState"
+- @ref ptsl::SetTrackSmartDspState "SetTrackSmartDspState"
+- @ref ptsl::SetTrackHiddenState "SetTrackHiddenState"
+- @ref ptsl::SetTrackInactiveState "SetTrackInactiveState"
+- @ref ptsl::SetTrackFrozenState "SetTrackFrozenState"
+- @ref ptsl::SetTrackOnlineState "SetTrackOnlineState"
+- @ref ptsl::SetTrackOpenState "SetTrackOpenState"
+
+New possible errors:
+- @ref ptsl::PT_NoTimelineFound "PT_NoTimelineFound"
+- @ref ptsl::PT_ArgumentOutOfRange "PT_ArgumentOutOfRange"
+- @ref ptsl::PT_ForbiddenTrackType "PT_ForbiddenTrackType"
+- @ref ptsl::PT_NoVideoEngineFound "PT_NoVideoEngineFound"
+- @ref ptsl::PT_NoDspHardwareFound "PT_NoDspHardwareFound"
+- @ref ptsl::PT_Info "PT_Info"
+
+New enumerations:
+- @ref ptsl::MarkerLocation "MarkerLocation"
+
+New messages:
+- @ref ptsl::ImportFailureInfo "ImportFailureInfo"
+- @ref ptsl::ImportVideoRequestBody "ImportVideoRequestBody" and @ref ptsl::ImportVideoResponseBody "ImportVideoResponseBody"
+- @ref ptsl::SelectMemoryLocationRequestBody "SelectMemoryLocationRequestBody"
+- @ref ptsl::SetTrackMuteStateRequestBody "SetTrackMuteStateRequestBody"
+- @ref ptsl::SetTrackSoloStateRequestBody "SetTrackSoloStateRequestBody"
+- @ref ptsl::SetTrackSoloSafeStateRequestBody "SetTrackSoloSafeStateRequestBody"
+- @ref ptsl::SetTrackRecordEnableStateRequestBody "SetTrackRecordEnableStateRequestBody"
+- @ref ptsl::SetTrackRecordSafeEnableStateRequestBody "SetTrackRecordSafeEnableStateRequestBody"
+- @ref ptsl::SetTrackInputMonitorStateRequestBody "SetTrackInputMonitorStateRequestBody"
+- @ref ptsl::SetTrackSmartDspStateRequestBody "SetTrackSmartDspStateRequestBody"
+- @ref ptsl::SetTrackInactiveStateRequestBody "SetTrackInactiveStateRequestBody"
+- @ref ptsl::SetTrackFrozenStateRequestBody "SetTrackFrozenStateRequestBody"
+- @ref ptsl::SetTrackOnlineStateRequestBody "SetTrackOnlineStateRequestBody"
+- @ref ptsl::SetTrackOpenStateRequestBody "SetTrackOpenStateRequestBody"
+
+New error response type.
+
+The new @ref ptsl::ResponseError "ResponseError" message replaces previous message in the @ref ptsl::Response::response_error_json "response_error_json".
+This will allow processing multiple errors/warnings via protobuf.
+
+Removed messages:
+- VideoData
+- MidiData
+- ClipGroups
+
+Existing command changes:
+- Changes in @ref ptsl::PasteSpecialOptions "PasteSpecialOptions" enumeration 
+    - @ref ptsl::PasteSpecialOptions::Merge "Merge" is deprecated. Use @ref ptsl::PasteSpecialOptions::MergeMidi "MergeMidi" instead
+- Changes in @ref ptsl::MemoryLocationReference "MemoryLocationReference" enumeration
+    - @ref ptsl::MemoryLocationReference::MLR_FollowTrackTimebase "MLR_FollowTrackTimebase" value was added
+- Changes in @ref ptsl::ImportType "ImportType" enumeration
+    - Video, Midi, ClipGroups values were removed
+- Changes in @ref ptsl::PaginationRequest "PaginationRequest" message
+    - message layout was changed
+- Changes in @ref ptsl::MemoryLocation "MemoryLocation" message
+    -  @ref ptsl::MemoryLocation::location "location", @ref ptsl::MemoryLocation::track_name "track_name", @ref ptsl::MemoryLocation::color_index "color_index" fields were added
+- Changes in @ref ptsl::MemoryLocationProperties "MemoryLocationProperties" message
+    -  @ref ptsl::MemoryLocationProperties::venue_snapshot_index "venue_snapshot_index", @ref ptsl::MemoryLocationProperties::venue_snapshot_name "venue_snapshot_name" fields were added
+- Changes in @ref ptsl::EditMemoryLocationRequestBody "EditMemoryLocationRequestBody" message
+    -  @ref ptsl::EditMemoryLocationRequestBody::color_index "color_index", @ref ptsl::EditMemoryLocationRequestBody::location "location", @ref ptsl::EditMemoryLocationRequestBody::track_name "track_name" fields were added
+- Changes in @ref ptsl::CreateMemoryLocationRequestBody "CreateMemoryLocationRequestBody" message
+    -  @ref ptsl::CreateMemoryLocationRequestBody::color_index "color_index", @ref ptsl::CreateMemoryLocationRequestBody::location "location", @ref ptsl::CreateMemoryLocationRequestBody::track_name "track_name" fields were added
+- Changes in @ref ptsl::GetMemoryLocationsRequestBody "GetMemoryLocationsRequestBody" message
+    - @ref ptsl::GetMemoryLocationsRequestBody::pagination_request "pagination_request" field was added
+- Changes in @ref ptsl::GetMemoryLocationsResponseBody "GetMemoryLocationsResponseBody" message
+    - @ref ptsl::GetMemoryLocationsResponseBody::pagination_response "pagination_response" field was added
+
+*/
+
+/** @page release_notes_2024_03 2024.03 Release Notes
+
+@ingroup ptsl_version_2024_03
+
+@section release_notes_2024_03_compatibility Compatibility
+
+PTSL SDK 2024.03 uses @ref PTSL_VERSION 3 of the client interface
+
+Pro Tools 2024.03 is compatible with clients using @ref PTSL_VERSION 1 and higher
+
+DEVELOPER CERTIFICATES ARE NO LONGER SUPPORTED
+
+You no longer need to obtain a developer certificate to establish a PTSL connection to Pro Tools.
+Use the new @ref PTSLC_CPP::CppPTSLClient::RegisterConnection "RegisterConnection" command to
+establish connections to Pro Tools 2023.3 and higher.
+
+@section release_notes_2024_03_changelog Changelog
+
+@subsection release_notes_2024_03_changelog_command_changes Protocol changes
+
+New command:
+- @ref ptsl::GetSessionIDs "GetSessionIDs"
+
+New message:
+- @ref ptsl::GetSessionIDsResponseBody "GetSessionIDsResponseBody"
+
+Existing command changes:
+- Changes in @ref ptsl::TrackFormat "TrackFormat" enumeration
+    - @ref ptsl::TrackFormat::TF_None "TF_None" value was added
+    - @ref ptsl::TrackFormat::TF_2_1 "TF_2_1" value was added
+    - @ref ptsl::TrackFormat::TF_Overhead "TF_Overhead" value was added
+- Changes in @ref ptsl::TrackTimebase "TrackTimebase" enumeration
+    - @ref ptsl::TrackTimebase::TTB_None "TTB_None" value was added
+- Changes in @ref ptsl::TrackAttributes "TrackAttributes" message
+    - @ref ptsl::TrackAttributes::is_record_enabled_safe "is_record_enabled_safe" field was added
+    - @ref ptsl::TrackAttributes::is_smart_dsp_on_safe "is_smart_dsp_on_safe" field was added
+    - @ref ptsl::TrackAttributes::is_soloed_safe "is_soloed_safe" field was added
+- Changes in @ref ptsl::Track "Track" message
+    - @ref ptsl::Track::format "format" field was added
+    - @ref ptsl::Track::timebase "timebase" field was added
+- Changes in @ref ptsl::ExportClipsAsFilesRequestBody "ExportClipsAsFilesRequestBody" message
+    - @ref ptsl::ExportClipsAsFilesRequestBody::sample_rate_custom "sample_rate_custom" field was added
+
+@subsection release_notes_2024_03_changelog_cpp_changes C++ client changes
+
+- C++ client build script now supports `-vs_compiler` option to specify the Visual Studio compiler version
+    - supported values: vs2017, vs2019, vs2022
+- C++ client was updated to support both @ref ptsl::CommandError "CommandError" and @ref ptsl::ResponseError "ResponseError" messages from Pro Tools
+
+*/
+
+/** @page release_notes_2024_06 2024.06 Release Notes
+
+@ingroup ptsl_version_2024_06
+
+@section release_notes_2024_06_compatibility Compatibility
+
+PTSL SDK 2024.06 uses @ref PTSL_VERSION 4 of the client interface
+
+Pro Tools 2024.06 is compatible with clients using @ref PTSL_VERSION 1 and higher
+
+DEVELOPER CERTIFICATES ARE NO LONGER SUPPORTED
+
+You no longer need to obtain a developer certificate to establish a PTSL connection to Pro Tools.
+Use the new @ref PTSLC_CPP::CppPTSLClient::RegisterConnection "RegisterConnection" command to
+establish connections to Pro Tools 2023.03 and higher.
+
+@section release_notes_2024_06_changelog Changelog
+
+@subsection release_notes_2024_06_changelog_command_changes Protocol changes
+
+New commands:
+- @ref ptsl::GetMemoryLocationsManageMode "GetMemoryLocationsManageMode"
+- @ref ptsl::SetMemoryLocationsManageMode "SetMemoryLocationsManageMode"
+- @ref ptsl::SetMainCounterFormat "SetMainCounterFormat"
+- @ref ptsl::SetSubCounterFormat "SetSubCounterFormat"
+- @ref ptsl::GetMainCounterFormat "GetMainCounterFormat"
+- @ref ptsl::GetSubCounterFormat "GetSubCounterFormat"
+- @ref ptsl::Undo "Undo"
+- @ref ptsl::Redo "Redo"
+- @ref ptsl::UndoAll "UndoAll"
+- @ref ptsl::RedoAll "RedoAll"
+- @ref ptsl::ClearUndoQueue "ClearUndoQueue"
+- @ref ptsl::SetTrackDSPModeSafeState "SetTrackDSPModeSafeState"
+- @ref ptsl::GetSessionSystemDelayInfo "GetSessionSystemDelayInfo"
+- @ref ptsl::GroupClips "GroupClips"
+- @ref ptsl::UngroupClips "UngroupClips"
+- @ref ptsl::UngroupAllClips "UngroupAllClips"
+- @ref ptsl::RegroupClips "RegroupClips"
+- @ref ptsl::RepeatSelection "RepeatSelection"
+- @ref ptsl::DuplicateSelection "DuplicateSelection"
+
+New possible errors:
+- @ref ptsl::PT_UnsupportedCommand "PT_UnsupportedCommand"
+- @ref ptsl::PT_HostNotReady "PT_HostNotReady"
+- @ref ptsl::PT_CannotBeDone "PT_CannotBeDone"
+
+New enumerations:
+- @ref ptsl::TrackInsertionPoint "TrackInsertionPoint"
+- @ref ptsl::TrackFromClipGroupExclusionReason "TrackFromClipGroupExclusionReason"
+
+New messages:
+- @ref ptsl::GetMemoryLocationsManageModeResponseBody "GetMemoryLocationsManageModeResponseBody"
+- @ref ptsl::SetMemoryLocationsManageModeRequestBody "SetMemoryLocationsManageModeRequestBody"
+- @ref ptsl::HostReadyCheckResponseBody "HostReadyCheckResponseBody"
+- @ref ptsl::SetMainCounterFormatRequestBody "SetMainCounterFormatRequestBody"
+- @ref ptsl::SetSubCounterFormatRequestBody "SetSubCounterFormatRequestBody"
+- @ref ptsl::GetMainCounterFormatResponseBody "GetMainCounterFormatResponseBody"
+- @ref ptsl::GetSubCounterFormatResponseBody "GetSubCounterFormatResponseBody"
+- @ref ptsl::UndoHistoryOperation "UndoHistoryOperation"
+- @ref ptsl::UndoRequestBody "UndoRequestBody"
+- @ref ptsl::UndoResponseBody "UndoResponseBody"
+- @ref ptsl::RedoRequestBody "RedoRequestBody"
+- @ref ptsl::RedoResponseBody "RedoResponseBody"
+- @ref ptsl::UndoAllResponseBody "UndoAllResponseBody"
+- @ref ptsl::RedoAllResponseBody "RedoAllResponseBody"
+- @ref ptsl::SetTrackDSPModeSafeStateRequestBody "SetTrackDSPModeSafeStateRequestBody"
+- @ref ptsl::GetSessionSystemDelayInfoResponseBody "GetSessionSystemDelayInfoResponseBody"
+- @ref ptsl::TrackExcludedFromClipGroupInfo "TrackExcludedFromClipGroupInfo"
+- @ref ptsl::RepeatSelectionRequestBody "RepeatSelectionRequestBody"
+
+Existing command changes:
+- Changes in @ref ptsl::EM_AudioInfo "EM_AudioInfo" message
+    - @ref ptsl::EM_AudioInfo::sample_rate_custom "sample_rate_custom" field was added
+- Changes in @ref ptsl::CreateNewTracksRequestBody "CreateNewTracksRequestBody" message
+    - @ref ptsl::CreateNewTracksRequestBody::pagination_request "pagination_request" field was added
+    - @ref ptsl::CreateNewTracksRequestBody::insertion_point_position "insertion_point_position" field was added
+    - @ref ptsl::CreateNewTracksRequestBody::insertion_point_track_name "insertion_point_track_name" field was added
+- Changes in @ref ptsl::CreateNewTracksResponseBody "CreateNewTracksResponseBody" message
+    - @ref ptsl::CreateNewTracksResponseBody::created_track_names "created_track_names" field was added
+    - @ref ptsl::CreateNewTracksResponseBody::pagination_response "pagination_response" field was added
+    - @ref ptsl::CreateNewTracksResponseBody::number_of_tracks "number_of_tracks" field was deprecated
+- Changes in @ref ptsl::HostReadyCheck "HostReadyCheck" command
+    - @ref ptsl::HostReadyCheckResponseBody::is_host_ready "is_host_ready" returns true after full Pro Tools initialization 
+- Changes in @ref ptsl::ClearMemoryLocation "ClearMemoryLocation" command
+    - @ref ptsl::ClearMemoryLocationResponseBody::success_count "success_count" field was added
+    - @ref ptsl::ClearMemoryLocationResponseBody::failure_count "failure_count" field was added
+    - @ref ptsl::ClearMemoryLocationResponseBody::failure_list "failure_list" field was added
+
+@subsection release_notes_2024_06_changelog_cpp_changes C++ client changes
+
+- @ref PTSLC_CPP::CppPTSLClient::HostReadyCheck "HostReadyCheck" command is now public and can be called directly
+- C++ client now supports "direct mode"
+    - the new mode allows sending a JSON string (message request) alongside the command instead of filling C++ structure with the command arguments
+    - see @ref PTSLC_CPP::CommandRequest::directJsonBody "directJsonBody". Non-empty string enables the mode
+- C++ client now privately depends on the Howard Hinnant date library version 3.0.1. The library is not exposed in public headers
+
+*/
+
+/** @page release_notes_2024_10 2024.10 Release Notes
+
+@ingroup ptsl_version_2024_10
+
+@section release_notes_2024_10_compatibility Compatibility
+
+PTSL SDK 2024.10 uses @ref PTSL_VERSION 5 of the client interface
+
+Pro Tools 2024.10 is compatible with clients using @ref PTSL_VERSION 1 and higher
+
+@section release_notes_2024_10_changelog Changelog
+
+@subsection release_notes_2024_10_changelog_command_progress_tracking Command Progress Tracking
+
+There are a few behavioral changes associated with the command progress tracking updates.
+1. Status Messages. For some commands you might notice a series of status messages being held by the server until command completion. These messages may appear as info items in the error list of the final command response but will not be flagged as an error or have any other impact on the response. Once more progress tracking related changes are added, these status updates will be returned to you as they are logged by the host.
+2. Host Busy State. If the host receives commands while certain modal dialogs or progress bars are being displayed by the host GUI, an info message will be logged indicating that the host is busy and that the command will wait for the current action to conclude before starting. These commands will go into a "queued" state.
+3. Command Timeout. Commands can now timeout while in progress and will receive a new PT_CommandTimeout command error upon termination. Legacy clients will receive a PT_UnknownError instead of the new error type, but the accompanying error message will still indicate what happened. Note, it's possible for any "queued" command to timeout while waiting to run. When this happens, in addition to the PT_CommandTimeout command error, there will be a PT_HostIsBusy command error in the error list of the response so that it can be distinguished from the general timeout case. The default timeout value for the current release is 24 hours.
+
+Please note, that the new command progress tracking infrastructure is implemented on the host side which means that it will be automatically applied to all clients.
+
+@subsection release_notes_2024_10_changelog_client_wrapper_changes C++ Client Wrapper Changes
+
+1. Deprecation of Individual Command Structures. To simplify maintenance, all individual command structures and handlers are deprecated. The deprecated functionality will remain for existing clients, but will not support future API changes.
+
+2. New SendRequest Method. A newly introduced @ref PTSLC_CPP::CppPTSLClient::SendRequest "SendRequest" method takes a @ref PTSLC_CPP::CppPTSLRequest "CppPTSLRequest" object, which in turn requires a @ref PTSLC_CPP::CommandId "CommandId" and a JSON string representing the command request body. This allows new commands to be submitted without a command-specific handler. The example request and response JSON strings are provided in the documentation for each command. This method is safe to use with all existing commands and is fully backward compatible.
+
+3. @ref PTSLC_CPP::CppPTSLClient::OnResponseReceived "OnResponseReceived" has been updated to use @ref PTSLC_CPP::CppPTSLClient::SendRequest "SendRequest" based structures. If you want to use the old version of the callback you can use the @ref PTSLC_CPP::CppPTSLClient::OnResponseReceived_V1_Deprecated "OnResponseReceived_V1_Deprecated" callback. Note, that the old callback can only be used with the old command methods while the new callback can only be used with the new command methods (i.e. SendRequest).
+
+4. The documentation is moved from the C++ client to the proto file. See @ref ptsl::CommandId "CommandId" for more details and examples.
+
+5. The client now depends on the nlohmann_json library version 3.11.3. The library is not exposed in public headers.
+
+These changes also affect ptslcmd example application as it's now using the new SendRequest method instead of individual command structures. If you need to build an old version of the ptslcmd for this release, you can use `ptslcmd.sdk.2024.06.0` target in the build script.
+
+@subsection release_notes_2024_10_changelog_command_changes Protocol Changes
+
+New command:
+- @ref ptsl::ClearAllMemoryLocations "ClearAllMemoryLocations"
+
+New possible errors:
+- @ref ptsl::PT_CommandTimeout "PT_CommandTimeout"
+- @ref ptsl::PT_HostIsBusy "PT_HostIsBusy"
+- @ref ptsl::SDK_SessionIdParseError "SDK_SessionIdParseError"
+- @ref ptsl::SDK_GrpcGeneric "SDK_GrpcGeneric"
+
+New enumerations:
+- @ref ptsl::TimelineLocationType "TimelineLocationType"
+- @ref ptsl::BasicTimeType "BasicTimeType"
+
+New messages:
+- @ref ptsl::TimelineLocation "TimelineLocation"
+- @ref ptsl::MediaTimePosition "MediaTimePosition"
+- @ref ptsl::TimeLength "TimeLength"
+- @ref ptsl::ClearAllMemoryLocationsResponseBody "ClearAllMemoryLocationsResponseBody"
+
+Existing command changes:
+- Changes in @ref ptsl::Track "Track" message
+    - @ref ptsl::Track::parent_folder_name "parent_folder_name" field was added
+    - @ref ptsl::Track::parent_folder_id "parent_folder_id" field was added
+
+*/
+
+-----------------------------------------------------------------------------
+
+/** @page release_notes_2025_06 2025.06 Release Notes
+
+@ingroup ptsl_version_2025_06
+
+@section release_notes_2025_06_compatibility Compatibility
+
+PTSL SDK 2025.06 uses:
+    - Old format:
+        - @ref PTSL_VERSION 2025 of the client interface
+    - New format:
+        - @ref ptsl::RequestHeader::version "Major Version" 2025
+        - @ref ptsl::RequestHeader::version_minor "Minor Version" 6
+        - @ref ptsl::RequestHeader::version_revision "Revision Version" 0
+
+Pro Tools 2025.06 is compatible with clients using @ref ptsl::RequestHeader::version "Major Version" 1 and higher.
+
+For further information, refer to the Versioning Changes sections.
+
+@section release_notes_2025_06_changelog Changelog
+
+@subsection release_notes_2025_06_changelog_versioning_changes Versioning Changes
+
+@subsubsection release_notes_2025_06_changelog_versioning_changes_version_triplet Version Triplet
+
+Starting with the 2025.06 release, the PTSL @ref ptsl::RequestHeader::version "version" has been updated from 5 (2024.10) to 2025 (2025.XX). Additionally, @ref ptsl::RequestHeader::version_minor "version_minor" (6) and @ref ptsl::RequestHeader::version_revision "version_revision" (0) are now used to differentiate releases and subreleases within the year.
+
+Old clients (prior to this release) will receive only the major @ref ptsl::ResponseHeader::version "version" (2025) for all Pro Tools releases in 2025.
+
+New clients (starting from this release) can process the entire triplet (@ref ptsl::ResponseHeader::version "version", @ref ptsl::ResponseHeader::version_minor "version_minor", @ref ptsl::ResponseHeader::version_revision "version_revision") to differentiate between Pro Tools releases. Older Pro Tools releases only have the major version, i.e., 5.0.0 for 2024.10.
+
+@subsubsection release_notes_2025_06_changelog_versioning_changes_protocol Protocol
+
+Starting with the 2025.06 release, the SDK package contains multiple `.proto` files. Each file includes the full protocol description for a release. For example, PTSL.2024.10.0.proto contains the protocol definition for the 2024.10 release, wrapped inside `package ptsl_2024_10_0`. The current release is always named `PTSL.proto`, wrapped inside `package ptsl`.
+
+Using the @ref PTSLC_CPP::CppPTSLClient::SendRequest "SendRequest" and @ref PTSLC_CPP::CppPTSLRequest "CppPTSLRequest", it is possible to send requests from different releases to the same Host. The Host response is adapted to the capabilities and protocol of the release requested by the client.
+
+There are two known limitations to this:
+- Host-side versioning is an area of active work:
+    - Some deprecated enumeration values may be prioritized over their new replacements regardless of the request version.
+    - Some commands may return both old properties and their new replacements.
+- Host-side versioning is a relatively new addition:
+    - It is not always possible to request API behavior similar to an older release, e.g., 2023.03.
+
+@subsubsection release_notes_2025_06_changelog_versioning_changes_cpp_client C++ Client
+
+The C++ client reflects the changes mentioned above. Both @ref PTSLC_CPP::CppPTSLRequest "CppPTSLRequest" and @ref PTSLC_CPP::CppPTSLResponse "CppPTSLResponse" provide the ability to get and set the version triplet.
+
+Old command-specific methods are now pinned to the 2024.10 PTSL version and are no longer expected to be updated.
+
+@subsection release_notes_2025_06_changelog_enumerations_changes Enumeration Changes
+
+There are several changes to enumerations to reduce name clashes and make their behavior more uniform:
+- All enumeration values now have a prefix based on their type name.
+    - The old values are deprecated but still accepted and can be returned by the Host.
+- All enumeration types (except @ref ptsl::CommandId "CommandId") now start with the '*_Unknown value = 0'.
+    - This may offset values in some types, but it will not affect communication with the Host as only the string names are used.
+
+@subsection release_notes_2025_06_changelog_time_types Time Types
+
+With the 2024.10 and 2025.06 changes, it is now possible to use new time structures and operations for easier interaction with time data in various commands. See:
+- @ref ptsl::TimelineLocationType "TimelineLocationType"
+- @ref ptsl::BasicTimeType "BasicTimeType"
+- @ref ptsl::TimelineLocation "TimelineLocation"
+- @ref ptsl::MediaTimePosition "MediaTimePosition"
+- @ref ptsl::TimeLength "TimeLength"
+- New time-related utility API
+- location, location_type, current_type fields added to the older API
+
+@subsection release_notes_2025_06_changelog_intermediate_responses Intermediate Responses
+
+This release enhances support for intermediate responses during command execution. A single task can now emit multiple @c InProgress intermediate responses, providing improved progress tracking and feedback. These improvements are applied universally to all clients from the Pro Tools side, enabling even older SDK versions to process them if desired. While intermediate response capability existed in the very first SDK release, the 2025.06 update delivers Pro Tools-side enhancements that improve functionality across all client implementations. New clients built with the updated SDK can now process intermediate responses seamlessly via updated @ref PTSLC_CPP::CppPTSLClient::SendRequest "SendRequest".
+
+Key updates:
+
+- Intermediate responses may include a JSON body, typically reserved for specific APIs such as the Event System (see below).
+- The final response consolidates all accumulated data, including errors, warnings, and informational messages generated during execution.
+
+C++ Client:
+- The @ref PTSLC_CPP::CppPTSLClient::SendRequest "SendRequest" method has been updated to include a new callback mechanism. This enables clients to receive all responses associated with a task, including intermediate responses, in real-time.
+
+@subsection release_notes_2025_06_changelog_event_system Event System (Experimental)
+
+The 2025.06 release introduces the Event System, enabling Pro Tools to send real-time notifications to subscribed clients. This system allows clients to subscribe to specific events, unsubscribe from them, and receive event notifications as they occur.
+
+### Workflow
+
+1. @ref ptsl::CId_SubscribeToEvents "SubscribeToEvents":
+   - Adds specified events to the subscription list for the current PTSL session.
+   - Each subscription is uniquely identified by the combination of PTSL session, EventId, and filter data. Any difference in filter data results in a new subscription, which is managed independently, even if they share the same EventId.
+   - For example, a hypothetical event `EId_TrackRecordEnabledStateChanged` could include a track ID in the filter data to listen for changes to the record-enabled state of a specific track.
+
+2. @ref ptsl::CId_UnsubscribeFromEvents "UnsubscribeFromEvents":
+   - Removes specified events (and their associated filter data) from the subscription list for the current PTSL session.
+
+3. @ref ptsl::CId_PollEvents "PollEvents":
+   - A long-polling API that streams real-time events to the client.
+   - Operates indefinitely without a typical end condition.
+   - Sends events as they are reported by Pro Tools, using the Intermediate Responses mechanism.
+   - Only one active PollEvents connection is allowed per PTSL session. If a new PollEvents call is made, the previous connection is terminated, and polling is transferred to the new connection.
+   - All event-related APIs, including PollEvents, are processed with higher execution priority compared to normal API commands, ensuring timely delivery of events without blocking other API commands.
+
+### Supported Events in 2025.06
+
+The Event System supports the following events:
+- @ref ptsl::EId_SessionOpened "SessionOpened": Triggered when Pro Tools has finished opening a session.
+- @ref ptsl::EId_SessionCreated "SessionCreated": Triggered when a new Pro Tools session has been created.
+- @ref ptsl::EId_SessionClosed "SessionClosed": Triggered when a current Pro Tools session has been closed.
+
+@subsection release_notes_2025_06_changelog_command_progress_tracking Command Progress Tracking
+
+With 2025.06 release, several commands have been enhanced to provide accurate progress tracking information. The host now reports precise command status updates as these commands execute. Furthermore, the updated commands can return a "Failed" status when an internal operation encounters an error.
+
+Updated commands:
+- @ref ptsl::CId_OpenSession "OpenSession"
+- @ref ptsl::CId_Cut "Cut"
+- @ref ptsl::CId_Copy "Copy"
+- @ref ptsl::CId_Paste "Paste"
+- @ref ptsl::CId_Clear "Clear"
+- @ref ptsl::CId_CutSpecial "CutSpecial"
+- @ref ptsl::CId_CopySpecial "CopySpecial"
+- @ref ptsl::CId_PasteSpecial "PasteSpecial"
+- @ref ptsl::CId_ClearSpecial "ClearSpecial"
+- @ref ptsl::CId_GroupClips "GroupClips"
+- @ref ptsl::CId_UngroupClips "UngroupClips"
+- @ref ptsl::CId_UngroupAllClips "UngroupAllClips"
+- @ref ptsl::CId_RegroupClips "RegroupClips"
+- @ref ptsl::CId_Spot "Spot"
+- @ref ptsl::CId_CreateFadesBasedOnPreset "CreateFadesBasedOnPreset"
+
+Please note that the command progress tracking infrastructure is implemented entirely on the host side. This means:
+
+- Products using older SDKs connecting to Pro Tools 2025.06 or newer will automatically benefit from command progress tracking without any code changes.
+- Products built with SDK version 2025.06 connecting to Pro Tools versions earlier than 2025.06 will not have improved command progress tracking functionality.
+
+@subsection release_notes_2025_06_changelog_protocol_changes Protocol Changes
+
+New commands:
+- @ref ptsl::CId_GetTimeAsType "GetTimeAsType"
+- @ref ptsl::CId_SubtractLocations "SubtractLocations"
+- @ref ptsl::CId_AddLengthToLocation "AddLengthToLocation"
+- @ref ptsl::CId_SubtractPositions "SubtractPositions"
+- @ref ptsl::CId_AddLengthToPosition "AddLengthToPosition"
+- @ref ptsl::CId_ImportAudioToClipList "ImportAudioToClipList"
+- @ref ptsl::CId_SpotClipsByID "SpotClipsByID"
+- @ref ptsl::CId_GetClipList "GetClipList"
+- @ref ptsl::CId_GetMediaFileInfo "GetMediaFileInfo"
+- @ref ptsl::CId_CreateAudioClips "CreateAudioClips"
+- @ref ptsl::CId_GetExportMixSourceList "GetExportMixSourceList"
+- @ref ptsl::CId_GetMonitorOutputPath "GetMonitorOutputPath"
+- @ref ptsl::CId_GetEditSelection "GetEditSelection"
+- @ref ptsl::CId_BounceTrack "BounceTrack"
+- @ref ptsl::CId_BeginScrub "BeginScrub"
+- @ref ptsl::CId_EndScrub "EndScrub"
+- @ref ptsl::CId_ContinueScrub "ContinueScrub"
+- @ref ptsl::CId_EnableCueProVideoPlugIn "EnableCueProVideoPlugIn"
+- @ref ptsl::CId_UpdateVideo "UpdateVideo"
+- @ref ptsl::CId_EnableAPI "EnableAPI"
+- @ref ptsl::CId_ExchangePublicKeys "ExchangePublicKeys"
+
+New possible errors:
+- @ref ptsl::CEType_PT_DeprecatedParameter "CEType_PT_DeprecatedParameter"
+- @ref ptsl::CEType_PT_DeprecatedParameterValue "CEType_PT_DeprecatedParameterValue"
+
+New enumerations:
+- @ref ptsl::ClipType "ClipType"
+- @ref ptsl::StemFormat "StemFormat"
+- @ref ptsl::StemChannel "StemChannel"
+- @ref ptsl::MP3EncodingOptionsConstantBitRate "MP3EncodingOptionsConstantBitRate"
+- @ref ptsl::MP3EncodingOptionsQuality "MP3EncodingOptionsQuality"
+
+New messages:
+- @ref ptsl::Clip "Clip"
+- @ref ptsl::AudioFileInfo "AudioFileInfo"
+- @ref ptsl::StemChannelId "StemChannelId"
+- @ref ptsl::CreateAudioClipRequestEntry "CreateAudioClipRequestEntry"
+- @ref ptsl::CreateAudioClipResponseEntry "CreateAudioClipResponseEntry"
+- @ref ptsl::CreateAudioClipRequestEntryClipInfo "CreateAudioClipRequestEntryClipInfo"
+- @ref ptsl::AudioEncodingOptions "AudioEncodingOptions"
+- @ref ptsl::MP3EncodingOptions "MP3EncodingOptions"
+
+Existing command changes:
+- Changes in @ref ptsl::RequestHeader "RequestHeader" message
+    - @ref ptsl::RequestHeader::version_minor "version_minor" field was added
+    - @ref ptsl::RequestHeader::version_revision "version_revision" field was added
+- Changes in @ref ptsl::ResponseHeader "ResponseHeader" message
+    - @ref ptsl::ResponseHeader::version "version" field was added
+    - @ref ptsl::ResponseHeader::version_minor "version_minor" field was added
+    - @ref ptsl::ResponseHeader::version_revision "version_revision" field was added
+- Changes in @ref ptsl::GetPTSLVersionResponseBody "GetPTSLVersionResponseBody" message
+    - @ref ptsl::GetPTSLVersionResponseBody::version_minor "version_minor" field was added
+    - @ref ptsl::GetPTSLVersionResponseBody::version_revision "version_revision" field was added
+- Changes in @ref ptsl::SpotLocationData "SpotLocationData" message
+    - @ref ptsl::SpotLocationData::location "location" field was added
+    - @ref ptsl::SpotLocationData::location_value "location_value" field was deprecated
+    - @ref ptsl::SpotLocationData::location_options "location_options" field was deprecated
+- Changes in @ref ptsl::ExportSessionInfoAsTextRequestBody "ExportSessionInfoAsTextRequestBody" message
+    - @ref ptsl::ExportSessionInfoAsTextRequestBody::location_type "location_type" field was added
+    - @ref ptsl::ExportSessionInfoAsTextRequestBody::track_offset_options "track_offset_options" field was deprecated
+- Changes in @ref ptsl::SetSessionStartTimeRequestBody "SetSessionStartTimeRequestBody" message
+    - @ref ptsl::SetSessionStartTimeRequestBody::location "location" field was added
+    - @ref ptsl::SetSessionStartTimeRequestBody::session_start_time "session_start_time" field was deprecated
+    - @ref ptsl::SetSessionStartTimeRequestBody::track_offset_opts "track_offset_opts" field was deprecated
+- Changes in @ref ptsl::SetTimelineSelectionRequestBody "SetTimelineSelectionRequestBody" message
+    - @ref ptsl::SetTimelineSelectionRequestBody::location_type "location_type" field was added
+- Changes in @ref ptsl::GetTimelineSelectionRequestBody "GetTimelineSelectionRequestBody" message
+    - @ref ptsl::GetTimelineSelectionRequestBody::location_type "location_type" field was added
+    - @ref ptsl::GetTimelineSelectionRequestBody::time_scale "time_scale" field was deprecated
+- Changes in @ref ptsl::SetMainCounterFormatRequestBody "SetMainCounterFormatRequestBody" message
+    - @ref ptsl::SetMainCounterFormatRequestBody::location_type "location_type" field was added
+    - @ref ptsl::SetMainCounterFormatRequestBody::time_scale "time_scale" field was deprecated
+- Changes in @ref ptsl::SetSubCounterFormatRequestBody "SetSubCounterFormatRequestBody" message
+    - @ref ptsl::SetSubCounterFormatRequestBody::location_type "location_type" field was added
+    - @ref ptsl::SetSubCounterFormatRequestBody::time_scale "time_scale" field was deprecated
+- Changes in @ref ptsl::GetMainCounterFormatResponseBody "GetMainCounterFormatResponseBody" message
+    - @ref ptsl::GetMainCounterFormatResponseBody::current_type "current_type" field was added
+    - @ref ptsl::GetMainCounterFormatResponseBody::current_setting "current_setting" field was deprecated
+- Changes in @ref ptsl::GetSubCounterFormatResponseBody "GetSubCounterFormatResponseBody" message
+    - @ref ptsl::GetSubCounterFormatResponseBody::current_type "current_type" field was added
+    - @ref ptsl::GetSubCounterFormatResponseBody::current_setting "current_setting" field was deprecated
+- Changes in @ref ptsl::FileType "FileType" enumeration
+    - @ref ptsl::FType_MXF "FType_MXF" value was added
+- Changes in @ref ptsl::AAFFileBitDepth "AAFFileBitDepth" enumeration
+    - @ref ptsl::AAFFBDepth_None "AAFFBDepth_None" value was added
+- Changes in Memory Locations (@ref ptsl::CommandId::CId_CreateMemoryLocation "CreateMemoryLocation", @ref ptsl::CommandId::CId_EditMemoryLocation "EditMemoryLocation", @ref ptsl::CommandId::CId_GetMemoryLocations "GetMemoryLocations"): added support of named rulers
+    - @ref ptsl::MarkerLocation_NamedRuler "MarkerLocation_NamedRuler" value was added
+    - Named ruler is specified by the 'track_name' field of the requested command
+- Changes in @ref ptsl::FileLocation "FileLocation" message
+    - @ref ptsl::FileLocation::file_id "file_id" field was added
+- Changes in @ref ptsl::CId_SetTrackInputMonitorState "SetTrackInputMonitorState" message
+    - Now supports Instrument track type
+- Changes in @ref ptsl::OpenSessionRequestBody "OpenSessionRequestBody" message
+    - @ref ptsl::OpenSessionRequestBody::behavior_options "behavior_options" field was added. Pass empty "behavior_options" field to bypass all dialogs when opening a session
+    - @ref ptsl::OpenSessionBehaviorOptions "OpenSessionBehaviorOptions" message was added and will be extended with possible options in the future
+- Changes in @ref ptsl::ExportMixRequestBody "ExportMixRequestBody" message
+    - @ref ptsl::ExportMixRequestBody::audio_encoding_options "audio_encoding_options" field was added
+        - The field is used to suppress any encoding options dialog
+    - @ref ptsl::ExportMixRequestBody::start_time "start_time" field was added
+    - @ref ptsl::ExportMixRequestBody::end_time "end_time" field was added
+
+### Upcoming API Features (Not Yet Available)
+ 
+This SDK release includes early references to several new APIs that are currently under development. While these APIs are visible in the package, they are not yet functional and should not be used in production environments.
+ 
+Upcoming commands:
+- @ref ptsl::CId_CreateBatchJob "CreateBatchJob"
+- @ref ptsl::CId_GetBatchJobStatus "GetBatchJobStatus"
+- @ref ptsl::CId_CompleteBatchJob "CompleteBatchJob"
+- @ref ptsl::CId_CancelBatchJob "CancelBatchJob"
+
+What to expect:
+- These APIs may appear in the SDK documentation
+- Attempting to use them will result in @ref ptsl::CEType_PT_UnsupportedCommand "CEType_PT_UnsupportedCommand" error
+- Full support and functionality will be introduced in a future release
+
+Stay tuned for updates in upcoming releases. We’ll provide full documentation and usage examples once these APIs are ready.
+
+*/
+
+/** @page release_notes_2025_10 2025.10 Release Notes
+
+@ingroup ptsl_version_2025_10
+
+@section release_notes_2025_10_compatibility Compatibility
+
+PTSL SDK 2025.10 uses:
+    - Old format:
+        - @ref PTSL_VERSION 2025 of the client interface
+    - New format:
+        - @ref ptsl::RequestHeader::version "Major Version" 2025
+        - @ref ptsl::RequestHeader::version_minor "Minor Version" 10
+        - @ref ptsl::RequestHeader::version_revision "Revision Version" 0
+
+Pro Tools 2025.10 is compatible with clients using @ref ptsl::RequestHeader::version "Major Version" 1 and higher.
+
+@section release_notes_2025_10_changelog Changelog
+
+@subsection release_notes_2025_10_changelog_protocol_changes Protocol Changes
+
+New commands:
+- @ref ptsl::CId_CreateSignalPath "CreateSignalPath"
+- @ref ptsl::CId_SetTrackMainOutputAssignments "SetTrackMainOutputAssignments"
+- @ref ptsl::CId_GetTrackControlInfo "GetTrackControlInfo"
+- @ref ptsl::CId_GetTrackControlBreakpoints "GetTrackControlBreakpoints"
+- @ref ptsl::CId_SetTrackControlBreakpoints "SetTrackControlBreakpoints"
+- @ref ptsl::CId_InstallMenuHandler "InstallMenuHandler"
+- @ref ptsl::CId_UninstallMenuHandler "UninstallMenuHandler"
+- @ref ptsl::CId_SetTrackColor "SetTrackColor"
+- @ref ptsl::CId_GetTrackPlaylists "GetTrackPlaylists"
+- @ref ptsl::CId_SetTrackTimebase "SetTrackTimebase"
+- @ref ptsl::CId_GetColorPalette "GetColorPalette"
+- @ref ptsl::CId_DeleteTracks "DeleteTracks"
+- @ref ptsl::CId_GetPlaylistElements "GetPlaylistElements"
+- @ref ptsl::CId_WriteSelectedTranscriptionToJSONFile "WriteSelectedTranscriptionToJSONFile"
+- @ref ptsl::CId_CreateBatchJob "CreateBatchJob"
+- @ref ptsl::CId_GetBatchJobStatus "GetBatchJobStatus"
+- @ref ptsl::CId_CompleteBatchJob "CompleteBatchJob"
+- @ref ptsl::CId_CancelBatchJob "CancelBatchJob"
+
+New events:
+- @ref ptsl::EId_TrackRecordEnabledStateChanged "TrackRecordEnabledStateChanged"
+- @ref ptsl::EId_MenuItemSelected "MenuItemSelected"
+- @ref ptsl::EId_TrackInputMonitorStateChanged "TrackInputMonitorStateChanged"
+- @ref ptsl::EId_TrackSoloStateChanged "TrackSoloStateChanged"
+- @ref ptsl::EId_TrackMuteStateChanged "TrackMuteStateChanged"
+- @ref ptsl::EId_BatchJobStatusChanged "BatchJobStatusChanged"
+
+New possible errors:
+- @ref ptsl::CEType_PT_GlobalRendererRequired "CEType_PT_GlobalRendererRequired"
+
+New enumerations:
+- @ref ptsl::ClipInstanceLockedState "ClipInstanceLockedState"
+- @ref ptsl::SignalPathType "SignalPathType"
+- @ref ptsl::TrackSectionId "TrackSectionId"
+- @ref ptsl::TrackControlType "TrackControlType"
+- @ref ptsl::PanControlParameter "PanControlParameter"
+- @ref ptsl::PanSpace "PanSpace"
+- @ref ptsl::MenuArea "MenuArea"
+- @ref ptsl::PlaylistType "PlaylistType"
+- @ref ptsl::ColorPaletteTarget "ColorPaletteTarget"
+- @ref ptsl::FadeSlope "FadeSlope"
+- @ref ptsl::FadeShape "FadeShape"
+- @ref ptsl::FadeType "FadeType"
+
+New messages:
+- @ref ptsl::SignalPathInfo "SignalPathInfo"
+- @ref ptsl::PanControlInfo "PanControlInfo"
+- @ref ptsl::PluginControlInfo "PluginControlInfo"
+- @ref ptsl::TrackControlId "TrackControlId"
+- @ref ptsl::TrackControlInfo "TrackControlInfo"
+- @ref ptsl::TrackControlBreakpoint "TrackControlBreakpoint"
+- @ref ptsl::MenuInfo "MenuInfo"
+- @ref ptsl::LocalizedUIString "LocalizedUIString"
+- @ref ptsl::Playlist "Playlist"
+- @ref ptsl::DeleteTrackBehaviorOptions "DeleteTrackBehaviorOptions"
+- @ref ptsl::PlaylistElement "PlaylistElement"
+- @ref ptsl::FadeShapeInfo "FadeShapeInfo"
+- @ref ptsl::FadeInfo "FadeInfo"
+- @ref ptsl::PlaylistElementClip "PlaylistElementClip"
+
+Existing command changes:
+- Changes in @ref ptsl::SelectAllClipsOnTrackRequestBody "SelectAllClipsOnTrackRequestBody" message
+    - @ref ptsl::SelectAllClipsOnTrackRequestBody::track_id "track_id" field was added
+- Changes in @ref ptsl::SelectAllClipsOnTrackResponseBody "SelectAllClipsOnTrackResponseBody" message
+    - @ref ptsl::SelectAllClipsOnTrackResponseBody::track_id "track_id" field was added
+- Changes in @ref ptsl::EM_SourceType "EM_SourceType" enumeration
+    - @ref ptsl::EMSType_Renderer "EMSType_Renderer" value was added
+- Changes in @ref ptsl::ClipInstanceAttributes "ClipInstanceAttributes" message
+    - @ref ptsl::ClipInstanceAttributes::is_muted "is_muted" field was added
+    - @ref ptsl::ClipInstanceAttributes::locked_states "locked_states" field was added
+
+Changes in examples:
+- ptslcmd now has -json_header parameter added which allows users to customize JSON header
+*/

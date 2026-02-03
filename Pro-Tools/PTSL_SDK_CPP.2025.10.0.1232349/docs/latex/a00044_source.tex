@@ -1,0 +1,89 @@
+\hypertarget{a00044_source}{}\doxysection{Cpp\+PTSLClient\+Internal.\+h}
+\label{a00044_source}\index{CppPTSLClientInternal.h@{CppPTSLClientInternal.h}}
+\mbox{\hyperlink{a00044}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{comment}{// Copyright 2022-\/2025 by Avid Technology, Inc.}}
+\DoxyCodeLine{2 \textcolor{comment}{// CONFIDENTIAL: this document contains confidential information of Avid. Do not disclose to any third party. Use of the information contained in this document is subject to an Avid SDK license.}}
+\DoxyCodeLine{3 }
+\DoxyCodeLine{9 \textcolor{preprocessor}{\#pragma once}}
+\DoxyCodeLine{10 }
+\DoxyCodeLine{11 \textcolor{preprocessor}{\#include <list>}}
+\DoxyCodeLine{12 \textcolor{preprocessor}{\#include <mutex>}}
+\DoxyCodeLine{13 }
+\DoxyCodeLine{14 \textcolor{preprocessor}{\#if defined(\_WIN32)}}
+\DoxyCodeLine{15 \textcolor{preprocessor}{\#define WIN32\_LEAN\_AND\_MEAN}}
+\DoxyCodeLine{16 \textcolor{preprocessor}{\#include <Windows.h>}}
+\DoxyCodeLine{17 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{18 }
+\DoxyCodeLine{19 \textcolor{preprocessor}{\#include <grpcpp/grpcpp.h>}}
+\DoxyCodeLine{20 }
+\DoxyCodeLine{21 \textcolor{preprocessor}{\#include "{}PTSL.grpc.pb.h"{}}}
+\DoxyCodeLine{22 }
+\DoxyCodeLine{23 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{a00017}{CppPTSLClient.h}}"{}}}
+\DoxyCodeLine{24 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{a00446}{PTSL\_Versions.h}}"{}}}
+\DoxyCodeLine{25 }
+\DoxyCodeLine{26 \textcolor{keyword}{namespace }\mbox{\hyperlink{a00491}{PTSLC\_CPP}}}
+\DoxyCodeLine{27 \{}
+\DoxyCodeLine{32     \textcolor{keyword}{class }\mbox{\hyperlink{a01332}{CallData}}}
+\DoxyCodeLine{33     \{}
+\DoxyCodeLine{34     \textcolor{keyword}{public}:}
+\DoxyCodeLine{35         \mbox{\hyperlink{a01332_af57ca4fceb7cddd6140c33de4de59ef8}{CallData}}() = \textcolor{keywordflow}{default};}
+\DoxyCodeLine{36         \mbox{\hyperlink{a02044}{ptsl::Request}} \mbox{\hyperlink{a01332_a43f0b13e221175f19a7d9773f6413f98}{m\_grpcRequest}};}
+\DoxyCodeLine{37         \mbox{\hyperlink{a02056}{ptsl::Response}} \mbox{\hyperlink{a01332_ae14fd9d499cd136e3f0f6d78ea3bab92}{m\_grpcResponse}};}
+\DoxyCodeLine{38         grpc::ClientContext \mbox{\hyperlink{a01332_a474c56616663446ca22bda7ce8476d6f}{m\_context}};}
+\DoxyCodeLine{39         grpc::Status \mbox{\hyperlink{a01332_a85841f24f488dac25612c6c3c26f4513}{m\_grpcStatus}};}
+\DoxyCodeLine{40     \};}
+\DoxyCodeLine{41 }
+\DoxyCodeLine{42     \textcolor{keyword}{static} google::protobuf::util::JsonOptions \mbox{\hyperlink{a00491_a6f182f9872f9fb59a13ddc248339ec08}{DefaultJsonWriteOptions}}()}
+\DoxyCodeLine{43     \{}
+\DoxyCodeLine{44         google::protobuf::util::JsonOptions jOpts;}
+\DoxyCodeLine{45         jOpts.add\_whitespace = \textcolor{keyword}{true};}
+\DoxyCodeLine{46 \textcolor{preprocessor}{\#if GOOGLE\_PROTOBUF\_VERSION < 5026000}}
+\DoxyCodeLine{47         jOpts.always\_print\_primitive\_fields = \textcolor{keyword}{true};}
+\DoxyCodeLine{48 \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{49         jOpts.always\_print\_fields\_with\_no\_presence = \textcolor{keyword}{true};}
+\DoxyCodeLine{50 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{51         jOpts.preserve\_proto\_field\_names = \textcolor{keyword}{true};}
+\DoxyCodeLine{52         \textcolor{keywordflow}{return} jOpts;}
+\DoxyCodeLine{53     \}}
+\DoxyCodeLine{54 }
+\DoxyCodeLine{55     \textcolor{keyword}{static} google::protobuf::util::JsonParseOptions \mbox{\hyperlink{a00491_a9163390b1bfc4f32518cb1097dc77054}{DefaultJsonParseOptions}}()}
+\DoxyCodeLine{56     \{}
+\DoxyCodeLine{57         google::protobuf::util::JsonParseOptions jOpts;}
+\DoxyCodeLine{58         jOpts.ignore\_unknown\_fields = \textcolor{keyword}{true};}
+\DoxyCodeLine{59         \textcolor{keywordflow}{return} jOpts;}
+\DoxyCodeLine{60     \}}
+\DoxyCodeLine{61 }
+\DoxyCodeLine{66     \textcolor{keyword}{class }\mbox{\hyperlink{a01336}{PTSLException}} : \textcolor{keyword}{public} std::runtime\_error}
+\DoxyCodeLine{67     \{}
+\DoxyCodeLine{68     \textcolor{keyword}{public}:}
+\DoxyCodeLine{72         \textcolor{keyword}{explicit} \mbox{\hyperlink{a01336_a83a63b0a3ce0233bafcef4f222ddb5aa}{PTSLException}}(\textcolor{keyword}{const} std::string\& message) : std::runtime\_error(message)}
+\DoxyCodeLine{73         \{}
+\DoxyCodeLine{74         \}}
+\DoxyCodeLine{75     \};}
+\DoxyCodeLine{76 }
+\DoxyCodeLine{80     \textcolor{keyword}{struct }\mbox{\hyperlink{a01340}{CppPTSLClient::InternalData}}}
+\DoxyCodeLine{81     \{}
+\DoxyCodeLine{82         \textcolor{keyword}{struct }\mbox{\hyperlink{a01344}{RpcContext}}}
+\DoxyCodeLine{83         \{}
+\DoxyCodeLine{84             grpc::ClientContext \mbox{\hyperlink{a01344_a4a6c08ad463fb04773e13d54788641f9}{m\_grpcContext}};}
+\DoxyCodeLine{85         \};}
+\DoxyCodeLine{86 }
+\DoxyCodeLine{88         std::unique\_ptr<ptsl::PTSL::Stub> \mbox{\hyperlink{a01340_a0fc444ee69b9559998df3b347f8f2b80}{m\_client}};}
+\DoxyCodeLine{89 }
+\DoxyCodeLine{91         grpc::CompletionQueue \mbox{\hyperlink{a01340_a982302f16a971792fdaaad4ab181e775}{m\_completionQueue}};}
+\DoxyCodeLine{92 }
+\DoxyCodeLine{94         std::map<std::string, ptsl::Response> \mbox{\hyperlink{a01340_ae96d5e219b16ca286e670f8e9eea033b}{m\_responsePool}};}
+\DoxyCodeLine{95 }
+\DoxyCodeLine{97         std::list<std::shared\_ptr<RpcContext>> \mbox{\hyperlink{a01340_a8dc00d62793ea3b1ce561c65dca48290}{m\_rpcContexts}};}
+\DoxyCodeLine{98         std::mutex \mbox{\hyperlink{a01340_a4ac74d1a813d55c2f7650a86b253a2e0}{m\_rpcContextsMutex}};}
+\DoxyCodeLine{99 }
+\DoxyCodeLine{100 \textcolor{preprocessor}{\#if defined(\_WIN32)}}
+\DoxyCodeLine{101         HMODULE m\_winHandle = \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{102 \textcolor{preprocessor}{\#elif defined(\_\_APPLE\_\_)}}
+\DoxyCodeLine{103         \textcolor{keywordtype}{void}* m\_macHandle = \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{104 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{105     \};}
+\DoxyCodeLine{106 \} \textcolor{comment}{// namespace PTSLC\_CPP}}
+
+\end{DoxyCode}

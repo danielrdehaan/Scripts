@@ -1,0 +1,80 @@
+\hypertarget{a02008}{}\doxysection{Ptsl\+Cmd\+Command\+Request}
+\label{a02008}\index{PtslCmdCommandRequest@{PtslCmdCommandRequest}}
+
+
+{\ttfamily \#include $<$Ptsl\+Cmd\+Command\+Request.\+h$>$}
+
+
+
+\doxysubsection{Description}
+Structured PTSL Cmd abstraction fot command request data. \doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::string \mbox{\hyperlink{a02008_a02251a1ef8a48fc5a729db5b6228a481}{Command\+Name}}
+\item 
+std\+::tuple$<$ int, int, int $>$ \mbox{\hyperlink{a02008_a35a6472375d7fa65838c5de3a7960f22}{Version}} \{0, 0, 0\}
+\item 
+std\+::string \mbox{\hyperlink{a02008_a45c41baeff3328eb0ecefc56ab741fa8}{Request\+Body\+Json}} = \char`\"{}\char`\"{}
+\item 
+std\+::string \mbox{\hyperlink{a02008_a208ceab3e07c508f70b57acab0da9655}{Versioned\+Header}} = \char`\"{}\char`\"{}
+\item 
+std\+::string \mbox{\hyperlink{a02008_a62c7c5d7f8623d55fe132fc2beb4d9e7}{Encryption\+Key}} = \char`\"{}\char`\"{}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{a02008_a02251a1ef8a48fc5a729db5b6228a481}\label{a02008_a02251a1ef8a48fc5a729db5b6228a481}} 
+\index{PtslCmdCommandRequest@{PtslCmdCommandRequest}!CommandName@{CommandName}}
+\index{CommandName@{CommandName}!PtslCmdCommandRequest@{PtslCmdCommandRequest}}
+\doxysubsubsection{\texorpdfstring{CommandName}{CommandName}}
+{\footnotesize\ttfamily std\+::string Command\+Name}
+
+
+
+Referenced by \mbox{\hyperlink{a02000_a9f67db559db48252e620520670e2b430}{File\+Script\+Parser\+::\+Parse()}}, and \mbox{\hyperlink{a02020_aa40745c10e0c5c76b86151ba0c79dcbc}{Ptsl\+Cmd\+Command\+Runner\+::\+Run\+Command()}}.
+
+\mbox{\Hypertarget{a02008_a35a6472375d7fa65838c5de3a7960f22}\label{a02008_a35a6472375d7fa65838c5de3a7960f22}} 
+\index{PtslCmdCommandRequest@{PtslCmdCommandRequest}!Version@{Version}}
+\index{Version@{Version}!PtslCmdCommandRequest@{PtslCmdCommandRequest}}
+\doxysubsubsection{\texorpdfstring{Version}{Version}}
+{\footnotesize\ttfamily std\+::tuple$<$int, int, int$>$ Version \{0, 0, 0\}}
+
+
+
+Referenced by \mbox{\hyperlink{a02000_a9f67db559db48252e620520670e2b430}{File\+Script\+Parser\+::\+Parse()}}, and \mbox{\hyperlink{a02020_aa40745c10e0c5c76b86151ba0c79dcbc}{Ptsl\+Cmd\+Command\+Runner\+::\+Run\+Command()}}.
+
+\mbox{\Hypertarget{a02008_a45c41baeff3328eb0ecefc56ab741fa8}\label{a02008_a45c41baeff3328eb0ecefc56ab741fa8}} 
+\index{PtslCmdCommandRequest@{PtslCmdCommandRequest}!RequestBodyJson@{RequestBodyJson}}
+\index{RequestBodyJson@{RequestBodyJson}!PtslCmdCommandRequest@{PtslCmdCommandRequest}}
+\doxysubsubsection{\texorpdfstring{RequestBodyJson}{RequestBodyJson}}
+{\footnotesize\ttfamily std\+::string Request\+Body\+Json = \char`\"{}\char`\"{}}
+
+
+
+Referenced by \mbox{\hyperlink{a02000_a9f67db559db48252e620520670e2b430}{File\+Script\+Parser\+::\+Parse()}}, and \mbox{\hyperlink{a02020_aa40745c10e0c5c76b86151ba0c79dcbc}{Ptsl\+Cmd\+Command\+Runner\+::\+Run\+Command()}}.
+
+\mbox{\Hypertarget{a02008_a208ceab3e07c508f70b57acab0da9655}\label{a02008_a208ceab3e07c508f70b57acab0da9655}} 
+\index{PtslCmdCommandRequest@{PtslCmdCommandRequest}!VersionedHeader@{VersionedHeader}}
+\index{VersionedHeader@{VersionedHeader}!PtslCmdCommandRequest@{PtslCmdCommandRequest}}
+\doxysubsubsection{\texorpdfstring{VersionedHeader}{VersionedHeader}}
+{\footnotesize\ttfamily std\+::string Versioned\+Header = \char`\"{}\char`\"{}}
+
+
+
+Referenced by \mbox{\hyperlink{a02000_a9f67db559db48252e620520670e2b430}{File\+Script\+Parser\+::\+Parse()}}, and \mbox{\hyperlink{a02020_aa40745c10e0c5c76b86151ba0c79dcbc}{Ptsl\+Cmd\+Command\+Runner\+::\+Run\+Command()}}.
+
+\mbox{\Hypertarget{a02008_a62c7c5d7f8623d55fe132fc2beb4d9e7}\label{a02008_a62c7c5d7f8623d55fe132fc2beb4d9e7}} 
+\index{PtslCmdCommandRequest@{PtslCmdCommandRequest}!EncryptionKey@{EncryptionKey}}
+\index{EncryptionKey@{EncryptionKey}!PtslCmdCommandRequest@{PtslCmdCommandRequest}}
+\doxysubsubsection{\texorpdfstring{EncryptionKey}{EncryptionKey}}
+{\footnotesize\ttfamily std\+::string Encryption\+Key = \char`\"{}\char`\"{}}
+
+
+
+Referenced by \mbox{\hyperlink{a02000_a9f67db559db48252e620520670e2b430}{File\+Script\+Parser\+::\+Parse()}}, and \mbox{\hyperlink{a02020_aa40745c10e0c5c76b86151ba0c79dcbc}{Ptsl\+Cmd\+Command\+Runner\+::\+Run\+Command()}}.
+
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{a00416}{Ptsl\+Cmd\+Command\+Request.\+h}}\end{DoxyCompactItemize}

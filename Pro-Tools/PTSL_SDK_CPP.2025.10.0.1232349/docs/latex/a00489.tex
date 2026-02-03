@@ -1,0 +1,115 @@
+\hypertarget{a00489}{}\doxysection{Version 2025.10}
+\label{a00489}\index{Version 2025.10@{Version 2025.10}}
+\hypertarget{a00489_release_notes_2025_10_compatibility}{}\doxysubsection{Compatibility}\label{a00489_release_notes_2025_10_compatibility}
+PTSL SDK 2025.\+10 uses\+:
+\begin{DoxyItemize}
+\item Old format\+:
+\begin{DoxyItemize}
+\item \mbox{\hyperlink{a00446_a83c5961efacc6c06e3e75877c239ebb1}{PTSL\+\_\+\+VERSION}} 2025 of the client interface
+\end{DoxyItemize}
+\item New format\+:
+\begin{DoxyItemize}
+\item \mbox{\hyperlink{a02036_a1403c9ca4289d8a9417e8c4da2b94c0e}{Major Version}} 2025
+\item \mbox{\hyperlink{a02036_a09c035a9bbb8296a09dfcfcc0c62de56}{Minor Version}} 10
+\item \mbox{\hyperlink{a02036_ac3eea2a8ad35f84eeb9f00174f197679}{Revision Version}} 0
+\end{DoxyItemize}
+\end{DoxyItemize}
+
+Pro Tools 2025.\+10 is compatible with clients using \mbox{\hyperlink{a02036_a1403c9ca4289d8a9417e8c4da2b94c0e}{Major Version}} 1 and higher.\hypertarget{a00489_release_notes_2025_10_changelog}{}\doxysubsection{Changelog}\label{a00489_release_notes_2025_10_changelog}
+\hypertarget{a00489_release_notes_2025_10_changelog_protocol_changes}{}\doxysubsubsection{Protocol Changes}\label{a00489_release_notes_2025_10_changelog_protocol_changes}
+New commands\+:
+\begin{DoxyItemize}
+\item \mbox{\hyperlink{a00494_aaf8d2069e2c6bbecf4aa8f9819028e8aa0e2e1f51e4bf051032c84ecb317e09e0}{Create\+Signal\+Path}}
+\item \mbox{\hyperlink{a00494_aaf8d2069e2c6bbecf4aa8f9819028e8aafcd1f11563a9a528238787fd4462b37c}{Set\+Track\+Main\+Output\+Assignments}}
+\item \mbox{\hyperlink{a00494_aaf8d2069e2c6bbecf4aa8f9819028e8aa02fb9c48c42d2995ae880343393b60e4}{Get\+Track\+Control\+Info}}
+\item \mbox{\hyperlink{a00494_aaf8d2069e2c6bbecf4aa8f9819028e8aa0996be6f1ef93e9d9952e073324e3add}{Get\+Track\+Control\+Breakpoints}}
+\item \mbox{\hyperlink{a00494_aaf8d2069e2c6bbecf4aa8f9819028e8aa94627054c47f4ee964037fbad2f32889}{Set\+Track\+Control\+Breakpoints}}
+\item \mbox{\hyperlink{a00494_aaf8d2069e2c6bbecf4aa8f9819028e8aa59a8b2486d07a5bdedfaeb18dd62e5df}{Install\+Menu\+Handler}}
+\item \mbox{\hyperlink{a00494_aaf8d2069e2c6bbecf4aa8f9819028e8aaf0888e59c80a4010c661b42e2cd2ca69}{Uninstall\+Menu\+Handler}}
+\item \mbox{\hyperlink{a00494_aaf8d2069e2c6bbecf4aa8f9819028e8aa171245732cba7fffc1cf18f979c760f4}{Set\+Track\+Color}}
+\item \mbox{\hyperlink{a00494_aaf8d2069e2c6bbecf4aa8f9819028e8aaead0eb985712559051645f2feb1c0d0e}{Get\+Track\+Playlists}}
+\item \mbox{\hyperlink{a00494_aaf8d2069e2c6bbecf4aa8f9819028e8aa7fd80c164f564d5e41b99dad789f177b}{Set\+Track\+Timebase}}
+\item \mbox{\hyperlink{a00494_aaf8d2069e2c6bbecf4aa8f9819028e8aa1727dc5beb7b780999f026a24c58e1df}{Get\+Color\+Palette}}
+\item \mbox{\hyperlink{a00494_aaf8d2069e2c6bbecf4aa8f9819028e8aac8d7d615c33bb43ae4da6138b16dcc9d}{Delete\+Tracks}}
+\item \mbox{\hyperlink{a00494_aaf8d2069e2c6bbecf4aa8f9819028e8aaecaa95ed39e73a0ca1e51b00b2779048}{Get\+Playlist\+Elements}}
+\item \mbox{\hyperlink{a00494_aaf8d2069e2c6bbecf4aa8f9819028e8aacb357b3f9d4f5e3779cfacff94a224f3}{Write\+Selected\+Transcription\+To\+JSONFile}}
+\item \mbox{\hyperlink{a00494_aaf8d2069e2c6bbecf4aa8f9819028e8aa17c3046e8e4fef2382edb3a0ddce10d0}{Create\+Batch\+Job}}
+\item \mbox{\hyperlink{a00494_aaf8d2069e2c6bbecf4aa8f9819028e8aa654ae43b848c95a769a333bd62e1b60e}{Get\+Batch\+Job\+Status}}
+\item \mbox{\hyperlink{a00494_aaf8d2069e2c6bbecf4aa8f9819028e8aad5c2ba4507d43e95710504bd00ce1420}{Complete\+Batch\+Job}}
+\item \mbox{\hyperlink{a00494_aaf8d2069e2c6bbecf4aa8f9819028e8aa6e4ef12a772e10ab94c0d1b3b6001d9a}{Cancel\+Batch\+Job}}
+\end{DoxyItemize}
+
+New events\+:
+\begin{DoxyItemize}
+\item \mbox{\hyperlink{a00494_a4cf8d4a4d56e9f795518b6541ddeb5bfad71cd4d6ba0d7f67fc4c192ab079478e}{Track\+Record\+Enabled\+State\+Changed}}
+\item \mbox{\hyperlink{a00494_a4cf8d4a4d56e9f795518b6541ddeb5bfa2f5c92785d6d203d478771ff2b76d91a}{Menu\+Item\+Selected}}
+\item \mbox{\hyperlink{a00494_a4cf8d4a4d56e9f795518b6541ddeb5bfa9956c79997e408bc5ad8cf67ff0f6122}{Track\+Input\+Monitor\+State\+Changed}}
+\item \mbox{\hyperlink{a00494_a4cf8d4a4d56e9f795518b6541ddeb5bfa7675e0019e8a799752f547a1d10ae822}{Track\+Solo\+State\+Changed}}
+\item \mbox{\hyperlink{a00494_a4cf8d4a4d56e9f795518b6541ddeb5bfade23ebce328d1634bae6419d0d3e28f2}{Track\+Mute\+State\+Changed}}
+\item \mbox{\hyperlink{a00494_a4cf8d4a4d56e9f795518b6541ddeb5bfa0b7f857c12a185080f279451e2e938bb}{Batch\+Job\+Status\+Changed}}
+\end{DoxyItemize}
+
+New possible errors\+:
+\begin{DoxyItemize}
+\item \mbox{\hyperlink{a00494_a72aa3dec22d29b2aa82ee130b3e8d64ca85c8298ecf8f18cb2e38fc2b33a44be5}{CEType\+\_\+\+PT\+\_\+\+Global\+Renderer\+Required}}
+\end{DoxyItemize}
+
+New enumerations\+:
+\begin{DoxyItemize}
+\item \mbox{\hyperlink{a00494_aa3323a4abafdbbddc58cb27143073eeb}{Clip\+Instance\+Locked\+State}}
+\item \mbox{\hyperlink{a00494_a54c0cae6bc479f54c8277947b7779348}{Signal\+Path\+Type}}
+\item \mbox{\hyperlink{a00494_afb096c57b8f26a79f214c4c88be3977d}{Track\+Section\+Id}}
+\item \mbox{\hyperlink{a00494_ab7d941b61e512563cb464b14b2c54a2e}{Track\+Control\+Type}}
+\item \mbox{\hyperlink{a00494_ac0685ec9d387e632efc9a12c1cbe4da2}{Pan\+Control\+Parameter}}
+\item \mbox{\hyperlink{a00494_ad3f5e2afc55060cfcef65710cb99afbe}{Pan\+Space}}
+\item \mbox{\hyperlink{a00494_a625c50cf507683f7b82bbbeb2459e86f}{Menu\+Area}}
+\item \mbox{\hyperlink{a00494_a5b8341033ad519e80384ddf6dba5f53f}{Playlist\+Type}}
+\item \mbox{\hyperlink{a00494_a1799ae7b860047af1d2dabe24dbea2f8}{Color\+Palette\+Target}}
+\item \mbox{\hyperlink{a00494_a98bcb8488086bd9a2827767b827ff989}{Fade\+Slope}}
+\item \mbox{\hyperlink{a00494_ab3bc8d7a5287545a3ee1b41250bd71b2}{Fade\+Shape}}
+\item \mbox{\hyperlink{a00494_a70affc925c7135308b023d7627f369dc}{Fade\+Type}}
+\end{DoxyItemize}
+
+New messages\+:
+\begin{DoxyItemize}
+\item \mbox{\hyperlink{a02924}{Signal\+Path\+Info}}
+\item \mbox{\hyperlink{a02940}{Pan\+Control\+Info}}
+\item \mbox{\hyperlink{a02944}{Plugin\+Control\+Info}}
+\item \mbox{\hyperlink{a02948}{Track\+Control\+Id}}
+\item \mbox{\hyperlink{a02952}{Track\+Control\+Info}}
+\item \mbox{\hyperlink{a02956}{Track\+Control\+Breakpoint}}
+\item \mbox{\hyperlink{a02988}{Menu\+Info}}
+\item \mbox{\hyperlink{a02992}{Localized\+UIString}}
+\item \mbox{\hyperlink{a03020}{Playlist}}
+\item \mbox{\hyperlink{a03048}{Delete\+Track\+Behavior\+Options}}
+\item \mbox{\hyperlink{a03084}{Playlist\+Element}}
+\item \mbox{\hyperlink{a03088}{Fade\+Shape\+Info}}
+\item \mbox{\hyperlink{a03092}{Fade\+Info}}
+\item \mbox{\hyperlink{a03096}{Playlist\+Element\+Clip}}
+\end{DoxyItemize}
+
+Existing command changes\+:
+\begin{DoxyItemize}
+\item Changes in \mbox{\hyperlink{a02148}{Select\+All\+Clips\+On\+Track\+Request\+Body}} message
+\begin{DoxyItemize}
+\item \mbox{\hyperlink{a02148_a6b0ebbd85f0b29b66f90c3b0857d6191}{track\+\_\+id}} field was added
+\end{DoxyItemize}
+\item Changes in \mbox{\hyperlink{a02152}{Select\+All\+Clips\+On\+Track\+Response\+Body}} message
+\begin{DoxyItemize}
+\item \mbox{\hyperlink{a02152_a6b0ebbd85f0b29b66f90c3b0857d6191}{track\+\_\+id}} field was added
+\end{DoxyItemize}
+\item Changes in \mbox{\hyperlink{a00494_a62da59b6c562ae38c74665e5d84d41c9}{EM\+\_\+\+Source\+Type}} enumeration
+\begin{DoxyItemize}
+\item \mbox{\hyperlink{a00494_a62da59b6c562ae38c74665e5d84d41c9a5a6b4e8ac8e4199187b18dcd6abfe1b2}{EMSType\+\_\+\+Renderer}} value was added
+\end{DoxyItemize}
+\item Changes in \mbox{\hyperlink{a02752}{Clip\+Instance\+Attributes}} message
+\begin{DoxyItemize}
+\item \mbox{\hyperlink{a02752_acc2b8849a411ecdf5c3a4fdf013127be}{is\+\_\+muted}} field was added
+\item \mbox{\hyperlink{a02752_a997907c4651d2f5b2cbc254441300775}{locked\+\_\+states}} field was added
+\end{DoxyItemize}
+\end{DoxyItemize}
+
+Changes in examples\+:
+\begin{DoxyItemize}
+\item ptslcmd now has -\/json\+\_\+header parameter added which allows users to customize JSON header 
+\end{DoxyItemize}

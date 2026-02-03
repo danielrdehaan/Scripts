@@ -1,0 +1,274 @@
+\hypertarget{a01320}{}\doxysection{Default\+Request\+Handler}
+\label{a01320}\index{DefaultRequestHandler@{DefaultRequestHandler}}
+
+
+{\ttfamily \#include $<$Cpp\+PTSLC\+\_\+\+Default\+Request.\+h$>$}
+
+
+
+\doxysubsection{Description}
+Common request handler for processing specific grpc requests and responses. 
+
+\begin{DoxyRefDesc}{Deprecated}
+\item[\mbox{\hyperlink{a00467__deprecated000001}{Deprecated}}]Deprecated starting in Pro Tools 2024.\+10. Please use a general JSON-\/based \mbox{\hyperlink{a01328_a2c6a9bfa639cab78fcb3d4159c460c5f}{Send\+Request}} function instead of using request handlers. \end{DoxyRefDesc}
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{a01324}{State}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{a01320_ae1589913c97b2dded5708f2a14725b71}{Default\+Request\+Handler}} ()
+\item 
+virtual \mbox{\hyperlink{a01320_a30f3f268f5c2419fb07716b4718a229a}{$\sim$\+Default\+Request\+Handler}} ()
+\item 
+bool \mbox{\hyperlink{a01320_aefd3dd4db2c269f91bb89d071f527a1a}{Convert\+Request\+Body\+To\+Json}} (std\+::string \&request\+Body\+JSON)
+\item 
+std\+::tuple$<$ bool, std\+::string $>$ \mbox{\hyperlink{a01320_a684292118b0be6ff0c2abc2f85934950}{Convert\+Json\+To\+Response\+Body}} (const std\+::string \&response\+Body\+JSON)
+\item 
+std\+::tuple$<$ bool, std\+::string $>$ \mbox{\hyperlink{a01320_aa4006557770204fc996765dffcb689d7}{Convert\+Json\+To\+Response\+Error}} (const std\+::string \&error\+JSON)
+\item 
+void \mbox{\hyperlink{a01320_ae47d011203809874367bd96f94db1cdf}{Convert\+Proto\+To\+Command\+Error}} (const \mbox{\hyperlink{a02028}{ptsl\+::\+Command\+Error}} \&in, \mbox{\hyperlink{a01364}{Command\+Error}} \&out)
+\item 
+virtual void \mbox{\hyperlink{a01320_a2c23df7336055b8f5ef9539fdb392143}{On\+Next\+Response}} ()
+\item 
+virtual void \mbox{\hyperlink{a01320_a85af433839d57c9b507444e64d6f5697}{On\+Has\+Body}} ()
+\item 
+virtual void \mbox{\hyperlink{a01320_ab93fe40008b1b347f09eee16d66a1d78}{On\+No\+Body}} ()
+\item 
+virtual bool \mbox{\hyperlink{a01320_a901e9c8d09a97d833470e6ddd6e5b08b}{Is\+Response\+Received}} () const
+\item 
+virtual void \mbox{\hyperlink{a01320_a6349818a8c71b82abe6d56f2a6bb5109}{On\+Has\+Header}} (const \mbox{\hyperlink{a02056}{ptsl\+::\+Response}} \&response)
+\item 
+virtual void \mbox{\hyperlink{a01320_a6acbcdb790474c41adb396ef4687d940}{On\+Has\+Error}} ()
+\item 
+virtual void \mbox{\hyperlink{a01320_a9866562327e2937731ec37f76df3ec96}{On\+No\+Response}} (\mbox{\hyperlink{a00491_ae5152a79762c33c83fdb5752192e511c}{Command\+Id}} command)
+\item 
+virtual void \mbox{\hyperlink{a01320_a1872ea66e9485bbc1d15f12dbee045d2}{Set\+Response\+Status}} (const \mbox{\hyperlink{a00491_a0927ccfbc4e114cef1f18c6f260d230b}{Task\+Status}} \&status, const std\+::string \&status\+Type\+Clarification=\char`\"{}\char`\"{})
+\item 
+virtual \mbox{\hyperlink{a00491_a0927ccfbc4e114cef1f18c6f260d230b}{Task\+Status}} \mbox{\hyperlink{a01320_aeb8aa35f7156a85fff38d60c257db899}{Get\+Response\+Status}} () const
+\item 
+virtual bool \mbox{\hyperlink{a01320_a56a26abd90082cf94a6710d7b7e42e1a}{Is\+Need\+To\+Ping\+Task\+Status}} () const
+\item 
+virtual std\+::string \mbox{\hyperlink{a01320_a9f1cd1e725e66afdc6110574ab6d69f3}{Get\+Request\+Name}} () const =0
+\item 
+virtual void \mbox{\hyperlink{a01320_aeeee685f31b968c1521b055ccf5eb10f}{Create\+State}} ()
+\item 
+virtual void \mbox{\hyperlink{a01320_a73883470a30e90a53f3384671f3fda2d}{Make\+Response}} ()
+\item 
+virtual std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{a01376}{Command\+Response}} $>$ \mbox{\hyperlink{a01320_aea078a3a558acf00d81ada4621817b97}{Get\+Response}} () const
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual google\+::protobuf\+::\+Message \& \mbox{\hyperlink{a01320_ab2a29386234779aafd289776e1f60495}{Get\+Request\+Body\+Ref}} ()
+\item 
+virtual google\+::protobuf\+::\+Message \& \mbox{\hyperlink{a01320_a634bf5c31f241da1a9cf73572942aac3}{Get\+Response\+Body\+Ref}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{a02032}{ptsl\+::\+Response\+Error}} \mbox{\hyperlink{a01320_a345bb96a4a178b8d7961224040f660b7}{m\+Grpc\+Response\+Error}}
+\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{a01324}{State}} $>$ \mbox{\hyperlink{a01320_a161820911b71a5b73ce1df1fc3054911}{m\+State}}
+\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{a01376}{Command\+Response}} $>$ \mbox{\hyperlink{a01320_a666c9c93bcb2638673a1e8dbe2e71f26}{m\+Response}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{a01320_ae1589913c97b2dded5708f2a14725b71}\label{a01320_ae1589913c97b2dded5708f2a14725b71}} 
+\index{DefaultRequestHandler@{DefaultRequestHandler}!DefaultRequestHandler@{DefaultRequestHandler}}
+\index{DefaultRequestHandler@{DefaultRequestHandler}!DefaultRequestHandler@{DefaultRequestHandler}}
+\doxysubsubsection{\texorpdfstring{DefaultRequestHandler()}{DefaultRequestHandler()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a01320}{Default\+Request\+Handler}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{a01320_a30f3f268f5c2419fb07716b4718a229a}\label{a01320_a30f3f268f5c2419fb07716b4718a229a}} 
+\index{DefaultRequestHandler@{DefaultRequestHandler}!````~DefaultRequestHandler@{$\sim$DefaultRequestHandler}}
+\index{````~DefaultRequestHandler@{$\sim$DefaultRequestHandler}!DefaultRequestHandler@{DefaultRequestHandler}}
+\doxysubsubsection{\texorpdfstring{$\sim$DefaultRequestHandler()}{~DefaultRequestHandler()}}
+{\footnotesize\ttfamily virtual $\sim$\mbox{\hyperlink{a01320}{Default\+Request\+Handler}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{a01320_aefd3dd4db2c269f91bb89d071f527a1a}\label{a01320_aefd3dd4db2c269f91bb89d071f527a1a}} 
+\index{DefaultRequestHandler@{DefaultRequestHandler}!ConvertRequestBodyToJson@{ConvertRequestBodyToJson}}
+\index{ConvertRequestBodyToJson@{ConvertRequestBodyToJson}!DefaultRequestHandler@{DefaultRequestHandler}}
+\doxysubsubsection{\texorpdfstring{ConvertRequestBodyToJson()}{ConvertRequestBodyToJson()}}
+{\footnotesize\ttfamily bool Convert\+Request\+Body\+To\+Json (\begin{DoxyParamCaption}\item[{std\+::string \&}]{request\+Body\+JSON }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+References \mbox{\hyperlink{a00491_a6f182f9872f9fb59a13ddc248339ec08}{PTSLC\+\_\+\+CPP\+::\+Default\+Json\+Write\+Options()}}.
+
+\mbox{\Hypertarget{a01320_a684292118b0be6ff0c2abc2f85934950}\label{a01320_a684292118b0be6ff0c2abc2f85934950}} 
+\index{DefaultRequestHandler@{DefaultRequestHandler}!ConvertJsonToResponseBody@{ConvertJsonToResponseBody}}
+\index{ConvertJsonToResponseBody@{ConvertJsonToResponseBody}!DefaultRequestHandler@{DefaultRequestHandler}}
+\doxysubsubsection{\texorpdfstring{ConvertJsonToResponseBody()}{ConvertJsonToResponseBody()}}
+{\footnotesize\ttfamily std\+::tuple$<$ bool, std\+::string $>$ Convert\+Json\+To\+Response\+Body (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{response\+Body\+JSON }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+References \mbox{\hyperlink{a00491_a9163390b1bfc4f32518cb1097dc77054}{PTSLC\+\_\+\+CPP\+::\+Default\+Json\+Parse\+Options()}}.
+
+\mbox{\Hypertarget{a01320_aa4006557770204fc996765dffcb689d7}\label{a01320_aa4006557770204fc996765dffcb689d7}} 
+\index{DefaultRequestHandler@{DefaultRequestHandler}!ConvertJsonToResponseError@{ConvertJsonToResponseError}}
+\index{ConvertJsonToResponseError@{ConvertJsonToResponseError}!DefaultRequestHandler@{DefaultRequestHandler}}
+\doxysubsubsection{\texorpdfstring{ConvertJsonToResponseError()}{ConvertJsonToResponseError()}}
+{\footnotesize\ttfamily std\+::tuple$<$ bool, std\+::string $>$ Convert\+Json\+To\+Response\+Error (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{error\+JSON }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+References \mbox{\hyperlink{a00491_a9163390b1bfc4f32518cb1097dc77054}{PTSLC\+\_\+\+CPP\+::\+Default\+Json\+Parse\+Options()}}.
+
+\mbox{\Hypertarget{a01320_ae47d011203809874367bd96f94db1cdf}\label{a01320_ae47d011203809874367bd96f94db1cdf}} 
+\index{DefaultRequestHandler@{DefaultRequestHandler}!ConvertProtoToCommandError@{ConvertProtoToCommandError}}
+\index{ConvertProtoToCommandError@{ConvertProtoToCommandError}!DefaultRequestHandler@{DefaultRequestHandler}}
+\doxysubsubsection{\texorpdfstring{ConvertProtoToCommandError()}{ConvertProtoToCommandError()}}
+{\footnotesize\ttfamily void Convert\+Proto\+To\+Command\+Error (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{a02028}{ptsl\+::\+Command\+Error}} \&}]{in,  }\item[{\mbox{\hyperlink{a01364}{Command\+Error}} \&}]{out }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+References \mbox{\hyperlink{a02028_a694cc14b5cdfef93f2a13c090a36be54}{Command\+Error\+::command\+\_\+error\+\_\+message}}, \mbox{\hyperlink{a02028_a387b7a0c5e7ef659b149a67c8d7e1f01}{Command\+Error\+::command\+\_\+error\+\_\+type}}, \mbox{\hyperlink{a01364_a61183f16e5224eaba5be8ccffd828242}{Command\+Error\+::error\+Message}}, \mbox{\hyperlink{a01364_a9d2a3d8a0d7ddeecb3c90cca47b81ad8}{Command\+Error\+::error\+Type}}, \mbox{\hyperlink{a02028_a95c0e7b53eba0f3c36fc4ed2fad34cb6}{Command\+Error\+::is\+\_\+warning}}, and \mbox{\hyperlink{a01364_a4ca0f3b4b594ee5a7ef31e6464fdae68}{Command\+Error\+::is\+Warning}}.
+
+\mbox{\Hypertarget{a01320_a2c23df7336055b8f5ef9539fdb392143}\label{a01320_a2c23df7336055b8f5ef9539fdb392143}} 
+\index{DefaultRequestHandler@{DefaultRequestHandler}!OnNextResponse@{OnNextResponse}}
+\index{OnNextResponse@{OnNextResponse}!DefaultRequestHandler@{DefaultRequestHandler}}
+\doxysubsubsection{\texorpdfstring{OnNextResponse()}{OnNextResponse()}}
+{\footnotesize\ttfamily virtual void On\+Next\+Response (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+\mbox{\Hypertarget{a01320_a85af433839d57c9b507444e64d6f5697}\label{a01320_a85af433839d57c9b507444e64d6f5697}} 
+\index{DefaultRequestHandler@{DefaultRequestHandler}!OnHasBody@{OnHasBody}}
+\index{OnHasBody@{OnHasBody}!DefaultRequestHandler@{DefaultRequestHandler}}
+\doxysubsubsection{\texorpdfstring{OnHasBody()}{OnHasBody()}}
+{\footnotesize\ttfamily virtual void On\+Has\+Body (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+\mbox{\Hypertarget{a01320_ab93fe40008b1b347f09eee16d66a1d78}\label{a01320_ab93fe40008b1b347f09eee16d66a1d78}} 
+\index{DefaultRequestHandler@{DefaultRequestHandler}!OnNoBody@{OnNoBody}}
+\index{OnNoBody@{OnNoBody}!DefaultRequestHandler@{DefaultRequestHandler}}
+\doxysubsubsection{\texorpdfstring{OnNoBody()}{OnNoBody()}}
+{\footnotesize\ttfamily virtual void On\+No\+Body (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+\mbox{\Hypertarget{a01320_a901e9c8d09a97d833470e6ddd6e5b08b}\label{a01320_a901e9c8d09a97d833470e6ddd6e5b08b}} 
+\index{DefaultRequestHandler@{DefaultRequestHandler}!IsResponseReceived@{IsResponseReceived}}
+\index{IsResponseReceived@{IsResponseReceived}!DefaultRequestHandler@{DefaultRequestHandler}}
+\doxysubsubsection{\texorpdfstring{IsResponseReceived()}{IsResponseReceived()}}
+{\footnotesize\ttfamily virtual bool Is\+Response\+Received (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+\mbox{\Hypertarget{a01320_a6349818a8c71b82abe6d56f2a6bb5109}\label{a01320_a6349818a8c71b82abe6d56f2a6bb5109}} 
+\index{DefaultRequestHandler@{DefaultRequestHandler}!OnHasHeader@{OnHasHeader}}
+\index{OnHasHeader@{OnHasHeader}!DefaultRequestHandler@{DefaultRequestHandler}}
+\doxysubsubsection{\texorpdfstring{OnHasHeader()}{OnHasHeader()}}
+{\footnotesize\ttfamily virtual void On\+Has\+Header (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{a02056}{ptsl\+::\+Response}} \&}]{response }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+References \mbox{\hyperlink{a02048_a6d73277ea08aa1deaa4e5233adf11f90}{Response\+Header\+::command}}, \mbox{\hyperlink{a02056_a0528827043dc24bfd1667e353d6f39a4}{Response\+::header}}, \mbox{\hyperlink{a02048_a66022d4254e1349f07b9963b32834e00}{Response\+Header\+::progress}}, \mbox{\hyperlink{a02056_a91c35346b83d143541cf42028c87f828}{Response\+::response\+\_\+body\+\_\+json}}, \mbox{\hyperlink{a02056_a0dff524019938631113b7e5e5c783493}{Response\+::response\+\_\+error\+\_\+json}}, \mbox{\hyperlink{a02048_a2be58077b1f98d7ed1a5f00b6dae9961}{Response\+Header\+::status}}, \mbox{\hyperlink{a02048_ab8fb5adee6b678b5d3d9c38be5df9d10}{Response\+Header\+::task\+\_\+id}}, \mbox{\hyperlink{a02048_a1403c9ca4289d8a9417e8c4da2b94c0e}{Response\+Header\+::version}}, \mbox{\hyperlink{a02048_a09c035a9bbb8296a09dfcfcc0c62de56}{Response\+Header\+::version\+\_\+minor}}, and \mbox{\hyperlink{a02048_ac3eea2a8ad35f84eeb9f00174f197679}{Response\+Header\+::version\+\_\+revision}}.
+
+\mbox{\Hypertarget{a01320_a6acbcdb790474c41adb396ef4687d940}\label{a01320_a6acbcdb790474c41adb396ef4687d940}} 
+\index{DefaultRequestHandler@{DefaultRequestHandler}!OnHasError@{OnHasError}}
+\index{OnHasError@{OnHasError}!DefaultRequestHandler@{DefaultRequestHandler}}
+\doxysubsubsection{\texorpdfstring{OnHasError()}{OnHasError()}}
+{\footnotesize\ttfamily virtual void On\+Has\+Error (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+References \mbox{\hyperlink{a00491_a46f003fc8324d10d4258e8057ae61b9d}{PTSLC\+\_\+\+CPP\+::\+Convert\+Proto\+To\+Command\+Error()}}.
+
+\mbox{\Hypertarget{a01320_a9866562327e2937731ec37f76df3ec96}\label{a01320_a9866562327e2937731ec37f76df3ec96}} 
+\index{DefaultRequestHandler@{DefaultRequestHandler}!OnNoResponse@{OnNoResponse}}
+\index{OnNoResponse@{OnNoResponse}!DefaultRequestHandler@{DefaultRequestHandler}}
+\doxysubsubsection{\texorpdfstring{OnNoResponse()}{OnNoResponse()}}
+{\footnotesize\ttfamily virtual void On\+No\+Response (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{a00491_ae5152a79762c33c83fdb5752192e511c}{Command\+Id}}}]{command }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+References \mbox{\hyperlink{a00491_a0927ccfbc4e114cef1f18c6f260d230ba6f53a2fd075a965d3aeb368d915c00a7}{PTSLC\+\_\+\+CPP\+::\+TStatus\+\_\+\+No\+Response\+Received}}.
+
+\mbox{\Hypertarget{a01320_a1872ea66e9485bbc1d15f12dbee045d2}\label{a01320_a1872ea66e9485bbc1d15f12dbee045d2}} 
+\index{DefaultRequestHandler@{DefaultRequestHandler}!SetResponseStatus@{SetResponseStatus}}
+\index{SetResponseStatus@{SetResponseStatus}!DefaultRequestHandler@{DefaultRequestHandler}}
+\doxysubsubsection{\texorpdfstring{SetResponseStatus()}{SetResponseStatus()}}
+{\footnotesize\ttfamily virtual void Set\+Response\+Status (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{a00491_a0927ccfbc4e114cef1f18c6f260d230b}{Task\+Status}} \&}]{status,  }\item[{const std\+::string \&}]{status\+Type\+Clarification = {\ttfamily \char`\"{}\char`\"{}} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+\mbox{\Hypertarget{a01320_aeb8aa35f7156a85fff38d60c257db899}\label{a01320_aeb8aa35f7156a85fff38d60c257db899}} 
+\index{DefaultRequestHandler@{DefaultRequestHandler}!GetResponseStatus@{GetResponseStatus}}
+\index{GetResponseStatus@{GetResponseStatus}!DefaultRequestHandler@{DefaultRequestHandler}}
+\doxysubsubsection{\texorpdfstring{GetResponseStatus()}{GetResponseStatus()}}
+{\footnotesize\ttfamily virtual \mbox{\hyperlink{a00491_a0927ccfbc4e114cef1f18c6f260d230b}{Task\+Status}} Get\+Response\+Status (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+References \mbox{\hyperlink{a00491_a0927ccfbc4e114cef1f18c6f260d230ba6f53a2fd075a965d3aeb368d915c00a7}{PTSLC\+\_\+\+CPP\+::\+TStatus\+\_\+\+No\+Response\+Received}}.
+
+\mbox{\Hypertarget{a01320_a56a26abd90082cf94a6710d7b7e42e1a}\label{a01320_a56a26abd90082cf94a6710d7b7e42e1a}} 
+\index{DefaultRequestHandler@{DefaultRequestHandler}!IsNeedToPingTaskStatus@{IsNeedToPingTaskStatus}}
+\index{IsNeedToPingTaskStatus@{IsNeedToPingTaskStatus}!DefaultRequestHandler@{DefaultRequestHandler}}
+\doxysubsubsection{\texorpdfstring{IsNeedToPingTaskStatus()}{IsNeedToPingTaskStatus()}}
+{\footnotesize\ttfamily virtual bool Is\+Need\+To\+Ping\+Task\+Status (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+\mbox{\Hypertarget{a01320_a9f1cd1e725e66afdc6110574ab6d69f3}\label{a01320_a9f1cd1e725e66afdc6110574ab6d69f3}} 
+\index{DefaultRequestHandler@{DefaultRequestHandler}!GetRequestName@{GetRequestName}}
+\index{GetRequestName@{GetRequestName}!DefaultRequestHandler@{DefaultRequestHandler}}
+\doxysubsubsection{\texorpdfstring{GetRequestName()}{GetRequestName()}}
+{\footnotesize\ttfamily virtual std\+::string Get\+Request\+Name (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+\mbox{\Hypertarget{a01320_aeeee685f31b968c1521b055ccf5eb10f}\label{a01320_aeeee685f31b968c1521b055ccf5eb10f}} 
+\index{DefaultRequestHandler@{DefaultRequestHandler}!CreateState@{CreateState}}
+\index{CreateState@{CreateState}!DefaultRequestHandler@{DefaultRequestHandler}}
+\doxysubsubsection{\texorpdfstring{CreateState()}{CreateState()}}
+{\footnotesize\ttfamily virtual void Create\+State (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+\mbox{\Hypertarget{a01320_a73883470a30e90a53f3384671f3fda2d}\label{a01320_a73883470a30e90a53f3384671f3fda2d}} 
+\index{DefaultRequestHandler@{DefaultRequestHandler}!MakeResponse@{MakeResponse}}
+\index{MakeResponse@{MakeResponse}!DefaultRequestHandler@{DefaultRequestHandler}}
+\doxysubsubsection{\texorpdfstring{MakeResponse()}{MakeResponse()}}
+{\footnotesize\ttfamily virtual void Make\+Response (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+\mbox{\Hypertarget{a01320_aea078a3a558acf00d81ada4621817b97}\label{a01320_aea078a3a558acf00d81ada4621817b97}} 
+\index{DefaultRequestHandler@{DefaultRequestHandler}!GetResponse@{GetResponse}}
+\index{GetResponse@{GetResponse}!DefaultRequestHandler@{DefaultRequestHandler}}
+\doxysubsubsection{\texorpdfstring{GetResponse()}{GetResponse()}}
+{\footnotesize\ttfamily virtual std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{a01376}{Command\+Response}} $>$ Get\+Response (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+\mbox{\Hypertarget{a01320_ab2a29386234779aafd289776e1f60495}\label{a01320_ab2a29386234779aafd289776e1f60495}} 
+\index{DefaultRequestHandler@{DefaultRequestHandler}!GetRequestBodyRef@{GetRequestBodyRef}}
+\index{GetRequestBodyRef@{GetRequestBodyRef}!DefaultRequestHandler@{DefaultRequestHandler}}
+\doxysubsubsection{\texorpdfstring{GetRequestBodyRef()}{GetRequestBodyRef()}}
+{\footnotesize\ttfamily virtual google\+::protobuf\+::\+Message \& Get\+Request\+Body\+Ref (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+\mbox{\Hypertarget{a01320_a634bf5c31f241da1a9cf73572942aac3}\label{a01320_a634bf5c31f241da1a9cf73572942aac3}} 
+\index{DefaultRequestHandler@{DefaultRequestHandler}!GetResponseBodyRef@{GetResponseBodyRef}}
+\index{GetResponseBodyRef@{GetResponseBodyRef}!DefaultRequestHandler@{DefaultRequestHandler}}
+\doxysubsubsection{\texorpdfstring{GetResponseBodyRef()}{GetResponseBodyRef()}}
+{\footnotesize\ttfamily virtual google\+::protobuf\+::\+Message \& Get\+Response\+Body\+Ref (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{a01320_a345bb96a4a178b8d7961224040f660b7}\label{a01320_a345bb96a4a178b8d7961224040f660b7}} 
+\index{DefaultRequestHandler@{DefaultRequestHandler}!mGrpcResponseError@{mGrpcResponseError}}
+\index{mGrpcResponseError@{mGrpcResponseError}!DefaultRequestHandler@{DefaultRequestHandler}}
+\doxysubsubsection{\texorpdfstring{mGrpcResponseError}{mGrpcResponseError}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a02032}{ptsl\+::\+Response\+Error}} m\+Grpc\+Response\+Error\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{a01320_a161820911b71a5b73ce1df1fc3054911}\label{a01320_a161820911b71a5b73ce1df1fc3054911}} 
+\index{DefaultRequestHandler@{DefaultRequestHandler}!mState@{mState}}
+\index{mState@{mState}!DefaultRequestHandler@{DefaultRequestHandler}}
+\doxysubsubsection{\texorpdfstring{mState}{mState}}
+{\footnotesize\ttfamily std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{a01324}{State}}$>$ m\+State\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{a01320_a666c9c93bcb2638673a1e8dbe2e71f26}\label{a01320_a666c9c93bcb2638673a1e8dbe2e71f26}} 
+\index{DefaultRequestHandler@{DefaultRequestHandler}!mResponse@{mResponse}}
+\index{mResponse@{mResponse}!DefaultRequestHandler@{DefaultRequestHandler}}
+\doxysubsubsection{\texorpdfstring{mResponse}{mResponse}}
+{\footnotesize\ttfamily std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{a01376}{Command\+Response}}$>$ m\+Response\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+The documentation for this struct was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{a00023}{Cpp\+PTSLC\+\_\+\+Default\+Request.\+h}}\item 
+\mbox{\hyperlink{a00014}{Cpp\+PTSLC\+\_\+\+Default\+Request.\+cpp}}\end{DoxyCompactItemize}

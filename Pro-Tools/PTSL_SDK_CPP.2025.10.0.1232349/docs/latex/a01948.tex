@@ -1,0 +1,58 @@
+\hypertarget{a01948}{}\doxysection{Set\+Track\+DSPMode\+Safe\+State\+Request}
+\label{a01948}\index{SetTrackDSPModeSafeStateRequest@{SetTrackDSPModeSafeStateRequest}}
+
+
+{\ttfamily \#include $<$Cpp\+PTSLCommon.\+h$>$}
+
+
+
+\doxysubsection{Description}
+Structure that describes Set\+Track\+DSPMode\+Safe\+State request data. 
+
+Supported starting in Pro Tools 2024.\+06
+
+\begin{DoxyRefDesc}{Deprecated}
+\item[\mbox{\hyperlink{a00467__deprecated000336}{Deprecated}}]All API-\/specific types in the C++ client lib are deprecated starting in Pro Tools 2024.\+10 since we introduced general JSON-\/based request/response. \end{DoxyRefDesc}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::vector$<$ std\+::string $>$ \mbox{\hyperlink{a01948_afa3b479848155297f7b0354c3db37ddc}{track\+Names}}
+\begin{DoxyCompactList}\small\item\em Tracks to set the DSP Mode Safe state. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{a01948_a8740ba80e30dd75e71d09fa1dcf04f3d}{enabled}} \{ false \}
+\begin{DoxyCompactList}\small\item\em The state to set ({\ttfamily true} for enabling the DSP Mode Safe, {\ttfamily false} for disabling the DSP Mode Safe). \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{a01948_afa3b479848155297f7b0354c3db37ddc}\label{a01948_afa3b479848155297f7b0354c3db37ddc}} 
+\index{SetTrackDSPModeSafeStateRequest@{SetTrackDSPModeSafeStateRequest}!trackNames@{trackNames}}
+\index{trackNames@{trackNames}!SetTrackDSPModeSafeStateRequest@{SetTrackDSPModeSafeStateRequest}}
+\doxysubsubsection{\texorpdfstring{trackNames}{trackNames}}
+{\footnotesize\ttfamily std\+::vector$<$std\+::string$>$ track\+Names}
+
+
+
+Tracks to set the DSP Mode Safe state. 
+
+
+
+Referenced by \mbox{\hyperlink{a01328_ab160a6b320f6b28c642c01a8731127af}{Cpp\+PTSLClient\+::\+Set\+Track\+DSPMode\+Safe\+State()}}.
+
+\mbox{\Hypertarget{a01948_a8740ba80e30dd75e71d09fa1dcf04f3d}\label{a01948_a8740ba80e30dd75e71d09fa1dcf04f3d}} 
+\index{SetTrackDSPModeSafeStateRequest@{SetTrackDSPModeSafeStateRequest}!enabled@{enabled}}
+\index{enabled@{enabled}!SetTrackDSPModeSafeStateRequest@{SetTrackDSPModeSafeStateRequest}}
+\doxysubsubsection{\texorpdfstring{enabled}{enabled}}
+{\footnotesize\ttfamily bool enabled \{ false \}}
+
+
+
+The state to set ({\ttfamily true} for enabling the DSP Mode Safe, {\ttfamily false} for disabling the DSP Mode Safe). 
+
+
+
+Referenced by \mbox{\hyperlink{a01328_ab160a6b320f6b28c642c01a8731127af}{Cpp\+PTSLClient\+::\+Set\+Track\+DSPMode\+Safe\+State()}}.
+
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{a00050}{Cpp\+PTSLCommon.\+h}}\end{DoxyCompactItemize}

@@ -1,0 +1,112 @@
+\hypertarget{a00483}{}\doxysection{Version 2023.09}
+\label{a00483}\index{Version 2023.09@{Version 2023.09}}
+\hypertarget{a00483_release_notes_2023_09_compatibility}{}\doxysubsection{Compatibility}\label{a00483_release_notes_2023_09_compatibility}
+PTSL SDK 2023.\+09 uses \mbox{\hyperlink{a00446_a83c5961efacc6c06e3e75877c239ebb1}{PTSL\+\_\+\+VERSION}} 1 of the client interface
+
+Pro Tools 2023.\+9 is compatible with clients using \mbox{\hyperlink{a00446_a83c5961efacc6c06e3e75877c239ebb1}{PTSL\+\_\+\+VERSION}} 1 and higher
+
+Reminder\+: \mbox{\hyperlink{a00481_release_notes_2023_03_changelog_developer_certificates_have_been_deprecated}{Developer certificates have been deprecated}}
+
+Pro Tools 2023.\+9 is the last release to support Authorize\+Connection
+
+The Authorize\+Connection API has been superseded by the \mbox{\hyperlink{a01328_aca497935e1b825a7c9cd5e28e7c2080b}{Register\+Connection}} API, introduced in PT 2023.\+3. This new method no longer requires a certificate to authenticate with Pro Tools upon connection, and simply requires you provide the \char`\"{}company\+Name\char`\"{} and \char`\"{}application\+Name\char`\"{} when sending commands from the SDK.
+
+For more details, see \mbox{\hyperlink{a01756}{Register\+Connection\+Request}} and \mbox{\hyperlink{a01760}{Register\+Connection\+Response}}.\hypertarget{a00483_release_notes_2023_09_changelog}{}\doxysubsection{Changelog}\label{a00483_release_notes_2023_09_changelog}
+\hypertarget{a00483_release_notes_2023_09_changelog_general_changes}{}\doxysubsubsection{General changes}\label{a00483_release_notes_2023_09_changelog_general_changes}
+
+\begin{DoxyItemize}
+\item {\ttfamily grpc} for both C++ client and Pro Tools server is updated to 1.\+43.\+0 additionally with its dependencies (previously was 1.\+37.\+0)
+\item {\ttfamily protobuf} for both C++ client and Pro Tools server is set to version 3.\+19.\+2 (previously was unspecified)
+\end{DoxyItemize}\hypertarget{a00483_release_notes_2023_09_changelog_command_changes}{}\doxysubsubsection{Protocol changes}\label{a00483_release_notes_2023_09_changelog_command_changes}
+New commands\+:
+\begin{DoxyItemize}
+\item \mbox{\hyperlink{a00494_aaf8d2069e2c6bbecf4aa8f9819028e8aa1c1ebd2ed3951f34c412d7176d3d23ed}{Create\+New\+Tracks}}
+\item \mbox{\hyperlink{a00494_aaf8d2069e2c6bbecf4aa8f9819028e8aa7550f225cdb37655a78460acdeeb9e02}{Select\+Tracks\+By\+Name}}
+\item \mbox{\hyperlink{a00494_aaf8d2069e2c6bbecf4aa8f9819028e8aa6da3edea75133834e9768bf1057cbf8f}{Get\+Edit\+Mode}}
+\item \mbox{\hyperlink{a00494_aaf8d2069e2c6bbecf4aa8f9819028e8aad0333dbad612c053fd8fef814ed635c6}{Set\+Edit\+Mode}}
+\item \mbox{\hyperlink{a00494_aaf8d2069e2c6bbecf4aa8f9819028e8aa1e25e8f380db6c291078ba455674d052}{Get\+Edit\+Tool}}
+\item \mbox{\hyperlink{a00494_aaf8d2069e2c6bbecf4aa8f9819028e8aa933f0a0ba515658e989cec087c2584e0}{Set\+Edit\+Tool}}
+\item \mbox{\hyperlink{a00494_aaf8d2069e2c6bbecf4aa8f9819028e8aa4831e2e1e26c5b627fec5c48abb22c91}{Recall\+Zoom\+Preset}}
+\item \mbox{\hyperlink{a00494_aaf8d2069e2c6bbecf4aa8f9819028e8aa15cd8fe9afe946eb7e6f345f786863c9}{Get\+Edit\+Mode\+Options}}
+\item \mbox{\hyperlink{a00494_aaf8d2069e2c6bbecf4aa8f9819028e8aaa7778bdba0c889d6663f73f1b13b96d4}{Set\+Edit\+Mode\+Options}}
+\item \mbox{\hyperlink{a00494_aaf8d2069e2c6bbecf4aa8f9819028e8aa3aa564dd7d21ea3de785cb12b4ff67c9}{Set\+Timeline\+Selection}}
+\item \mbox{\hyperlink{a00494_aaf8d2069e2c6bbecf4aa8f9819028e8aa1a8a2c000db9af74cf21d59e5a2441d2}{Get\+Timeline\+Selection}}
+\end{DoxyItemize}
+
+New possible errors\+:
+\begin{DoxyItemize}
+\item \mbox{\hyperlink{a00494_a72aa3dec22d29b2aa82ee130b3e8d64ca1cfc04c04a5ec0df96c515b9b3c36649}{PT\+\_\+\+Forbidden}}
+\item \mbox{\hyperlink{a00494_a72aa3dec22d29b2aa82ee130b3e8d64ca108aa02e7af1871a0427ebed4cf29a3f}{PT\+\_\+\+No\+Timeline\+Found}}
+\item \mbox{\hyperlink{a00494_a72aa3dec22d29b2aa82ee130b3e8d64ca8849680c67a84c60494d19bd3a77b81f}{PT\+\_\+\+Argument\+Out\+Of\+Range}}
+\end{DoxyItemize}
+
+New enumerations\+:
+\begin{DoxyItemize}
+\item \mbox{\hyperlink{a00494_a1d8948fc6065e2ef9bbb9b89d064a6c4}{Track\+Format}}
+\item \mbox{\hyperlink{a00494_a5bc5dcc65cbbf84540f807fdfe9e7ec6}{Track\+Timebase}}
+\item \mbox{\hyperlink{a00494_ae48f4765db58ef1c17af526e7d9d8920}{Edit\+Mode}}
+\item \mbox{\hyperlink{a00494_a7126487d744a48657f5a3dc1a9fce23f}{Edit\+Tool}}
+\item \mbox{\hyperlink{a00494_a1046eaf55d0a4804602cc64e4615caa9}{Timeline\+Update\+Video}}
+\item \mbox{\hyperlink{a00494_a7059dfa0ed70c89facc3d317fb4138b3}{Selection\+Mode}}
+\end{DoxyItemize}
+
+New messages\+:
+\begin{DoxyItemize}
+\item \mbox{\hyperlink{a02068}{Pagination\+Request}}
+\item \mbox{\hyperlink{a02076}{Pagination\+Response}}
+\item \mbox{\hyperlink{a02480}{Create\+New\+Tracks\+Request\+Body}} and \mbox{\hyperlink{a02484}{Create\+New\+Tracks\+Response\+Body}}
+\item \mbox{\hyperlink{a02488}{Edit\+Mode\+Options}}
+\item \mbox{\hyperlink{a02492}{Get\+Edit\+Mode\+Response\+Body}}
+\item \mbox{\hyperlink{a02496}{Set\+Edit\+Mode\+Request\+Body}}
+\item \mbox{\hyperlink{a02500}{Get\+Edit\+Tool\+Response\+Body}}
+\item \mbox{\hyperlink{a02504}{Set\+Edit\+Tool\+Request\+Body}}
+\item \mbox{\hyperlink{a02508}{Recall\+Zoom\+Preset\+Request\+Body}}
+\item \mbox{\hyperlink{a02516}{Set\+Edit\+Mode\+Options\+Request\+Body}}
+\item \mbox{\hyperlink{a02512}{Get\+Edit\+Mode\+Options\+Response\+Body}}
+\item \mbox{\hyperlink{a02520}{Set\+Timeline\+Selection\+Request\+Body}}
+\item \mbox{\hyperlink{a02524}{Get\+Timeline\+Selection\+Request\+Body}} and \mbox{\hyperlink{a02528}{Get\+Timeline\+Selection\+Response\+Body}}
+\item \mbox{\hyperlink{a02532}{Select\+Tracks\+By\+Name\+Request\+Body}} and \mbox{\hyperlink{a02536}{Select\+Tracks\+By\+Name\+Response\+Body}}
+\end{DoxyItemize}
+
+Existing command changes\+:
+\begin{DoxyItemize}
+\item \mbox{\hyperlink{a00494_ad80740dd555f7d3688d2c4d9f44d3b04}{Track\+Type}} enumeration\+: added prefixes for values, non prefix values are deprecated
+\item \mbox{\hyperlink{a02072}{Pagination}} message is deprecated. Use \mbox{\hyperlink{a02068}{Pagination\+Request}} instead
+\item Changes in \mbox{\hyperlink{a02124}{Audio\+Data}} message
+\begin{DoxyItemize}
+\item \mbox{\hyperlink{a02124_a6605950a4a13a3c874ed6549a2040c10}{destination}} is deprecated. Use \mbox{\hyperlink{a02124_a37e325c12e773687ad5cfc74f3dbd45d}{audio\+\_\+destination}} instead
+\item \mbox{\hyperlink{a02124_a7fe3cdde96ef77ae923294913cf82ba7}{location}} is deprecated. Use \mbox{\hyperlink{a02124_ad481552a37f0653aa1e0e3c2cd39f2ab}{audio\+\_\+location}} instead
+\end{DoxyItemize}
+\item Changes in \mbox{\hyperlink{a02132}{Import\+Response\+Body}} message
+\begin{DoxyItemize}
+\item \mbox{\hyperlink{a02132_aadd0d1a71e4deeb6a7e655fe7ec3bad8}{file\+\_\+list}}, \mbox{\hyperlink{a02132_af7de830b1153caa3e3fad069cf533cf5}{audio\+\_\+operations}}, \mbox{\hyperlink{a02132_a311474d42d0749959dcf0e0b8989c55e}{destination\+\_\+path}} are deprecated. Use \mbox{\hyperlink{a02132_affb18f2956cbaa5a7bca52a32db820f1}{audio\+\_\+data}} instead
+\item The response is not fully implemented yet. The values are not expected to be returned at the moment.
+\end{DoxyItemize}
+\item Changes in \mbox{\hyperlink{a02140}{Get\+Track\+List\+Request\+Body}} message
+\begin{DoxyItemize}
+\item \mbox{\hyperlink{a02140_a5fd5f2662579f44d6aea0ddd8ce6082d}{page\+\_\+limit}} is deprecated. Use \mbox{\hyperlink{a02140_a4e3c2dae8310ae3f4086bebe2d455e9a}{pagination\+\_\+request}} instead
+\end{DoxyItemize}
+\item Changes in \mbox{\hyperlink{a02144}{Get\+Track\+List\+Response\+Body}} message
+\begin{DoxyItemize}
+\item \mbox{\hyperlink{a02144_aae073e278aa75dc36fac3396694b8db3}{stats}} is deprecated. Use \mbox{\hyperlink{a02144_a8a973a0245db52a6d5d05a57a84418e8}{pagination\+\_\+response}} instead
+\end{DoxyItemize}
+\item Changes in \mbox{\hyperlink{a02200}{Get\+File\+Location\+Request\+Body}} message
+\begin{DoxyItemize}
+\item \mbox{\hyperlink{a02200_a5fd5f2662579f44d6aea0ddd8ce6082d}{page\+\_\+limit}} is deprecated. Use \mbox{\hyperlink{a02200_a4e3c2dae8310ae3f4086bebe2d455e9a}{pagination\+\_\+request}} instead
+\end{DoxyItemize}
+\item Changes in \mbox{\hyperlink{a02204}{Get\+File\+Location\+Response\+Body}} message
+\begin{DoxyItemize}
+\item \mbox{\hyperlink{a02204_aae073e278aa75dc36fac3396694b8db3}{stats}} is deprecated. Use \mbox{\hyperlink{a02204_a8a973a0245db52a6d5d05a57a84418e8}{pagination\+\_\+response}} instead
+\end{DoxyItemize}
+\end{DoxyItemize}\hypertarget{a00483_release_notes_2023_09_changelog_cpp_changes}{}\doxysubsubsection{C++ client changes}\label{a00483_release_notes_2023_09_changelog_cpp_changes}
+
+\begin{DoxyItemize}
+\item CMake 3.\+25.\+0 is the minimum requirement (previously was unspecified). The check is not enforced but it\textquotesingle{}s not guaranteed to be compatible with older versions
+\item {\ttfamily C++17} is the minimum requirement (previously was C++14)
+\item {\ttfamily -\/arch armv8} option is deprecated in {\ttfamily build\+\_\+cpp\+\_\+ptsl\+\_\+sdk.\+py}. Use {\ttfamily arm64} instead
+\item {\ttfamily -\/arch x86\+\_\+64\+\_\+arm64} (universal binary) option is now the default option for Mac\+OS in {\ttfamily build\+\_\+cpp\+\_\+ptsl\+\_\+sdk.\+py} 
+\item {\ttfamily find\+\_\+package} for the C++ client supports PTSLC\+\_\+\+CPP\+\_\+\+DEBUG\+\_\+\+ROOT/\+PTSLC\+\_\+\+CPP\+\_\+\+RELEASE\+\_\+\+ROOT CMake variables to hint additional search path in multi-\/config projects
+\item Improved universal binary/cross-\/compilation (architecture) support for the C++ client
+\item \mbox{\hyperlink{a01328_afd276b6115a3821736c1969ffe2cd230}{Create\+Fade}} is deprecated. Use \mbox{\hyperlink{a01328_a22b34ecfe9e02386b5b5a527cf134558}{Create\+Fades\+Based\+On\+Preset}}
+\item \mbox{\hyperlink{a01328_aa6482f7604906dcdcb8fc5f3c77e09d9}{Rename\+Track}} is deprecated. Use \mbox{\hyperlink{a01328_afe71a30252f535d3d08515e2bb81270c}{Rename\+Target\+Track}} 
+\end{DoxyItemize}

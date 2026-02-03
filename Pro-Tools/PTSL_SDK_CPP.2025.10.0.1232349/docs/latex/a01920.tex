@@ -1,0 +1,74 @@
+\hypertarget{a01920}{}\doxysection{Undo\+History\+Operation}
+\label{a01920}\index{UndoHistoryOperation@{UndoHistoryOperation}}
+
+
+{\ttfamily \#include $<$Cpp\+PTSLCommon.\+h$>$}
+
+
+
+\doxysubsection{Description}
+A single Undo/\+Redo operation (see menu Window -\/\texorpdfstring{$>$}{>} Undo History in the Pro Tools UI). 
+
+Supported starting in Pro Tools 2024.\+06
+
+\begin{DoxyRefDesc}{Deprecated}
+\item[\mbox{\hyperlink{a00467__deprecated000329}{Deprecated}}]All API-\/specific types in the C++ client lib are deprecated starting in Pro Tools 2024.\+10 since we introduced general JSON-\/based request/response. \end{DoxyRefDesc}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::chrono\+::system\+\_\+clock\+::time\+\_\+point \mbox{\hyperlink{a01920_a5c03f6df2eef6d83c88bed5654d3c757}{time}}
+\begin{DoxyCompactList}\small\item\em The time of the operation (ISO 8601 format). \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{a01920_a0797d3319fe7c55172ad55cb31ca7d91}{operation}}
+\begin{DoxyCompactList}\small\item\em The name of the operation. \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{a01920_adfd48101c5417e0d6fa1c59b9dffbeaa}{details}}
+\begin{DoxyCompactList}\small\item\em The details of the operation (if available). \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{a01920_a5c03f6df2eef6d83c88bed5654d3c757}\label{a01920_a5c03f6df2eef6d83c88bed5654d3c757}} 
+\index{UndoHistoryOperation@{UndoHistoryOperation}!time@{time}}
+\index{time@{time}!UndoHistoryOperation@{UndoHistoryOperation}}
+\doxysubsubsection{\texorpdfstring{time}{time}}
+{\footnotesize\ttfamily std\+::chrono\+::system\+\_\+clock\+::time\+\_\+point time}
+
+
+
+The time of the operation (ISO 8601 format). 
+
+
+
+Referenced by \mbox{\hyperlink{a01328_a000bdb19f6528ed444f11154aedede1b}{Cpp\+PTSLClient\+::\+Redo()}}, \mbox{\hyperlink{a01328_a27a62434036f1ce5ec28f9ad0a6e10f7}{Cpp\+PTSLClient\+::\+Redo\+All()}}, \mbox{\hyperlink{a01328_ad25fe34f9417d31c7a1f995a43111e30}{Cpp\+PTSLClient\+::\+Undo()}}, and \mbox{\hyperlink{a01328_a9ae2fbc1f26640bad6007db3dcdf36b0}{Cpp\+PTSLClient\+::\+Undo\+All()}}.
+
+\mbox{\Hypertarget{a01920_a0797d3319fe7c55172ad55cb31ca7d91}\label{a01920_a0797d3319fe7c55172ad55cb31ca7d91}} 
+\index{UndoHistoryOperation@{UndoHistoryOperation}!operation@{operation}}
+\index{operation@{operation}!UndoHistoryOperation@{UndoHistoryOperation}}
+\doxysubsubsection{\texorpdfstring{operation}{operation}}
+{\footnotesize\ttfamily std\+::string operation}
+
+
+
+The name of the operation. 
+
+
+
+Referenced by \mbox{\hyperlink{a01328_a000bdb19f6528ed444f11154aedede1b}{Cpp\+PTSLClient\+::\+Redo()}}, \mbox{\hyperlink{a01328_a27a62434036f1ce5ec28f9ad0a6e10f7}{Cpp\+PTSLClient\+::\+Redo\+All()}}, \mbox{\hyperlink{a01328_ad25fe34f9417d31c7a1f995a43111e30}{Cpp\+PTSLClient\+::\+Undo()}}, and \mbox{\hyperlink{a01328_a9ae2fbc1f26640bad6007db3dcdf36b0}{Cpp\+PTSLClient\+::\+Undo\+All()}}.
+
+\mbox{\Hypertarget{a01920_adfd48101c5417e0d6fa1c59b9dffbeaa}\label{a01920_adfd48101c5417e0d6fa1c59b9dffbeaa}} 
+\index{UndoHistoryOperation@{UndoHistoryOperation}!details@{details}}
+\index{details@{details}!UndoHistoryOperation@{UndoHistoryOperation}}
+\doxysubsubsection{\texorpdfstring{details}{details}}
+{\footnotesize\ttfamily std\+::string details}
+
+
+
+The details of the operation (if available). 
+
+
+
+Referenced by \mbox{\hyperlink{a01328_a000bdb19f6528ed444f11154aedede1b}{Cpp\+PTSLClient\+::\+Redo()}}, \mbox{\hyperlink{a01328_a27a62434036f1ce5ec28f9ad0a6e10f7}{Cpp\+PTSLClient\+::\+Redo\+All()}}, \mbox{\hyperlink{a01328_ad25fe34f9417d31c7a1f995a43111e30}{Cpp\+PTSLClient\+::\+Undo()}}, and \mbox{\hyperlink{a01328_a9ae2fbc1f26640bad6007db3dcdf36b0}{Cpp\+PTSLClient\+::\+Undo\+All()}}.
+
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{a00050}{Cpp\+PTSLCommon.\+h}}\end{DoxyCompactItemize}

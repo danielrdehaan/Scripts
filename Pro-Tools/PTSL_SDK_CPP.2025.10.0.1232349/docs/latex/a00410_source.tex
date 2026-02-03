@@ -1,0 +1,37 @@
+\hypertarget{a00410_source}{}\doxysection{Ptsl\+Cmd\+Command\+Runner.\+h}
+\label{a00410_source}\index{PtslCmdCommandRunner.h@{PtslCmdCommandRunner.h}}
+\mbox{\hyperlink{a00410}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{comment}{// Copyright 2024-\/2025 by Avid Technology, Inc.}}
+\DoxyCodeLine{2 \textcolor{comment}{// CONFIDENTIAL: this document contains confidential information of Avid. Do not disclose to any third party. Use of the information contained in this document is subject to an Avid SDK license.}}
+\DoxyCodeLine{3 }
+\DoxyCodeLine{4 \textcolor{preprocessor}{\#pragma once}}
+\DoxyCodeLine{5 }
+\DoxyCodeLine{6 \textcolor{preprocessor}{\#include <memory>}}
+\DoxyCodeLine{7 \textcolor{preprocessor}{\#include <string>}}
+\DoxyCodeLine{8 \textcolor{preprocessor}{\#include <vector>}}
+\DoxyCodeLine{9 }
+\DoxyCodeLine{10 \textcolor{preprocessor}{\#include "{}PTSLC\_CPP/CppPTSLClient.h"{}}}
+\DoxyCodeLine{11 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{a00416}{PtslCmdCommandRequest.h}}"{}}}
+\DoxyCodeLine{12 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{a00437}{PtslCmdCommandResult.h}}"{}}}
+\DoxyCodeLine{13 }
+\DoxyCodeLine{14 \textcolor{keyword}{class }\mbox{\hyperlink{a02020}{PtslCmdCommandRunner}}}
+\DoxyCodeLine{15 \{}
+\DoxyCodeLine{16 \textcolor{keyword}{public}:}
+\DoxyCodeLine{17     \textcolor{keyword}{explicit} \mbox{\hyperlink{a02020_a78adb148ecdc85e228eb3c256167e375}{PtslCmdCommandRunner}}(\mbox{\hyperlink{a01328}{PTSLC\_CPP::CppPTSLClient}}\& client) : mClientPtr(\&client)}
+\DoxyCodeLine{18     \{}
+\DoxyCodeLine{19     \}}
+\DoxyCodeLine{20 }
+\DoxyCodeLine{21     \textcolor{keyword}{virtual} \mbox{\hyperlink{a02020_a37583b112b27030ea831b37babaf9fff}{\string~PtslCmdCommandRunner}}() = \textcolor{keywordflow}{default};}
+\DoxyCodeLine{22 }
+\DoxyCodeLine{23     \mbox{\hyperlink{a02016}{PtslCmdCommandStreamResult}} \mbox{\hyperlink{a02020_aa40745c10e0c5c76b86151ba0c79dcbc}{RunCommand}}(\textcolor{keyword}{const} \mbox{\hyperlink{a02008}{PtslCmdCommandRequest}}\& ptslCmdRequest);}
+\DoxyCodeLine{24     std::vector<PtslCmdCommandStreamResult> \mbox{\hyperlink{a02020_a20c4c340e8dfd65eb1f69fc1c40a509b}{RunScript}}(\textcolor{keyword}{const} std::string\& scriptJson);}
+\DoxyCodeLine{25     std::vector<PtslCmdCommandStreamResult> \mbox{\hyperlink{a02020_a3f20f03ca7228e0e3240f69f8313340a}{RunFileScript}}(\textcolor{keyword}{const} std::string\& fileName);}
+\DoxyCodeLine{26 }
+\DoxyCodeLine{27 \textcolor{keyword}{private}:}
+\DoxyCodeLine{28     \mbox{\hyperlink{a02020}{PtslCmdCommandRunner}}() = \textcolor{keywordflow}{default};}
+\DoxyCodeLine{29 }
+\DoxyCodeLine{30     \mbox{\hyperlink{a01328}{PTSLC\_CPP::CppPTSLClient}}* mClientPtr;}
+\DoxyCodeLine{31 \};}
+
+\end{DoxyCode}

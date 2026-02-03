@@ -1,0 +1,128 @@
+\hypertarget{a02180}{}\doxysection{Export\+Selected\+Tracks\+As\+AAFOMFRequest\+Body}
+\label{a02180}\index{ExportSelectedTracksAsAAFOMFRequestBody@{ExportSelectedTracksAsAAFOMFRequestBody}}
+
+
+\doxysubsection{Description}
+Structure that describes Export\+Selected\+Tracks\+As\+AAFOMF request data. \doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{a00494_abf6cb8ad073f0d47010ed2e9d38989a4}{Export\+As\+AAFFile\+Type}} \mbox{\hyperlink{a02180_a44ba992d83117c9df08a06cec9aaf0d4}{file\+\_\+type}} = 2
+\item 
+\mbox{\hyperlink{a00494_ab2cb221238621f99efd550db3a15432e}{AAFFile\+Bit\+Depth}} \mbox{\hyperlink{a02180_a8205dc49d8f105aea22aeb9a671cda30}{bit\+\_\+depth}} = 3
+\item 
+\mbox{\hyperlink{a00494_a1d9374cc9f58fb2efb319060863d374d}{Copy\+Option}} \mbox{\hyperlink{a02180_ac14c68d7c1020bb85077d8eedd4f12d0}{copy\+\_\+option}} = 4
+\begin{DoxyCompactList}\small\item\em Consolidate\+From\+Source\+Media by default. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{a02180_abb13166aa8c3d568a2c7e4623c19d66e}{enforce\+\_\+media\+\_\+composer\+\_\+compatibility}} = 5
+\begin{DoxyCompactList}\small\item\em true by default. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{a02180_a407054265f9f297ee96b10bfb5d2c606}{quantize\+\_\+edits\+\_\+to\+\_\+frame\+\_\+boundaries}} = 6
+\begin{DoxyCompactList}\small\item\em true by default, always checked when \textquotesingle{}Enforce Media Composer compatibility\textquotesingle{} is ON. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{a02180_a6ad6e93ea3871d5ae1d2529b3ac8b96c}{export\+\_\+stereo\+\_\+as\+\_\+multichannel}} = 7
+\begin{DoxyCompactList}\small\item\em true by default, but not always applicable, false is only available if those track stems are included in the selection invoking the export dialog. \end{DoxyCompactList}\item 
+string \mbox{\hyperlink{a02180_af9ebcfc0f279dd46812ad9f872e7c5a1}{container\+\_\+file\+\_\+name}} = 9
+\begin{DoxyCompactList}\small\item\em suppress and pass through sequence name if not specified. \end{DoxyCompactList}\item 
+string \mbox{\hyperlink{a02180_a5d6ffe42f13bb275709fe2c58f246e1f}{container\+\_\+file\+\_\+location}} = 10
+\begin{DoxyCompactList}\small\item\em destination directory. \end{DoxyCompactList}\item 
+string \mbox{\hyperlink{a02180_a997ba6ccb85bbeb89258c61984d2be31}{asset\+\_\+file\+\_\+location}} = 11
+\item 
+string \mbox{\hyperlink{a02180_ab48a6b2c07eedf0293ac6571a880c979}{comments}} = 12
+\item 
+string \mbox{\hyperlink{a02180_a30537dd8bd0990d376e8a791b375006b}{sequence\+\_\+name}} = 13
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{a02180_a44ba992d83117c9df08a06cec9aaf0d4}\label{a02180_a44ba992d83117c9df08a06cec9aaf0d4}} 
+\index{ExportSelectedTracksAsAAFOMFRequestBody@{ExportSelectedTracksAsAAFOMFRequestBody}!file\_type@{file\_type}}
+\index{file\_type@{file\_type}!ExportSelectedTracksAsAAFOMFRequestBody@{ExportSelectedTracksAsAAFOMFRequestBody}}
+\doxysubsubsection{\texorpdfstring{file\_type}{file\_type}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a00494_abf6cb8ad073f0d47010ed2e9d38989a4}{Export\+As\+AAFFile\+Type}} file\+\_\+type = 2}
+
+\mbox{\Hypertarget{a02180_a8205dc49d8f105aea22aeb9a671cda30}\label{a02180_a8205dc49d8f105aea22aeb9a671cda30}} 
+\index{ExportSelectedTracksAsAAFOMFRequestBody@{ExportSelectedTracksAsAAFOMFRequestBody}!bit\_depth@{bit\_depth}}
+\index{bit\_depth@{bit\_depth}!ExportSelectedTracksAsAAFOMFRequestBody@{ExportSelectedTracksAsAAFOMFRequestBody}}
+\doxysubsubsection{\texorpdfstring{bit\_depth}{bit\_depth}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a00494_ab2cb221238621f99efd550db3a15432e}{AAFFile\+Bit\+Depth}} bit\+\_\+depth = 3}
+
+\mbox{\Hypertarget{a02180_ac14c68d7c1020bb85077d8eedd4f12d0}\label{a02180_ac14c68d7c1020bb85077d8eedd4f12d0}} 
+\index{ExportSelectedTracksAsAAFOMFRequestBody@{ExportSelectedTracksAsAAFOMFRequestBody}!copy\_option@{copy\_option}}
+\index{copy\_option@{copy\_option}!ExportSelectedTracksAsAAFOMFRequestBody@{ExportSelectedTracksAsAAFOMFRequestBody}}
+\doxysubsubsection{\texorpdfstring{copy\_option}{copy\_option}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a00494_a1d9374cc9f58fb2efb319060863d374d}{Copy\+Option}} copy\+\_\+option = 4}
+
+
+
+Consolidate\+From\+Source\+Media by default. 
+
+\mbox{\Hypertarget{a02180_abb13166aa8c3d568a2c7e4623c19d66e}\label{a02180_abb13166aa8c3d568a2c7e4623c19d66e}} 
+\index{ExportSelectedTracksAsAAFOMFRequestBody@{ExportSelectedTracksAsAAFOMFRequestBody}!enforce\_media\_composer\_compatibility@{enforce\_media\_composer\_compatibility}}
+\index{enforce\_media\_composer\_compatibility@{enforce\_media\_composer\_compatibility}!ExportSelectedTracksAsAAFOMFRequestBody@{ExportSelectedTracksAsAAFOMFRequestBody}}
+\doxysubsubsection{\texorpdfstring{enforce\_media\_composer\_compatibility}{enforce\_media\_composer\_compatibility}}
+{\footnotesize\ttfamily bool enforce\+\_\+media\+\_\+composer\+\_\+compatibility = 5}
+
+
+
+true by default. 
+
+\mbox{\Hypertarget{a02180_a407054265f9f297ee96b10bfb5d2c606}\label{a02180_a407054265f9f297ee96b10bfb5d2c606}} 
+\index{ExportSelectedTracksAsAAFOMFRequestBody@{ExportSelectedTracksAsAAFOMFRequestBody}!quantize\_edits\_to\_frame\_boundaries@{quantize\_edits\_to\_frame\_boundaries}}
+\index{quantize\_edits\_to\_frame\_boundaries@{quantize\_edits\_to\_frame\_boundaries}!ExportSelectedTracksAsAAFOMFRequestBody@{ExportSelectedTracksAsAAFOMFRequestBody}}
+\doxysubsubsection{\texorpdfstring{quantize\_edits\_to\_frame\_boundaries}{quantize\_edits\_to\_frame\_boundaries}}
+{\footnotesize\ttfamily bool quantize\+\_\+edits\+\_\+to\+\_\+frame\+\_\+boundaries = 6}
+
+
+
+true by default, always checked when \textquotesingle{}Enforce Media Composer compatibility\textquotesingle{} is ON. 
+
+\mbox{\Hypertarget{a02180_a6ad6e93ea3871d5ae1d2529b3ac8b96c}\label{a02180_a6ad6e93ea3871d5ae1d2529b3ac8b96c}} 
+\index{ExportSelectedTracksAsAAFOMFRequestBody@{ExportSelectedTracksAsAAFOMFRequestBody}!export\_stereo\_as\_multichannel@{export\_stereo\_as\_multichannel}}
+\index{export\_stereo\_as\_multichannel@{export\_stereo\_as\_multichannel}!ExportSelectedTracksAsAAFOMFRequestBody@{ExportSelectedTracksAsAAFOMFRequestBody}}
+\doxysubsubsection{\texorpdfstring{export\_stereo\_as\_multichannel}{export\_stereo\_as\_multichannel}}
+{\footnotesize\ttfamily bool export\+\_\+stereo\+\_\+as\+\_\+multichannel = 7}
+
+
+
+true by default, but not always applicable, false is only available if those track stems are included in the selection invoking the export dialog. 
+
+\mbox{\Hypertarget{a02180_af9ebcfc0f279dd46812ad9f872e7c5a1}\label{a02180_af9ebcfc0f279dd46812ad9f872e7c5a1}} 
+\index{ExportSelectedTracksAsAAFOMFRequestBody@{ExportSelectedTracksAsAAFOMFRequestBody}!container\_file\_name@{container\_file\_name}}
+\index{container\_file\_name@{container\_file\_name}!ExportSelectedTracksAsAAFOMFRequestBody@{ExportSelectedTracksAsAAFOMFRequestBody}}
+\doxysubsubsection{\texorpdfstring{container\_file\_name}{container\_file\_name}}
+{\footnotesize\ttfamily string container\+\_\+file\+\_\+name = 9}
+
+
+
+suppress and pass through sequence name if not specified. 
+
+\mbox{\Hypertarget{a02180_a5d6ffe42f13bb275709fe2c58f246e1f}\label{a02180_a5d6ffe42f13bb275709fe2c58f246e1f}} 
+\index{ExportSelectedTracksAsAAFOMFRequestBody@{ExportSelectedTracksAsAAFOMFRequestBody}!container\_file\_location@{container\_file\_location}}
+\index{container\_file\_location@{container\_file\_location}!ExportSelectedTracksAsAAFOMFRequestBody@{ExportSelectedTracksAsAAFOMFRequestBody}}
+\doxysubsubsection{\texorpdfstring{container\_file\_location}{container\_file\_location}}
+{\footnotesize\ttfamily string container\+\_\+file\+\_\+location = 10}
+
+
+
+destination directory. 
+
+\mbox{\Hypertarget{a02180_a997ba6ccb85bbeb89258c61984d2be31}\label{a02180_a997ba6ccb85bbeb89258c61984d2be31}} 
+\index{ExportSelectedTracksAsAAFOMFRequestBody@{ExportSelectedTracksAsAAFOMFRequestBody}!asset\_file\_location@{asset\_file\_location}}
+\index{asset\_file\_location@{asset\_file\_location}!ExportSelectedTracksAsAAFOMFRequestBody@{ExportSelectedTracksAsAAFOMFRequestBody}}
+\doxysubsubsection{\texorpdfstring{asset\_file\_location}{asset\_file\_location}}
+{\footnotesize\ttfamily string asset\+\_\+file\+\_\+location = 11}
+
+\mbox{\Hypertarget{a02180_ab48a6b2c07eedf0293ac6571a880c979}\label{a02180_ab48a6b2c07eedf0293ac6571a880c979}} 
+\index{ExportSelectedTracksAsAAFOMFRequestBody@{ExportSelectedTracksAsAAFOMFRequestBody}!comments@{comments}}
+\index{comments@{comments}!ExportSelectedTracksAsAAFOMFRequestBody@{ExportSelectedTracksAsAAFOMFRequestBody}}
+\doxysubsubsection{\texorpdfstring{comments}{comments}}
+{\footnotesize\ttfamily string comments = 12}
+
+\mbox{\Hypertarget{a02180_a30537dd8bd0990d376e8a791b375006b}\label{a02180_a30537dd8bd0990d376e8a791b375006b}} 
+\index{ExportSelectedTracksAsAAFOMFRequestBody@{ExportSelectedTracksAsAAFOMFRequestBody}!sequence\_name@{sequence\_name}}
+\index{sequence\_name@{sequence\_name}!ExportSelectedTracksAsAAFOMFRequestBody@{ExportSelectedTracksAsAAFOMFRequestBody}}
+\doxysubsubsection{\texorpdfstring{sequence\_name}{sequence\_name}}
+{\footnotesize\ttfamily string sequence\+\_\+name = 13}
+
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{a00464}{PTSL.\+proto}}\end{DoxyCompactItemize}

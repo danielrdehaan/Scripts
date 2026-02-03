@@ -1,0 +1,52 @@
+\hypertarget{a02928}{}\doxysection{Create\+Signal\+Path\+Request\+Body}
+\label{a02928}\index{CreateSignalPathRequestBody@{CreateSignalPathRequestBody}}
+
+
+\doxysubsection{Description}
+Structure that describes Create\+Signal\+Path request data. \doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+string \mbox{\hyperlink{a02928_ab319d576a079b0d70c72b98e427ef098}{signalpath\+\_\+name}} = 1
+\begin{DoxyCompactList}\small\item\em Name of the signal path to create. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{a00494_a54c0cae6bc479f54c8277947b7779348}{Signal\+Path\+Type}} \mbox{\hyperlink{a02928_a9e504b01fd58085576f3e6b314ab4937}{signalpath\+\_\+type}} = 2
+\begin{DoxyCompactList}\small\item\em Signal path type to create\+: bus, renderer object, or renderer bed. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{a00494_a999565e0d7e844183026916ee443c836}{Stem\+Format}} \mbox{\hyperlink{a02928_ae031e35c617cd4effaee20e01304221b}{signalpath\+\_\+format}} = 3
+\begin{DoxyCompactList}\small\item\em Stem format of the signal path to create -\/ unused for signalpath\+\_\+type \mbox{\hyperlink{a00494_a54c0cae6bc479f54c8277947b7779348a16540070e8836acd56201356cb597729}{SPType\+\_\+\+Renderer\+Object}}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{a02928_ab319d576a079b0d70c72b98e427ef098}\label{a02928_ab319d576a079b0d70c72b98e427ef098}} 
+\index{CreateSignalPathRequestBody@{CreateSignalPathRequestBody}!signalpath\_name@{signalpath\_name}}
+\index{signalpath\_name@{signalpath\_name}!CreateSignalPathRequestBody@{CreateSignalPathRequestBody}}
+\doxysubsubsection{\texorpdfstring{signalpath\_name}{signalpath\_name}}
+{\footnotesize\ttfamily string signalpath\+\_\+name = 1}
+
+
+
+Name of the signal path to create. 
+
+Required for signalpath\+\_\+type \mbox{\hyperlink{a00494_a54c0cae6bc479f54c8277947b7779348a2a5ebf74c614896bea1fe30011f58b7c}{SPType\+\_\+\+Bus}}. Optional for \mbox{\hyperlink{a00494_a54c0cae6bc479f54c8277947b7779348a0f4c2128b6338c94267a4edb8a388823}{SPType\+\_\+\+Renderer\+Bed}}; a generic name like \char`\"{}\+Bed 1\char`\"{} will be used if it is not provided. \mbox{\Hypertarget{a02928_a9e504b01fd58085576f3e6b314ab4937}\label{a02928_a9e504b01fd58085576f3e6b314ab4937}} 
+\index{CreateSignalPathRequestBody@{CreateSignalPathRequestBody}!signalpath\_type@{signalpath\_type}}
+\index{signalpath\_type@{signalpath\_type}!CreateSignalPathRequestBody@{CreateSignalPathRequestBody}}
+\doxysubsubsection{\texorpdfstring{signalpath\_type}{signalpath\_type}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a00494_a54c0cae6bc479f54c8277947b7779348}{Signal\+Path\+Type}} signalpath\+\_\+type = 2}
+
+
+
+Signal path type to create\+: bus, renderer object, or renderer bed. 
+
+\mbox{\Hypertarget{a02928_ae031e35c617cd4effaee20e01304221b}\label{a02928_ae031e35c617cd4effaee20e01304221b}} 
+\index{CreateSignalPathRequestBody@{CreateSignalPathRequestBody}!signalpath\_format@{signalpath\_format}}
+\index{signalpath\_format@{signalpath\_format}!CreateSignalPathRequestBody@{CreateSignalPathRequestBody}}
+\doxysubsubsection{\texorpdfstring{signalpath\_format}{signalpath\_format}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a00494_a999565e0d7e844183026916ee443c836}{Stem\+Format}} signalpath\+\_\+format = 3}
+
+
+
+Stem format of the signal path to create -\/ unused for signalpath\+\_\+type \mbox{\hyperlink{a00494_a54c0cae6bc479f54c8277947b7779348a16540070e8836acd56201356cb597729}{SPType\+\_\+\+Renderer\+Object}}. 
+
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{a00464}{PTSL.\+proto}}\end{DoxyCompactItemize}

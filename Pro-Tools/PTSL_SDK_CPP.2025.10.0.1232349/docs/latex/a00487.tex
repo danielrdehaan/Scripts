@@ -1,0 +1,60 @@
+\hypertarget{a00487}{}\doxysection{Version 2024.10}
+\label{a00487}\index{Version 2024.10@{Version 2024.10}}
+\hypertarget{a00487_release_notes_2024_10_compatibility}{}\doxysubsection{Compatibility}\label{a00487_release_notes_2024_10_compatibility}
+PTSL SDK 2024.\+10 uses \mbox{\hyperlink{a00446_a83c5961efacc6c06e3e75877c239ebb1}{PTSL\+\_\+\+VERSION}} 5 of the client interface
+
+Pro Tools 2024.\+10 is compatible with clients using \mbox{\hyperlink{a00446_a83c5961efacc6c06e3e75877c239ebb1}{PTSL\+\_\+\+VERSION}} 1 and higher\hypertarget{a00487_release_notes_2024_10_changelog}{}\doxysubsection{Changelog}\label{a00487_release_notes_2024_10_changelog}
+\hypertarget{a00487_release_notes_2024_10_changelog_command_progress_tracking}{}\doxysubsubsection{Command Progress Tracking}\label{a00487_release_notes_2024_10_changelog_command_progress_tracking}
+There are a few behavioral changes associated with the command progress tracking updates.
+\begin{DoxyEnumerate}
+\item Status Messages. For some commands you might notice a series of status messages being held by the server until command completion. These messages may appear as info items in the error list of the final command response but will not be flagged as an error or have any other impact on the response. Once more progress tracking related changes are added, these status updates will be returned to you as they are logged by the host.
+\item Host Busy State. If the host receives commands while certain modal dialogs or progress bars are being displayed by the host GUI, an info message will be logged indicating that the host is busy and that the command will wait for the current action to conclude before starting. These commands will go into a \char`\"{}queued\char`\"{} state.
+\item Command Timeout. Commands can now timeout while in progress and will receive a new PT\+\_\+\+Command\+Timeout command error upon termination. Legacy clients will receive a PT\+\_\+\+Unknown\+Error instead of the new error type, but the accompanying error message will still indicate what happened. Note, it\textquotesingle{}s possible for any \char`\"{}queued\char`\"{} command to timeout while waiting to run. When this happens, in addition to the PT\+\_\+\+Command\+Timeout command error, there will be a PT\+\_\+\+Host\+Is\+Busy command error in the error list of the response so that it can be distinguished from the general timeout case. The default timeout value for the current release is 24 hours.
+\end{DoxyEnumerate}
+
+Please note, that the new command progress tracking infrastructure is implemented on the host side which means that it will be automatically applied to all clients.\hypertarget{a00487_release_notes_2024_10_changelog_client_wrapper_changes}{}\doxysubsubsection{C++ Client Wrapper Changes}\label{a00487_release_notes_2024_10_changelog_client_wrapper_changes}
+
+\begin{DoxyEnumerate}
+\item Deprecation of Individual Command Structures. To simplify maintenance, all individual command structures and handlers are deprecated. The deprecated functionality will remain for existing clients, but will not support future API changes.
+\item New Send\+Request Method. A newly introduced \mbox{\hyperlink{a01328_a2c6a9bfa639cab78fcb3d4159c460c5f}{Send\+Request}} method takes a \mbox{\hyperlink{a01980}{Cpp\+PTSLRequest}} object, which in turn requires a \mbox{\hyperlink{a00491_ae5152a79762c33c83fdb5752192e511c}{Command\+Id}} and a JSON string representing the command request body. This allows new commands to be submitted without a command-\/specific handler. The example request and response JSON strings are provided in the documentation for each command. This method is safe to use with all existing commands and is fully backward compatible.
+\item \mbox{\hyperlink{a01328_ad50205dc2210e8a51c53d9715ed12e2c}{On\+Response\+Received}} has been updated to use \mbox{\hyperlink{a01328_a2c6a9bfa639cab78fcb3d4159c460c5f}{Send\+Request}} based structures. If you want to use the old version of the callback you can use the \mbox{\hyperlink{a01328_a3011adc1912995aed11669640e5ca621}{On\+Response\+Received\+\_\+\+V1\+\_\+\+Deprecated}} callback. Note, that the old callback can only be used with the old command methods while the new callback can only be used with the new command methods (i.\+e. Send\+Request).
+\item The documentation is moved from the C++ client to the proto file. See \mbox{\hyperlink{a00494_aaf8d2069e2c6bbecf4aa8f9819028e8a}{Command\+Id}} for more details and examples.
+\item The client now depends on the nlohmann\+\_\+json library version 3.\+11.\+3. The library is not exposed in public headers.
+\end{DoxyEnumerate}
+
+These changes also affect ptslcmd example application as it\textquotesingle{}s now using the new Send\+Request method instead of individual command structures. If you need to build an old version of the ptslcmd for this release, you can use {\ttfamily ptslcmd.\+sdk.\+2024.\+06.\+0} target in the build script.\hypertarget{a00487_release_notes_2024_10_changelog_command_changes}{}\doxysubsubsection{Protocol Changes}\label{a00487_release_notes_2024_10_changelog_command_changes}
+New command\+:
+\begin{DoxyItemize}
+\item \mbox{\hyperlink{a00494_aaf8d2069e2c6bbecf4aa8f9819028e8aac2fd7d9e7f0ea874f16215e15a9aa1bf}{Clear\+All\+Memory\+Locations}}
+\end{DoxyItemize}
+
+New possible errors\+:
+\begin{DoxyItemize}
+\item \mbox{\hyperlink{a00494_a72aa3dec22d29b2aa82ee130b3e8d64ca5268849a8a4efb90c7b2e5fd6b93d18c}{PT\+\_\+\+Command\+Timeout}}
+\item \mbox{\hyperlink{a00494_a72aa3dec22d29b2aa82ee130b3e8d64cabd518bb34f6fa6ea931da379e783837c}{PT\+\_\+\+Host\+Is\+Busy}}
+\item \mbox{\hyperlink{a00494_a72aa3dec22d29b2aa82ee130b3e8d64cafb2a9ba8ef025ddfd7a447e93a0ded5a}{SDK\+\_\+\+Session\+Id\+Parse\+Error}}
+\item \mbox{\hyperlink{a00494_a72aa3dec22d29b2aa82ee130b3e8d64ca229e7fd75570206f8ac59762e4a56493}{SDK\+\_\+\+Grpc\+Generic}}
+\end{DoxyItemize}
+
+New enumerations\+:
+\begin{DoxyItemize}
+\item \mbox{\hyperlink{a00494_ae147cb28819b5a7002c8a0d8c58c362c}{Timeline\+Location\+Type}}
+\item \mbox{\hyperlink{a00494_ad77427d31ed88c909fdd83fd14fbae65}{Basic\+Time\+Type}}
+\end{DoxyItemize}
+
+New messages\+:
+\begin{DoxyItemize}
+\item \mbox{\hyperlink{a02680}{Timeline\+Location}}
+\item \mbox{\hyperlink{a02684}{Media\+Time\+Position}}
+\item \mbox{\hyperlink{a02688}{Time\+Length}}
+\item \mbox{\hyperlink{a02692}{Clear\+All\+Memory\+Locations\+Response\+Body}}
+\end{DoxyItemize}
+
+Existing command changes\+:
+\begin{DoxyItemize}
+\item Changes in \mbox{\hyperlink{a02084}{Track}} message
+\begin{DoxyItemize}
+\item \mbox{\hyperlink{a02084_a3a764f096730384b433317afb0df4f42}{parent\+\_\+folder\+\_\+name}} field was added
+\item \mbox{\hyperlink{a02084_ac024860bc9ec4744de3ef07bd145c309}{parent\+\_\+folder\+\_\+id}} field was added 
+\end{DoxyItemize}
+\end{DoxyItemize}

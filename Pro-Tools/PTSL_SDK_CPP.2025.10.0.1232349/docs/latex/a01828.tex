@@ -1,0 +1,144 @@
+\hypertarget{a01828}{}\doxysection{Import\+Video\+Request}
+\label{a01828}\index{ImportVideoRequest@{ImportVideoRequest}}
+
+
+{\ttfamily \#include $<$Cpp\+PTSLCommon.\+h$>$}
+
+
+
+\doxysubsection{Description}
+Structure that describes Import\+Video request data. 
+
+\begin{DoxyRefDesc}{Deprecated}
+\item[\mbox{\hyperlink{a00467__deprecated000306}{Deprecated}}]All API-\/specific types in the C++ client lib are deprecated starting in Pro Tools 2024.\+10 since we introduced general JSON-\/based request/response. \end{DoxyRefDesc}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::vector$<$ std\+::string $>$ \mbox{\hyperlink{a01828_a99f4d17daf4704f694b6695c123ede99}{video\+Files\+List}}
+\item 
+\mbox{\hyperlink{a00491_ae5f220ad8417f0e2c4a4422ed6d1b8d2}{Media\+Destination}} \mbox{\hyperlink{a01828_a6605950a4a13a3c874ed6549a2040c10}{destination}}
+\item 
+\mbox{\hyperlink{a00491_ae91ae5f03071d79f9a3be871ba32b079}{Media\+Location}} \mbox{\hyperlink{a01828_a7fe3cdde96ef77ae923294913cf82ba7}{location}}
+\item 
+\mbox{\hyperlink{a01408}{Spot\+Location\+Data}} \mbox{\hyperlink{a01828_a204a7aaf19bb81592f7d36ef1ed2bdcc}{spot\+Location\+Data}}
+\item 
+int32\+\_\+t \mbox{\hyperlink{a01828_af73aa0691f292f6ba997ddb4d513b7ee}{gaps\+Between\+Clips}} = 0
+\item 
+bool \mbox{\hyperlink{a01828_a3872aaaa937d2dbe389ba609a0aec1d0}{import\+Audio\+From\+File}} = true
+\item 
+std\+::string \mbox{\hyperlink{a01828_a8d1ba5821a2349686091cf128ff043c4}{audio\+Destination\+Path}}
+\item 
+bool \mbox{\hyperlink{a01828_a42f5badb94650d9aec68637b0710cccd}{remove\+Existing\+Video\+Tracks}} = false
+\item 
+bool \mbox{\hyperlink{a01828_a5a786d6ea3c8a3aa08afd63968004509}{remove\+Existing\+Video\+Clips}} = false
+\item 
+bool \mbox{\hyperlink{a01828_a544ed0b44238f17f1683d7852594f777}{clear\+Destination\+Video\+Track\+Playlist}} = false
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{a01828_a99f4d17daf4704f694b6695c123ede99}\label{a01828_a99f4d17daf4704f694b6695c123ede99}} 
+\index{ImportVideoRequest@{ImportVideoRequest}!videoFilesList@{videoFilesList}}
+\index{videoFilesList@{videoFilesList}!ImportVideoRequest@{ImportVideoRequest}}
+\doxysubsubsection{\texorpdfstring{videoFilesList}{videoFilesList}}
+{\footnotesize\ttfamily std\+::vector$<$std\+::string$>$ video\+Files\+List}
+
+
+
+Referenced by \mbox{\hyperlink{a01328_a3a7df9722db8d53e3d7adee85f63c8c2}{Cpp\+PTSLClient\+::\+Import\+Video()}}.
+
+\mbox{\Hypertarget{a01828_a6605950a4a13a3c874ed6549a2040c10}\label{a01828_a6605950a4a13a3c874ed6549a2040c10}} 
+\index{ImportVideoRequest@{ImportVideoRequest}!destination@{destination}}
+\index{destination@{destination}!ImportVideoRequest@{ImportVideoRequest}}
+\doxysubsubsection{\texorpdfstring{destination}{destination}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a00491_ae5f220ad8417f0e2c4a4422ed6d1b8d2}{Media\+Destination}} destination}
+
+
+
+Referenced by \mbox{\hyperlink{a01328_a3a7df9722db8d53e3d7adee85f63c8c2}{Cpp\+PTSLClient\+::\+Import\+Video()}}.
+
+\mbox{\Hypertarget{a01828_a7fe3cdde96ef77ae923294913cf82ba7}\label{a01828_a7fe3cdde96ef77ae923294913cf82ba7}} 
+\index{ImportVideoRequest@{ImportVideoRequest}!location@{location}}
+\index{location@{location}!ImportVideoRequest@{ImportVideoRequest}}
+\doxysubsubsection{\texorpdfstring{location}{location}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a00491_ae91ae5f03071d79f9a3be871ba32b079}{Media\+Location}} location}
+
+
+
+Referenced by \mbox{\hyperlink{a01328_a3a7df9722db8d53e3d7adee85f63c8c2}{Cpp\+PTSLClient\+::\+Import\+Video()}}.
+
+\mbox{\Hypertarget{a01828_a204a7aaf19bb81592f7d36ef1ed2bdcc}\label{a01828_a204a7aaf19bb81592f7d36ef1ed2bdcc}} 
+\index{ImportVideoRequest@{ImportVideoRequest}!spotLocationData@{spotLocationData}}
+\index{spotLocationData@{spotLocationData}!ImportVideoRequest@{ImportVideoRequest}}
+\doxysubsubsection{\texorpdfstring{spotLocationData}{spotLocationData}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a01408}{Spot\+Location\+Data}} spot\+Location\+Data}
+
+
+
+Referenced by \mbox{\hyperlink{a01328_a3a7df9722db8d53e3d7adee85f63c8c2}{Cpp\+PTSLClient\+::\+Import\+Video()}}.
+
+\mbox{\Hypertarget{a01828_af73aa0691f292f6ba997ddb4d513b7ee}\label{a01828_af73aa0691f292f6ba997ddb4d513b7ee}} 
+\index{ImportVideoRequest@{ImportVideoRequest}!gapsBetweenClips@{gapsBetweenClips}}
+\index{gapsBetweenClips@{gapsBetweenClips}!ImportVideoRequest@{ImportVideoRequest}}
+\doxysubsubsection{\texorpdfstring{gapsBetweenClips}{gapsBetweenClips}}
+{\footnotesize\ttfamily int32\+\_\+t gaps\+Between\+Clips = 0}
+
+
+
+Referenced by \mbox{\hyperlink{a01328_a3a7df9722db8d53e3d7adee85f63c8c2}{Cpp\+PTSLClient\+::\+Import\+Video()}}.
+
+\mbox{\Hypertarget{a01828_a3872aaaa937d2dbe389ba609a0aec1d0}\label{a01828_a3872aaaa937d2dbe389ba609a0aec1d0}} 
+\index{ImportVideoRequest@{ImportVideoRequest}!importAudioFromFile@{importAudioFromFile}}
+\index{importAudioFromFile@{importAudioFromFile}!ImportVideoRequest@{ImportVideoRequest}}
+\doxysubsubsection{\texorpdfstring{importAudioFromFile}{importAudioFromFile}}
+{\footnotesize\ttfamily bool import\+Audio\+From\+File = true}
+
+
+
+Referenced by \mbox{\hyperlink{a01328_a3a7df9722db8d53e3d7adee85f63c8c2}{Cpp\+PTSLClient\+::\+Import\+Video()}}.
+
+\mbox{\Hypertarget{a01828_a8d1ba5821a2349686091cf128ff043c4}\label{a01828_a8d1ba5821a2349686091cf128ff043c4}} 
+\index{ImportVideoRequest@{ImportVideoRequest}!audioDestinationPath@{audioDestinationPath}}
+\index{audioDestinationPath@{audioDestinationPath}!ImportVideoRequest@{ImportVideoRequest}}
+\doxysubsubsection{\texorpdfstring{audioDestinationPath}{audioDestinationPath}}
+{\footnotesize\ttfamily std\+::string audio\+Destination\+Path}
+
+
+
+Referenced by \mbox{\hyperlink{a01328_a3a7df9722db8d53e3d7adee85f63c8c2}{Cpp\+PTSLClient\+::\+Import\+Video()}}.
+
+\mbox{\Hypertarget{a01828_a42f5badb94650d9aec68637b0710cccd}\label{a01828_a42f5badb94650d9aec68637b0710cccd}} 
+\index{ImportVideoRequest@{ImportVideoRequest}!removeExistingVideoTracks@{removeExistingVideoTracks}}
+\index{removeExistingVideoTracks@{removeExistingVideoTracks}!ImportVideoRequest@{ImportVideoRequest}}
+\doxysubsubsection{\texorpdfstring{removeExistingVideoTracks}{removeExistingVideoTracks}}
+{\footnotesize\ttfamily bool remove\+Existing\+Video\+Tracks = false}
+
+
+
+Referenced by \mbox{\hyperlink{a01328_a3a7df9722db8d53e3d7adee85f63c8c2}{Cpp\+PTSLClient\+::\+Import\+Video()}}.
+
+\mbox{\Hypertarget{a01828_a5a786d6ea3c8a3aa08afd63968004509}\label{a01828_a5a786d6ea3c8a3aa08afd63968004509}} 
+\index{ImportVideoRequest@{ImportVideoRequest}!removeExistingVideoClips@{removeExistingVideoClips}}
+\index{removeExistingVideoClips@{removeExistingVideoClips}!ImportVideoRequest@{ImportVideoRequest}}
+\doxysubsubsection{\texorpdfstring{removeExistingVideoClips}{removeExistingVideoClips}}
+{\footnotesize\ttfamily bool remove\+Existing\+Video\+Clips = false}
+
+
+
+Referenced by \mbox{\hyperlink{a01328_a3a7df9722db8d53e3d7adee85f63c8c2}{Cpp\+PTSLClient\+::\+Import\+Video()}}.
+
+\mbox{\Hypertarget{a01828_a544ed0b44238f17f1683d7852594f777}\label{a01828_a544ed0b44238f17f1683d7852594f777}} 
+\index{ImportVideoRequest@{ImportVideoRequest}!clearDestinationVideoTrackPlaylist@{clearDestinationVideoTrackPlaylist}}
+\index{clearDestinationVideoTrackPlaylist@{clearDestinationVideoTrackPlaylist}!ImportVideoRequest@{ImportVideoRequest}}
+\doxysubsubsection{\texorpdfstring{clearDestinationVideoTrackPlaylist}{clearDestinationVideoTrackPlaylist}}
+{\footnotesize\ttfamily bool clear\+Destination\+Video\+Track\+Playlist = false}
+
+
+
+Referenced by \mbox{\hyperlink{a01328_a3a7df9722db8d53e3d7adee85f63c8c2}{Cpp\+PTSLClient\+::\+Import\+Video()}}.
+
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{a00050}{Cpp\+PTSLCommon.\+h}}\end{DoxyCompactItemize}

@@ -1,0 +1,50 @@
+\hypertarget{a01968}{}\doxysection{Time\+Length}
+\label{a01968}\index{TimeLength@{TimeLength}}
+
+
+{\ttfamily \#include $<$Cpp\+PTSLCommon.\+h$>$}
+
+
+
+\doxysubsection{Description}
+Structure that represents a typed relative time position -\/ can apply to both media and timeline times. 
+
+Not relative to the global timeline. Can only be expressed in fundamental units, depending on media type.
+
+\begin{DoxyRefDesc}{Deprecated}
+\item[\mbox{\hyperlink{a00467__deprecated000343}{Deprecated}}]All API-\/specific types in the C++ client lib are deprecated starting in Pro Tools 2024.\+10 since we introduced general JSON-\/based request/response. \end{DoxyRefDesc}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+int64\+\_\+t \mbox{\hyperlink{a01968_a0dbcbb15b2f5f82a201fdd00cc12d5e6}{length}}
+\begin{DoxyCompactList}\small\item\em Length, as appropriate for the unit. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{a00491_ad77427d31ed88c909fdd83fd14fbae65}{Basic\+Time\+Type}} \mbox{\hyperlink{a01968_a4b1236691a1956688c53ebe96c0d4d2d}{time\+Type}}
+\begin{DoxyCompactList}\small\item\em Type of the location time. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{a01968_a0dbcbb15b2f5f82a201fdd00cc12d5e6}\label{a01968_a0dbcbb15b2f5f82a201fdd00cc12d5e6}} 
+\index{TimeLength@{TimeLength}!length@{length}}
+\index{length@{length}!TimeLength@{TimeLength}}
+\doxysubsubsection{\texorpdfstring{length}{length}}
+{\footnotesize\ttfamily int64\+\_\+t length}
+
+
+
+Length, as appropriate for the unit. 
+
+Can be positive or negative. \mbox{\Hypertarget{a01968_a4b1236691a1956688c53ebe96c0d4d2d}\label{a01968_a4b1236691a1956688c53ebe96c0d4d2d}} 
+\index{TimeLength@{TimeLength}!timeType@{timeType}}
+\index{timeType@{timeType}!TimeLength@{TimeLength}}
+\doxysubsubsection{\texorpdfstring{timeType}{timeType}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a00491_ad77427d31ed88c909fdd83fd14fbae65}{Basic\+Time\+Type}} time\+Type}
+
+
+
+Type of the location time. 
+
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{a00050}{Cpp\+PTSLCommon.\+h}}\end{DoxyCompactItemize}

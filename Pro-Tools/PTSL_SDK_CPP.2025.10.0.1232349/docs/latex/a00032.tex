@@ -1,0 +1,88 @@
+\hypertarget{a00032}{}\doxysection{Cpp\+PTSLCommon\+Conversions.\+cpp File Reference}
+\label{a00032}\index{CppPTSLCommonConversions.cpp@{CppPTSLCommonConversions.cpp}}
+{\ttfamily \#include $<$optional$>$}\newline
+{\ttfamily \#include $<$PTSL.\+pb.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}Cpp\+PTSLCommon\+Conversions.\+h\char`\"{}}\newline
+
+
+\doxysubsection{Description}
+Type conversions of types that are used by the \mbox{\hyperlink{a01328}{PTSLC\+\_\+\+CPP\+::\+Cpp\+PTSLClient}}. 
+
+\begin{DoxyRefDesc}{Deprecated}
+\item[\mbox{\hyperlink{a00467__deprecated000674}{Deprecated}}]Deprecated starting in Pro Tools 2024.\+10 \end{DoxyRefDesc}
+\doxysubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{a00491}{PTSLC\+\_\+\+CPP}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{a00032_a8a73bc5ccac8938916b1987e660cd380}{DEFINE\+\_\+\+PTSL\+\_\+\+ENUM\+\_\+\+CONVERSIONS\+\_\+\+SPECIAL}}(Client\+Type,  Proto\+Type)
+\item 
+\#define \mbox{\hyperlink{a00032_ae9251565a4ea271c84c1cd75df80bf16}{DEFINE\+\_\+\+PTSL\+\_\+\+ENUM\+\_\+\+CONVERSIONS}}(Type)~\mbox{\hyperlink{a00032_a8a73bc5ccac8938916b1987e660cd380}{DEFINE\+\_\+\+PTSL\+\_\+\+ENUM\+\_\+\+CONVERSIONS\+\_\+\+SPECIAL}}(Type, Type)
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$typename EnumT , typename DescriptorT $>$ }\\std\+::string \mbox{\hyperlink{a00491_a30e0acabcf6858c730036c8a2f24520e}{Get\+String\+From\+Enum}} (const DescriptorT $\ast$descriptor, EnumT value)
+\item 
+{\footnotesize template$<$typename EnumT , typename DescriptorT $>$ }\\std\+::optional$<$ EnumT $>$ \mbox{\hyperlink{a00491_a2a8d7abef525079397d706b9a9138611}{Get\+Enum\+From\+String}} (const DescriptorT $\ast$descriptor, const std\+::string \&value)
+\item 
+PTSLC\+\_\+\+CPP\+\_\+\+EXPORT std\+::vector$<$ std\+::string $>$ \mbox{\hyperlink{a00491_a141e6f7dfbee14ae9356c8a0931b5af6}{Enum\+Values\+To\+Strings}} (const std\+::string \&enum\+Type\+Name)
+\item 
+\mbox{\hyperlink{a00491_ac13511bac9c5e0a0f33702958c295a56}{DEFINE\+\_\+\+PTSL\+\_\+\+ENUM\+\_\+\+CONVERSIONS}} (Command\+Id)
+\item 
+\mbox{\hyperlink{a00491_aa171d31aa69dbf88510a38e4eb35b4b3}{DEFINE\+\_\+\+PTSL\+\_\+\+ENUM\+\_\+\+CONVERSIONS}} (Command\+Error\+Type)
+\item 
+\mbox{\hyperlink{a00491_a73ccbe59d052cd0114baa2c1d1599b46}{DEFINE\+\_\+\+PTSL\+\_\+\+ENUM\+\_\+\+CONVERSIONS}} (Track\+Type)
+\item 
+\mbox{\hyperlink{a00491_a57e44c3c1c7ab2e0afecdc15b62ef857}{DEFINE\+\_\+\+PTSL\+\_\+\+ENUM\+\_\+\+CONVERSIONS}} (Track\+Format)
+\item 
+\mbox{\hyperlink{a00491_a110b370c907f036ff5e7f43413f6e2b4}{DEFINE\+\_\+\+PTSL\+\_\+\+ENUM\+\_\+\+CONVERSIONS}} (Track\+Timebase)
+\item 
+\mbox{\hyperlink{a00491_a83939bc9ebed9104f5e822be8fdc217d}{DEFINE\+\_\+\+PTSL\+\_\+\+ENUM\+\_\+\+CONVERSIONS}} (Track\+Offset\+Options)
+\item 
+\mbox{\hyperlink{a00491_a8558c5ba3b0edb61a075e8243c8a05cd}{DEFINE\+\_\+\+PTSL\+\_\+\+ENUM\+\_\+\+CONVERSIONS}} (Timeline\+Update\+Video)
+\item 
+\mbox{\hyperlink{a00491_abb3e717893dc98bf2d0dee4459275ca8}{DEFINE\+\_\+\+PTSL\+\_\+\+ENUM\+\_\+\+CONVERSIONS}} (Track\+From\+Clip\+Group\+Exclusion\+Reason)
+\item 
+\mbox{\hyperlink{a00491_ad6602adee808f1b43f4e64bdeadada19}{DEFINE\+\_\+\+PTSL\+\_\+\+ENUM\+\_\+\+CONVERSIONS}} (Track\+Insertion\+Point)
+\item 
+template$<$$>$ PTSLC\+\_\+\+CPP\+\_\+\+EXPORT std\+::string \mbox{\hyperlink{a00491_a7f901a4d2418d70b8cc038a9cbae9582}{Enum\+To\+String$<$ Command\+Status\+Type $>$}} (Command\+Status\+Type value)
+\item 
+template$<$$>$ PTSLC\+\_\+\+CPP\+\_\+\+EXPORT std\+::optional$<$ Command\+Status\+Type $>$ \mbox{\hyperlink{a00491_a6ea371c2bb7972bf0c4ed1be9bfabad7}{String\+To\+Enum$<$ Command\+Status\+Type $>$}} (const std\+::string \&value)
+\item 
+template$<$$>$ PTSLC\+\_\+\+CPP\+\_\+\+EXPORT std\+::string \mbox{\hyperlink{a00491_ab6558d4635eccc445bf9ebb8524caa54}{Enum\+To\+String$<$ Triple\+Bool $>$}} (Triple\+Bool value)
+\item 
+template$<$$>$ PTSLC\+\_\+\+CPP\+\_\+\+EXPORT std\+::optional$<$ Triple\+Bool $>$ \mbox{\hyperlink{a00491_a3d5cb86b6ccc4281b7e3a2d5d9b95f24}{String\+To\+Enum$<$ Triple\+Bool $>$}} (const std\+::string \&value)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Macro Definition Documentation}
+\mbox{\Hypertarget{a00032_a8a73bc5ccac8938916b1987e660cd380}\label{a00032_a8a73bc5ccac8938916b1987e660cd380}} 
+\index{CppPTSLCommonConversions.cpp@{CppPTSLCommonConversions.cpp}!DEFINE\_PTSL\_ENUM\_CONVERSIONS\_SPECIAL@{DEFINE\_PTSL\_ENUM\_CONVERSIONS\_SPECIAL}}
+\index{DEFINE\_PTSL\_ENUM\_CONVERSIONS\_SPECIAL@{DEFINE\_PTSL\_ENUM\_CONVERSIONS\_SPECIAL}!CppPTSLCommonConversions.cpp@{CppPTSLCommonConversions.cpp}}
+\doxysubsubsection{\texorpdfstring{DEFINE\_PTSL\_ENUM\_CONVERSIONS\_SPECIAL}{DEFINE\_PTSL\_ENUM\_CONVERSIONS\_SPECIAL}}
+{\footnotesize\ttfamily \#define DEFINE\+\_\+\+PTSL\+\_\+\+ENUM\+\_\+\+CONVERSIONS\+\_\+\+SPECIAL(\begin{DoxyParamCaption}\item[{}]{Client\+Type,  }\item[{}]{Proto\+Type }\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{    \textcolor{keyword}{template} <>                                                                                                        \(\backslash\)}
+\DoxyCodeLine{    PTSLC\_CPP\_EXPORT std::string EnumToString<ClientType>(ClientType value)                                            \(\backslash\)}
+\DoxyCodeLine{    \{                                                                                                                  \(\backslash\)}
+\DoxyCodeLine{        return \mbox{\hyperlink{a00491_a30e0acabcf6858c730036c8a2f24520e}{GetStringFromEnum}}(ptsl::ProtoType\#\#\_descriptor(), value);                                               \(\backslash\)}
+\DoxyCodeLine{    \}                                                                                                                  \(\backslash\)}
+\DoxyCodeLine{    template <>                                                                                                        \(\backslash\)}
+\DoxyCodeLine{    PTSLC\_CPP\_EXPORT std::optional<ClientType> StringToEnum<ClientType>(\textcolor{keyword}{const} std::string\& value)                      \(\backslash\)}
+\DoxyCodeLine{    \{                                                                                                                  \(\backslash\)}
+\DoxyCodeLine{        return GetEnumFromString<ClientType>(ptsl::ProtoType\#\#\_descriptor(), value);                                   \(\backslash\)}
+\DoxyCodeLine{    \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{a00032_ae9251565a4ea271c84c1cd75df80bf16}\label{a00032_ae9251565a4ea271c84c1cd75df80bf16}} 
+\index{CppPTSLCommonConversions.cpp@{CppPTSLCommonConversions.cpp}!DEFINE\_PTSL\_ENUM\_CONVERSIONS@{DEFINE\_PTSL\_ENUM\_CONVERSIONS}}
+\index{DEFINE\_PTSL\_ENUM\_CONVERSIONS@{DEFINE\_PTSL\_ENUM\_CONVERSIONS}!CppPTSLCommonConversions.cpp@{CppPTSLCommonConversions.cpp}}
+\doxysubsubsection{\texorpdfstring{DEFINE\_PTSL\_ENUM\_CONVERSIONS}{DEFINE\_PTSL\_ENUM\_CONVERSIONS}}
+{\footnotesize\ttfamily \#define DEFINE\+\_\+\+PTSL\+\_\+\+ENUM\+\_\+\+CONVERSIONS(\begin{DoxyParamCaption}\item[{}]{Type }\end{DoxyParamCaption})~\mbox{\hyperlink{a00032_a8a73bc5ccac8938916b1987e660cd380}{DEFINE\+\_\+\+PTSL\+\_\+\+ENUM\+\_\+\+CONVERSIONS\+\_\+\+SPECIAL}}(Type, Type)}
+

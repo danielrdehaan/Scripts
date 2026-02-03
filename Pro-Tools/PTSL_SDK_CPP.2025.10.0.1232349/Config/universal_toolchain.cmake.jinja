@@ -1,0 +1,23 @@
+# Copyright 2022-2023 by Avid Technology, Inc.
+# CONFIDENTIAL: this document contains confidential information of Avid. Do not disclose to any third party. Use of the information contained in this document is subject to an Avid SDK license.
+
+# This is not feature complete toolchain, it aims only to set SOME of the required variables to help dependencies resolution
+include_guard()
+
+message(STATUS "Using Universal toolchain: ${CMAKE_CURRENT_LIST_FILE}")
+
+if(${CMAKE_VERSION} VERSION_LESS "3.15")
+    message(FATAL_ERROR "The 'CMakeToolchain' generator only works with CMake >= 3.15")
+endif()
+
+set(CMAKE_SYSTEM_NAME "Darwin")
+# Set the architectures for which to build.
+set(CMAKE_OSX_ARCHITECTURES "{{ architectures }}" CACHE STRING "" FORCE)
+
+get_property( _CMAKE_IN_TRY_COMPILE GLOBAL PROPERTY IN_TRY_COMPILE )
+if(_CMAKE_IN_TRY_COMPILE)
+    message(STATUS "Running toolchain IN_TRY_COMPILE")
+    return()
+endif()
+
+{{ extra_lines }}

@@ -1,0 +1,88 @@
+\hypertarget{a03100}{}\doxysection{Get\+Playlist\+Elements\+Request\+Body}
+\label{a03100}\index{GetPlaylistElementsRequestBody@{GetPlaylistElementsRequestBody}}
+
+
+\doxysubsection{Description}
+Structure that describes Get\+Playlist\+Elements request data. \doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+string \mbox{\hyperlink{a03100_a74ed01244c2b673f1eda7132830184a1}{playlist\+\_\+id}} = 1
+\begin{DoxyCompactList}\small\item\em Unique ID of the playlist to get elements for. \end{DoxyCompactList}\item 
+string \mbox{\hyperlink{a03100_a701bf18e9385a9f21a5aaf2b2e94ce10}{playlist\+\_\+name}} = 2
+\begin{DoxyCompactList}\small\item\em Name of the playlist to get elements for. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{a02680}{Timeline\+Location}} \mbox{\hyperlink{a03100_ad2b55ccec2f232c00b50738d5d71e7b1}{start\+\_\+time}} = 3
+\begin{DoxyCompactList}\small\item\em Start time for the elements to retrieve. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{a02680}{Timeline\+Location}} \mbox{\hyperlink{a03100_a49d866076c6162502bd4ed8afcfdb129}{end\+\_\+time}} = 4
+\begin{DoxyCompactList}\small\item\em End time for the elements to retrieve. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{a00494_ae147cb28819b5a7002c8a0d8c58c362c}{Timeline\+Location\+Type}} \mbox{\hyperlink{a03100_a2df591df684492bb1a1b762b11f1d522}{time\+\_\+format}} = 5
+\begin{DoxyCompactList}\small\item\em Time format for the elements to retrieve. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{a02068}{Pagination\+Request}} \mbox{\hyperlink{a03100_a4e3c2dae8310ae3f4086bebe2d455e9a}{pagination\+\_\+request}} = 6
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{a02072}{Pagination}} request for the elements to retrieve. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{a03100_a74ed01244c2b673f1eda7132830184a1}\label{a03100_a74ed01244c2b673f1eda7132830184a1}} 
+\index{GetPlaylistElementsRequestBody@{GetPlaylistElementsRequestBody}!playlist\_id@{playlist\_id}}
+\index{playlist\_id@{playlist\_id}!GetPlaylistElementsRequestBody@{GetPlaylistElementsRequestBody}}
+\doxysubsubsection{\texorpdfstring{playlist\_id}{playlist\_id}}
+{\footnotesize\ttfamily string playlist\+\_\+id = 1}
+
+
+
+Unique ID of the playlist to get elements for. 
+
+Only one of \mbox{\hyperlink{a03100_a74ed01244c2b673f1eda7132830184a1}{playlist\+\_\+id}} or \mbox{\hyperlink{a03100_a701bf18e9385a9f21a5aaf2b2e94ce10}{playlist\+\_\+name}} is required. \mbox{\Hypertarget{a03100_a701bf18e9385a9f21a5aaf2b2e94ce10}\label{a03100_a701bf18e9385a9f21a5aaf2b2e94ce10}} 
+\index{GetPlaylistElementsRequestBody@{GetPlaylistElementsRequestBody}!playlist\_name@{playlist\_name}}
+\index{playlist\_name@{playlist\_name}!GetPlaylistElementsRequestBody@{GetPlaylistElementsRequestBody}}
+\doxysubsubsection{\texorpdfstring{playlist\_name}{playlist\_name}}
+{\footnotesize\ttfamily string playlist\+\_\+name = 2}
+
+
+
+Name of the playlist to get elements for. 
+
+Only one of \mbox{\hyperlink{a03100_a74ed01244c2b673f1eda7132830184a1}{playlist\+\_\+id}} or \mbox{\hyperlink{a03100_a701bf18e9385a9f21a5aaf2b2e94ce10}{playlist\+\_\+name}} is required. \mbox{\Hypertarget{a03100_ad2b55ccec2f232c00b50738d5d71e7b1}\label{a03100_ad2b55ccec2f232c00b50738d5d71e7b1}} 
+\index{GetPlaylistElementsRequestBody@{GetPlaylistElementsRequestBody}!start\_time@{start\_time}}
+\index{start\_time@{start\_time}!GetPlaylistElementsRequestBody@{GetPlaylistElementsRequestBody}}
+\doxysubsubsection{\texorpdfstring{start\_time}{start\_time}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a02680}{Timeline\+Location}} start\+\_\+time = 3}
+
+
+
+Start time for the elements to retrieve. 
+
+Optional. \mbox{\Hypertarget{a03100_a49d866076c6162502bd4ed8afcfdb129}\label{a03100_a49d866076c6162502bd4ed8afcfdb129}} 
+\index{GetPlaylistElementsRequestBody@{GetPlaylistElementsRequestBody}!end\_time@{end\_time}}
+\index{end\_time@{end\_time}!GetPlaylistElementsRequestBody@{GetPlaylistElementsRequestBody}}
+\doxysubsubsection{\texorpdfstring{end\_time}{end\_time}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a02680}{Timeline\+Location}} end\+\_\+time = 4}
+
+
+
+End time for the elements to retrieve. 
+
+Optional. \mbox{\Hypertarget{a03100_a2df591df684492bb1a1b762b11f1d522}\label{a03100_a2df591df684492bb1a1b762b11f1d522}} 
+\index{GetPlaylistElementsRequestBody@{GetPlaylistElementsRequestBody}!time\_format@{time\_format}}
+\index{time\_format@{time\_format}!GetPlaylistElementsRequestBody@{GetPlaylistElementsRequestBody}}
+\doxysubsubsection{\texorpdfstring{time\_format}{time\_format}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a00494_ae147cb28819b5a7002c8a0d8c58c362c}{Timeline\+Location\+Type}} time\+\_\+format = 5}
+
+
+
+Time format for the elements to retrieve. 
+
+Optional, defaults to the native time format of the playlist. \mbox{\Hypertarget{a03100_a4e3c2dae8310ae3f4086bebe2d455e9a}\label{a03100_a4e3c2dae8310ae3f4086bebe2d455e9a}} 
+\index{GetPlaylistElementsRequestBody@{GetPlaylistElementsRequestBody}!pagination\_request@{pagination\_request}}
+\index{pagination\_request@{pagination\_request}!GetPlaylistElementsRequestBody@{GetPlaylistElementsRequestBody}}
+\doxysubsubsection{\texorpdfstring{pagination\_request}{pagination\_request}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a02068}{Pagination\+Request}} pagination\+\_\+request = 6}
+
+
+
+\mbox{\hyperlink{a02072}{Pagination}} request for the elements to retrieve. 
+
+Optional, defaults to no pagination. 
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{a00464}{PTSL.\+proto}}\end{DoxyCompactItemize}

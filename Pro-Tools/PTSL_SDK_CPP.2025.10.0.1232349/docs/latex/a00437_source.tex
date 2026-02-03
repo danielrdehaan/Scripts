@@ -1,0 +1,94 @@
+\hypertarget{a00437_source}{}\doxysection{Ptsl\+Cmd\+Command\+Result.\+h}
+\label{a00437_source}\index{PtslCmdCommandResult.h@{PtslCmdCommandResult.h}}
+\mbox{\hyperlink{a00437}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{comment}{// Copyright 2022-\/2025 by Avid Technology, Inc.}}
+\DoxyCodeLine{2 \textcolor{comment}{// CONFIDENTIAL: this document contains confidential information of Avid. Do not disclose to any third party. Use of the information contained in this document is subject to an Avid SDK license.}}
+\DoxyCodeLine{3 }
+\DoxyCodeLine{4 \textcolor{preprocessor}{\#pragma once}}
+\DoxyCodeLine{5 }
+\DoxyCodeLine{6 \textcolor{preprocessor}{\#include <algorithm>}}
+\DoxyCodeLine{7 \textcolor{preprocessor}{\#include <nlohmann/json.hpp>}}
+\DoxyCodeLine{8 \textcolor{preprocessor}{\#include <optional>}}
+\DoxyCodeLine{9 }
+\DoxyCodeLine{10 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{a00428}{Constants.h}}"{}}}
+\DoxyCodeLine{11 \textcolor{preprocessor}{\#include "{}PTSLC\_CPP/CppPTSLCommonConversions.h"{}}}
+\DoxyCodeLine{12 \textcolor{preprocessor}{\#include "{}PTSLC\_CPP/CppPTSLResponse.h"{}}}
+\DoxyCodeLine{13 }
+\DoxyCodeLine{14 \textcolor{keyword}{using }\mbox{\hyperlink{a00002_ab701e3ac61a85b337ec5c1abaad6742d}{json}} = \mbox{\hyperlink{a00437_ab701e3ac61a85b337ec5c1abaad6742d}{nlohmann::json}};}
+\DoxyCodeLine{15 }
+\DoxyCodeLine{16 \textcolor{keyword}{struct }\mbox{\hyperlink{a02012}{PtslCmdCommandResult}}}
+\DoxyCodeLine{17 \{}
+\DoxyCodeLine{18     \textcolor{keywordtype}{bool} \mbox{\hyperlink{a02012_a28d3ca76b378b3e417205c760b511696}{gotResponse}} = \textcolor{keyword}{false};}
+\DoxyCodeLine{19     std::string \mbox{\hyperlink{a02012_a4e4591a633e2eede7984e0a50e684206}{commandName}} = \textcolor{stringliteral}{"{}"{}};}
+\DoxyCodeLine{20     std::string \mbox{\hyperlink{a02012_aca89687d436029fce7b3fa6a5a1d1834}{jsonHeader}} = \textcolor{stringliteral}{"{}"{}};}
+\DoxyCodeLine{21     std::string \mbox{\hyperlink{a02012_a59792b941ab4ec3167a390213b131bd5}{jsonBody}} = \textcolor{stringliteral}{"{}"{}};}
+\DoxyCodeLine{22     std::string \mbox{\hyperlink{a02012_a7d8a2cda86885e9071038d9e36430a70}{jsonError}} = \textcolor{stringliteral}{"{}"{}};}
+\DoxyCodeLine{23     std::optional<std::string> \mbox{\hyperlink{a02012_a0d06129bcdae7059ec0df22903f005d9}{cannotParseArgsReason}} = std::nullopt;}
+\DoxyCodeLine{24 }
+\DoxyCodeLine{25     \textcolor{keyword}{explicit} \mbox{\hyperlink{a02012_a6be6f94dc02169ff60f283ff9037e125}{PtslCmdCommandResult}}(\textcolor{keyword}{const} \mbox{\hyperlink{a01984}{PTSLC\_CPP::CppPTSLResponse}}\& clientResponse)}
+\DoxyCodeLine{26         : \mbox{\hyperlink{a02012_a28d3ca76b378b3e417205c760b511696}{gotResponse}}(true),}
+\DoxyCodeLine{27           \mbox{\hyperlink{a02012_a59792b941ab4ec3167a390213b131bd5}{jsonBody}}(clientResponse.GetResponseBodyJson()),}
+\DoxyCodeLine{28           \mbox{\hyperlink{a02012_a7d8a2cda86885e9071038d9e36430a70}{jsonError}}(clientResponse.GetResponseErrorJson())}
+\DoxyCodeLine{29     \{}
+\DoxyCodeLine{30         \mbox{\hyperlink{a00002_ab701e3ac61a85b337ec5c1abaad6742d}{json}} headerJson;}
+\DoxyCodeLine{31         headerJson[\mbox{\hyperlink{a01992_a5f3cf9ade2ff4aeeec4a51c6b8bb0b3f}{Constants::RESPONSE\_HEADER\_TASK\_ID}}] = clientResponse.\mbox{\hyperlink{a01984_a2305135a559d980716efc6034ac6cfb1}{GetTaskId}}();}
+\DoxyCodeLine{32         headerJson[\mbox{\hyperlink{a01992_a7b81a421a48139d3e2fb121769c6629c}{Constants::RESPONSE\_HEADER\_COMMAND}}] = \mbox{\hyperlink{a00491_a499ea157e8ed6a8aed4acb377077c43b}{EnumToString}}(clientResponse.\mbox{\hyperlink{a01984_a7b04e38f0d3a41b61a800f85e7e8fa36}{GetCommandId}}());}
+\DoxyCodeLine{33         headerJson[\mbox{\hyperlink{a01992_ae498863ebb54c3e01a68f1e582293464}{Constants::RESPONSE\_HEADER\_STATUS}}] = \mbox{\hyperlink{a00491_a499ea157e8ed6a8aed4acb377077c43b}{EnumToString}}(clientResponse.\mbox{\hyperlink{a01984_a39a988dde17c5aa799e1d128fc24b0ae}{GetStatus}}());}
+\DoxyCodeLine{34         headerJson[\mbox{\hyperlink{a01992_ab66b2d42ad9bc3a50972eb8bb3d9576d}{Constants::RESPONSE\_HEADER\_PROGRESS}}] = clientResponse.\mbox{\hyperlink{a01984_aaf64fe92c4505a08d676511579478f5a}{GetProgress}}();}
+\DoxyCodeLine{35         headerJson[\mbox{\hyperlink{a01992_acd847ac769932f5f7f9a39f8d2d0abb6}{Constants::RESPONSE\_HEADER\_VERSION}}] = clientResponse.\mbox{\hyperlink{a01984_a39e90127ae0e08a1d46809e70df63411}{GetVersion}}();}
+\DoxyCodeLine{36         headerJson[\mbox{\hyperlink{a01992_a69ddab44a33e3cbbfa13168ffefd1bf5}{Constants::RESPONSE\_HEADER\_VERSION\_MINOR}}] = clientResponse.\mbox{\hyperlink{a01984_ac05310a53af17359a0b0ced605dbe8a1}{GetVersionMinor}}();}
+\DoxyCodeLine{37         headerJson[\mbox{\hyperlink{a01992_a06cf2b4d853e06b6cc1f223943d4ddb8}{Constants::RESPONSE\_HEADER\_VERSION\_REVISION}}] = clientResponse.\mbox{\hyperlink{a01984_ab9e9064c25b6aa9fcb704c63a862a1bc}{GetVersionRevision}}();}
+\DoxyCodeLine{38         headerJson[\mbox{\hyperlink{a01992_a9412ef7fb741b532d353bbee9a001e84}{Constants::RESPONSE\_HEADER\_VERSIONED\_RESPONSE\_HEADER\_JSON}}] = clientResponse.\mbox{\hyperlink{a01984_afa0c80508459e21fc25e101fdfc63c96}{GetVersionedResponseHeaderJson}}();}
+\DoxyCodeLine{39 }
+\DoxyCodeLine{40         \mbox{\hyperlink{a02012_aca89687d436029fce7b3fa6a5a1d1834}{jsonHeader}} = headerJson.dump(indent) + \textcolor{stringliteral}{"{}\(\backslash\)n"{}};}
+\DoxyCodeLine{41     \}}
+\DoxyCodeLine{42 }
+\DoxyCodeLine{43     \textcolor{keyword}{static} \mbox{\hyperlink{a02012}{PtslCmdCommandResult}} \mbox{\hyperlink{a02012_a71e70c2ecc01efe5a0d9cee9be6a95c4}{CreateCannotParseArgsResult}}(\textcolor{keyword}{const} std::string\& reason, \textcolor{keyword}{const} std::string\& cmdName = \textcolor{stringliteral}{"{}"{}})}
+\DoxyCodeLine{44     \{}
+\DoxyCodeLine{45         \textcolor{keyword}{auto} result = \mbox{\hyperlink{a02012}{PtslCmdCommandResult}}();}
+\DoxyCodeLine{46         result.gotResponse = \textcolor{keyword}{false};}
+\DoxyCodeLine{47         result.commandName = cmdName;}
+\DoxyCodeLine{48         result.cannotParseArgsReason = reason;}
+\DoxyCodeLine{49         \textcolor{keywordflow}{return} result;}
+\DoxyCodeLine{50     \}}
+\DoxyCodeLine{51 }
+\DoxyCodeLine{52     \textcolor{keyword}{virtual} \mbox{\hyperlink{a02012_aee73500f9e96ef427d1c1cf4166d17ee}{\string~PtslCmdCommandResult}}() = \textcolor{keywordflow}{default};}
+\DoxyCodeLine{53 }
+\DoxyCodeLine{54     \textcolor{keyword}{virtual} std::string \mbox{\hyperlink{a02012_aeceab8f2c81d2aa93ab1d4edab22bd5d}{ToString}}()\textcolor{keyword}{ const}}
+\DoxyCodeLine{55 \textcolor{keyword}{    }\{}
+\DoxyCodeLine{56         \textcolor{keywordflow}{if} (!\mbox{\hyperlink{a02012_a28d3ca76b378b3e417205c760b511696}{gotResponse}})}
+\DoxyCodeLine{57         \{}
+\DoxyCodeLine{58             \textcolor{keywordflow}{return} \textcolor{stringliteral}{"{}"{}};}
+\DoxyCodeLine{59         \}}
+\DoxyCodeLine{60 }
+\DoxyCodeLine{61         \textcolor{keyword}{auto} isNullOrWhiteSpace = [](\textcolor{keyword}{const} std::string\& str)}
+\DoxyCodeLine{62         \{ \textcolor{keywordflow}{return} str.empty() || std::all\_of(str.begin(), str.end(), ::isspace); \};}
+\DoxyCodeLine{63 }
+\DoxyCodeLine{64         \mbox{\hyperlink{a00002_ab701e3ac61a85b337ec5c1abaad6742d}{json}} responseJson;}
+\DoxyCodeLine{65         \textcolor{keyword}{auto} emptyJson = json::object();}
+\DoxyCodeLine{66 }
+\DoxyCodeLine{67         responseJson[\mbox{\hyperlink{a01992_aef7cd01471960875a074bcc3408ed978}{Constants::RESPONSE\_HEADER}}] = isNullOrWhiteSpace(\mbox{\hyperlink{a02012_aca89687d436029fce7b3fa6a5a1d1834}{jsonHeader}}) ? emptyJson : json::parse(\mbox{\hyperlink{a02012_aca89687d436029fce7b3fa6a5a1d1834}{jsonHeader}});}
+\DoxyCodeLine{68         responseJson[\mbox{\hyperlink{a01992_a003dbd322a05b91896d0520e19bb7ce3}{Constants::RESPONSE\_BODY}}] = isNullOrWhiteSpace(\mbox{\hyperlink{a02012_a59792b941ab4ec3167a390213b131bd5}{jsonBody}}) ? emptyJson : json::parse(\mbox{\hyperlink{a02012_a59792b941ab4ec3167a390213b131bd5}{jsonBody}});}
+\DoxyCodeLine{69         responseJson[\mbox{\hyperlink{a01992_ad25feaa33d7de936009108e51408cc4f}{Constants::RESPONSE\_ERROR}}] = isNullOrWhiteSpace(\mbox{\hyperlink{a02012_a7d8a2cda86885e9071038d9e36430a70}{jsonError}}) ? emptyJson : json::parse(\mbox{\hyperlink{a02012_a7d8a2cda86885e9071038d9e36430a70}{jsonError}});}
+\DoxyCodeLine{70 }
+\DoxyCodeLine{71         \textcolor{keywordflow}{return} responseJson.dump(indent) + \textcolor{stringliteral}{"{}\(\backslash\)n"{}};}
+\DoxyCodeLine{72     \}}
+\DoxyCodeLine{73 }
+\DoxyCodeLine{74     \textcolor{keyword}{operator} bool()\textcolor{keyword}{ const}}
+\DoxyCodeLine{75 \textcolor{keyword}{    }\{}
+\DoxyCodeLine{76         \textcolor{keywordflow}{return} \mbox{\hyperlink{a02012_a28d3ca76b378b3e417205c760b511696}{gotResponse}};}
+\DoxyCodeLine{77     \}}
+\DoxyCodeLine{78 }
+\DoxyCodeLine{79 \textcolor{keyword}{private}:}
+\DoxyCodeLine{80     \mbox{\hyperlink{a02012}{PtslCmdCommandResult}}() = \textcolor{keywordflow}{default};}
+\DoxyCodeLine{81 }
+\DoxyCodeLine{82     \textcolor{keyword}{inline} \textcolor{keyword}{static} \textcolor{keyword}{const} \textcolor{keywordtype}{int} indent = 2;}
+\DoxyCodeLine{83 \};}
+\DoxyCodeLine{84 }
+\DoxyCodeLine{85 \textcolor{keyword}{struct }\mbox{\hyperlink{a02016}{PtslCmdCommandStreamResult}}}
+\DoxyCodeLine{86 \{}
+\DoxyCodeLine{87     std::vector<PtslCmdCommandResult> \mbox{\hyperlink{a02016_a79c10ad6b77fdff9ed3f871d0502fc32}{results}};}
+\DoxyCodeLine{88 \};}
+
+\end{DoxyCode}

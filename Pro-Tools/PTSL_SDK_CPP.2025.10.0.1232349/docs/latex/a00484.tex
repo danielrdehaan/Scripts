@@ -1,0 +1,116 @@
+\hypertarget{a00484}{}\doxysection{Version 2023.12}
+\label{a00484}\index{Version 2023.12@{Version 2023.12}}
+\hypertarget{a00484_release_notes_2023_12_compatibility}{}\doxysubsection{Compatibility}\label{a00484_release_notes_2023_12_compatibility}
+PTSL SDK 2023.\+12 uses \mbox{\hyperlink{a00446_a83c5961efacc6c06e3e75877c239ebb1}{PTSL\+\_\+\+VERSION}} 2 of the client interface
+
+Pro Tools 2023.\+12 is compatible with clients using \mbox{\hyperlink{a00446_a83c5961efacc6c06e3e75877c239ebb1}{PTSL\+\_\+\+VERSION}} 1 and higher
+
+DEVELOPER CERTIFICATES ARE NO LONGER SUPPORTED
+
+You no longer need to obtain a developer certificate to establish a PTSL connection to Pro Tools. Use the new \mbox{\hyperlink{a01328_aca497935e1b825a7c9cd5e28e7c2080b}{Register\+Connection}} command to establish connections to Pro Tools 2023.\+3 and higher.\hypertarget{a00484_release_notes_2023_12_changelog}{}\doxysubsection{Changelog}\label{a00484_release_notes_2023_12_changelog}
+\hypertarget{a00484_release_notes_2023_12_changelog_command_changes}{}\doxysubsubsection{Protocol changes}\label{a00484_release_notes_2023_12_changelog_command_changes}
+New commands\+:
+\begin{DoxyItemize}
+\item \mbox{\hyperlink{a00494_aaf8d2069e2c6bbecf4aa8f9819028e8aa8c1ba5ef566d8993ed13300cdb555392}{Import\+Video}}
+\item \mbox{\hyperlink{a00494_aaf8d2069e2c6bbecf4aa8f9819028e8aa7ff352af9c74f63eb1463a0aa1cdbc7e}{Select\+Memory\+Location}}
+\item \mbox{\hyperlink{a00494_aaf8d2069e2c6bbecf4aa8f9819028e8aacbaee94bca4e9272fc008b9e0b3b9688}{Set\+Track\+Mute\+State}}
+\item \mbox{\hyperlink{a00494_aaf8d2069e2c6bbecf4aa8f9819028e8aaf9957c18f691123f739f3254e07a4f3f}{Set\+Track\+Solo\+State}}
+\item \mbox{\hyperlink{a00494_aaf8d2069e2c6bbecf4aa8f9819028e8aa4340895ad527873c9c45f631093c316e}{Set\+Track\+Solo\+Safe\+State}}
+\item \mbox{\hyperlink{a00494_aaf8d2069e2c6bbecf4aa8f9819028e8aadb5738c94aa9609580f5f0e27bd85e78}{Set\+Track\+Record\+Enable\+State}}
+\item \mbox{\hyperlink{a00494_aaf8d2069e2c6bbecf4aa8f9819028e8aad54256ccaec1e59834432769dba7cbd8}{Set\+Track\+Record\+Safe\+Enable\+State}}
+\item \mbox{\hyperlink{a00494_aaf8d2069e2c6bbecf4aa8f9819028e8aa4819dd133cc837adc3c3c77489ec96cc}{Set\+Track\+Input\+Monitor\+State}}
+\item \mbox{\hyperlink{a00494_aaf8d2069e2c6bbecf4aa8f9819028e8aa97ae70ce6a07dfcec28a7e5fdad713b4}{Set\+Track\+Smart\+Dsp\+State}}
+\item \mbox{\hyperlink{a00494_aaf8d2069e2c6bbecf4aa8f9819028e8aa7c1d490640e452143f3a60123ab02e17}{Set\+Track\+Hidden\+State}}
+\item \mbox{\hyperlink{a00494_aaf8d2069e2c6bbecf4aa8f9819028e8aa2a875638869357d38d915abac43893a0}{Set\+Track\+Inactive\+State}}
+\item \mbox{\hyperlink{a00494_aaf8d2069e2c6bbecf4aa8f9819028e8aa5be7989ff79f9c10c080cc117dc21695}{Set\+Track\+Frozen\+State}}
+\item \mbox{\hyperlink{a00494_aaf8d2069e2c6bbecf4aa8f9819028e8aa9064445b5c890fda8638464b4ed5f137}{Set\+Track\+Online\+State}}
+\item \mbox{\hyperlink{a00494_aaf8d2069e2c6bbecf4aa8f9819028e8aaa1ee8b5c571fb0515864aaa88d66c914}{Set\+Track\+Open\+State}}
+\end{DoxyItemize}
+
+New possible errors\+:
+\begin{DoxyItemize}
+\item \mbox{\hyperlink{a00494_a72aa3dec22d29b2aa82ee130b3e8d64ca108aa02e7af1871a0427ebed4cf29a3f}{PT\+\_\+\+No\+Timeline\+Found}}
+\item \mbox{\hyperlink{a00494_a72aa3dec22d29b2aa82ee130b3e8d64ca8849680c67a84c60494d19bd3a77b81f}{PT\+\_\+\+Argument\+Out\+Of\+Range}}
+\item \mbox{\hyperlink{a00494_a72aa3dec22d29b2aa82ee130b3e8d64ca3ad4bbe3786d377071fd4a7d260a6f0d}{PT\+\_\+\+Forbidden\+Track\+Type}}
+\item \mbox{\hyperlink{a00494_a72aa3dec22d29b2aa82ee130b3e8d64ca757ee24c35d06266337277bde74ce191}{PT\+\_\+\+No\+Video\+Engine\+Found}}
+\item \mbox{\hyperlink{a00494_a72aa3dec22d29b2aa82ee130b3e8d64caa05f7da3a6117be311d3fe22d490071e}{PT\+\_\+\+No\+Dsp\+Hardware\+Found}}
+\item \mbox{\hyperlink{a00494_a72aa3dec22d29b2aa82ee130b3e8d64ca3d06b397419bdea0df2f39a76b8c467a}{PT\+\_\+\+Info}}
+\end{DoxyItemize}
+
+New enumerations\+:
+\begin{DoxyItemize}
+\item \mbox{\hyperlink{a00494_a80a851c93542214355352e288e8e7cbc}{Marker\+Location}}
+\end{DoxyItemize}
+
+New messages\+:
+\begin{DoxyItemize}
+\item \mbox{\hyperlink{a02540}{Import\+Failure\+Info}}
+\item \mbox{\hyperlink{a02544}{Import\+Video\+Request\+Body}} and \mbox{\hyperlink{a02548}{Import\+Video\+Response\+Body}}
+\item \mbox{\hyperlink{a02552}{Select\+Memory\+Location\+Request\+Body}}
+\item \mbox{\hyperlink{a02556}{Set\+Track\+Mute\+State\+Request\+Body}}
+\item \mbox{\hyperlink{a02560}{Set\+Track\+Solo\+State\+Request\+Body}}
+\item \mbox{\hyperlink{a02564}{Set\+Track\+Solo\+Safe\+State\+Request\+Body}}
+\item \mbox{\hyperlink{a02568}{Set\+Track\+Record\+Enable\+State\+Request\+Body}}
+\item \mbox{\hyperlink{a02572}{Set\+Track\+Record\+Safe\+Enable\+State\+Request\+Body}}
+\item \mbox{\hyperlink{a02576}{Set\+Track\+Input\+Monitor\+State\+Request\+Body}}
+\item \mbox{\hyperlink{a02580}{Set\+Track\+Smart\+Dsp\+State\+Request\+Body}}
+\item \mbox{\hyperlink{a02588}{Set\+Track\+Inactive\+State\+Request\+Body}}
+\item \mbox{\hyperlink{a02592}{Set\+Track\+Frozen\+State\+Request\+Body}}
+\item \mbox{\hyperlink{a02596}{Set\+Track\+Online\+State\+Request\+Body}}
+\item \mbox{\hyperlink{a02600}{Set\+Track\+Open\+State\+Request\+Body}}
+\end{DoxyItemize}
+
+New error response type.
+
+The new \mbox{\hyperlink{a02032}{Response\+Error}} message replaces previous message in the \mbox{\hyperlink{a02056_a0dff524019938631113b7e5e5c783493}{response\+\_\+error\+\_\+json}}. This will allow processing multiple errors/warnings via protobuf.
+
+Removed messages\+:
+\begin{DoxyItemize}
+\item Video\+Data
+\item Midi\+Data
+\item Clip\+Groups
+\end{DoxyItemize}
+
+Existing command changes\+:
+\begin{DoxyItemize}
+\item Changes in \mbox{\hyperlink{a00494_a7d3ee0aaeccfa8fa34cf9eaae6d5169a}{Paste\+Special\+Options}} enumeration
+\begin{DoxyItemize}
+\item Merge is deprecated. Use Merge\+Midi instead
+\end{DoxyItemize}
+\item Changes in \mbox{\hyperlink{a00494_a0fc3c621f320568f31247473da3dc5f1}{Memory\+Location\+Reference}} enumeration
+\begin{DoxyItemize}
+\item MLR\+\_\+\+Follow\+Track\+Timebase value was added
+\end{DoxyItemize}
+\item Changes in \mbox{\hyperlink{a00494_afedf28d42d92fc1609c264c3c8e3f7f1}{Import\+Type}} enumeration
+\begin{DoxyItemize}
+\item Video, Midi, Clip\+Groups values were removed
+\end{DoxyItemize}
+\item Changes in \mbox{\hyperlink{a02068}{Pagination\+Request}} message
+\begin{DoxyItemize}
+\item message layout was changed
+\end{DoxyItemize}
+\item Changes in \mbox{\hyperlink{a02440}{Memory\+Location}} message
+\begin{DoxyItemize}
+\item \mbox{\hyperlink{a02440_a53a831dba7bb44b26f8b6b3d481ccf2d}{location}}, \mbox{\hyperlink{a02440_a8a1b964744fc8edfd57c077d8d916076}{track\+\_\+name}}, \mbox{\hyperlink{a02440_a719ea85515bcdf1aa37a1a39f90517e3}{color\+\_\+index}} fields were added
+\end{DoxyItemize}
+\item Changes in \mbox{\hyperlink{a02444}{Memory\+Location\+Properties}} message
+\begin{DoxyItemize}
+\item \mbox{\hyperlink{a02444_aa5ee5a11c26c218c70b2692d5ba7d90d}{venue\+\_\+snapshot\+\_\+index}}, \mbox{\hyperlink{a02444_abd47664a78f2064da80802f2443c0f08}{venue\+\_\+snapshot\+\_\+name}} fields were added
+\end{DoxyItemize}
+\item Changes in \mbox{\hyperlink{a02448}{Edit\+Memory\+Location\+Request\+Body}} message
+\begin{DoxyItemize}
+\item \mbox{\hyperlink{a02448_a719ea85515bcdf1aa37a1a39f90517e3}{color\+\_\+index}}, \mbox{\hyperlink{a02448_a53a831dba7bb44b26f8b6b3d481ccf2d}{location}}, \mbox{\hyperlink{a02448_a8a1b964744fc8edfd57c077d8d916076}{track\+\_\+name}} fields were added
+\end{DoxyItemize}
+\item Changes in \mbox{\hyperlink{a02456}{Create\+Memory\+Location\+Request\+Body}} message
+\begin{DoxyItemize}
+\item \mbox{\hyperlink{a02456_a719ea85515bcdf1aa37a1a39f90517e3}{color\+\_\+index}}, \mbox{\hyperlink{a02456_a53a831dba7bb44b26f8b6b3d481ccf2d}{location}}, \mbox{\hyperlink{a02456_a8a1b964744fc8edfd57c077d8d916076}{track\+\_\+name}} fields were added
+\end{DoxyItemize}
+\item Changes in \mbox{\hyperlink{a02464}{Get\+Memory\+Locations\+Request\+Body}} message
+\begin{DoxyItemize}
+\item \mbox{\hyperlink{a02464_a4e3c2dae8310ae3f4086bebe2d455e9a}{pagination\+\_\+request}} field was added
+\end{DoxyItemize}
+\item Changes in \mbox{\hyperlink{a02468}{Get\+Memory\+Locations\+Response\+Body}} message
+\begin{DoxyItemize}
+\item \mbox{\hyperlink{a02468_a8a973a0245db52a6d5d05a57a84418e8}{pagination\+\_\+response}} field was added 
+\end{DoxyItemize}
+\end{DoxyItemize}

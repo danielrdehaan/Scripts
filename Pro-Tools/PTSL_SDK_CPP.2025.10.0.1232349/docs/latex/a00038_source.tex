@@ -1,0 +1,55 @@
+\hypertarget{a00038_source}{}\doxysection{Cpp\+PTSLCommon\+Conversions.\+h}
+\label{a00038_source}\index{CppPTSLCommonConversions.h@{CppPTSLCommonConversions.h}}
+\mbox{\hyperlink{a00038}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{comment}{// Copyright 2023-\/2024 by Avid Technology, Inc.}}
+\DoxyCodeLine{2 \textcolor{comment}{// CONFIDENTIAL: this document contains confidential information of Avid. Do not disclose to any third party. Use of the information contained in this document is subject to an Avid SDK license.}}
+\DoxyCodeLine{3 }
+\DoxyCodeLine{11 \textcolor{preprocessor}{\#pragma once}}
+\DoxyCodeLine{12 }
+\DoxyCodeLine{13 \textcolor{preprocessor}{\#include <optional>}}
+\DoxyCodeLine{14 \textcolor{preprocessor}{\#include <string>}}
+\DoxyCodeLine{15 }
+\DoxyCodeLine{16 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{a00050}{CppPTSLCommon.h}}"{}}}
+\DoxyCodeLine{17 \textcolor{preprocessor}{\#include "{}PtslCCppExport.h"{}}}
+\DoxyCodeLine{18 }
+\DoxyCodeLine{19 \textcolor{keyword}{namespace }\mbox{\hyperlink{a00491}{PTSLC\_CPP}}}
+\DoxyCodeLine{20 \{}
+\DoxyCodeLine{21     \textcolor{keyword}{template} <\textcolor{keyword}{typename} T>}
+\DoxyCodeLine{22     std::string \mbox{\hyperlink{a00491_a499ea157e8ed6a8aed4acb377077c43b}{EnumToString}}(T value)}
+\DoxyCodeLine{23     \{}
+\DoxyCodeLine{24         \textcolor{keyword}{static\_assert}(\textcolor{keyword}{sizeof}(T) == -\/1, \textcolor{stringliteral}{"{}Please specialize this template for enum T"{}});}
+\DoxyCodeLine{25     \}}
+\DoxyCodeLine{26 }
+\DoxyCodeLine{27     \textcolor{keyword}{template} <\textcolor{keyword}{typename} T>}
+\DoxyCodeLine{28     std::optional<T> \mbox{\hyperlink{a00491_a1a2cf75c9cdf33bdc904a769b0a9f2e8}{StringToEnum}}(\textcolor{keyword}{const} std::string\& value)}
+\DoxyCodeLine{29     \{}
+\DoxyCodeLine{30         \textcolor{keyword}{static\_assert}(\textcolor{keyword}{sizeof}(T) == -\/1, \textcolor{stringliteral}{"{}Please specialize this template for enum T"{}});}
+\DoxyCodeLine{31     \}}
+\DoxyCodeLine{32 }
+\DoxyCodeLine{33     PTSLC\_CPP\_EXPORT std::vector<std::string> \mbox{\hyperlink{a00491_a141e6f7dfbee14ae9356c8a0931b5af6}{EnumValuesToStrings}}(\textcolor{keyword}{const} std::string\& enumTypeName);}
+\DoxyCodeLine{34 }
+\DoxyCodeLine{35 \textcolor{comment}{// Enumerations, synchronized with proto structures.}}
+\DoxyCodeLine{36 \textcolor{preprocessor}{\#define DECLARE\_PTSL\_ENUM\_CONVERSIONS(Type)                                                                            \(\backslash\)}}
+\DoxyCodeLine{37 \textcolor{preprocessor}{    template <>                                                                                                        \(\backslash\)}}
+\DoxyCodeLine{38 \textcolor{preprocessor}{    PTSLC\_CPP\_EXPORT std::string EnumToString<Type>(Type value);                                                       \(\backslash\)}}
+\DoxyCodeLine{39 \textcolor{preprocessor}{    template <>                                                                                                        \(\backslash\)}}
+\DoxyCodeLine{40 \textcolor{preprocessor}{    PTSLC\_CPP\_EXPORT std::optional<Type> StringToEnum<Type>(const std::string\& value)}}
+\DoxyCodeLine{41 }
+\DoxyCodeLine{42     \mbox{\hyperlink{a00491_a6089e1a1bb805731414aae38590e38f8}{DECLARE\_PTSL\_ENUM\_CONVERSIONS}}(\mbox{\hyperlink{a00491_ae5152a79762c33c83fdb5752192e511c}{CommandId}});}
+\DoxyCodeLine{43     \mbox{\hyperlink{a00491_a6089e1a1bb805731414aae38590e38f8}{DECLARE\_PTSL\_ENUM\_CONVERSIONS}}(\mbox{\hyperlink{a00491_a0927ccfbc4e114cef1f18c6f260d230b}{CommandStatusType}});}
+\DoxyCodeLine{44     \mbox{\hyperlink{a00491_a6089e1a1bb805731414aae38590e38f8}{DECLARE\_PTSL\_ENUM\_CONVERSIONS}}(\mbox{\hyperlink{a00491_a8fe9e0532a0e4ab36abdbc81b22f0645}{CommandErrorType}});}
+\DoxyCodeLine{45     \mbox{\hyperlink{a00491_a6089e1a1bb805731414aae38590e38f8}{DECLARE\_PTSL\_ENUM\_CONVERSIONS}}(\mbox{\hyperlink{a00491_aff573c4102ceda6874e623984a456866}{TrackType}});}
+\DoxyCodeLine{46     \mbox{\hyperlink{a00491_a6089e1a1bb805731414aae38590e38f8}{DECLARE\_PTSL\_ENUM\_CONVERSIONS}}(\mbox{\hyperlink{a00491_a878b30086d48b8130d58508ad7359780}{TrackFormat}});}
+\DoxyCodeLine{47     \mbox{\hyperlink{a00491_a6089e1a1bb805731414aae38590e38f8}{DECLARE\_PTSL\_ENUM\_CONVERSIONS}}(\mbox{\hyperlink{a00491_aa36dd4c5217eefc60b6fbf639003b1c6}{TrackTimebase}});}
+\DoxyCodeLine{48     \mbox{\hyperlink{a00491_a6089e1a1bb805731414aae38590e38f8}{DECLARE\_PTSL\_ENUM\_CONVERSIONS}}(\mbox{\hyperlink{a00491_aa4a3e54c77ceb119b66161e7181b9d29}{TimelineUpdateVideo}});}
+\DoxyCodeLine{49     \mbox{\hyperlink{a00491_a6089e1a1bb805731414aae38590e38f8}{DECLARE\_PTSL\_ENUM\_CONVERSIONS}}(\mbox{\hyperlink{a00491_a5a4c016feccbda0b32e3f0a6b1b3f246}{TripleBool}});}
+\DoxyCodeLine{50     \mbox{\hyperlink{a00491_a6089e1a1bb805731414aae38590e38f8}{DECLARE\_PTSL\_ENUM\_CONVERSIONS}}(\mbox{\hyperlink{a00491_aca704862f862634822651397791086c3}{TrackOffsetOptions}});}
+\DoxyCodeLine{51     \mbox{\hyperlink{a00491_a6089e1a1bb805731414aae38590e38f8}{DECLARE\_PTSL\_ENUM\_CONVERSIONS}}(\mbox{\hyperlink{a00491_a66c13619bee363f4237cc6ff4451dad0}{TrackFromClipGroupExclusionReason}});}
+\DoxyCodeLine{52     \mbox{\hyperlink{a00491_a6089e1a1bb805731414aae38590e38f8}{DECLARE\_PTSL\_ENUM\_CONVERSIONS}}(\mbox{\hyperlink{a00491_ab38ef592f7385a967695ac32ca6e5739}{TrackInsertionPoint}});}
+\DoxyCodeLine{53 }
+\DoxyCodeLine{54 \textcolor{preprocessor}{\#undef DECLARE\_PTSL\_ENUM\_CONVERSIONS}}
+\DoxyCodeLine{55 }
+\DoxyCodeLine{56 \} \textcolor{comment}{// namespace PTSLC\_CPP}}
+
+\end{DoxyCode}

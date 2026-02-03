@@ -1,0 +1,108 @@
+\hypertarget{a01548}{}\doxysection{EM\+\_\+\+Import\+Options}
+\label{a01548}\index{EM\_ImportOptions@{EM\_ImportOptions}}
+
+
+{\ttfamily \#include $<$Cpp\+PTSLCommon.\+h$>$}
+
+
+
+\doxysubsection{Description}
+Structure that describes information for import options if import\+After\+Bounce is true. 
+
+\begin{DoxyRefDesc}{Deprecated}
+\item[\mbox{\hyperlink{a00467__deprecated000211}{Deprecated}}]All API-\/specific types in the C++ client lib are deprecated starting in Pro Tools 2024.\+10 since we introduced general JSON-\/based request/response. \end{DoxyRefDesc}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{a00491_ae5f220ad8417f0e2c4a4422ed6d1b8d2}{Media\+Destination}} \mbox{\hyperlink{a01548_a808248bd96cbce6cd41f5ddb22a643db}{import\+Destination}}
+\item 
+\mbox{\hyperlink{a00491_ae91ae5f03071d79f9a3be871ba32b079}{Media\+Location}} \mbox{\hyperlink{a01548_a7059936213dc8fbe6312df6fd17f8a3e}{import\+Location}}
+\item 
+int32\+\_\+t \mbox{\hyperlink{a01548_af73aa0691f292f6ba997ddb4d513b7ee}{gaps\+Between\+Clips}}
+\item 
+\mbox{\hyperlink{a00491_a5a4c016feccbda0b32e3f0a6b1b3f246}{Triple\+Bool}} \mbox{\hyperlink{a01548_a595884b25c018eceaa06222ac2bf1efa}{import\+Audio\+From\+File}}
+\item 
+\mbox{\hyperlink{a00491_a5a4c016feccbda0b32e3f0a6b1b3f246}{Triple\+Bool}} \mbox{\hyperlink{a01548_ac06492f152165fc5a4c8186253cef815}{remove\+Existing\+Video\+Tracks}}
+\item 
+\mbox{\hyperlink{a00491_a5a4c016feccbda0b32e3f0a6b1b3f246}{Triple\+Bool}} \mbox{\hyperlink{a01548_a24c8bf573aaf19caa488e52d361a9576}{remove\+Existing\+Video\+Clips}}
+\item 
+\mbox{\hyperlink{a00491_a5a4c016feccbda0b32e3f0a6b1b3f246}{Triple\+Bool}} \mbox{\hyperlink{a01548_a11662f5080156a83638743eee9092a71}{clear\+Destination\+Video\+Track\+Playlist}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{a01548_a808248bd96cbce6cd41f5ddb22a643db}\label{a01548_a808248bd96cbce6cd41f5ddb22a643db}} 
+\index{EM\_ImportOptions@{EM\_ImportOptions}!importDestination@{importDestination}}
+\index{importDestination@{importDestination}!EM\_ImportOptions@{EM\_ImportOptions}}
+\doxysubsubsection{\texorpdfstring{importDestination}{importDestination}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a00491_ae5f220ad8417f0e2c4a4422ed6d1b8d2}{Media\+Destination}} import\+Destination}
+
+
+
+Referenced by \mbox{\hyperlink{a01328_a2fb834727f02bdc4db8432508b5a8ed6}{Cpp\+PTSLClient\+::\+Export\+Mix()}}.
+
+\mbox{\Hypertarget{a01548_a7059936213dc8fbe6312df6fd17f8a3e}\label{a01548_a7059936213dc8fbe6312df6fd17f8a3e}} 
+\index{EM\_ImportOptions@{EM\_ImportOptions}!importLocation@{importLocation}}
+\index{importLocation@{importLocation}!EM\_ImportOptions@{EM\_ImportOptions}}
+\doxysubsubsection{\texorpdfstring{importLocation}{importLocation}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a00491_ae91ae5f03071d79f9a3be871ba32b079}{Media\+Location}} import\+Location}
+
+
+
+Referenced by \mbox{\hyperlink{a01328_a2fb834727f02bdc4db8432508b5a8ed6}{Cpp\+PTSLClient\+::\+Export\+Mix()}}.
+
+\mbox{\Hypertarget{a01548_af73aa0691f292f6ba997ddb4d513b7ee}\label{a01548_af73aa0691f292f6ba997ddb4d513b7ee}} 
+\index{EM\_ImportOptions@{EM\_ImportOptions}!gapsBetweenClips@{gapsBetweenClips}}
+\index{gapsBetweenClips@{gapsBetweenClips}!EM\_ImportOptions@{EM\_ImportOptions}}
+\doxysubsubsection{\texorpdfstring{gapsBetweenClips}{gapsBetweenClips}}
+{\footnotesize\ttfamily int32\+\_\+t gaps\+Between\+Clips}
+
+
+
+Referenced by \mbox{\hyperlink{a01328_a2fb834727f02bdc4db8432508b5a8ed6}{Cpp\+PTSLClient\+::\+Export\+Mix()}}.
+
+\mbox{\Hypertarget{a01548_a595884b25c018eceaa06222ac2bf1efa}\label{a01548_a595884b25c018eceaa06222ac2bf1efa}} 
+\index{EM\_ImportOptions@{EM\_ImportOptions}!importAudioFromFile@{importAudioFromFile}}
+\index{importAudioFromFile@{importAudioFromFile}!EM\_ImportOptions@{EM\_ImportOptions}}
+\doxysubsubsection{\texorpdfstring{importAudioFromFile}{importAudioFromFile}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a00491_a5a4c016feccbda0b32e3f0a6b1b3f246}{Triple\+Bool}} import\+Audio\+From\+File}
+
+
+
+Referenced by \mbox{\hyperlink{a01328_a2fb834727f02bdc4db8432508b5a8ed6}{Cpp\+PTSLClient\+::\+Export\+Mix()}}.
+
+\mbox{\Hypertarget{a01548_ac06492f152165fc5a4c8186253cef815}\label{a01548_ac06492f152165fc5a4c8186253cef815}} 
+\index{EM\_ImportOptions@{EM\_ImportOptions}!removeExistingVideoTracks@{removeExistingVideoTracks}}
+\index{removeExistingVideoTracks@{removeExistingVideoTracks}!EM\_ImportOptions@{EM\_ImportOptions}}
+\doxysubsubsection{\texorpdfstring{removeExistingVideoTracks}{removeExistingVideoTracks}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a00491_a5a4c016feccbda0b32e3f0a6b1b3f246}{Triple\+Bool}} remove\+Existing\+Video\+Tracks}
+
+
+
+Referenced by \mbox{\hyperlink{a01328_a2fb834727f02bdc4db8432508b5a8ed6}{Cpp\+PTSLClient\+::\+Export\+Mix()}}.
+
+\mbox{\Hypertarget{a01548_a24c8bf573aaf19caa488e52d361a9576}\label{a01548_a24c8bf573aaf19caa488e52d361a9576}} 
+\index{EM\_ImportOptions@{EM\_ImportOptions}!removeExistingVideoClips@{removeExistingVideoClips}}
+\index{removeExistingVideoClips@{removeExistingVideoClips}!EM\_ImportOptions@{EM\_ImportOptions}}
+\doxysubsubsection{\texorpdfstring{removeExistingVideoClips}{removeExistingVideoClips}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a00491_a5a4c016feccbda0b32e3f0a6b1b3f246}{Triple\+Bool}} remove\+Existing\+Video\+Clips}
+
+
+
+Referenced by \mbox{\hyperlink{a01328_a2fb834727f02bdc4db8432508b5a8ed6}{Cpp\+PTSLClient\+::\+Export\+Mix()}}.
+
+\mbox{\Hypertarget{a01548_a11662f5080156a83638743eee9092a71}\label{a01548_a11662f5080156a83638743eee9092a71}} 
+\index{EM\_ImportOptions@{EM\_ImportOptions}!clearDestinationVideoTrackPlaylist@{clearDestinationVideoTrackPlaylist}}
+\index{clearDestinationVideoTrackPlaylist@{clearDestinationVideoTrackPlaylist}!EM\_ImportOptions@{EM\_ImportOptions}}
+\doxysubsubsection{\texorpdfstring{clearDestinationVideoTrackPlaylist}{clearDestinationVideoTrackPlaylist}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a00491_a5a4c016feccbda0b32e3f0a6b1b3f246}{Triple\+Bool}} clear\+Destination\+Video\+Track\+Playlist}
+
+
+
+Referenced by \mbox{\hyperlink{a01328_a2fb834727f02bdc4db8432508b5a8ed6}{Cpp\+PTSLClient\+::\+Export\+Mix()}}.
+
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{a00050}{Cpp\+PTSLCommon.\+h}}\end{DoxyCompactItemize}

@@ -1,0 +1,156 @@
+\hypertarget{a00431}{}\doxysection{ptslcmd.\+cpp File Reference}
+\label{a00431}\index{ptslcmd.cpp@{ptslcmd.cpp}}
+{\ttfamily \#include $<$gtest/gtest.\+h$>$}\newline
+{\ttfamily \#include $<$iostream$>$}\newline
+{\ttfamily \#include $<$map$>$}\newline
+{\ttfamily \#include $<$string$>$}\newline
+{\ttfamily \#include $<$unordered\+\_\+map$>$}\newline
+{\ttfamily \#include $<$vector$>$}\newline
+{\ttfamily \#include \char`\"{}Command\+Line\+Parser.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}Constants.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}Print\+Help\+Helpers.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}Ptsl\+Cmd\+Command\+Request.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}Ptsl\+Cmd\+Command\+Result.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}Ptsl\+Cmd\+Command\+Runner.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}PTSLC\+\_\+\+CPP/\+Cpp\+PTSLClient.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}PTSLC\+\_\+\+CPP/\+Cpp\+PTSLCommon\+Conversions.\+h\char`\"{}}\newline
+
+
+\doxysubsection{Description}
+C++ PTSL client test application. 
+
+This application is used internally in Avid to test the PTSL Scripting SDK. You can use the application at your own risk to send Pro Tools commands without creating your own program. However, we can\textquotesingle{}t guarantee that it won\textquotesingle{}t be changed or removed in the future.
+
+Please see usage information by running\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{ptslcmd -\/help}
+
+\end{DoxyCode}
+ \doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{a00431_a69c10b2c44363d9cb357b77b8535878a}{NO\+\_\+\+RESULT}}~0
+\item 
+\#define \mbox{\hyperlink{a00431_ab702106cf3b3e96750b6845ded4e0299}{RESET}}~\char`\"{}\textbackslash{}033\mbox{[}0m\char`\"{}
+\item 
+\#define \mbox{\hyperlink{a00431_ac5b6e19bf06822021f35602c59658de3}{ORANGE}}~\char`\"{}\textbackslash{}033\mbox{[}38;5;214m\char`\"{}
+\item 
+\#define \mbox{\hyperlink{a00431_a79d10e672abb49ad63eeaa8aaef57c38}{BLUE}}~\char`\"{}\textbackslash{}033\mbox{[}38;5;33m\char`\"{}
+\end{DoxyCompactItemize}
+\doxysubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+using \mbox{\hyperlink{a00431_a5918110e303a36e1fba0e801b5d92971}{Task\+Queue}} = vector$<$ shared\+\_\+ptr$<$ \mbox{\hyperlink{a01984}{Cpp\+PTSLResponse}} $>$ $>$
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+static void \mbox{\hyperlink{a00431_a1701628a70c506c662f9638dbc9c5498}{Print\+Ptsl\+Command\+Results}} (const vector$<$ \mbox{\hyperlink{a02016}{Ptsl\+Cmd\+Command\+Stream\+Result}} $>$ \&cmd\+Stream\+Results)
+\item 
+static bool \mbox{\hyperlink{a00431_a3c3be261757d557879267a9509198be6}{Print\+Help\+If\+Required}} (bool has\+Help\+Param, bool has\+List\+Param, bool has\+No\+Args)
+\item 
+int \mbox{\hyperlink{a00431_a0ddf1224851353fc92bfbff6f499fa97}{main}} (int argc, char $\ast$argv\mbox{[}$\,$\mbox{]})
+\item 
+\mbox{\hyperlink{a00431_a44c4751dc61c42f486399d7e1d6ca8fa}{TEST}} (Client, Result)
+\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+static \mbox{\hyperlink{a00431_a5918110e303a36e1fba0e801b5d92971}{Task\+Queue}} \mbox{\hyperlink{a00431_a5b95e677c34ccc77d437745e4446e856}{s\+\_\+\+Completion\+Tasks\+Queue}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Macro Definition Documentation}
+\mbox{\Hypertarget{a00431_a69c10b2c44363d9cb357b77b8535878a}\label{a00431_a69c10b2c44363d9cb357b77b8535878a}} 
+\index{ptslcmd.cpp@{ptslcmd.cpp}!NO\_RESULT@{NO\_RESULT}}
+\index{NO\_RESULT@{NO\_RESULT}!ptslcmd.cpp@{ptslcmd.cpp}}
+\doxysubsubsection{\texorpdfstring{NO\_RESULT}{NO\_RESULT}}
+{\footnotesize\ttfamily \#define NO\+\_\+\+RESULT~0}
+
+\mbox{\Hypertarget{a00431_ab702106cf3b3e96750b6845ded4e0299}\label{a00431_ab702106cf3b3e96750b6845ded4e0299}} 
+\index{ptslcmd.cpp@{ptslcmd.cpp}!RESET@{RESET}}
+\index{RESET@{RESET}!ptslcmd.cpp@{ptslcmd.cpp}}
+\doxysubsubsection{\texorpdfstring{RESET}{RESET}}
+{\footnotesize\ttfamily \#define RESET~\char`\"{}\textbackslash{}033\mbox{[}0m\char`\"{}}
+
+\mbox{\Hypertarget{a00431_ac5b6e19bf06822021f35602c59658de3}\label{a00431_ac5b6e19bf06822021f35602c59658de3}} 
+\index{ptslcmd.cpp@{ptslcmd.cpp}!ORANGE@{ORANGE}}
+\index{ORANGE@{ORANGE}!ptslcmd.cpp@{ptslcmd.cpp}}
+\doxysubsubsection{\texorpdfstring{ORANGE}{ORANGE}}
+{\footnotesize\ttfamily \#define ORANGE~\char`\"{}\textbackslash{}033\mbox{[}38;5;214m\char`\"{}}
+
+\mbox{\Hypertarget{a00431_a79d10e672abb49ad63eeaa8aaef57c38}\label{a00431_a79d10e672abb49ad63eeaa8aaef57c38}} 
+\index{ptslcmd.cpp@{ptslcmd.cpp}!BLUE@{BLUE}}
+\index{BLUE@{BLUE}!ptslcmd.cpp@{ptslcmd.cpp}}
+\doxysubsubsection{\texorpdfstring{BLUE}{BLUE}}
+{\footnotesize\ttfamily \#define BLUE~\char`\"{}\textbackslash{}033\mbox{[}38;5;33m\char`\"{}}
+
+
+
+\doxysubsection{Typedef Documentation}
+\mbox{\Hypertarget{a00431_a5918110e303a36e1fba0e801b5d92971}\label{a00431_a5918110e303a36e1fba0e801b5d92971}} 
+\index{ptslcmd.cpp@{ptslcmd.cpp}!TaskQueue@{TaskQueue}}
+\index{TaskQueue@{TaskQueue}!ptslcmd.cpp@{ptslcmd.cpp}}
+\doxysubsubsection{\texorpdfstring{TaskQueue}{TaskQueue}}
+{\footnotesize\ttfamily using \mbox{\hyperlink{a00431_a5918110e303a36e1fba0e801b5d92971}{Task\+Queue}} =  vector$<$shared\+\_\+ptr$<$\mbox{\hyperlink{a01984}{Cpp\+PTSLResponse}}$>$ $>$}
+
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{a00431_a1701628a70c506c662f9638dbc9c5498}\label{a00431_a1701628a70c506c662f9638dbc9c5498}} 
+\index{ptslcmd.cpp@{ptslcmd.cpp}!PrintPtslCommandResults@{PrintPtslCommandResults}}
+\index{PrintPtslCommandResults@{PrintPtslCommandResults}!ptslcmd.cpp@{ptslcmd.cpp}}
+\doxysubsubsection{\texorpdfstring{PrintPtslCommandResults()}{PrintPtslCommandResults()}}
+{\footnotesize\ttfamily void Print\+Ptsl\+Command\+Results (\begin{DoxyParamCaption}\item[{const vector$<$ \mbox{\hyperlink{a02016}{Ptsl\+Cmd\+Command\+Stream\+Result}} $>$ \&}]{cmd\+Stream\+Results }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Referenced by \mbox{\hyperlink{a00431_a0ddf1224851353fc92bfbff6f499fa97}{main()}}.
+
+\mbox{\Hypertarget{a00431_a3c3be261757d557879267a9509198be6}\label{a00431_a3c3be261757d557879267a9509198be6}} 
+\index{ptslcmd.cpp@{ptslcmd.cpp}!PrintHelpIfRequired@{PrintHelpIfRequired}}
+\index{PrintHelpIfRequired@{PrintHelpIfRequired}!ptslcmd.cpp@{ptslcmd.cpp}}
+\doxysubsubsection{\texorpdfstring{PrintHelpIfRequired()}{PrintHelpIfRequired()}}
+{\footnotesize\ttfamily bool Print\+Help\+If\+Required (\begin{DoxyParamCaption}\item[{bool}]{has\+Help\+Param,  }\item[{bool}]{has\+List\+Param,  }\item[{bool}]{has\+No\+Args }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+References \mbox{\hyperlink{a02004_a657d981eb22162576464c53be9421c91}{Print\+Help\+Helpers\+::\+Print\+Command\+List\+Help()}}, and \mbox{\hyperlink{a02004_ae964ff8411b4fdcaf65cb5529aea4bef}{Print\+Help\+Helpers\+::\+Print\+Help()}}.
+
+
+
+Referenced by \mbox{\hyperlink{a00431_a0ddf1224851353fc92bfbff6f499fa97}{main()}}.
+
+\mbox{\Hypertarget{a00431_a0ddf1224851353fc92bfbff6f499fa97}\label{a00431_a0ddf1224851353fc92bfbff6f499fa97}} 
+\index{ptslcmd.cpp@{ptslcmd.cpp}!main@{main}}
+\index{main@{main}!ptslcmd.cpp@{ptslcmd.cpp}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}\item[{int}]{argc,  }\item[{char $\ast$}]{argv\mbox{[}$\,$\mbox{]} }\end{DoxyParamCaption})}
+
+
+
+References \mbox{\hyperlink{a01992_aca439e5544b8484bc08ddc73c626d6ee}{Constants\+::\+ENCRYPTION\+\_\+\+KEY\+\_\+\+ARG}}, \mbox{\hyperlink{a01992_af464392efbf535fb77ee5a7685c2e084}{Constants\+::\+FILE\+\_\+\+CMD\+\_\+\+ARG}}, \mbox{\hyperlink{a01992_acf5cf0a09be075d6e282aa404f4b09a3}{Constants\+::\+HELP\+\_\+\+CMD\+\_\+\+ARG}}, \mbox{\hyperlink{a01992_adb4bdac88475e72e52dd06c06689f86f}{Constants\+::\+JSON\+\_\+\+HEADER\+\_\+\+CMD\+\_\+\+ARG}}, \mbox{\hyperlink{a01992_adb52dc4187c0ebc3e0dcad8cf5510282}{Constants\+::\+JSON\+\_\+\+REQUEST\+\_\+\+CMD\+\_\+\+ARG}}, \mbox{\hyperlink{a01992_a5209e331d4dc776cd1322bac799aa41e}{Constants\+::\+LIST\+\_\+\+CMD\+\_\+\+ARG}}, \mbox{\hyperlink{a00431_a69c10b2c44363d9cb357b77b8535878a}{NO\+\_\+\+RESULT}}, \mbox{\hyperlink{a01328_ad50205dc2210e8a51c53d9715ed12e2c}{Cpp\+PTSLClient\+::\+On\+Response\+Received}}, \mbox{\hyperlink{a01992_ae7bb693723949a82b79056d35c2efb44}{Constants\+::\+PARAMETERLESS\+\_\+\+ARGS\+\_\+\+KEY}}, \mbox{\hyperlink{a00431_a3c3be261757d557879267a9509198be6}{Print\+Help\+If\+Required()}}, \mbox{\hyperlink{a00431_a1701628a70c506c662f9638dbc9c5498}{Print\+Ptsl\+Command\+Results()}}, \mbox{\hyperlink{a02020_aa40745c10e0c5c76b86151ba0c79dcbc}{Ptsl\+Cmd\+Command\+Runner\+::\+Run\+Command()}}, \mbox{\hyperlink{a02020_a3f20f03ca7228e0e3240f69f8313340a}{Ptsl\+Cmd\+Command\+Runner\+::\+Run\+File\+Script()}}, \mbox{\hyperlink{a00431_a5b95e677c34ccc77d437745e4446e856}{s\+\_\+\+Completion\+Tasks\+Queue}}, and \mbox{\hyperlink{a01992_a87bd382423778ee72ec398cf8b1163e7}{Constants\+::\+SESSION\+\_\+\+ID\+\_\+\+CMD\+\_\+\+ARG}}.
+
+\mbox{\Hypertarget{a00431_a44c4751dc61c42f486399d7e1d6ca8fa}\label{a00431_a44c4751dc61c42f486399d7e1d6ca8fa}} 
+\index{ptslcmd.cpp@{ptslcmd.cpp}!TEST@{TEST}}
+\index{TEST@{TEST}!ptslcmd.cpp@{ptslcmd.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}}
+{\footnotesize\ttfamily TEST (\begin{DoxyParamCaption}\item[{Client}]{,  }\item[{Result}]{ }\end{DoxyParamCaption})}
+
+
+
+References \mbox{\hyperlink{a00431_a79d10e672abb49ad63eeaa8aaef57c38}{BLUE}}, \mbox{\hyperlink{a00494_aacda182df7dba8ce63a50654d7232ba8af47f90c31ee3cdaa28b81ecf57b72ce9}{ptsl\+::\+Completed}}, \mbox{\hyperlink{a00494_aacda182df7dba8ce63a50654d7232ba8a356f3b156a89864d4649d009ac9e8cc5}{ptsl\+::\+Completed\+With\+Bad\+Response}}, \mbox{\hyperlink{a00491_a499ea157e8ed6a8aed4acb377077c43b}{PTSLC\+\_\+\+CPP\+::\+Enum\+To\+String()}}, \mbox{\hyperlink{a00494_aacda182df7dba8ce63a50654d7232ba8a1f506c828f4945d6b5a7bf71445f7d54}{ptsl\+::\+Failed}}, \mbox{\hyperlink{a00494_aacda182df7dba8ce63a50654d7232ba8a3f492f050fe26cc5d4b639380bf2aae9}{ptsl\+::\+Failed\+With\+Bad\+Error\+Response}}, \mbox{\hyperlink{a00494_aaf8d2069e2c6bbecf4aa8f9819028e8aa122502776c29770a517d44e1a005538e}{ptsl\+::\+Get\+Task\+Status}}, \mbox{\hyperlink{a00494_aaf8d2069e2c6bbecf4aa8f9819028e8aa165e2323abfeb1d7f1eb094c253b80a8}{ptsl\+::\+Host\+Ready\+Check}}, \mbox{\hyperlink{a00431_ac5b6e19bf06822021f35602c59658de3}{ORANGE}}, \mbox{\hyperlink{a00431_ab702106cf3b3e96750b6845ded4e0299}{RESET}}, and \mbox{\hyperlink{a00431_a5b95e677c34ccc77d437745e4446e856}{s\+\_\+\+Completion\+Tasks\+Queue}}.
+
+
+
+\doxysubsection{Variable Documentation}
+\mbox{\Hypertarget{a00431_a5b95e677c34ccc77d437745e4446e856}\label{a00431_a5b95e677c34ccc77d437745e4446e856}} 
+\index{ptslcmd.cpp@{ptslcmd.cpp}!s\_CompletionTasksQueue@{s\_CompletionTasksQueue}}
+\index{s\_CompletionTasksQueue@{s\_CompletionTasksQueue}!ptslcmd.cpp@{ptslcmd.cpp}}
+\doxysubsubsection{\texorpdfstring{s\_CompletionTasksQueue}{s\_CompletionTasksQueue}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a00431_a5918110e303a36e1fba0e801b5d92971}{Task\+Queue}} s\+\_\+\+Completion\+Tasks\+Queue\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Referenced by \mbox{\hyperlink{a00431_a0ddf1224851353fc92bfbff6f499fa97}{main()}}, and \mbox{\hyperlink{a00431_a44c4751dc61c42f486399d7e1d6ca8fa}{TEST()}}.
+

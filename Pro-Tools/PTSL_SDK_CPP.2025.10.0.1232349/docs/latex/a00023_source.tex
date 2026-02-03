@@ -1,0 +1,280 @@
+\hypertarget{a00023_source}{}\doxysection{Cpp\+PTSLC\+\_\+\+Default\+Request.\+h}
+\label{a00023_source}\index{CppPTSLC\_DefaultRequest.h@{CppPTSLC\_DefaultRequest.h}}
+\mbox{\hyperlink{a00023}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{comment}{// Copyright 2021-\/2024 by Avid Technology, Inc.}}
+\DoxyCodeLine{2 \textcolor{comment}{// CONFIDENTIAL: this document contains confidential information of Avid. Do not disclose to any third party. Use of the information contained in this document is subject to an Avid SDK license.}}
+\DoxyCodeLine{3 }
+\DoxyCodeLine{9 \textcolor{preprocessor}{\#pragma once}}
+\DoxyCodeLine{10 }
+\DoxyCodeLine{11 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{a00017}{CppPTSLClient.h}}"{}}}
+\DoxyCodeLine{12 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{a00044}{CppPTSLClientInternal.h}}"{}}}
+\DoxyCodeLine{13 \textcolor{preprocessor}{\#include <algorithm>}}
+\DoxyCodeLine{14 \textcolor{preprocessor}{\#include <string>}}
+\DoxyCodeLine{15 \textcolor{preprocessor}{\#include <tuple>}}
+\DoxyCodeLine{16 \textcolor{preprocessor}{\#include <utility>}}
+\DoxyCodeLine{17 }
+\DoxyCodeLine{18 \textcolor{comment}{// Deprecated starting in 2024.10}}
+\DoxyCodeLine{19 \textcolor{preprocessor}{\#define INIT\_HNDLR(CMD)                                                                                                \(\backslash\)}}
+\DoxyCodeLine{20 \textcolor{preprocessor}{    CMD\#\#Handler()                                                                                                     \(\backslash\)}}
+\DoxyCodeLine{21 \textcolor{preprocessor}{    \{                                                                                                                  \(\backslash\)}}
+\DoxyCodeLine{22 \textcolor{preprocessor}{    \}                                                                                                                  \(\backslash\)}}
+\DoxyCodeLine{23 \textcolor{preprocessor}{                                                                                                                       \(\backslash\)}}
+\DoxyCodeLine{24 \textcolor{preprocessor}{    CMD\#\#Handler(const CommandRequest\& request)                                                                        \(\backslash\)}}
+\DoxyCodeLine{25 \textcolor{preprocessor}{    \{                                                                                                                  \(\backslash\)}}
+\DoxyCodeLine{26 \textcolor{preprocessor}{    \}}}
+\DoxyCodeLine{27 }
+\DoxyCodeLine{28 \textcolor{comment}{// Indeed, parsing `mGrpcRequestBody` from JSON to convert it later back to JSON may seem peculiar.}}
+\DoxyCodeLine{29 \textcolor{comment}{// However, this method ensures a consistent process for all scenarios further on, whether it's JSON or command line.}}
+\DoxyCodeLine{30 }
+\DoxyCodeLine{31 \textcolor{comment}{// Deprecated starting in 2024.10}}
+\DoxyCodeLine{32 \textcolor{comment}{//  Please use a general JSON-\/based @ref PTSLC\_CPP::CppPTSLClient::SendRequest "{}SendRequest"{} function,}}
+\DoxyCodeLine{33 \textcolor{comment}{//  so you don't need JSON <-\/> message conversion.}}
+\DoxyCodeLine{34 \textcolor{preprocessor}{\#define INIT\_HNDLR\_OVRD(CMD)                                                                                           \(\backslash\)}}
+\DoxyCodeLine{35 \textcolor{preprocessor}{    CMD\#\#Handler()                                                                                                     \(\backslash\)}}
+\DoxyCodeLine{36 \textcolor{preprocessor}{    \{                                                                                                                  \(\backslash\)}}
+\DoxyCodeLine{37 \textcolor{preprocessor}{    \}                                                                                                                  \(\backslash\)}}
+\DoxyCodeLine{38 \textcolor{preprocessor}{                                                                                                                       \(\backslash\)}}
+\DoxyCodeLine{39 \textcolor{preprocessor}{    CMD\#\#Handler(const CMD\#\#Request\& request)                                                                          \(\backslash\)}}
+\DoxyCodeLine{40 \textcolor{preprocessor}{    \{                                                                                                                  \(\backslash\)}}
+\DoxyCodeLine{41 \textcolor{preprocessor}{        std::string jsonBody = request.directJsonBody;                                                                 \(\backslash\)}}
+\DoxyCodeLine{42 \textcolor{preprocessor}{        if (!jsonBody.empty() \&\& !std::all\_of(jsonBody.begin(), jsonBody.end(), isspace))                              \(\backslash\)}}
+\DoxyCodeLine{43 \textcolor{preprocessor}{        \{                                                                                                              \(\backslash\)}}
+\DoxyCodeLine{44 \textcolor{preprocessor}{            google::protobuf::util::JsonStringToMessage(jsonBody, \&mGrpcRequestBody);                                  \(\backslash\)}}
+\DoxyCodeLine{45 \textcolor{preprocessor}{        \}                                                                                                              \(\backslash\)}}
+\DoxyCodeLine{46 \textcolor{preprocessor}{        else                                                                                                           \(\backslash\)}}
+\DoxyCodeLine{47 \textcolor{preprocessor}{        \{                                                                                                              \(\backslash\)}}
+\DoxyCodeLine{48 \textcolor{preprocessor}{            this-\/>FillGrpcRequest(request);                                                                            \(\backslash\)}}
+\DoxyCodeLine{49 \textcolor{preprocessor}{        \}                                                                                                              \(\backslash\)}}
+\DoxyCodeLine{50 \textcolor{preprocessor}{    \}}}
+\DoxyCodeLine{51 }
+\DoxyCodeLine{52 \textcolor{comment}{// Deprecated starting in 2024.10}}
+\DoxyCodeLine{53 \textcolor{preprocessor}{\#define CREATE\_STATE\_OVRD(CMD)                                                                                         \(\backslash\)}}
+\DoxyCodeLine{54 \textcolor{preprocessor}{    void CreateState() override                                                                                        \(\backslash\)}}
+\DoxyCodeLine{55 \textcolor{preprocessor}{    \{                                                                                                                  \(\backslash\)}}
+\DoxyCodeLine{56 \textcolor{preprocessor}{        mState = std::make\_shared<CMD\#\#State>();                                                                       \(\backslash\)}}
+\DoxyCodeLine{57 \textcolor{preprocessor}{    \}}}
+\DoxyCodeLine{58 }
+\DoxyCodeLine{59 \textcolor{comment}{// Deprecated starting in 2024.10}}
+\DoxyCodeLine{60 \textcolor{preprocessor}{\#define MAKE\_RESP\_OVRD(CMD)                                                                                            \(\backslash\)}}
+\DoxyCodeLine{61 \textcolor{preprocessor}{    void MakeResponse() override                                                                                       \(\backslash\)}}
+\DoxyCodeLine{62 \textcolor{preprocessor}{    \{                                                                                                                  \(\backslash\)}}
+\DoxyCodeLine{63 \textcolor{preprocessor}{        mResponse = std::make\_shared<CMD\#\#Response>();                                                                 \(\backslash\)}}
+\DoxyCodeLine{64 \textcolor{preprocessor}{    \}}}
+\DoxyCodeLine{65 }
+\DoxyCodeLine{66 }
+\DoxyCodeLine{67 \textcolor{comment}{// Deprecated starting in 2024.10}}
+\DoxyCodeLine{68 \textcolor{comment}{//  Please use a general JSON-\/based @ref PTSLC\_CPP::CppPTSLClient::SendRequest "{}SendRequest"{} function}}
+\DoxyCodeLine{69 \textcolor{comment}{//  instead of MAKE\_REQUEST}}
+\DoxyCodeLine{70 \textcolor{preprocessor}{\#define MAKE\_REQUEST(CMD, HAS\_REQ, IS\_STREAMING)                                                                       \(\backslash\)}}
+\DoxyCodeLine{71 \textcolor{preprocessor}{    std::shared\_ptr<DefaultRequestHandler> hndlr;                                                                      \(\backslash\)}}
+\DoxyCodeLine{72 \textcolor{preprocessor}{                                                                                                                       \(\backslash\)}}
+\DoxyCodeLine{73 \textcolor{preprocessor}{    if (HAS\_REQ)                                                                                                       \(\backslash\)}}
+\DoxyCodeLine{74 \textcolor{preprocessor}{        hndlr = std::make\_shared<CMD\#\#Handler>(request);                                                               \(\backslash\)}}
+\DoxyCodeLine{75 \textcolor{preprocessor}{    else                                                                                                               \(\backslash\)}}
+\DoxyCodeLine{76 \textcolor{preprocessor}{        hndlr = std::make\_shared<CMD\#\#Handler>();                                                                      \(\backslash\)}}
+\DoxyCodeLine{77 \textcolor{preprocessor}{                                                                                                                       \(\backslash\)}}
+\DoxyCodeLine{78 \textcolor{preprocessor}{    if (IS\_STREAMING)                                                                                                  \(\backslash\)}}
+\DoxyCodeLine{79 \textcolor{preprocessor}{        this-\/>MakeStreamingRequest(hndlr, CommandId::CId\_\#\#CMD);                                                       \(\backslash\)}}
+\DoxyCodeLine{80 \textcolor{preprocessor}{    else                                                                                                               \(\backslash\)}}
+\DoxyCodeLine{81 \textcolor{preprocessor}{        this-\/>MakeRequest(hndlr, CommandId::CId\_\#\#CMD);}}
+\DoxyCodeLine{82 }
+\DoxyCodeLine{83 \textcolor{keyword}{namespace }\mbox{\hyperlink{a00491}{PTSLC\_CPP}}}
+\DoxyCodeLine{84 \{}
+\DoxyCodeLine{85     \textcolor{keyword}{using namespace }google::protobuf;}
+\DoxyCodeLine{86     \textcolor{keyword}{using namespace }google::protobuf::util;}
+\DoxyCodeLine{87 }
+\DoxyCodeLine{95     \textcolor{keyword}{struct }[[deprecated("{}Please use \mbox{\hyperlink{a00491}{PTSLC\_CPP}}::\mbox{\hyperlink{a01328_a2c6a9bfa639cab78fcb3d4159c460c5f}{CppPTSLClient::SendRequest}}()"{})]] \mbox{\hyperlink{a01320}{DefaultRequestHandler}}}
+\DoxyCodeLine{96     \{}
+\DoxyCodeLine{97     \textcolor{keyword}{public}:}
+\DoxyCodeLine{98         \textcolor{keyword}{struct }\mbox{\hyperlink{a01324}{State}}}
+\DoxyCodeLine{99         \{}
+\DoxyCodeLine{100             \textcolor{keywordtype}{bool} mNeedSendResponse = \textcolor{keyword}{true};}
+\DoxyCodeLine{101         \};}
+\DoxyCodeLine{102 }
+\DoxyCodeLine{103         \mbox{\hyperlink{a01320_ae1589913c97b2dded5708f2a14725b71}{DefaultRequestHandler}}() : mResponse(nullptr)}
+\DoxyCodeLine{104         \{}
+\DoxyCodeLine{105         \}}
+\DoxyCodeLine{106 }
+\DoxyCodeLine{107         \textcolor{keyword}{virtual} \mbox{\hyperlink{a01320_a30f3f268f5c2419fb07716b4718a229a}{\string~DefaultRequestHandler}}()}
+\DoxyCodeLine{108         \{}
+\DoxyCodeLine{109         \}}
+\DoxyCodeLine{110 }
+\DoxyCodeLine{111         \textcolor{keywordtype}{bool} \mbox{\hyperlink{a01320_aefd3dd4db2c269f91bb89d071f527a1a}{ConvertRequestBodyToJson}}(std::string\& requestBodyJSON)}
+\DoxyCodeLine{112         \{}
+\DoxyCodeLine{113             \textcolor{keywordtype}{bool} status = \textcolor{keyword}{false};}
+\DoxyCodeLine{114 }
+\DoxyCodeLine{115             JsonOptions jOpts = \mbox{\hyperlink{a00491_a6f182f9872f9fb59a13ddc248339ec08}{DefaultJsonWriteOptions}}();}
+\DoxyCodeLine{116 }
+\DoxyCodeLine{117             status = MessageToJsonString(GetRequestBodyRef(), \&requestBodyJSON, jOpts).ok();}
+\DoxyCodeLine{118             \textcolor{keywordflow}{return} status;}
+\DoxyCodeLine{119         \}}
+\DoxyCodeLine{120 }
+\DoxyCodeLine{121         std::tuple<bool, std::string> \mbox{\hyperlink{a01320_a684292118b0be6ff0c2abc2f85934950}{ConvertJsonToResponseBody}}(\textcolor{keyword}{const} std::string\& responseBodyJSON)}
+\DoxyCodeLine{122         \{}
+\DoxyCodeLine{123             JsonParseOptions jOpts = \mbox{\hyperlink{a00491_a9163390b1bfc4f32518cb1097dc77054}{DefaultJsonParseOptions}}();}
+\DoxyCodeLine{124             \textcolor{keyword}{auto} status = JsonStringToMessage(responseBodyJSON, \&GetResponseBodyRef(), jOpts);}
+\DoxyCodeLine{125 }
+\DoxyCodeLine{126             \textcolor{keywordtype}{bool} result = status.ok();}
+\DoxyCodeLine{127             std::string result\_str = status.ToString();}
+\DoxyCodeLine{128 }
+\DoxyCodeLine{129             \textcolor{keywordflow}{return} \{ result, result\_str \};}
+\DoxyCodeLine{130         \}}
+\DoxyCodeLine{131 }
+\DoxyCodeLine{132         std::tuple<bool, std::string> \mbox{\hyperlink{a01320_aa4006557770204fc996765dffcb689d7}{ConvertJsonToResponseError}}(\textcolor{keyword}{const} std::string\& errorJSON)}
+\DoxyCodeLine{133         \{}
+\DoxyCodeLine{134             JsonParseOptions jOpts = \mbox{\hyperlink{a00491_a9163390b1bfc4f32518cb1097dc77054}{DefaultJsonParseOptions}}();}
+\DoxyCodeLine{135 }
+\DoxyCodeLine{136             \textcolor{keyword}{auto} status = JsonStringToMessage(errorJSON, \&mGrpcResponseError, jOpts);}
+\DoxyCodeLine{137             \textcolor{keywordtype}{bool} result = status.ok();}
+\DoxyCodeLine{138             std::string result\_str = status.ToString();}
+\DoxyCodeLine{139 }
+\DoxyCodeLine{140             \textcolor{keywordflow}{if} (!status.ok())}
+\DoxyCodeLine{141             \{}
+\DoxyCodeLine{142                 \mbox{\hyperlink{a02028}{ptsl::CommandError}} legacyError;}
+\DoxyCodeLine{143                 \textcolor{keyword}{auto} legacy\_err\_status = JsonStringToMessage(errorJSON, \&legacyError);}
+\DoxyCodeLine{144                 result = legacy\_err\_status.ok();}
+\DoxyCodeLine{145                 \textcolor{keywordflow}{if} (legacy\_err\_status.ok())}
+\DoxyCodeLine{146                 \{}
+\DoxyCodeLine{147                     mGrpcResponseError.add\_errors()-\/>CopyFrom(legacyError);}
+\DoxyCodeLine{148                     \textcolor{comment}{// Reset result\_str to the legacy error status since}}
+\DoxyCodeLine{149                     \textcolor{comment}{// the previous error was expected}}
+\DoxyCodeLine{150                     result\_str = legacy\_err\_status.ToString();}
+\DoxyCodeLine{151                 \}}
+\DoxyCodeLine{152                 \textcolor{keywordflow}{else}}
+\DoxyCodeLine{153                 \{}
+\DoxyCodeLine{154                     \textcolor{comment}{// Append the legacy error status to the result string}}
+\DoxyCodeLine{155                     \textcolor{comment}{// for additional context}}
+\DoxyCodeLine{156                     result\_str += \textcolor{stringliteral}{"{};"{}} + legacy\_err\_status.ToString();}
+\DoxyCodeLine{157                 \}}
+\DoxyCodeLine{158             \}}
+\DoxyCodeLine{159 }
+\DoxyCodeLine{160             \textcolor{keywordflow}{return} \{ result, result\_str \};}
+\DoxyCodeLine{161         \}}
+\DoxyCodeLine{162 }
+\DoxyCodeLine{163         \textcolor{keywordtype}{void} \mbox{\hyperlink{a01320_ae47d011203809874367bd96f94db1cdf}{ConvertProtoToCommandError}}(\textcolor{keyword}{const} \mbox{\hyperlink{a02028}{ptsl::CommandError}}\& in, \mbox{\hyperlink{a01364}{CommandError}}\& out)}
+\DoxyCodeLine{164         \{}
+\DoxyCodeLine{165             out.\mbox{\hyperlink{a01364_a9d2a3d8a0d7ddeecb3c90cca47b81ad8}{errorType}} = \textcolor{keyword}{static\_cast<}\mbox{\hyperlink{a00491_a8fe9e0532a0e4ab36abdbc81b22f0645}{CommandErrorType}}\textcolor{keyword}{>}(in.\mbox{\hyperlink{a02028_a387b7a0c5e7ef659b149a67c8d7e1f01}{command\_error\_type}}());}
+\DoxyCodeLine{166             out.\mbox{\hyperlink{a01364_a61183f16e5224eaba5be8ccffd828242}{errorMessage}} = in.\mbox{\hyperlink{a02028_a694cc14b5cdfef93f2a13c090a36be54}{command\_error\_message}}();}
+\DoxyCodeLine{167             out.\mbox{\hyperlink{a01364_a4ca0f3b4b594ee5a7ef31e6464fdae68}{isWarning}} = in.\mbox{\hyperlink{a02028_a95c0e7b53eba0f3c36fc4ed2fad34cb6}{is\_warning}}();}
+\DoxyCodeLine{168         \}}
+\DoxyCodeLine{169 }
+\DoxyCodeLine{170         \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{a01320_a2c23df7336055b8f5ef9539fdb392143}{OnNextResponse}}()}
+\DoxyCodeLine{171         \{}
+\DoxyCodeLine{172         \}}
+\DoxyCodeLine{173 }
+\DoxyCodeLine{174         \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{a01320_a85af433839d57c9b507444e64d6f5697}{OnHasBody}}()}
+\DoxyCodeLine{175         \{}
+\DoxyCodeLine{176         \}}
+\DoxyCodeLine{177 }
+\DoxyCodeLine{178         \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{a01320_ab93fe40008b1b347f09eee16d66a1d78}{OnNoBody}}()}
+\DoxyCodeLine{179         \{}
+\DoxyCodeLine{180         \}}
+\DoxyCodeLine{181 }
+\DoxyCodeLine{182         \textcolor{keyword}{virtual} \textcolor{keywordtype}{bool} \mbox{\hyperlink{a01320_a901e9c8d09a97d833470e6ddd6e5b08b}{IsResponseReceived}}()\textcolor{keyword}{ const}}
+\DoxyCodeLine{183 \textcolor{keyword}{        }\{}
+\DoxyCodeLine{184             \textcolor{keywordflow}{return} \textcolor{keyword}{true};}
+\DoxyCodeLine{185         \}}
+\DoxyCodeLine{186 }
+\DoxyCodeLine{187         \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{a01320_a6349818a8c71b82abe6d56f2a6bb5109}{OnHasHeader}}(\textcolor{keyword}{const} \mbox{\hyperlink{a02056}{ptsl::Response}}\& response)}
+\DoxyCodeLine{188         \{}
+\DoxyCodeLine{189             \textcolor{keywordflow}{if} (mResponse)}
+\DoxyCodeLine{190             \{}
+\DoxyCodeLine{191                 mResponse-\/>header.commandType = (\mbox{\hyperlink{a00491_ae5152a79762c33c83fdb5752192e511c}{CommandId}})response.\mbox{\hyperlink{a02056_a0528827043dc24bfd1667e353d6f39a4}{header}}().\mbox{\hyperlink{a02048_a6d73277ea08aa1deaa4e5233adf11f90}{command}}();}
+\DoxyCodeLine{192                 mResponse-\/>header.taskId = response.\mbox{\hyperlink{a02056_a0528827043dc24bfd1667e353d6f39a4}{header}}().\mbox{\hyperlink{a02048_ab8fb5adee6b678b5d3d9c38be5df9d10}{task\_id}}();}
+\DoxyCodeLine{193                 mResponse-\/>header.version = response.\mbox{\hyperlink{a02056_a0528827043dc24bfd1667e353d6f39a4}{header}}().\mbox{\hyperlink{a02048_a1403c9ca4289d8a9417e8c4da2b94c0e}{version}}();}
+\DoxyCodeLine{194                 mResponse-\/>header.versionMinor = response.\mbox{\hyperlink{a02056_a0528827043dc24bfd1667e353d6f39a4}{header}}().\mbox{\hyperlink{a02048_a09c035a9bbb8296a09dfcfcc0c62de56}{version\_minor}}();}
+\DoxyCodeLine{195                 mResponse-\/>header.versionRevision = response.\mbox{\hyperlink{a02056_a0528827043dc24bfd1667e353d6f39a4}{header}}().\mbox{\hyperlink{a02048_ac3eea2a8ad35f84eeb9f00174f197679}{version\_revision}}();}
+\DoxyCodeLine{196                 mResponse-\/>status.type = (\mbox{\hyperlink{a00491_a0927ccfbc4e114cef1f18c6f260d230b}{TaskStatus}})response.\mbox{\hyperlink{a02056_a0528827043dc24bfd1667e353d6f39a4}{header}}().\mbox{\hyperlink{a02048_a2be58077b1f98d7ed1a5f00b6dae9961}{status}}();}
+\DoxyCodeLine{197                 mResponse-\/>status.progress = response.\mbox{\hyperlink{a02056_a0528827043dc24bfd1667e353d6f39a4}{header}}().\mbox{\hyperlink{a02048_a66022d4254e1349f07b9963b32834e00}{progress}}();}
+\DoxyCodeLine{198                 mResponse-\/>jsonBody = response.\mbox{\hyperlink{a02056_a91c35346b83d143541cf42028c87f828}{response\_body\_json}}();}
+\DoxyCodeLine{199                 mResponse-\/>jsonError = response.\mbox{\hyperlink{a02056_a0dff524019938631113b7e5e5c783493}{response\_error\_json}}();}
+\DoxyCodeLine{200             \}}
+\DoxyCodeLine{201         \}}
+\DoxyCodeLine{202 }
+\DoxyCodeLine{203         \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{a01320_a6acbcdb790474c41adb396ef4687d940}{OnHasError}}()}
+\DoxyCodeLine{204         \{}
+\DoxyCodeLine{205             \textcolor{keywordflow}{if} (mResponse)}
+\DoxyCodeLine{206             \{}
+\DoxyCodeLine{207                 \textcolor{keywordflow}{for} (\textcolor{keyword}{const} \textcolor{keyword}{auto}\& error : mGrpcResponseError.errors())}
+\DoxyCodeLine{208                 \{}
+\DoxyCodeLine{209                     \textcolor{keyword}{auto} commandError = std::make\_shared<CommandError>();}
+\DoxyCodeLine{210                     \mbox{\hyperlink{a00491_a46f003fc8324d10d4258e8057ae61b9d}{ConvertProtoToCommandError}}(error, *commandError);}
+\DoxyCodeLine{211                     mResponse-\/>errors.push\_back(commandError);}
+\DoxyCodeLine{212                 \}}
+\DoxyCodeLine{213             \}}
+\DoxyCodeLine{214         \}}
+\DoxyCodeLine{215 }
+\DoxyCodeLine{216         \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{a01320_a9866562327e2937731ec37f76df3ec96}{OnNoResponse}}(\mbox{\hyperlink{a00491_ae5152a79762c33c83fdb5752192e511c}{CommandId}} command)}
+\DoxyCodeLine{217         \{}
+\DoxyCodeLine{218             \textcolor{keywordflow}{if} (mResponse)}
+\DoxyCodeLine{219             \{}
+\DoxyCodeLine{220                 mResponse-\/>header.commandType = command;}
+\DoxyCodeLine{221                 mResponse-\/>status.type = \mbox{\hyperlink{a00491_a0927ccfbc4e114cef1f18c6f260d230ba6f53a2fd075a965d3aeb368d915c00a7}{TaskStatus::TStatus\_NoResponseReceived}};}
+\DoxyCodeLine{222             \}}
+\DoxyCodeLine{223         \}}
+\DoxyCodeLine{224 }
+\DoxyCodeLine{225         \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{a01320_a1872ea66e9485bbc1d15f12dbee045d2}{SetResponseStatus}}(\textcolor{keyword}{const} \mbox{\hyperlink{a00491_a0927ccfbc4e114cef1f18c6f260d230b}{TaskStatus}}\& status, \textcolor{keyword}{const} std::string\& statusTypeClarification = \textcolor{stringliteral}{"{}"{}})}
+\DoxyCodeLine{226         \{}
+\DoxyCodeLine{227             \textcolor{keywordflow}{if} (mResponse)}
+\DoxyCodeLine{228             \{}
+\DoxyCodeLine{229                 mResponse-\/>status.type = status;}
+\DoxyCodeLine{230                 mResponse-\/>status.typeClarification = statusTypeClarification;}
+\DoxyCodeLine{231             \}}
+\DoxyCodeLine{232         \}}
+\DoxyCodeLine{233 }
+\DoxyCodeLine{234         \textcolor{keyword}{virtual} \mbox{\hyperlink{a00491_a0927ccfbc4e114cef1f18c6f260d230b}{TaskStatus}} \mbox{\hyperlink{a01320_aeb8aa35f7156a85fff38d60c257db899}{GetResponseStatus}}()\textcolor{keyword}{ const}}
+\DoxyCodeLine{235 \textcolor{keyword}{        }\{}
+\DoxyCodeLine{236             \mbox{\hyperlink{a00491_a0927ccfbc4e114cef1f18c6f260d230b}{TaskStatus}} status = \mbox{\hyperlink{a00491_a0927ccfbc4e114cef1f18c6f260d230ba6f53a2fd075a965d3aeb368d915c00a7}{TaskStatus::TStatus\_NoResponseReceived}};}
+\DoxyCodeLine{237 }
+\DoxyCodeLine{238             \textcolor{keywordflow}{if} (mResponse)}
+\DoxyCodeLine{239             \{}
+\DoxyCodeLine{240                 status = mResponse-\/>status.type;}
+\DoxyCodeLine{241             \}}
+\DoxyCodeLine{242 }
+\DoxyCodeLine{243             \textcolor{keywordflow}{return} status;}
+\DoxyCodeLine{244         \}}
+\DoxyCodeLine{245 }
+\DoxyCodeLine{246         \textcolor{keyword}{virtual} \textcolor{keywordtype}{bool} \mbox{\hyperlink{a01320_a56a26abd90082cf94a6710d7b7e42e1a}{IsNeedToPingTaskStatus}}()\textcolor{keyword}{ const}}
+\DoxyCodeLine{247 \textcolor{keyword}{        }\{}
+\DoxyCodeLine{248             \textcolor{keywordflow}{return} \textcolor{keyword}{false};}
+\DoxyCodeLine{249         \}}
+\DoxyCodeLine{250 }
+\DoxyCodeLine{251         \textcolor{keyword}{virtual} std::string \mbox{\hyperlink{a01320_a9f1cd1e725e66afdc6110574ab6d69f3}{GetRequestName}}() \textcolor{keyword}{const} = 0;}
+\DoxyCodeLine{252 }
+\DoxyCodeLine{253         \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{a01320_aeeee685f31b968c1521b055ccf5eb10f}{CreateState}}()}
+\DoxyCodeLine{254         \{}
+\DoxyCodeLine{255             mState = std::make\_shared<State>();}
+\DoxyCodeLine{256         \}}
+\DoxyCodeLine{257 }
+\DoxyCodeLine{258         \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{a01320_a73883470a30e90a53f3384671f3fda2d}{MakeResponse}}()}
+\DoxyCodeLine{259         \{}
+\DoxyCodeLine{260             mResponse = std::make\_shared<CommandResponse>();}
+\DoxyCodeLine{261         \}}
+\DoxyCodeLine{262 }
+\DoxyCodeLine{263         \textcolor{keyword}{virtual} std::shared\_ptr<CommandResponse> \mbox{\hyperlink{a01320_aea078a3a558acf00d81ada4621817b97}{GetResponse}}()\textcolor{keyword}{ const}}
+\DoxyCodeLine{264 \textcolor{keyword}{        }\{}
+\DoxyCodeLine{265             \textcolor{keywordflow}{return} mResponse;}
+\DoxyCodeLine{266         \}}
+\DoxyCodeLine{267 }
+\DoxyCodeLine{268     \textcolor{keyword}{protected}:}
+\DoxyCodeLine{269         \textcolor{keyword}{virtual} google::protobuf::Message\& \mbox{\hyperlink{a01320_ab2a29386234779aafd289776e1f60495}{GetRequestBodyRef}}()}
+\DoxyCodeLine{270         \{}
+\DoxyCodeLine{271             \textcolor{keywordflow}{return} sEmptyMessage;}
+\DoxyCodeLine{272         \}}
+\DoxyCodeLine{273 }
+\DoxyCodeLine{274         \textcolor{keyword}{virtual} google::protobuf::Message\& \mbox{\hyperlink{a01320_a634bf5c31f241da1a9cf73572942aac3}{GetResponseBodyRef}}()}
+\DoxyCodeLine{275         \{}
+\DoxyCodeLine{276             \textcolor{keywordflow}{return} sEmptyMessage;}
+\DoxyCodeLine{277         \}}
+\DoxyCodeLine{278 }
+\DoxyCodeLine{279         \mbox{\hyperlink{a02032}{ptsl::ResponseError}} \mbox{\hyperlink{a01320_a345bb96a4a178b8d7961224040f660b7}{mGrpcResponseError}};}
+\DoxyCodeLine{280         std::shared\_ptr<State> \mbox{\hyperlink{a01320_a161820911b71a5b73ce1df1fc3054911}{mState}};}
+\DoxyCodeLine{281         std::shared\_ptr<CommandResponse> \mbox{\hyperlink{a01320_a666c9c93bcb2638673a1e8dbe2e71f26}{mResponse}};}
+\DoxyCodeLine{282 }
+\DoxyCodeLine{283     \textcolor{keyword}{private}:}
+\DoxyCodeLine{284         \textcolor{keyword}{static} google::protobuf::Message\& sEmptyMessage;}
+\DoxyCodeLine{285     \};}
+\DoxyCodeLine{286 \}; \textcolor{comment}{// namespace PTSLC\_CPP}}
+
+\end{DoxyCode}

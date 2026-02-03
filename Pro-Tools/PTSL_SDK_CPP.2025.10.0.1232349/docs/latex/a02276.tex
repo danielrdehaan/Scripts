@@ -1,0 +1,124 @@
+\hypertarget{a02276}{}\doxysection{Property\+Descriptor}
+\label{a02276}\index{PropertyDescriptor@{PropertyDescriptor}}
+
+
+\doxysubsection{Description}
+Structure that describes dynamic property. \doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+string \mbox{\hyperlink{a02276_a8ccf841cb59e451791bcb2e1ac4f1edc}{name}} = 1
+\begin{DoxyCompactList}\small\item\em (required) name of property field -\/ matches the field name in the message object for the associated dynamic property type \end{DoxyCompactList}\item 
+\mbox{\hyperlink{a00494_a962f27cf551f261f9d491aa6fe2d678f}{DP\+\_\+\+Value\+Types}} \mbox{\hyperlink{a02276_a05733c1d1fb330594288ecaa6e57f0fc}{value\+\_\+type}} = 2
+\begin{DoxyCompactList}\small\item\em (required) type of value expected \end{DoxyCompactList}\item 
+string \mbox{\hyperlink{a02276_a306691eb6b6d8403f05a8f8c1b88387e}{object\+\_\+type}} = 3
+\begin{DoxyCompactList}\small\item\em (optional) // name of message object \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{a02276_a89ebe0265f74c9919a622df7dccbfe5c}{required}} = 4
+\begin{DoxyCompactList}\small\item\em (required) is the property required \end{DoxyCompactList}\item 
+string \mbox{\hyperlink{a02276_a23af17c78302b71c14ef38ea40b8d1d7}{description}} = 5
+\begin{DoxyCompactList}\small\item\em (required) brief description of the property \end{DoxyCompactList}\item 
+string \mbox{\hyperlink{a02276_ac01880f8d68eddb677b98db6544eee46}{units}} = 6
+\begin{DoxyCompactList}\small\item\em (optional) expected units for this property if applicable \end{DoxyCompactList}\item 
+repeated string \mbox{\hyperlink{a02276_ad1ae55ed2479ea4d211536f8d49be0fc}{accepted\+\_\+values}} = 7
+\begin{DoxyCompactList}\small\item\em (optional) -\/ a list of accepted values \end{DoxyCompactList}\item 
+string \mbox{\hyperlink{a02276_a7f8911c6a50c4f42941fb220ec2e6408}{max\+\_\+value}} = 8
+\begin{DoxyCompactList}\small\item\em (optional) \end{DoxyCompactList}\item 
+string \mbox{\hyperlink{a02276_a06e4aef8cad0166f86f1e51067a52b3c}{min\+\_\+value}} = 9
+\begin{DoxyCompactList}\small\item\em (optional) \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{a02276_a8ccf841cb59e451791bcb2e1ac4f1edc}\label{a02276_a8ccf841cb59e451791bcb2e1ac4f1edc}} 
+\index{PropertyDescriptor@{PropertyDescriptor}!name@{name}}
+\index{name@{name}!PropertyDescriptor@{PropertyDescriptor}}
+\doxysubsubsection{\texorpdfstring{name}{name}}
+{\footnotesize\ttfamily string name = 1}
+
+
+
+(required) name of property field -\/ matches the field name in the message object for the associated dynamic property type 
+
+\mbox{\Hypertarget{a02276_a05733c1d1fb330594288ecaa6e57f0fc}\label{a02276_a05733c1d1fb330594288ecaa6e57f0fc}} 
+\index{PropertyDescriptor@{PropertyDescriptor}!value\_type@{value\_type}}
+\index{value\_type@{value\_type}!PropertyDescriptor@{PropertyDescriptor}}
+\doxysubsubsection{\texorpdfstring{value\_type}{value\_type}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a00494_a962f27cf551f261f9d491aa6fe2d678f}{DP\+\_\+\+Value\+Types}} value\+\_\+type = 2}
+
+
+
+(required) type of value expected 
+
+\mbox{\Hypertarget{a02276_a306691eb6b6d8403f05a8f8c1b88387e}\label{a02276_a306691eb6b6d8403f05a8f8c1b88387e}} 
+\index{PropertyDescriptor@{PropertyDescriptor}!object\_type@{object\_type}}
+\index{object\_type@{object\_type}!PropertyDescriptor@{PropertyDescriptor}}
+\doxysubsubsection{\texorpdfstring{object\_type}{object\_type}}
+{\footnotesize\ttfamily string object\+\_\+type = 3}
+
+
+
+(optional) // name of message object 
+
+\mbox{\Hypertarget{a02276_a89ebe0265f74c9919a622df7dccbfe5c}\label{a02276_a89ebe0265f74c9919a622df7dccbfe5c}} 
+\index{PropertyDescriptor@{PropertyDescriptor}!required@{required}}
+\index{required@{required}!PropertyDescriptor@{PropertyDescriptor}}
+\doxysubsubsection{\texorpdfstring{required}{required}}
+{\footnotesize\ttfamily bool required = 4}
+
+
+
+(required) is the property required 
+
+\mbox{\Hypertarget{a02276_a23af17c78302b71c14ef38ea40b8d1d7}\label{a02276_a23af17c78302b71c14ef38ea40b8d1d7}} 
+\index{PropertyDescriptor@{PropertyDescriptor}!description@{description}}
+\index{description@{description}!PropertyDescriptor@{PropertyDescriptor}}
+\doxysubsubsection{\texorpdfstring{description}{description}}
+{\footnotesize\ttfamily string description = 5}
+
+
+
+(required) brief description of the property 
+
+\mbox{\Hypertarget{a02276_ac01880f8d68eddb677b98db6544eee46}\label{a02276_ac01880f8d68eddb677b98db6544eee46}} 
+\index{PropertyDescriptor@{PropertyDescriptor}!units@{units}}
+\index{units@{units}!PropertyDescriptor@{PropertyDescriptor}}
+\doxysubsubsection{\texorpdfstring{units}{units}}
+{\footnotesize\ttfamily string units = 6}
+
+
+
+(optional) expected units for this property if applicable 
+
+\mbox{\Hypertarget{a02276_ad1ae55ed2479ea4d211536f8d49be0fc}\label{a02276_ad1ae55ed2479ea4d211536f8d49be0fc}} 
+\index{PropertyDescriptor@{PropertyDescriptor}!accepted\_values@{accepted\_values}}
+\index{accepted\_values@{accepted\_values}!PropertyDescriptor@{PropertyDescriptor}}
+\doxysubsubsection{\texorpdfstring{accepted\_values}{accepted\_values}}
+{\footnotesize\ttfamily repeated string accepted\+\_\+values = 7}
+
+
+
+(optional) -\/ a list of accepted values 
+
+\mbox{\Hypertarget{a02276_a7f8911c6a50c4f42941fb220ec2e6408}\label{a02276_a7f8911c6a50c4f42941fb220ec2e6408}} 
+\index{PropertyDescriptor@{PropertyDescriptor}!max\_value@{max\_value}}
+\index{max\_value@{max\_value}!PropertyDescriptor@{PropertyDescriptor}}
+\doxysubsubsection{\texorpdfstring{max\_value}{max\_value}}
+{\footnotesize\ttfamily string max\+\_\+value = 8}
+
+
+
+(optional) 
+
+\mbox{\Hypertarget{a02276_a06e4aef8cad0166f86f1e51067a52b3c}\label{a02276_a06e4aef8cad0166f86f1e51067a52b3c}} 
+\index{PropertyDescriptor@{PropertyDescriptor}!min\_value@{min\_value}}
+\index{min\_value@{min\_value}!PropertyDescriptor@{PropertyDescriptor}}
+\doxysubsubsection{\texorpdfstring{min\_value}{min\_value}}
+{\footnotesize\ttfamily string min\+\_\+value = 9}
+
+
+
+(optional) 
+
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{a00464}{PTSL.\+proto}}\end{DoxyCompactItemize}

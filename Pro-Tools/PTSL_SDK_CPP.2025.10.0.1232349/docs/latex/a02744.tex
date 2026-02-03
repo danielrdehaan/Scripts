@@ -1,0 +1,57 @@
+\hypertarget{a02744}{}\doxysection{Import\+Audio\+To\+Clip\+List\+Request\+Body}
+\label{a02744}\index{ImportAudioToClipListRequestBody@{ImportAudioToClipListRequestBody}}
+
+
+\doxysubsection{Description}
+Structure that describes Import\+Audio\+To\+Clip\+List request data. 
+
+\begin{DoxySince}{Since}
+Pro Tools 2025.\+06 
+\end{DoxySince}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+repeated string \mbox{\hyperlink{a02744_aadd0d1a71e4deeb6a7e655fe7ec3bad8}{file\+\_\+list}} = 1
+\begin{DoxyCompactList}\small\item\em List of audio files to import. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{a00494_a9d567bfbd66933b5c926467fcbe36173}{Audio\+Operations}} \mbox{\hyperlink{a02744_af7de830b1153caa3e3fad069cf533cf5}{audio\+\_\+operations}} = 2
+\begin{DoxyCompactList}\small\item\em How to import the input media. \end{DoxyCompactList}\item 
+string \mbox{\hyperlink{a02744_a311474d42d0749959dcf0e0b8989c55e}{destination\+\_\+path}} = 3
+\begin{DoxyCompactList}\small\item\em The destination path for the imported audio. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{a02744_aadd0d1a71e4deeb6a7e655fe7ec3bad8}\label{a02744_aadd0d1a71e4deeb6a7e655fe7ec3bad8}} 
+\index{ImportAudioToClipListRequestBody@{ImportAudioToClipListRequestBody}!file\_list@{file\_list}}
+\index{file\_list@{file\_list}!ImportAudioToClipListRequestBody@{ImportAudioToClipListRequestBody}}
+\doxysubsubsection{\texorpdfstring{file\_list}{file\_list}}
+{\footnotesize\ttfamily repeated string file\+\_\+list = 1}
+
+
+
+List of audio files to import. 
+
+\mbox{\Hypertarget{a02744_af7de830b1153caa3e3fad069cf533cf5}\label{a02744_af7de830b1153caa3e3fad069cf533cf5}} 
+\index{ImportAudioToClipListRequestBody@{ImportAudioToClipListRequestBody}!audio\_operations@{audio\_operations}}
+\index{audio\_operations@{audio\_operations}!ImportAudioToClipListRequestBody@{ImportAudioToClipListRequestBody}}
+\doxysubsubsection{\texorpdfstring{audio\_operations}{audio\_operations}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a00494_a9d567bfbd66933b5c926467fcbe36173}{Audio\+Operations}} audio\+\_\+operations = 2}
+
+
+
+How to import the input media. 
+
+Optional. If not provided, the default behavior is chosen by Pro Tools. Note\+: Pro Tools cannot always honor this request. Discrepancies will be noted in the response (check \mbox{\hyperlink{a02748_af7596d1da271c2a5e89977b88c77290c}{Import\+Audio\+To\+Clip\+List\+Response\+Body.\+failure\+\_\+list}}). \mbox{\Hypertarget{a02744_a311474d42d0749959dcf0e0b8989c55e}\label{a02744_a311474d42d0749959dcf0e0b8989c55e}} 
+\index{ImportAudioToClipListRequestBody@{ImportAudioToClipListRequestBody}!destination\_path@{destination\_path}}
+\index{destination\_path@{destination\_path}!ImportAudioToClipListRequestBody@{ImportAudioToClipListRequestBody}}
+\doxysubsubsection{\texorpdfstring{destination\_path}{destination\_path}}
+{\footnotesize\ttfamily string destination\+\_\+path = 3}
+
+
+
+The destination path for the imported audio. 
+
+Optional. If not provided, the audio will be imported to the session\textquotesingle{}s audio files folder. 
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{a00464}{PTSL.\+proto}}\end{DoxyCompactItemize}

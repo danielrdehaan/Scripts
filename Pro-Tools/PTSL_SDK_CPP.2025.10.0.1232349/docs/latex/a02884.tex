@@ -1,0 +1,153 @@
+\hypertarget{a02884}{}\doxysection{Bounce\+Track\+Request\+Body}
+\label{a02884}\index{BounceTrackRequestBody@{BounceTrackRequestBody}}
+
+
+\doxysubsection{Description}
+Structure that describes Bounce\+Track request data. 
+
+\begin{DoxySince}{Since}
+Pro Tools 2025.\+06 
+\end{DoxySince}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+string \mbox{\hyperlink{a02884_a9c26974aae7348ed515ef814b3392eab}{preset\+\_\+path}} = 1
+\begin{DoxyCompactList}\small\item\em File path for to Track\+Bounce preset to use. \end{DoxyCompactList}\item 
+string \mbox{\hyperlink{a02884_a67baa55057842e663a13cc4655192492}{file\+\_\+name\+\_\+prefix}} = 2
+\begin{DoxyCompactList}\small\item\em File name of bounced track. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{a00494_ab1acd24041b72f2426ef1c43b2bb99a2}{EM\+\_\+\+File\+Type}} \mbox{\hyperlink{a02884_a8a2dc0c4f45e07de33e49f766607cc4d}{file\+\_\+type}} = 3
+\begin{DoxyCompactList}\small\item\em File type of bounced track. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{a02236}{EM\+\_\+\+Audio\+Info}} \mbox{\hyperlink{a02884_ae94110dd9e192f3806f3208d754c6ddb}{audio\+\_\+info}} = 4
+\begin{DoxyCompactList}\small\item\em Information for audio section in the \mbox{\hyperlink{a02084}{Track}} Bounce window. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{a02256}{EM\+\_\+\+Location\+Info}} \mbox{\hyperlink{a02884_ad7693dfc9e6a051e8618addec119618d}{location\+\_\+info}} = 5
+\begin{DoxyCompactList}\small\item\em Information for location section in the \mbox{\hyperlink{a02084}{Track}} Bounce window. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{a00494_a126460572c79fe538db9136e88d0ff62}{Triple\+Bool}} \mbox{\hyperlink{a02884_a5c4743d6c0ae40c625b2f64014de4e9d}{offline\+\_\+bounce}} = 6
+\begin{DoxyCompactList}\small\item\em Option for offline bounce or real-\/time bounce. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{a02268}{Audio\+Encoding\+Options}} \mbox{\hyperlink{a02884_af804ebfee3b3c3c6cc015bb58ccb3128}{audio\+\_\+encoding\+\_\+options}} = 7
+\begin{DoxyCompactList}\small\item\em Encoding options information. \end{DoxyCompactList}\item 
+string \mbox{\hyperlink{a02884_adec9ec04484855b4eb08ae08c9964e91}{src\+\_\+track\+\_\+id}} = 8
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{a02084}{Track}} ID to bounce. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{a02680}{Timeline\+Location}} \mbox{\hyperlink{a02884_a72342dd94ddf1ec07348dab29bfc1f3a}{in\+\_\+location}} = 9
+\begin{DoxyCompactList}\small\item\em Start location of the bounce. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{a02680}{Timeline\+Location}} \mbox{\hyperlink{a02884_a8d113cc6e26c656ad7a40fcccc62b27b}{out\+\_\+location}} = 10
+\begin{DoxyCompactList}\small\item\em End location of the bounce. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{a02880}{Render\+Automation\+Options}} \mbox{\hyperlink{a02884_a959aac0bcd821646e22bc99f21e3ff3a}{automation\+\_\+options}} = 11
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{a02084}{Track}} bounce automation options. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{a02884_a9c26974aae7348ed515ef814b3392eab}\label{a02884_a9c26974aae7348ed515ef814b3392eab}} 
+\index{BounceTrackRequestBody@{BounceTrackRequestBody}!preset\_path@{preset\_path}}
+\index{preset\_path@{preset\_path}!BounceTrackRequestBody@{BounceTrackRequestBody}}
+\doxysubsubsection{\texorpdfstring{preset\_path}{preset\_path}}
+{\footnotesize\ttfamily string preset\+\_\+path = 1}
+
+
+
+File path for to Track\+Bounce preset to use. 
+
+\mbox{\Hypertarget{a02884_a67baa55057842e663a13cc4655192492}\label{a02884_a67baa55057842e663a13cc4655192492}} 
+\index{BounceTrackRequestBody@{BounceTrackRequestBody}!file\_name\_prefix@{file\_name\_prefix}}
+\index{file\_name\_prefix@{file\_name\_prefix}!BounceTrackRequestBody@{BounceTrackRequestBody}}
+\doxysubsubsection{\texorpdfstring{file\_name\_prefix}{file\_name\_prefix}}
+{\footnotesize\ttfamily string file\+\_\+name\+\_\+prefix = 2}
+
+
+
+File name of bounced track. 
+
+\mbox{\Hypertarget{a02884_a8a2dc0c4f45e07de33e49f766607cc4d}\label{a02884_a8a2dc0c4f45e07de33e49f766607cc4d}} 
+\index{BounceTrackRequestBody@{BounceTrackRequestBody}!file\_type@{file\_type}}
+\index{file\_type@{file\_type}!BounceTrackRequestBody@{BounceTrackRequestBody}}
+\doxysubsubsection{\texorpdfstring{file\_type}{file\_type}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a00494_ab1acd24041b72f2426ef1c43b2bb99a2}{EM\+\_\+\+File\+Type}} file\+\_\+type = 3}
+
+
+
+File type of bounced track. 
+
+\mbox{\Hypertarget{a02884_ae94110dd9e192f3806f3208d754c6ddb}\label{a02884_ae94110dd9e192f3806f3208d754c6ddb}} 
+\index{BounceTrackRequestBody@{BounceTrackRequestBody}!audio\_info@{audio\_info}}
+\index{audio\_info@{audio\_info}!BounceTrackRequestBody@{BounceTrackRequestBody}}
+\doxysubsubsection{\texorpdfstring{audio\_info}{audio\_info}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a02236}{EM\+\_\+\+Audio\+Info}} audio\+\_\+info = 4}
+
+
+
+Information for audio section in the \mbox{\hyperlink{a02084}{Track}} Bounce window. 
+
+\mbox{\Hypertarget{a02884_ad7693dfc9e6a051e8618addec119618d}\label{a02884_ad7693dfc9e6a051e8618addec119618d}} 
+\index{BounceTrackRequestBody@{BounceTrackRequestBody}!location\_info@{location\_info}}
+\index{location\_info@{location\_info}!BounceTrackRequestBody@{BounceTrackRequestBody}}
+\doxysubsubsection{\texorpdfstring{location\_info}{location\_info}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a02256}{EM\+\_\+\+Location\+Info}} location\+\_\+info = 5}
+
+
+
+Information for location section in the \mbox{\hyperlink{a02084}{Track}} Bounce window. 
+
+\mbox{\Hypertarget{a02884_a5c4743d6c0ae40c625b2f64014de4e9d}\label{a02884_a5c4743d6c0ae40c625b2f64014de4e9d}} 
+\index{BounceTrackRequestBody@{BounceTrackRequestBody}!offline\_bounce@{offline\_bounce}}
+\index{offline\_bounce@{offline\_bounce}!BounceTrackRequestBody@{BounceTrackRequestBody}}
+\doxysubsubsection{\texorpdfstring{offline\_bounce}{offline\_bounce}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a00494_a126460572c79fe538db9136e88d0ff62}{Triple\+Bool}} offline\+\_\+bounce = 6}
+
+
+
+Option for offline bounce or real-\/time bounce. 
+
+\mbox{\Hypertarget{a02884_af804ebfee3b3c3c6cc015bb58ccb3128}\label{a02884_af804ebfee3b3c3c6cc015bb58ccb3128}} 
+\index{BounceTrackRequestBody@{BounceTrackRequestBody}!audio\_encoding\_options@{audio\_encoding\_options}}
+\index{audio\_encoding\_options@{audio\_encoding\_options}!BounceTrackRequestBody@{BounceTrackRequestBody}}
+\doxysubsubsection{\texorpdfstring{audio\_encoding\_options}{audio\_encoding\_options}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a02268}{Audio\+Encoding\+Options}} audio\+\_\+encoding\+\_\+options = 7}
+
+
+
+Encoding options information. 
+
+\mbox{\Hypertarget{a02884_adec9ec04484855b4eb08ae08c9964e91}\label{a02884_adec9ec04484855b4eb08ae08c9964e91}} 
+\index{BounceTrackRequestBody@{BounceTrackRequestBody}!src\_track\_id@{src\_track\_id}}
+\index{src\_track\_id@{src\_track\_id}!BounceTrackRequestBody@{BounceTrackRequestBody}}
+\doxysubsubsection{\texorpdfstring{src\_track\_id}{src\_track\_id}}
+{\footnotesize\ttfamily string src\+\_\+track\+\_\+id = 8}
+
+
+
+\mbox{\hyperlink{a02084}{Track}} ID to bounce. 
+
+\mbox{\Hypertarget{a02884_a72342dd94ddf1ec07348dab29bfc1f3a}\label{a02884_a72342dd94ddf1ec07348dab29bfc1f3a}} 
+\index{BounceTrackRequestBody@{BounceTrackRequestBody}!in\_location@{in\_location}}
+\index{in\_location@{in\_location}!BounceTrackRequestBody@{BounceTrackRequestBody}}
+\doxysubsubsection{\texorpdfstring{in\_location}{in\_location}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a02680}{Timeline\+Location}} in\+\_\+location = 9}
+
+
+
+Start location of the bounce. 
+
+\mbox{\Hypertarget{a02884_a8d113cc6e26c656ad7a40fcccc62b27b}\label{a02884_a8d113cc6e26c656ad7a40fcccc62b27b}} 
+\index{BounceTrackRequestBody@{BounceTrackRequestBody}!out\_location@{out\_location}}
+\index{out\_location@{out\_location}!BounceTrackRequestBody@{BounceTrackRequestBody}}
+\doxysubsubsection{\texorpdfstring{out\_location}{out\_location}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a02680}{Timeline\+Location}} out\+\_\+location = 10}
+
+
+
+End location of the bounce. 
+
+\mbox{\Hypertarget{a02884_a959aac0bcd821646e22bc99f21e3ff3a}\label{a02884_a959aac0bcd821646e22bc99f21e3ff3a}} 
+\index{BounceTrackRequestBody@{BounceTrackRequestBody}!automation\_options@{automation\_options}}
+\index{automation\_options@{automation\_options}!BounceTrackRequestBody@{BounceTrackRequestBody}}
+\doxysubsubsection{\texorpdfstring{automation\_options}{automation\_options}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a02880}{Render\+Automation\+Options}} automation\+\_\+options = 11}
+
+
+
+\mbox{\hyperlink{a02084}{Track}} bounce automation options. 
+
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{a00464}{PTSL.\+proto}}\end{DoxyCompactItemize}

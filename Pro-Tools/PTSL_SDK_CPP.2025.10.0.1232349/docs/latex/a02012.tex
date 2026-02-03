@@ -1,0 +1,149 @@
+\hypertarget{a02012}{}\doxysection{Ptsl\+Cmd\+Command\+Result}
+\label{a02012}\index{PtslCmdCommandResult@{PtslCmdCommandResult}}
+
+
+{\ttfamily \#include $<$Ptsl\+Cmd\+Command\+Result.\+h$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{a02012_a6be6f94dc02169ff60f283ff9037e125}{Ptsl\+Cmd\+Command\+Result}} (const \mbox{\hyperlink{a01984}{PTSLC\+\_\+\+CPP\+::\+Cpp\+PTSLResponse}} \&client\+Response)
+\item 
+virtual \mbox{\hyperlink{a02012_aee73500f9e96ef427d1c1cf4166d17ee}{$\sim$\+Ptsl\+Cmd\+Command\+Result}} ()=default
+\item 
+virtual std\+::string \mbox{\hyperlink{a02012_aeceab8f2c81d2aa93ab1d4edab22bd5d}{To\+String}} () const
+\item 
+\mbox{\hyperlink{a02012_a67b76affb3b5d35fa419ac234144038b}{operator bool}} () const
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \mbox{\hyperlink{a02012}{Ptsl\+Cmd\+Command\+Result}} \mbox{\hyperlink{a02012_a71e70c2ecc01efe5a0d9cee9be6a95c4}{Create\+Cannot\+Parse\+Args\+Result}} (const std\+::string \&reason, const std\+::string \&cmd\+Name=\char`\"{}\char`\"{})
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{a02012_a28d3ca76b378b3e417205c760b511696}{got\+Response}} = false
+\item 
+std\+::string \mbox{\hyperlink{a02012_a4e4591a633e2eede7984e0a50e684206}{command\+Name}} = \char`\"{}\char`\"{}
+\item 
+std\+::string \mbox{\hyperlink{a02012_aca89687d436029fce7b3fa6a5a1d1834}{json\+Header}} = \char`\"{}\char`\"{}
+\item 
+std\+::string \mbox{\hyperlink{a02012_a59792b941ab4ec3167a390213b131bd5}{json\+Body}} = \char`\"{}\char`\"{}
+\item 
+std\+::string \mbox{\hyperlink{a02012_a7d8a2cda86885e9071038d9e36430a70}{json\+Error}} = \char`\"{}\char`\"{}
+\item 
+std\+::optional$<$ std\+::string $>$ \mbox{\hyperlink{a02012_a0d06129bcdae7059ec0df22903f005d9}{cannot\+Parse\+Args\+Reason}} = std\+::nullopt
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{a02012_a6be6f94dc02169ff60f283ff9037e125}\label{a02012_a6be6f94dc02169ff60f283ff9037e125}} 
+\index{PtslCmdCommandResult@{PtslCmdCommandResult}!PtslCmdCommandResult@{PtslCmdCommandResult}}
+\index{PtslCmdCommandResult@{PtslCmdCommandResult}!PtslCmdCommandResult@{PtslCmdCommandResult}}
+\doxysubsubsection{\texorpdfstring{PtslCmdCommandResult()}{PtslCmdCommandResult()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a02012}{Ptsl\+Cmd\+Command\+Result}} (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{a01984}{PTSLC\+\_\+\+CPP\+::\+Cpp\+PTSLResponse}} \&}]{client\+Response }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [explicit]}}
+
+
+
+References \mbox{\hyperlink{a00491_a499ea157e8ed6a8aed4acb377077c43b}{PTSLC\+\_\+\+CPP\+::\+Enum\+To\+String()}}, \mbox{\hyperlink{a01984_a7b04e38f0d3a41b61a800f85e7e8fa36}{Cpp\+PTSLResponse\+::\+Get\+Command\+Id()}}, \mbox{\hyperlink{a01984_aaf64fe92c4505a08d676511579478f5a}{Cpp\+PTSLResponse\+::\+Get\+Progress()}}, \mbox{\hyperlink{a01984_a39a988dde17c5aa799e1d128fc24b0ae}{Cpp\+PTSLResponse\+::\+Get\+Status()}}, \mbox{\hyperlink{a01984_a2305135a559d980716efc6034ac6cfb1}{Cpp\+PTSLResponse\+::\+Get\+Task\+Id()}}, \mbox{\hyperlink{a01984_a39e90127ae0e08a1d46809e70df63411}{Cpp\+PTSLResponse\+::\+Get\+Version()}}, \mbox{\hyperlink{a01984_afa0c80508459e21fc25e101fdfc63c96}{Cpp\+PTSLResponse\+::\+Get\+Versioned\+Response\+Header\+Json()}}, \mbox{\hyperlink{a01984_ac05310a53af17359a0b0ced605dbe8a1}{Cpp\+PTSLResponse\+::\+Get\+Version\+Minor()}}, \mbox{\hyperlink{a01984_ab9e9064c25b6aa9fcb704c63a862a1bc}{Cpp\+PTSLResponse\+::\+Get\+Version\+Revision()}}, \mbox{\hyperlink{a02012_aca89687d436029fce7b3fa6a5a1d1834}{json\+Header}}, \mbox{\hyperlink{a01992_a7b81a421a48139d3e2fb121769c6629c}{Constants\+::\+RESPONSE\+\_\+\+HEADER\+\_\+\+COMMAND}}, \mbox{\hyperlink{a01992_ab66b2d42ad9bc3a50972eb8bb3d9576d}{Constants\+::\+RESPONSE\+\_\+\+HEADER\+\_\+\+PROGRESS}}, \mbox{\hyperlink{a01992_ae498863ebb54c3e01a68f1e582293464}{Constants\+::\+RESPONSE\+\_\+\+HEADER\+\_\+\+STATUS}}, \mbox{\hyperlink{a01992_a5f3cf9ade2ff4aeeec4a51c6b8bb0b3f}{Constants\+::\+RESPONSE\+\_\+\+HEADER\+\_\+\+TASK\+\_\+\+ID}}, \mbox{\hyperlink{a01992_acd847ac769932f5f7f9a39f8d2d0abb6}{Constants\+::\+RESPONSE\+\_\+\+HEADER\+\_\+\+VERSION}}, \mbox{\hyperlink{a01992_a69ddab44a33e3cbbfa13168ffefd1bf5}{Constants\+::\+RESPONSE\+\_\+\+HEADER\+\_\+\+VERSION\+\_\+\+MINOR}}, \mbox{\hyperlink{a01992_a06cf2b4d853e06b6cc1f223943d4ddb8}{Constants\+::\+RESPONSE\+\_\+\+HEADER\+\_\+\+VERSION\+\_\+\+REVISION}}, and \mbox{\hyperlink{a01992_a9412ef7fb741b532d353bbee9a001e84}{Constants\+::\+RESPONSE\+\_\+\+HEADER\+\_\+\+VERSIONED\+\_\+\+RESPONSE\+\_\+\+HEADER\+\_\+\+JSON}}.
+
+\mbox{\Hypertarget{a02012_aee73500f9e96ef427d1c1cf4166d17ee}\label{a02012_aee73500f9e96ef427d1c1cf4166d17ee}} 
+\index{PtslCmdCommandResult@{PtslCmdCommandResult}!````~PtslCmdCommandResult@{$\sim$PtslCmdCommandResult}}
+\index{````~PtslCmdCommandResult@{$\sim$PtslCmdCommandResult}!PtslCmdCommandResult@{PtslCmdCommandResult}}
+\doxysubsubsection{\texorpdfstring{$\sim$PtslCmdCommandResult()}{~PtslCmdCommandResult()}}
+{\footnotesize\ttfamily virtual $\sim$\mbox{\hyperlink{a02012}{Ptsl\+Cmd\+Command\+Result}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}, {\ttfamily [default]}}
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{a02012_a71e70c2ecc01efe5a0d9cee9be6a95c4}\label{a02012_a71e70c2ecc01efe5a0d9cee9be6a95c4}} 
+\index{PtslCmdCommandResult@{PtslCmdCommandResult}!CreateCannotParseArgsResult@{CreateCannotParseArgsResult}}
+\index{CreateCannotParseArgsResult@{CreateCannotParseArgsResult}!PtslCmdCommandResult@{PtslCmdCommandResult}}
+\doxysubsubsection{\texorpdfstring{CreateCannotParseArgsResult()}{CreateCannotParseArgsResult()}}
+{\footnotesize\ttfamily static \mbox{\hyperlink{a02012}{Ptsl\+Cmd\+Command\+Result}} Create\+Cannot\+Parse\+Args\+Result (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{reason,  }\item[{const std\+::string \&}]{cmd\+Name = {\ttfamily \char`\"{}\char`\"{}} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Referenced by \mbox{\hyperlink{a02020_aa40745c10e0c5c76b86151ba0c79dcbc}{Ptsl\+Cmd\+Command\+Runner\+::\+Run\+Command()}}, \mbox{\hyperlink{a02020_a3f20f03ca7228e0e3240f69f8313340a}{Ptsl\+Cmd\+Command\+Runner\+::\+Run\+File\+Script()}}, and \mbox{\hyperlink{a02020_a20c4c340e8dfd65eb1f69fc1c40a509b}{Ptsl\+Cmd\+Command\+Runner\+::\+Run\+Script()}}.
+
+\mbox{\Hypertarget{a02012_aeceab8f2c81d2aa93ab1d4edab22bd5d}\label{a02012_aeceab8f2c81d2aa93ab1d4edab22bd5d}} 
+\index{PtslCmdCommandResult@{PtslCmdCommandResult}!ToString@{ToString}}
+\index{ToString@{ToString}!PtslCmdCommandResult@{PtslCmdCommandResult}}
+\doxysubsubsection{\texorpdfstring{ToString()}{ToString()}}
+{\footnotesize\ttfamily virtual std\+::string To\+String (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+References \mbox{\hyperlink{a02012_a28d3ca76b378b3e417205c760b511696}{got\+Response}}, \mbox{\hyperlink{a02012_a59792b941ab4ec3167a390213b131bd5}{json\+Body}}, \mbox{\hyperlink{a02012_a7d8a2cda86885e9071038d9e36430a70}{json\+Error}}, \mbox{\hyperlink{a02012_aca89687d436029fce7b3fa6a5a1d1834}{json\+Header}}, \mbox{\hyperlink{a01992_a003dbd322a05b91896d0520e19bb7ce3}{Constants\+::\+RESPONSE\+\_\+\+BODY}}, \mbox{\hyperlink{a01992_ad25feaa33d7de936009108e51408cc4f}{Constants\+::\+RESPONSE\+\_\+\+ERROR}}, and \mbox{\hyperlink{a01992_aef7cd01471960875a074bcc3408ed978}{Constants\+::\+RESPONSE\+\_\+\+HEADER}}.
+
+\mbox{\Hypertarget{a02012_a67b76affb3b5d35fa419ac234144038b}\label{a02012_a67b76affb3b5d35fa419ac234144038b}} 
+\index{PtslCmdCommandResult@{PtslCmdCommandResult}!operator bool@{operator bool}}
+\index{operator bool@{operator bool}!PtslCmdCommandResult@{PtslCmdCommandResult}}
+\doxysubsubsection{\texorpdfstring{operator bool()}{operator bool()}}
+{\footnotesize\ttfamily operator bool (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+References \mbox{\hyperlink{a02012_a28d3ca76b378b3e417205c760b511696}{got\+Response}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{a02012_a28d3ca76b378b3e417205c760b511696}\label{a02012_a28d3ca76b378b3e417205c760b511696}} 
+\index{PtslCmdCommandResult@{PtslCmdCommandResult}!gotResponse@{gotResponse}}
+\index{gotResponse@{gotResponse}!PtslCmdCommandResult@{PtslCmdCommandResult}}
+\doxysubsubsection{\texorpdfstring{gotResponse}{gotResponse}}
+{\footnotesize\ttfamily bool got\+Response = false}
+
+
+
+Referenced by \mbox{\hyperlink{a02012_a67b76affb3b5d35fa419ac234144038b}{operator bool()}}, and \mbox{\hyperlink{a02012_aeceab8f2c81d2aa93ab1d4edab22bd5d}{To\+String()}}.
+
+\mbox{\Hypertarget{a02012_a4e4591a633e2eede7984e0a50e684206}\label{a02012_a4e4591a633e2eede7984e0a50e684206}} 
+\index{PtslCmdCommandResult@{PtslCmdCommandResult}!commandName@{commandName}}
+\index{commandName@{commandName}!PtslCmdCommandResult@{PtslCmdCommandResult}}
+\doxysubsubsection{\texorpdfstring{commandName}{commandName}}
+{\footnotesize\ttfamily std\+::string command\+Name = \char`\"{}\char`\"{}}
+
+\mbox{\Hypertarget{a02012_aca89687d436029fce7b3fa6a5a1d1834}\label{a02012_aca89687d436029fce7b3fa6a5a1d1834}} 
+\index{PtslCmdCommandResult@{PtslCmdCommandResult}!jsonHeader@{jsonHeader}}
+\index{jsonHeader@{jsonHeader}!PtslCmdCommandResult@{PtslCmdCommandResult}}
+\doxysubsubsection{\texorpdfstring{jsonHeader}{jsonHeader}}
+{\footnotesize\ttfamily std\+::string json\+Header = \char`\"{}\char`\"{}}
+
+
+
+Referenced by \mbox{\hyperlink{a02012_a6be6f94dc02169ff60f283ff9037e125}{Ptsl\+Cmd\+Command\+Result()}}, and \mbox{\hyperlink{a02012_aeceab8f2c81d2aa93ab1d4edab22bd5d}{To\+String()}}.
+
+\mbox{\Hypertarget{a02012_a59792b941ab4ec3167a390213b131bd5}\label{a02012_a59792b941ab4ec3167a390213b131bd5}} 
+\index{PtslCmdCommandResult@{PtslCmdCommandResult}!jsonBody@{jsonBody}}
+\index{jsonBody@{jsonBody}!PtslCmdCommandResult@{PtslCmdCommandResult}}
+\doxysubsubsection{\texorpdfstring{jsonBody}{jsonBody}}
+{\footnotesize\ttfamily std\+::string json\+Body = \char`\"{}\char`\"{}}
+
+
+
+Referenced by \mbox{\hyperlink{a02012_aeceab8f2c81d2aa93ab1d4edab22bd5d}{To\+String()}}.
+
+\mbox{\Hypertarget{a02012_a7d8a2cda86885e9071038d9e36430a70}\label{a02012_a7d8a2cda86885e9071038d9e36430a70}} 
+\index{PtslCmdCommandResult@{PtslCmdCommandResult}!jsonError@{jsonError}}
+\index{jsonError@{jsonError}!PtslCmdCommandResult@{PtslCmdCommandResult}}
+\doxysubsubsection{\texorpdfstring{jsonError}{jsonError}}
+{\footnotesize\ttfamily std\+::string json\+Error = \char`\"{}\char`\"{}}
+
+
+
+Referenced by \mbox{\hyperlink{a02012_aeceab8f2c81d2aa93ab1d4edab22bd5d}{To\+String()}}.
+
+\mbox{\Hypertarget{a02012_a0d06129bcdae7059ec0df22903f005d9}\label{a02012_a0d06129bcdae7059ec0df22903f005d9}} 
+\index{PtslCmdCommandResult@{PtslCmdCommandResult}!cannotParseArgsReason@{cannotParseArgsReason}}
+\index{cannotParseArgsReason@{cannotParseArgsReason}!PtslCmdCommandResult@{PtslCmdCommandResult}}
+\doxysubsubsection{\texorpdfstring{cannotParseArgsReason}{cannotParseArgsReason}}
+{\footnotesize\ttfamily std\+::optional$<$std\+::string$>$ cannot\+Parse\+Args\+Reason = std\+::nullopt}
+
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{a00437}{Ptsl\+Cmd\+Command\+Result.\+h}}\end{DoxyCompactItemize}

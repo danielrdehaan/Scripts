@@ -1,0 +1,270 @@
+\label{index_mainpage}%
+\Hypertarget{index_mainpage}%
+\hypertarget{index_autotoc_md0}{}\doxysection{Welcome}\label{index_autotoc_md0}
+The Pro Tools Scripting Library makes it possible for applications to interact with Pro Tools. PTSL supports RPC with any language supported by the g\+RPC protocol.
+
+This package includes a reference C++ client implementation for PTSL as well as an example C++ client application, ptslcmd.
+
+For a list of commands provided by the Pro Tools Scripting Library, see \mbox{\hyperlink{a00469}{All commands}}\hypertarget{index_autotoc_md1}{}\doxysubsection{License}\label{index_autotoc_md1}
+All documents in the Pro Tools Scripting Library contain confidential information of Avid. Do not disclose to any third party. Use of the information contained in the Pro Tools Scripting Library is subject to an Avid SDK license. Questions regarding this agreement can be sent to Avid\textquotesingle{}s Audio SDK team at \href{mailto:audiosdk@avid.com}{\texttt{ audiosdk@avid.\+com}}.\hypertarget{index_autotoc_md2}{}\doxysection{Getting Started}\label{index_autotoc_md2}
+Follow this brief guide to get started with PTSL and use the ptslcmd example application to issue commands to Pro Tools.\hypertarget{index_autotoc_md3}{}\doxysubsection{Prerequisites}\label{index_autotoc_md3}
+Your system must meet the following requirements to build the PTSL C++ client and the ptslcmd example application successfully\+:
+
+Mac\+:
+\begin{DoxyItemize}
+\item Python version \texorpdfstring{$>$}{>}= 3.\+8
+\item XCode version \texorpdfstring{$>$}{>}= 10.\+2.\+1
+\end{DoxyItemize}
+
+Windows\+:
+\begin{DoxyItemize}
+\item Python version \texorpdfstring{$>$}{>}= 3.\+8
+\item Visual Studio Community Edition (vs2017, vs2019, vs2022)
+\item Windows SDK 11 (10.\+0.\+22000)
+\end{DoxyItemize}
+
+Conan version 1.\+62.\+0 as provided in Config/requirements.\+txt or the latest 1.\+x version of Conan.\hypertarget{index_autotoc_md4}{}\doxysubsection{Build the PTSL C++ Client Wrapper}\label{index_autotoc_md4}
+The PTSL C++ Client Wrapper is a cmake project that creates a dynamic library for easy integration into your application.
+
+Build the library using the setup/build\+\_\+cpp\+\_\+ptsl\+\_\+sdk.\+py script. The script takes arguments for the project to build and the build configurations\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{python3 setup/build\_cpp\_ptsl\_sdk.py -\/-\/target ptsl.client.cpp -\/-\/config Debug [-\/-\/arch] [-\/-\/os\_version] [-\/-\/vs\_compiler]}
+
+\end{DoxyCode}
+
+
+The compiled library is placed in the SDK\textquotesingle{}s install directory.
+
+This script sets up a python virtual environment (venv) and uses conan to pull in dependencies (including cmake) to that environment. Finally it uses cmake to perform the build. See the contents of the config directory if you\textquotesingle{}d like more details on how the build process works.\hypertarget{index_autotoc_md5}{}\doxysubsection{Build and run the ptslcmd example application}\label{index_autotoc_md5}
+The ptslcmd application provides an example of how to use the Client Wrapper library in a PTSL client.
+
+The build\+\_\+cpp\+\_\+ptsl\+\_\+sdk.\+py script includes an option for building the example application\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{python3 setup/build\_cpp\_ptsl\_sdk.py -\/-\/target ptslcmd.sdk -\/-\/config Debug [-\/-\/arch] [-\/-\/os\_version] [-\/-\/vs\_compiler]}
+
+\end{DoxyCode}
+
+
+ptslcmd provides a command line interface for executing various PTSL API commands. In addition to serving as an example of a simple client, ptslcmd can be used as a way to test out various API methods.
+
+You can check an example of ptslcmd usage and command line arguments in \mbox{\hyperlink{a00431}{ptslcmd.\+cpp}}\hypertarget{index_autotoc_md6}{}\doxysection{Using the PTSL Client Wrapper}\label{index_autotoc_md6}
+To use the PTSL C++ client wrapper in your application, create a \mbox{\hyperlink{a01328}{Cpp\+PTSLClient}} object. This class provides a C++ interface to the PTSL inter-\/process communication and commands.
+
+This example code fragment shows how to instantiate the client using the \mbox{\hyperlink{a01348}{Client\+Config}} structure to configure and instantiate the client wrapper.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{a00017}{CppPTSLClient.h}}"{}}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\mbox{\hyperlink{a01348}{PTSLC\_CPP::ClientConfig}} config}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{    \textcolor{stringliteral}{"{}localhost:31416"{}},                              \textcolor{comment}{// server address -\/-\/ note the server port!}}
+\DoxyCodeLine{    ClientConfig::Mode::ProTools,                   \textcolor{comment}{// turn off stand-\/alone mode -\/-\/ look for a server instead of launching our own (see CppPTSLClient::LocateServer)}}
+\DoxyCodeLine{    ClientConfig::SkipHostLaunch::No                \textcolor{comment}{// do not skip auto launch -\/-\/ try to launch Pro Tools if it is not running already}}
+\DoxyCodeLine{\};}
+\DoxyCodeLine{\textcolor{keyword}{auto} client = std::make\_unique<PTSLC\_CPP::CppPTSLClient>(config);}
+
+\end{DoxyCode}
+\hypertarget{index_autotoc_md7}{}\doxysubsection{Establish a connection to Pro Tools}\label{index_autotoc_md7}
+Pro Tools requires connection registration before any PTSL commands may be executed by your application.
+
+Use the \mbox{\hyperlink{a02472}{Register\+Connection\+Request\+Body}} message to establish a connection to Pro Tools. This request takes 2 required string parameters\+: {\ttfamily company\+\_\+name} and {\ttfamily application\+\_\+name}. See \mbox{\hyperlink{a00494_aaf8d2069e2c6bbecf4aa8f9819028e8aadbcbc9c114ba96f458c70cac0b0c5e0a}{Register\+Connection}} for more details.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{a01980}{PTSLC\_CPP::CppPTSLRequest}} request\{ \mbox{\hyperlink{a00491_ae5152a79762c33c83fdb5752192e511ca4e17a53a8e094abfcd19d35a3790a64f}{PTSLC\_CPP::CommandId::RegisterConnection}}, R\textcolor{stringliteral}{"{}(\{ "{}company\_name"{}: "{}YOUR COMPANY NAME"{}, "{}application\_name"{}: "{}YOUR APPLICATION NAME"{} \})"{} \};}}
+\DoxyCodeLine{\textcolor{stringliteral}{}}
+\DoxyCodeLine{\textcolor{stringliteral}{}\textcolor{keyword}{auto} response = client-\/>SendRequest(request).get();}
+\DoxyCodeLine{ParseResponse(registrationRsp); \textcolor{comment}{// see below}}
+
+\end{DoxyCode}
+
+
+Instead of manually creating a JSON string you can reuse protocol objects to generate it based on the \mbox{\hyperlink{a00464}{PTSL.\+proto}}. For this option you need to generate {\ttfamily PTSL.\+pb.\+h} using the protobuf compiler.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include "{}PTSL.pb.h"{}}}
+\DoxyCodeLine{}
+\DoxyCodeLine{...}
+\DoxyCodeLine{}
+\DoxyCodeLine{ptsl::RegisterConnectionRequestBody requestBody;}
+\DoxyCodeLine{requestBody.set\_company\_name(\textcolor{stringliteral}{"{}YOUR COMPANY NAME"{}});}
+\DoxyCodeLine{requestBody.set\_application\_name(\textcolor{stringliteral}{"{}YOUR APPLICATION NAME"{}});}
+\DoxyCodeLine{}
+\DoxyCodeLine{google::protobuf::util::JsonOptions jOpts;}
+\DoxyCodeLine{jOpts.always\_print\_primitive\_fields = \textcolor{keyword}{true};}
+\DoxyCodeLine{jOpts.preserve\_proto\_field\_names = \textcolor{keyword}{true};}
+\DoxyCodeLine{}
+\DoxyCodeLine{std::string \mbox{\hyperlink{a00002_ab701e3ac61a85b337ec5c1abaad6742d}{json}};}
+\DoxyCodeLine{\textcolor{keywordflow}{if} (MessageToJsonString(requestBody, \&\mbox{\hyperlink{a00002_ab701e3ac61a85b337ec5c1abaad6742d}{json}}, jOpts).ok())}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{    \textcolor{keyword}{auto} response = client-\/>SendRequest(\mbox{\hyperlink{a01980}{PTSLC\_CPP::CppPTSLRequest}}\{ \mbox{\hyperlink{a00491_ae5152a79762c33c83fdb5752192e511ca4e17a53a8e094abfcd19d35a3790a64f}{PTSLC\_CPP::CommandId::RegisterConnection}}, \mbox{\hyperlink{a00002_ab701e3ac61a85b337ec5c1abaad6742d}{json}} \}).get();}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{\textcolor{keywordflow}{else}}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{    ...}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+
+
+If this command is successful it establishes a connection and provides an associated guid named {\ttfamily session\+\_\+id}, which will be used in the request header for all subsequent commands. Note, the {\ttfamily session\+\_\+id} persists throughout the life of the currently running instance of Pro Tools and has no correlation with opening and closing Pro Tools sessions. After Pro Tools exits you will need to re-\/register your client.
+
+The client wrapper keeps track of your {\ttfamily session\+\_\+id} for you and submits it in the request header with each of your commands, so you do not need to capture or track it yourself.
+
+See \mbox{\hyperlink{a00002}{Source/\+Cpp\+PTSLClient.\+cpp}} for more information about how the client wrapper tracks your {\ttfamily session\+\_\+id}.
+
+\doxysubsubsection*{Local vs Remote Connection to PTSL Server}
+
+Note the PTSL service currently requires a local client for connection. This is because the server is bound to localhost. As a result, it does not support remote connections at this time.
+
+\doxysubsubsection*{PTSL Client Threading in AAX Plugins}
+
+For PTSL integration in AAX plugins, ensure PTSL client code runs in a separate thread. This avoids deadlocks from concurrent PTSL client code execution and incoming request servicing in the main Pro Tools thread.\hypertarget{index_autotoc_md8}{}\doxysubsection{Issue a command to Pro Tools}\label{index_autotoc_md8}
+In the steps below, the \mbox{\hyperlink{a00494_aaf8d2069e2c6bbecf4aa8f9819028e8aa25599a03f0711edc5699aff815505884}{Export\+Session\+Info\+As\+Text}} command will be used as an example. This command exports session information into a text file.
+
+The \mbox{\hyperlink{a00494_aaf8d2069e2c6bbecf4aa8f9819028e8aa25599a03f0711edc5699aff815505884}{Export\+Session\+Info\+As\+Text}} command is configured using an \mbox{\hyperlink{a02296}{Export\+Session\+Info\+As\+Text\+Request\+Body}} data structure, a collection of parameters used to fill the client app\textquotesingle{}s request to the PTSL server in Pro Tools.
+
+This completed request can now be passed to the \mbox{\hyperlink{a01328_a2c6a9bfa639cab78fcb3d4159c460c5f}{Send\+Request}} method.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{CppPTSLRequest request\{ \mbox{\hyperlink{a00491_ae5152a79762c33c83fdb5752192e511cace22d77e5353bb88f6f315464601fadb}{PTSLC\_CPP::CommandId::ExportSessionInfoAsText}}, R\textcolor{stringliteral}{"{}(\{}}
+\DoxyCodeLine{\textcolor{stringliteral}{    "{}include\_file\_list"{}: true,}}
+\DoxyCodeLine{\textcolor{stringliteral}{    "{}include\_clip\_list"{}: true,}}
+\DoxyCodeLine{\textcolor{stringliteral}{    "{}include\_markers"{}: true,}}
+\DoxyCodeLine{\textcolor{stringliteral}{    "{}include\_plugin\_list"{}: true,}}
+\DoxyCodeLine{\textcolor{stringliteral}{    "{}include\_track\_edls"{}: true,}}
+\DoxyCodeLine{\textcolor{stringliteral}{    "{}show\_sub\_frames"{}: true,}}
+\DoxyCodeLine{\textcolor{stringliteral}{    "{}include\_user\_timestamps"{}: true,}}
+\DoxyCodeLine{\textcolor{stringliteral}{    "{}track\_list\_type"{}: "{}AllTracks"{},}}
+\DoxyCodeLine{\textcolor{stringliteral}{    "{}fade\_handling\_type"{}: "{}ShowCrossfades"{},}}
+\DoxyCodeLine{\textcolor{stringliteral}{    "{}track\_offset\_options"{}: "{}BarsBeats"{},}}
+\DoxyCodeLine{\textcolor{stringliteral}{    "{}text\_as\_file\_format"{}: "{}UTF8"{},}}
+\DoxyCodeLine{\textcolor{stringliteral}{    "{}output\_type"{}: "{}ESI\_File"{},}}
+\DoxyCodeLine{\textcolor{stringliteral}{    "{}output\_path"{}: "{}/path/to/session\_info.txt"{}}}
+\DoxyCodeLine{\textcolor{stringliteral}{\})"{} \};}}
+\DoxyCodeLine{\textcolor{stringliteral}{}}
+\DoxyCodeLine{\textcolor{stringliteral}{}\textcolor{keyword}{auto} response = client-\/>SendRequest(request).get();}
+\DoxyCodeLine{ParseResponse(response); \textcolor{comment}{// see below}}
+
+\end{DoxyCode}
+\hypertarget{index_autotoc_md9}{}\doxysubsection{Determine whether a command succeeded}\label{index_autotoc_md9}
+It is important to check whether every command has succeeded by analyzing the \mbox{\hyperlink{a01984}{Cpp\+PTSLResponse}} it returns. Command failures may occur for a number of reasons, and your client application should be designed to accept and recover from a command error. Depending on the error condition, a re-\/try may succeed.
+
+This example shows a test implementation checking a command response for success.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keywordtype}{void} ParseResponse(\textcolor{keyword}{const} \mbox{\hyperlink{a01984}{PTSLC\_CPP::CppPTSLResponse}}\& rsp)}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{    \textcolor{keywordflow}{if} (rsp.\mbox{\hyperlink{a01984_a39a988dde17c5aa799e1d128fc24b0ae}{GetStatus}}() == \mbox{\hyperlink{a00494_aacda182df7dba8ce63a50654d7232ba8af47f90c31ee3cdaa28b81ecf57b72ce9}{PTSLC\_CPP::CommandStatusType::Completed}})}
+\DoxyCodeLine{    \{}
+\DoxyCodeLine{        std::cout << \textcolor{stringliteral}{"{}Command completed successfully!\(\backslash\)n"{}} << rsp.\mbox{\hyperlink{a01984_a830904d6ccd5018f4de41ab57ff023ce}{GetResponseBodyJson}}() << \textcolor{stringliteral}{"{}\(\backslash\)n"{}};}
+\DoxyCodeLine{    \}}
+\DoxyCodeLine{    \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (rsp.\mbox{\hyperlink{a01984_a39a988dde17c5aa799e1d128fc24b0ae}{GetStatus}}() == \mbox{\hyperlink{a00494_aacda182df7dba8ce63a50654d7232ba8a1f506c828f4945d6b5a7bf71445f7d54}{PTSLC\_CPP::CommandStatusType::Failed}})}
+\DoxyCodeLine{    \{}
+\DoxyCodeLine{        std::cout << \textcolor{stringliteral}{"{}Command failed!\(\backslash\)n"{}} << rsp.\mbox{\hyperlink{a01984_afb5d29338731c7351981441bd9149a8c}{GetResponseErrorJson}}() << \textcolor{stringliteral}{"{}\(\backslash\)n"{}};}
+\DoxyCodeLine{        \textcolor{comment}{// or}}
+\DoxyCodeLine{        \textcolor{keywordflow}{for} (\textcolor{keyword}{const} \textcolor{keyword}{auto}\& error : rsp.\mbox{\hyperlink{a01984_a03bc7629d5d06dd1921eb2835cc3948b}{GetResponseErrorList}}().\mbox{\hyperlink{a01368_a450ab3da1da8707cd44ebbecf379d90b}{errors}})}
+\DoxyCodeLine{        \{}
+\DoxyCodeLine{            std::cout << (error-\/>isWarning ? \textcolor{stringliteral}{"{}Warning "{}} : \textcolor{stringliteral}{"{}Error "{}}) << \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{int}\textcolor{keyword}{>}(error-\/>errorType) << \textcolor{stringliteral}{"{}: "{}} << error-\/>errorMessage << \textcolor{stringliteral}{"{}\(\backslash\)n"{}};}
+\DoxyCodeLine{        \}}
+\DoxyCodeLine{    \}}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+\hypertarget{index_autotoc_md10}{}\doxysection{Versioning and compatibility}\label{index_autotoc_md10}
+Compatibility information for specific releases is noted in the \textquotesingle{}Release Notes\textquotesingle{} tab.
+
+If a PTSL client application attempts to connect to an incompatible version of Pro Tools, a \mbox{\hyperlink{a00491_a8fe9e0532a0e4ab36abdbc81b22f0645aa5efd83cacf898e2156e4886847934ab}{SDK\+\_\+\+Version\+Mismatch}} error will be returned.
+
+For more information about versioning, see \mbox{\hyperlink{a00446}{PTSL\+\_\+\+Versions.\+h}}\hypertarget{index_autotoc_md11}{}\doxysection{Troubleshooting}\label{index_autotoc_md11}
+\hypertarget{index_autotoc_md12}{}\doxysubsection{General FAQ}\label{index_autotoc_md12}
+For answers to the most frequently asked questions, see the \href{https://kb.avid.com/pkb/articles/FAQ/Pro-Tools-Scripting-SDK-FAQ}{\texttt{ Pro Tools Scripting SDK FAQ}}.\hypertarget{index_autotoc_md13}{}\doxysubsection{Pro Tools Logs}\label{index_autotoc_md13}
+When troubleshooting issues with PTSL it is often useful to review the Pro Tools application logs. Pro Tools log files are written to $\sim$\+Library/\+Logs/\+Avid on Mac and \%Local\+App\+Data\%\textbackslash{}Avid\textbackslash{}Logs on Windows.
+
+To enable PTSL-\/specific logging, place a file named \char`\"{}config.\+digitrace\char`\"{} next to the Pro Tools application bundle (Mac) or executable (Windows) containing the following line\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{DTF\_PTSL=file@DTP\_LOW}
+
+\end{DoxyCode}
+
+
+If the PTSL tracing has been enabled properly you should see {\ttfamily DTF\+\_\+\+PTSL@DTP\+\_\+\+LOW(0e28)} in the log file\textquotesingle{}s preamble and logs such as \char`\"{}\+Incoming PTSL command\+: \{...\}\char`\"{} when Pro Tools receives commands from the client. All PTSL logging traces will include {\ttfamily 0e28} in the \char`\"{}\+Facility\char`\"{} column, so you can use that identifier to quickly search the log file for PTSL related information.\hypertarget{index_autotoc_md14}{}\doxysubsection{Conan errors when running the build script}\label{index_autotoc_md14}
+If you see an error referencing a problem with a Conan package when running the setup/build\+\_\+cpp\+\_\+ptsl\+\_\+sdk.\+py script then follow the steps below.
+
+An example error type that you may see\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{Error loading conanfile ... Current Conan version does not satisfy the defined one.}
+
+\end{DoxyCode}
+
+
+As a quick fix, it is sometimes possible to resolve this problem by clearing the conan cache at $\sim$/.conan/data, then re-\/running the build script. This will essentially delete all of the PTSL dependencies that have been downloaded already, and this will fix the issue if the underlying problem is a corrupt or invalid package in the cache.
+
+If clearing the cache does not work then the next step is to update the requirements.\+txt file. This will ensure that both the Conan package itself and all of its dependencies are up-\/to-\/date with the requirements from the public conan registry. All of the next steps should be done in the same folder\+:
+
+
+\begin{DoxyEnumerate}
+\item Rename the existing requirements.\+txt file to something else.
+\item Create a virtual environment (venv) to store new dependencies 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{python -\/m venv .venv }
+
+\end{DoxyCode}
+
+\item Activate the venv 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{source .venv/bin/activate }
+
+\end{DoxyCode}
+
+\item Install the latest Conan package 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{pip install conan }
+
+\end{DoxyCode}
+
+\item Install CMake 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{pip install cmake==3.25.0 }
+
+\end{DoxyCode}
+
+\item Export to a new requirements.\+txt file 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{pip freeze > requirements.txt }
+
+\end{DoxyCode}
+
+\item Finally, attempt to rebuild using the build script
+\end{DoxyEnumerate}
+
+Another class of errors may look like\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{PtslClient/None: 'settings.compiler' value not defined}
+
+\end{DoxyCode}
+
+
+\doxysubsubsection*{Cause}
+
+Running the build script without the necessary build tools can lead to persistent errors. This happens because Conan creates a default profile that lacks complete information during the initial run.
+
+\doxysubsubsection*{Resolution}
+
+To fix this, delete the default Conan profile and re-\/run the build. Conan will then create a new profile that includes the build tools you’ve installed.\hypertarget{index_autotoc_md15}{}\doxysubsection{Requests are refused}\label{index_autotoc_md15}
+Verify that your client application has issued a \mbox{\hyperlink{a00494_aaf8d2069e2c6bbecf4aa8f9819028e8aadbcbc9c114ba96f458c70cac0b0c5e0a}{Register\+Connection}} and that the result was successful.\hypertarget{index_autotoc_md16}{}\doxysubsection{Unexpected errors}\label{index_autotoc_md16}
+It is not guaranteed that a command issued by your application will succeed even if it is well-\/formed. Errors on the Pro Tools application side can occur during normal operation. Your application should be robust against such failures, for example by incorporating a retry sequence for failing commands and by providing suitable UI to prompt the user when a request has failed repeatedly. 

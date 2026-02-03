@@ -1,0 +1,146 @@
+\hypertarget{a01988}{}\doxysection{Command\+Line\+Parser}
+\label{a01988}\index{CommandLineParser@{CommandLineParser}}
+
+
+{\ttfamily \#include $<$Command\+Line\+Parser.\+h$>$}
+
+
+
+\doxysubsection{Description}
+Parses command line arguments into internal structure of parameters and arguments. 
+
+Following terms are used in the context of this class\+:
+\begin{DoxyItemize}
+\item \textquotesingle{}parameter\textquotesingle{} (\textquotesingle{}param\textquotesingle{}) is a value that starts with a param\+Symbol (e.\+g., \char`\"{}-\/\char`\"{}) – e.\+g., \char`\"{}-\/file\char`\"{};
+\item \textquotesingle{}argument\textquotesingle{} (\textquotesingle{}arg\textquotesingle{}) is a value that follows a parameter – e.\+g., \char`\"{}script.\+txt\char`\"{}. Parameters can have single, multiple or no arguments. 
+\end{DoxyItemize}\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{a01988_a32976b84f32673dae09aeace19e40ef9}{Command\+Line\+Parser}} ()=delete
+\item 
+\mbox{\hyperlink{a01988_a1ab36f44767ea3b000f68b687df457fa}{Command\+Line\+Parser}} (int argc, char $\ast$argv\mbox{[}$\,$\mbox{]}, bool skip\+First\+Param=true)
+\item 
+\mbox{\hyperlink{a01988_ae4aef0677d1dd2904436c3bc0ce9c353}{Command\+Line\+Parser}} (std\+::vector$<$ std\+::string $>$ command\+Arguments, bool skip\+First\+Param=true)
+\item 
+const \mbox{\hyperlink{a00440_a7e65606e31fd0fb4bc872b1278ef51d9}{Params\+Args\+Map}} \& \mbox{\hyperlink{a01988_a4ce268153c819e8035c511290eefdfbe}{Get\+Params\+With\+Args}} () const
+\begin{DoxyCompactList}\small\item\em Returns the map of parameters with their arguments. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{a01988_a8e12342fc420701fbffd97025421575a}{Is\+Empty}} () const
+\begin{DoxyCompactList}\small\item\em Checks if the command line arguments are empty. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{a01988_ae1ef67b343e3a56fe44ed9ec5747bba8}{Has\+Param}} (const std\+::string \&param) const
+\begin{DoxyCompactList}\small\item\em Checks if the given parameter is present in the command line arguments. \end{DoxyCompactList}\item 
+std\+::optional$<$ std\+::vector$<$ std\+::string $>$ $>$ \mbox{\hyperlink{a01988_af276f9ce65bd4319b5c7dd8f34625ee1}{Get\+Args\+For\+Param}} (const std\+::string \&param) const
+\begin{DoxyCompactList}\small\item\em Returns all arguments for the given parameter. \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{a01988_a0e879ba52cd303c0c02ab7d22cf0baeb}{First\+Or\+Default}} (const std\+::string \&param, const std\+::string \&default\+Value) const
+\begin{DoxyCompactList}\small\item\em Returns the first argument for the given parameter. \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{a01988_adc9d6d47dcefe790c41d556252e7ebd4}{operator\mbox{[}$\,$\mbox{]}}} (const std\+::string \&param) const
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{a01988_a32976b84f32673dae09aeace19e40ef9}\label{a01988_a32976b84f32673dae09aeace19e40ef9}} 
+\index{CommandLineParser@{CommandLineParser}!CommandLineParser@{CommandLineParser}}
+\index{CommandLineParser@{CommandLineParser}!CommandLineParser@{CommandLineParser}}
+\doxysubsubsection{\texorpdfstring{CommandLineParser()}{CommandLineParser()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a01988}{Command\+Line\+Parser}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
+
+\mbox{\Hypertarget{a01988_a1ab36f44767ea3b000f68b687df457fa}\label{a01988_a1ab36f44767ea3b000f68b687df457fa}} 
+\index{CommandLineParser@{CommandLineParser}!CommandLineParser@{CommandLineParser}}
+\index{CommandLineParser@{CommandLineParser}!CommandLineParser@{CommandLineParser}}
+\doxysubsubsection{\texorpdfstring{CommandLineParser()}{CommandLineParser()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a01988}{Command\+Line\+Parser}} (\begin{DoxyParamCaption}\item[{int}]{argc,  }\item[{char $\ast$}]{argv\mbox{[}$\,$\mbox{]},  }\item[{bool}]{skip\+First\+Param = {\ttfamily true} }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{a01988_ae4aef0677d1dd2904436c3bc0ce9c353}\label{a01988_ae4aef0677d1dd2904436c3bc0ce9c353}} 
+\index{CommandLineParser@{CommandLineParser}!CommandLineParser@{CommandLineParser}}
+\index{CommandLineParser@{CommandLineParser}!CommandLineParser@{CommandLineParser}}
+\doxysubsubsection{\texorpdfstring{CommandLineParser()}{CommandLineParser()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a01988}{Command\+Line\+Parser}} (\begin{DoxyParamCaption}\item[{std\+::vector$<$ std\+::string $>$}]{command\+Arguments,  }\item[{bool}]{skip\+First\+Param = {\ttfamily true} }\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{a01988_a4ce268153c819e8035c511290eefdfbe}\label{a01988_a4ce268153c819e8035c511290eefdfbe}} 
+\index{CommandLineParser@{CommandLineParser}!GetParamsWithArgs@{GetParamsWithArgs}}
+\index{GetParamsWithArgs@{GetParamsWithArgs}!CommandLineParser@{CommandLineParser}}
+\doxysubsubsection{\texorpdfstring{GetParamsWithArgs()}{GetParamsWithArgs()}}
+{\footnotesize\ttfamily const \mbox{\hyperlink{a00440_a7e65606e31fd0fb4bc872b1278ef51d9}{Params\+Args\+Map}} \& Get\+Params\+With\+Args (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Returns the map of parameters with their arguments. 
+
+The special key \mbox{\hyperlink{a01992_ae7bb693723949a82b79056d35c2efb44}{Constants\+::\+PARAMETERLESS\+\_\+\+ARGS\+\_\+\+KEY}} is used for arguments without a parameter. \mbox{\Hypertarget{a01988_a8e12342fc420701fbffd97025421575a}\label{a01988_a8e12342fc420701fbffd97025421575a}} 
+\index{CommandLineParser@{CommandLineParser}!IsEmpty@{IsEmpty}}
+\index{IsEmpty@{IsEmpty}!CommandLineParser@{CommandLineParser}}
+\doxysubsubsection{\texorpdfstring{IsEmpty()}{IsEmpty()}}
+{\footnotesize\ttfamily bool Is\+Empty (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Checks if the command line arguments are empty. 
+
+\mbox{\Hypertarget{a01988_ae1ef67b343e3a56fe44ed9ec5747bba8}\label{a01988_ae1ef67b343e3a56fe44ed9ec5747bba8}} 
+\index{CommandLineParser@{CommandLineParser}!HasParam@{HasParam}}
+\index{HasParam@{HasParam}!CommandLineParser@{CommandLineParser}}
+\doxysubsubsection{\texorpdfstring{HasParam()}{HasParam()}}
+{\footnotesize\ttfamily bool Has\+Param (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{param }\end{DoxyParamCaption}) const}
+
+
+
+Checks if the given parameter is present in the command line arguments. 
+
+
+
+Referenced by \mbox{\hyperlink{a01988_af276f9ce65bd4319b5c7dd8f34625ee1}{Get\+Args\+For\+Param()}}.
+
+\mbox{\Hypertarget{a01988_af276f9ce65bd4319b5c7dd8f34625ee1}\label{a01988_af276f9ce65bd4319b5c7dd8f34625ee1}} 
+\index{CommandLineParser@{CommandLineParser}!GetArgsForParam@{GetArgsForParam}}
+\index{GetArgsForParam@{GetArgsForParam}!CommandLineParser@{CommandLineParser}}
+\doxysubsubsection{\texorpdfstring{GetArgsForParam()}{GetArgsForParam()}}
+{\footnotesize\ttfamily optional$<$ vector$<$ string $>$ $>$ Get\+Args\+For\+Param (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{param }\end{DoxyParamCaption}) const}
+
+
+
+Returns all arguments for the given parameter. 
+
+If the parameter is a modifier (i.\+e., it does not have arguments), returns an empty vector. If the parameter is not present, returns nullopt. 
+
+References \mbox{\hyperlink{a01988_ae1ef67b343e3a56fe44ed9ec5747bba8}{Has\+Param()}}.
+
+
+
+Referenced by \mbox{\hyperlink{a01988_a0e879ba52cd303c0c02ab7d22cf0baeb}{First\+Or\+Default()}}.
+
+\mbox{\Hypertarget{a01988_a0e879ba52cd303c0c02ab7d22cf0baeb}\label{a01988_a0e879ba52cd303c0c02ab7d22cf0baeb}} 
+\index{CommandLineParser@{CommandLineParser}!FirstOrDefault@{FirstOrDefault}}
+\index{FirstOrDefault@{FirstOrDefault}!CommandLineParser@{CommandLineParser}}
+\doxysubsubsection{\texorpdfstring{FirstOrDefault()}{FirstOrDefault()}}
+{\footnotesize\ttfamily string First\+Or\+Default (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{param,  }\item[{const std\+::string \&}]{default\+Value }\end{DoxyParamCaption}) const}
+
+
+
+Returns the first argument for the given parameter. 
+
+If the parameter is not present or has no arguments, returns the default value. 
+
+References \mbox{\hyperlink{a01988_af276f9ce65bd4319b5c7dd8f34625ee1}{Get\+Args\+For\+Param()}}.
+
+
+
+Referenced by \mbox{\hyperlink{a01988_adc9d6d47dcefe790c41d556252e7ebd4}{operator\mbox{[}$\,$\mbox{]}()}}.
+
+\mbox{\Hypertarget{a01988_adc9d6d47dcefe790c41d556252e7ebd4}\label{a01988_adc9d6d47dcefe790c41d556252e7ebd4}} 
+\index{CommandLineParser@{CommandLineParser}!operator\mbox{[}\mbox{]}@{operator[]}}
+\index{operator\mbox{[}\mbox{]}@{operator[]}!CommandLineParser@{CommandLineParser}}
+\doxysubsubsection{\texorpdfstring{operator[]()}{operator[]()}}
+{\footnotesize\ttfamily string operator\mbox{[}$\,$\mbox{]} (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{param }\end{DoxyParamCaption}) const}
+
+
+
+References \mbox{\hyperlink{a01988_a0e879ba52cd303c0c02ab7d22cf0baeb}{First\+Or\+Default()}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{a00440}{Command\+Line\+Parser.\+h}}\item 
+\mbox{\hyperlink{a00443}{Command\+Line\+Parser.\+cpp}}\end{DoxyCompactItemize}

@@ -1,0 +1,52 @@
+\hypertarget{a02936}{}\doxysection{Set\+Track\+Main\+Output\+Assignments\+Request\+Body}
+\label{a02936}\index{SetTrackMainOutputAssignmentsRequestBody@{SetTrackMainOutputAssignmentsRequestBody}}
+
+
+\doxysubsection{Description}
+Structure that describes Set\+Track\+Main\+Output\+Assignments request data. \doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+repeated string \mbox{\hyperlink{a02936_a8cbcf6a38855c67a0062761b460aec46}{track\+\_\+ids}} = 1
+\begin{DoxyCompactList}\small\item\em Unique ID(s) of track(s) to assign output(s) to; either this or \textquotesingle{}track\+\_\+names\textquotesingle{} is required. \end{DoxyCompactList}\item 
+repeated string \mbox{\hyperlink{a02936_a8b3874c231b6e693bb654078d7f05e69}{track\+\_\+names}} = 2
+\begin{DoxyCompactList}\small\item\em Names of track(s) to assign output(s) to; either this or \textquotesingle{}track\+\_\+ids\textquotesingle{} is required. \end{DoxyCompactList}\item 
+repeated string \mbox{\hyperlink{a02936_a53cfe33bc33adec6ac35cd35aa4a0822}{signalpath\+\_\+ids}} = 3
+\begin{DoxyCompactList}\small\item\em Signal path(s) to assign to track(s); created with Create\+Signal\+Path or queried with Get\+Signal\+Path\+Info. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{a02936_a8cbcf6a38855c67a0062761b460aec46}\label{a02936_a8cbcf6a38855c67a0062761b460aec46}} 
+\index{SetTrackMainOutputAssignmentsRequestBody@{SetTrackMainOutputAssignmentsRequestBody}!track\_ids@{track\_ids}}
+\index{track\_ids@{track\_ids}!SetTrackMainOutputAssignmentsRequestBody@{SetTrackMainOutputAssignmentsRequestBody}}
+\doxysubsubsection{\texorpdfstring{track\_ids}{track\_ids}}
+{\footnotesize\ttfamily repeated string track\+\_\+ids = 1}
+
+
+
+Unique ID(s) of track(s) to assign output(s) to; either this or \textquotesingle{}track\+\_\+names\textquotesingle{} is required. 
+
+\mbox{\Hypertarget{a02936_a8b3874c231b6e693bb654078d7f05e69}\label{a02936_a8b3874c231b6e693bb654078d7f05e69}} 
+\index{SetTrackMainOutputAssignmentsRequestBody@{SetTrackMainOutputAssignmentsRequestBody}!track\_names@{track\_names}}
+\index{track\_names@{track\_names}!SetTrackMainOutputAssignmentsRequestBody@{SetTrackMainOutputAssignmentsRequestBody}}
+\doxysubsubsection{\texorpdfstring{track\_names}{track\_names}}
+{\footnotesize\ttfamily repeated string track\+\_\+names = 2}
+
+
+
+Names of track(s) to assign output(s) to; either this or \textquotesingle{}track\+\_\+ids\textquotesingle{} is required. 
+
+\mbox{\Hypertarget{a02936_a53cfe33bc33adec6ac35cd35aa4a0822}\label{a02936_a53cfe33bc33adec6ac35cd35aa4a0822}} 
+\index{SetTrackMainOutputAssignmentsRequestBody@{SetTrackMainOutputAssignmentsRequestBody}!signalpath\_ids@{signalpath\_ids}}
+\index{signalpath\_ids@{signalpath\_ids}!SetTrackMainOutputAssignmentsRequestBody@{SetTrackMainOutputAssignmentsRequestBody}}
+\doxysubsubsection{\texorpdfstring{signalpath\_ids}{signalpath\_ids}}
+{\footnotesize\ttfamily repeated string signalpath\+\_\+ids = 3}
+
+
+
+Signal path(s) to assign to track(s); created with Create\+Signal\+Path or queried with Get\+Signal\+Path\+Info. 
+
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{a00464}{PTSL.\+proto}}\end{DoxyCompactItemize}

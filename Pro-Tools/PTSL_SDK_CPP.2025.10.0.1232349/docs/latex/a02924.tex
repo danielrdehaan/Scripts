@@ -1,0 +1,93 @@
+\hypertarget{a02924}{}\doxysection{Signal\+Path\+Info}
+\label{a02924}\index{SignalPathInfo@{SignalPathInfo}}
+
+
+\doxysubsection{Description}
+Structure that describes output assignments for a given track. 
+
+\begin{DoxySince}{Since}
+Pro Tools 2025.\+10 
+\end{DoxySince}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+string \mbox{\hyperlink{a02924_ad97b05b88ce9080f35b157cfacc8eb69}{id}} = 1
+\begin{DoxyCompactList}\small\item\em Unique ID for a signal path; see Create\+Signal\+Path or Get\+Signal\+Path\+Info. \end{DoxyCompactList}\item 
+string \mbox{\hyperlink{a02924_a8ccf841cb59e451791bcb2e1ac4f1edc}{name}} = 2
+\begin{DoxyCompactList}\small\item\em Name of the signal path; e.\+g. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{a00494_a54c0cae6bc479f54c8277947b7779348}{Signal\+Path\+Type}} \mbox{\hyperlink{a02924_a1ecf65cac51056db52afb73b389d3a99}{type}} = 3
+\begin{DoxyCompactList}\small\item\em Signal path type\+: bus, renderer object, or renderer bed. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{a00494_a999565e0d7e844183026916ee443c836}{Stem\+Format}} \mbox{\hyperlink{a02924_a45f2e4944ccc5d7b0d06bf24e09ca056}{format}} = 4
+\begin{DoxyCompactList}\small\item\em Represents the channel format of the output of the signalpath. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{a02924_a407c3efba665d276a38229f905bef352}{is\+\_\+active}} = 5
+\begin{DoxyCompactList}\small\item\em Whether the path is active; outputs can be inactive if, for example, they were created on a system with different audio interfaces. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{a02924_a7768b84c51671204cc736430f48246a0}{in\+\_\+use}} = 6
+\begin{DoxyCompactList}\small\item\em Whether anything is routed to / from the path. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{a02924_ad97b05b88ce9080f35b157cfacc8eb69}\label{a02924_ad97b05b88ce9080f35b157cfacc8eb69}} 
+\index{SignalPathInfo@{SignalPathInfo}!id@{id}}
+\index{id@{id}!SignalPathInfo@{SignalPathInfo}}
+\doxysubsubsection{\texorpdfstring{id}{id}}
+{\footnotesize\ttfamily string id = 1}
+
+
+
+Unique ID for a signal path; see Create\+Signal\+Path or Get\+Signal\+Path\+Info. 
+
+\mbox{\Hypertarget{a02924_a8ccf841cb59e451791bcb2e1ac4f1edc}\label{a02924_a8ccf841cb59e451791bcb2e1ac4f1edc}} 
+\index{SignalPathInfo@{SignalPathInfo}!name@{name}}
+\index{name@{name}!SignalPathInfo@{SignalPathInfo}}
+\doxysubsubsection{\texorpdfstring{name}{name}}
+{\footnotesize\ttfamily string name = 2}
+
+
+
+Name of the signal path; e.\+g. 
+
+\char`\"{}\+New Bus 1\char`\"{} \mbox{\Hypertarget{a02924_a1ecf65cac51056db52afb73b389d3a99}\label{a02924_a1ecf65cac51056db52afb73b389d3a99}} 
+\index{SignalPathInfo@{SignalPathInfo}!type@{type}}
+\index{type@{type}!SignalPathInfo@{SignalPathInfo}}
+\doxysubsubsection{\texorpdfstring{type}{type}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a00494_a54c0cae6bc479f54c8277947b7779348}{Signal\+Path\+Type}} type = 3}
+
+
+
+Signal path type\+: bus, renderer object, or renderer bed. 
+
+\mbox{\Hypertarget{a02924_a45f2e4944ccc5d7b0d06bf24e09ca056}\label{a02924_a45f2e4944ccc5d7b0d06bf24e09ca056}} 
+\index{SignalPathInfo@{SignalPathInfo}!format@{format}}
+\index{format@{format}!SignalPathInfo@{SignalPathInfo}}
+\doxysubsubsection{\texorpdfstring{format}{format}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a00494_a999565e0d7e844183026916ee443c836}{Stem\+Format}} format = 4}
+
+
+
+Represents the channel format of the output of the signalpath. 
+
+\mbox{\Hypertarget{a02924_a407c3efba665d276a38229f905bef352}\label{a02924_a407c3efba665d276a38229f905bef352}} 
+\index{SignalPathInfo@{SignalPathInfo}!is\_active@{is\_active}}
+\index{is\_active@{is\_active}!SignalPathInfo@{SignalPathInfo}}
+\doxysubsubsection{\texorpdfstring{is\_active}{is\_active}}
+{\footnotesize\ttfamily bool is\+\_\+active = 5}
+
+
+
+Whether the path is active; outputs can be inactive if, for example, they were created on a system with different audio interfaces. 
+
+\mbox{\Hypertarget{a02924_a7768b84c51671204cc736430f48246a0}\label{a02924_a7768b84c51671204cc736430f48246a0}} 
+\index{SignalPathInfo@{SignalPathInfo}!in\_use@{in\_use}}
+\index{in\_use@{in\_use}!SignalPathInfo@{SignalPathInfo}}
+\doxysubsubsection{\texorpdfstring{in\_use}{in\_use}}
+{\footnotesize\ttfamily bool in\+\_\+use = 6}
+
+
+
+Whether anything is routed to / from the path. 
+
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{a00464}{PTSL.\+proto}}\end{DoxyCompactItemize}

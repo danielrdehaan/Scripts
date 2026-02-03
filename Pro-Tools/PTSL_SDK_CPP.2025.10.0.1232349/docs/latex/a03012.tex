@@ -1,0 +1,59 @@
+\hypertarget{a03012}{}\doxysection{Set\+Track\+Color\+Request\+Body}
+\label{a03012}\index{SetTrackColorRequestBody@{SetTrackColorRequestBody}}
+
+
+\doxysubsection{Description}
+Structure that describes Set\+Track\+Color request data. 
+
+Color index -\/1 (None) corresponds to the \char`\"{}\#ff2a2a2a\char`\"{} color value Color index -\/2 (Default) corresponds to the \char`\"{}\#ff11225f\char`\"{} color value
+
+\begin{DoxySince}{Since}
+Pro Tools 2025.\+10 
+\end{DoxySince}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+repeated string \mbox{\hyperlink{a03012_a8cbcf6a38855c67a0062761b460aec46}{track\+\_\+ids}} = 1
+\begin{DoxyCompactList}\small\item\em Unique ID(s) of track(s) to assign color(s) to. \end{DoxyCompactList}\item 
+repeated string \mbox{\hyperlink{a03012_a8b3874c231b6e693bb654078d7f05e69}{track\+\_\+names}} = 2
+\begin{DoxyCompactList}\small\item\em Names of track(s) to assign color(s) to. \end{DoxyCompactList}\item 
+int32 \mbox{\hyperlink{a03012_a719ea85515bcdf1aa37a1a39f90517e3}{color\+\_\+index}} = 3
+\begin{DoxyCompactList}\small\item\em Specified color index. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{a03012_a8cbcf6a38855c67a0062761b460aec46}\label{a03012_a8cbcf6a38855c67a0062761b460aec46}} 
+\index{SetTrackColorRequestBody@{SetTrackColorRequestBody}!track\_ids@{track\_ids}}
+\index{track\_ids@{track\_ids}!SetTrackColorRequestBody@{SetTrackColorRequestBody}}
+\doxysubsubsection{\texorpdfstring{track\_ids}{track\_ids}}
+{\footnotesize\ttfamily repeated string track\+\_\+ids = 1}
+
+
+
+Unique ID(s) of track(s) to assign color(s) to. 
+
+Either this or \mbox{\hyperlink{a03012_a8b3874c231b6e693bb654078d7f05e69}{track\+\_\+names}} is required \mbox{\Hypertarget{a03012_a8b3874c231b6e693bb654078d7f05e69}\label{a03012_a8b3874c231b6e693bb654078d7f05e69}} 
+\index{SetTrackColorRequestBody@{SetTrackColorRequestBody}!track\_names@{track\_names}}
+\index{track\_names@{track\_names}!SetTrackColorRequestBody@{SetTrackColorRequestBody}}
+\doxysubsubsection{\texorpdfstring{track\_names}{track\_names}}
+{\footnotesize\ttfamily repeated string track\+\_\+names = 2}
+
+
+
+Names of track(s) to assign color(s) to. 
+
+Either this or \mbox{\hyperlink{a03012_a8cbcf6a38855c67a0062761b460aec46}{track\+\_\+ids}} is required \mbox{\Hypertarget{a03012_a719ea85515bcdf1aa37a1a39f90517e3}\label{a03012_a719ea85515bcdf1aa37a1a39f90517e3}} 
+\index{SetTrackColorRequestBody@{SetTrackColorRequestBody}!color\_index@{color\_index}}
+\index{color\_index@{color\_index}!SetTrackColorRequestBody@{SetTrackColorRequestBody}}
+\doxysubsubsection{\texorpdfstring{color\_index}{color\_index}}
+{\footnotesize\ttfamily int32 color\+\_\+index = 3}
+
+
+
+Specified color index. 
+
+Color value can be obtained with Get\+Color\+Palette command 
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{a00464}{PTSL.\+proto}}\end{DoxyCompactItemize}

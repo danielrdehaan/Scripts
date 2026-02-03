@@ -1,0 +1,307 @@
+\hypertarget{a00488}{}\doxysection{Version 2025.06}
+\label{a00488}\index{Version 2025.06@{Version 2025.06}}
+\hypertarget{a00488_release_notes_2025_06_compatibility}{}\doxysubsection{Compatibility}\label{a00488_release_notes_2025_06_compatibility}
+PTSL SDK 2025.\+06 uses\+:
+\begin{DoxyItemize}
+\item Old format\+:
+\begin{DoxyItemize}
+\item \mbox{\hyperlink{a00446_a83c5961efacc6c06e3e75877c239ebb1}{PTSL\+\_\+\+VERSION}} 2025 of the client interface
+\end{DoxyItemize}
+\item New format\+:
+\begin{DoxyItemize}
+\item \mbox{\hyperlink{a02036_a1403c9ca4289d8a9417e8c4da2b94c0e}{Major Version}} 2025
+\item \mbox{\hyperlink{a02036_a09c035a9bbb8296a09dfcfcc0c62de56}{Minor Version}} 6
+\item \mbox{\hyperlink{a02036_ac3eea2a8ad35f84eeb9f00174f197679}{Revision Version}} 0
+\end{DoxyItemize}
+\end{DoxyItemize}
+
+Pro Tools 2025.\+06 is compatible with clients using \mbox{\hyperlink{a02036_a1403c9ca4289d8a9417e8c4da2b94c0e}{Major Version}} 1 and higher.
+
+For further information, refer to the Versioning Changes sections.\hypertarget{a00488_release_notes_2025_06_changelog}{}\doxysubsection{Changelog}\label{a00488_release_notes_2025_06_changelog}
+\hypertarget{a00488_release_notes_2025_06_changelog_versioning_changes}{}\doxysubsubsection{Versioning Changes}\label{a00488_release_notes_2025_06_changelog_versioning_changes}
+\hypertarget{a00488_release_notes_2025_06_changelog_versioning_changes_version_triplet}{}\doxyparagraph{Version Triplet}\label{a00488_release_notes_2025_06_changelog_versioning_changes_version_triplet}
+Starting with the 2025.\+06 release, the PTSL \mbox{\hyperlink{a02036_a1403c9ca4289d8a9417e8c4da2b94c0e}{version}} has been updated from 5 (2024.\+10) to 2025 (2025.\+XX). Additionally, \mbox{\hyperlink{a02036_a09c035a9bbb8296a09dfcfcc0c62de56}{version\+\_\+minor}} (6) and \mbox{\hyperlink{a02036_ac3eea2a8ad35f84eeb9f00174f197679}{version\+\_\+revision}} (0) are now used to differentiate releases and subreleases within the year.
+
+Old clients (prior to this release) will receive only the major \mbox{\hyperlink{a02048_a1403c9ca4289d8a9417e8c4da2b94c0e}{version}} (2025) for all Pro Tools releases in 2025.
+
+New clients (starting from this release) can process the entire triplet (\mbox{\hyperlink{a02048_a1403c9ca4289d8a9417e8c4da2b94c0e}{version}}, \mbox{\hyperlink{a02048_a09c035a9bbb8296a09dfcfcc0c62de56}{version\+\_\+minor}}, \mbox{\hyperlink{a02048_ac3eea2a8ad35f84eeb9f00174f197679}{version\+\_\+revision}}) to differentiate between Pro Tools releases. Older Pro Tools releases only have the major version, i.\+e., 5.\+0.\+0 for 2024.\+10.\hypertarget{a00488_release_notes_2025_06_changelog_versioning_changes_protocol}{}\doxyparagraph{Protocol}\label{a00488_release_notes_2025_06_changelog_versioning_changes_protocol}
+Starting with the 2025.\+06 release, the SDK package contains multiple {\ttfamily .proto} files. Each file includes the full protocol description for a release. For example, PTSL.\+2024.\+10.\+0.\+proto contains the protocol definition for the 2024.\+10 release, wrapped inside {\ttfamily package ptsl\+\_\+2024\+\_\+10\+\_\+0}. The current release is always named {\ttfamily \mbox{\hyperlink{a00464}{PTSL.\+proto}}}, wrapped inside {\ttfamily package ptsl}.
+
+Using the \mbox{\hyperlink{a01328_a2c6a9bfa639cab78fcb3d4159c460c5f}{Send\+Request}} and \mbox{\hyperlink{a01980}{Cpp\+PTSLRequest}}, it is possible to send requests from different releases to the same Host. The Host response is adapted to the capabilities and protocol of the release requested by the client.
+
+There are two known limitations to this\+:
+\begin{DoxyItemize}
+\item Host-\/side versioning is an area of active work\+:
+\begin{DoxyItemize}
+\item Some deprecated enumeration values may be prioritized over their new replacements regardless of the request version.
+\item Some commands may return both old properties and their new replacements.
+\end{DoxyItemize}
+\item Host-\/side versioning is a relatively new addition\+:
+\begin{DoxyItemize}
+\item It is not always possible to request API behavior similar to an older release, e.\+g., 2023.\+03.
+\end{DoxyItemize}
+\end{DoxyItemize}\hypertarget{a00488_release_notes_2025_06_changelog_versioning_changes_cpp_client}{}\doxyparagraph{C++ Client}\label{a00488_release_notes_2025_06_changelog_versioning_changes_cpp_client}
+The C++ client reflects the changes mentioned above. Both \mbox{\hyperlink{a01980}{Cpp\+PTSLRequest}} and \mbox{\hyperlink{a01984}{Cpp\+PTSLResponse}} provide the ability to get and set the version triplet.
+
+Old command-\/specific methods are now pinned to the 2024.\+10 PTSL version and are no longer expected to be updated.\hypertarget{a00488_release_notes_2025_06_changelog_enumerations_changes}{}\doxysubsubsection{Enumeration Changes}\label{a00488_release_notes_2025_06_changelog_enumerations_changes}
+There are several changes to enumerations to reduce name clashes and make their behavior more uniform\+:
+\begin{DoxyItemize}
+\item All enumeration values now have a prefix based on their type name.
+\begin{DoxyItemize}
+\item The old values are deprecated but still accepted and can be returned by the Host.
+\end{DoxyItemize}
+\item All enumeration types (except \mbox{\hyperlink{a00494_aaf8d2069e2c6bbecf4aa8f9819028e8a}{Command\+Id}}) now start with the \textquotesingle{}$\ast$\+\_\+\+Unknown value = 0\textquotesingle{}.
+\begin{DoxyItemize}
+\item This may offset values in some types, but it will not affect communication with the Host as only the string names are used.
+\end{DoxyItemize}
+\end{DoxyItemize}\hypertarget{a00488_release_notes_2025_06_changelog_time_types}{}\doxysubsubsection{Time Types}\label{a00488_release_notes_2025_06_changelog_time_types}
+With the 2024.\+10 and 2025.\+06 changes, it is now possible to use new time structures and operations for easier interaction with time data in various commands. See\+:
+\begin{DoxyItemize}
+\item \mbox{\hyperlink{a00494_ae147cb28819b5a7002c8a0d8c58c362c}{Timeline\+Location\+Type}}
+\item \mbox{\hyperlink{a00494_ad77427d31ed88c909fdd83fd14fbae65}{Basic\+Time\+Type}}
+\item \mbox{\hyperlink{a02680}{Timeline\+Location}}
+\item \mbox{\hyperlink{a02684}{Media\+Time\+Position}}
+\item \mbox{\hyperlink{a02688}{Time\+Length}}
+\item New time-\/related utility API
+\item location, location\+\_\+type, current\+\_\+type fields added to the older API
+\end{DoxyItemize}\hypertarget{a00488_release_notes_2025_06_changelog_intermediate_responses}{}\doxysubsubsection{Intermediate Responses}\label{a00488_release_notes_2025_06_changelog_intermediate_responses}
+This release enhances support for intermediate responses during command execution. A single task can now emit multiple {\ttfamily In\+Progress} intermediate responses, providing improved progress tracking and feedback. These improvements are applied universally to all clients from the Pro Tools side, enabling even older SDK versions to process them if desired. While intermediate response capability existed in the very first SDK release, the 2025.\+06 update delivers Pro Tools-\/side enhancements that improve functionality across all client implementations. New clients built with the updated SDK can now process intermediate responses seamlessly via updated \mbox{\hyperlink{a01328_a2c6a9bfa639cab78fcb3d4159c460c5f}{Send\+Request}}.
+
+Key updates\+:
+
+
+\begin{DoxyItemize}
+\item Intermediate responses may include a JSON body, typically reserved for specific APIs such as the Event System (see below).
+\item The final response consolidates all accumulated data, including errors, warnings, and informational messages generated during execution.
+\end{DoxyItemize}
+
+C++ Client\+:
+\begin{DoxyItemize}
+\item The \mbox{\hyperlink{a01328_a2c6a9bfa639cab78fcb3d4159c460c5f}{Send\+Request}} method has been updated to include a new callback mechanism. This enables clients to receive all responses associated with a task, including intermediate responses, in real-\/time.
+\end{DoxyItemize}\hypertarget{a00488_release_notes_2025_06_changelog_event_system}{}\doxysubsubsection{Event System (\+Experimental)}\label{a00488_release_notes_2025_06_changelog_event_system}
+The 2025.\+06 release introduces the Event System, enabling Pro Tools to send real-\/time notifications to subscribed clients. This system allows clients to subscribe to specific events, unsubscribe from them, and receive event notifications as they occur.\hypertarget{a00488_autotoc_md17}{}\doxyparagraph{Workflow}\label{a00488_autotoc_md17}
+
+\begin{DoxyEnumerate}
+\item \mbox{\hyperlink{a00494_aaf8d2069e2c6bbecf4aa8f9819028e8aa3123650ddf7f82ade0c8def87b1f7f40}{Subscribe\+To\+Events}}\+:
+\begin{DoxyItemize}
+\item Adds specified events to the subscription list for the current PTSL session.
+\item Each subscription is uniquely identified by the combination of PTSL session, Event\+Id, and filter data. Any difference in filter data results in a new subscription, which is managed independently, even if they share the same Event\+Id.
+\item For example, a hypothetical event {\ttfamily EId\+\_\+\+Track\+Record\+Enabled\+State\+Changed} could include a track ID in the filter data to listen for changes to the record-\/enabled state of a specific track.
+\end{DoxyItemize}
+\item \mbox{\hyperlink{a00494_aaf8d2069e2c6bbecf4aa8f9819028e8aa4890bca2c334308b21af02d39e25b1ee}{Unsubscribe\+From\+Events}}\+:
+\begin{DoxyItemize}
+\item Removes specified events (and their associated filter data) from the subscription list for the current PTSL session.
+\end{DoxyItemize}
+\item \mbox{\hyperlink{a00494_aaf8d2069e2c6bbecf4aa8f9819028e8aabc3d3419d76198a03985575dff948bce}{Poll\+Events}}\+:
+\begin{DoxyItemize}
+\item A long-\/polling API that streams real-\/time events to the client.
+\item Operates indefinitely without a typical end condition.
+\item Sends events as they are reported by Pro Tools, using the Intermediate Responses mechanism.
+\item Only one active Poll\+Events connection is allowed per PTSL session. If a new Poll\+Events call is made, the previous connection is terminated, and polling is transferred to the new connection.
+\item All event-\/related APIs, including Poll\+Events, are processed with higher execution priority compared to normal API commands, ensuring timely delivery of events without blocking other API commands.
+\end{DoxyItemize}
+\end{DoxyEnumerate}\hypertarget{a00488_autotoc_md18}{}\doxyparagraph{Supported Events in 2025.\+06}\label{a00488_autotoc_md18}
+The Event System supports the following events\+:
+\begin{DoxyItemize}
+\item \mbox{\hyperlink{a00494_a4cf8d4a4d56e9f795518b6541ddeb5bfa0248585ab1d9a639e6f3ec4ec99d9fe3}{Session\+Opened}}\+: Triggered when Pro Tools has finished opening a session.
+\item \mbox{\hyperlink{a00494_a4cf8d4a4d56e9f795518b6541ddeb5bfacf581026eb4ae689f0384315df1d0b4b}{Session\+Created}}\+: Triggered when a new Pro Tools session has been created.
+\item \mbox{\hyperlink{a00494_a4cf8d4a4d56e9f795518b6541ddeb5bfa1e92c1627dc8273b4cf38306934527a0}{Session\+Closed}}\+: Triggered when a current Pro Tools session has been closed.
+\end{DoxyItemize}\hypertarget{a00488_release_notes_2025_06_changelog_command_progress_tracking}{}\doxysubsubsection{Command Progress Tracking}\label{a00488_release_notes_2025_06_changelog_command_progress_tracking}
+With 2025.\+06 release, several commands have been enhanced to provide accurate progress tracking information. The host now reports precise command status updates as these commands execute. Furthermore, the updated commands can return a \char`\"{}\+Failed\char`\"{} status when an internal operation encounters an error.
+
+Updated commands\+:
+\begin{DoxyItemize}
+\item \mbox{\hyperlink{a00494_aaf8d2069e2c6bbecf4aa8f9819028e8aa469d31ef64a01ad8cc61ac6043111216}{Open\+Session}}
+\item \mbox{\hyperlink{a00494_aaf8d2069e2c6bbecf4aa8f9819028e8aa23644a38fb88c283aebd74ba6985e6cc}{Cut}}
+\item \mbox{\hyperlink{a00494_aaf8d2069e2c6bbecf4aa8f9819028e8aa58f0170153c3948184882fe1dfa250c4}{Copy}}
+\item \mbox{\hyperlink{a00494_aaf8d2069e2c6bbecf4aa8f9819028e8aa32f28e03d81c54264b2830bec4ecbed4}{Paste}}
+\item \mbox{\hyperlink{a00494_aaf8d2069e2c6bbecf4aa8f9819028e8aa7942190ee4d9c0c00ee06461e9465741}{Clear}}
+\item \mbox{\hyperlink{a00494_aaf8d2069e2c6bbecf4aa8f9819028e8aabccad12fc9d9481a2da984a325b121b9}{Cut\+Special}}
+\item \mbox{\hyperlink{a00494_aaf8d2069e2c6bbecf4aa8f9819028e8aa79026e29bb34e6a7e25efdefdc4b4687}{Copy\+Special}}
+\item \mbox{\hyperlink{a00494_aaf8d2069e2c6bbecf4aa8f9819028e8aa764e84724a249e8a7c33cec8d1b07b55}{Paste\+Special}}
+\item \mbox{\hyperlink{a00494_aaf8d2069e2c6bbecf4aa8f9819028e8aacbf3413677ddd61cd6e9d5ebadb94338}{Clear\+Special}}
+\item \mbox{\hyperlink{a00494_aaf8d2069e2c6bbecf4aa8f9819028e8aa3acc752bd698857b484ac064b00c5289}{Group\+Clips}}
+\item \mbox{\hyperlink{a00494_aaf8d2069e2c6bbecf4aa8f9819028e8aa3e80b0346d6f0a8df26c646f0b795217}{Ungroup\+Clips}}
+\item \mbox{\hyperlink{a00494_aaf8d2069e2c6bbecf4aa8f9819028e8aa77c7d95ac2d7fc194d20546da11a87c3}{Ungroup\+All\+Clips}}
+\item \mbox{\hyperlink{a00494_aaf8d2069e2c6bbecf4aa8f9819028e8aa9e278d3ce9c1dddee2934a739110e226}{Regroup\+Clips}}
+\item \mbox{\hyperlink{a00494_aaf8d2069e2c6bbecf4aa8f9819028e8aa5d226c9cf330ede57f0a77c1074862c7}{Spot}}
+\item \mbox{\hyperlink{a00494_aaf8d2069e2c6bbecf4aa8f9819028e8aafa5e10317c63a00f499a5d74eac5e41a}{Create\+Fades\+Based\+On\+Preset}}
+\end{DoxyItemize}
+
+Please note that the command progress tracking infrastructure is implemented entirely on the host side. This means\+:
+
+
+\begin{DoxyItemize}
+\item Products using older SDKs connecting to Pro Tools 2025.\+06 or newer will automatically benefit from command progress tracking without any code changes.
+\item Products built with SDK version 2025.\+06 connecting to Pro Tools versions earlier than 2025.\+06 will not have improved command progress tracking functionality.
+\end{DoxyItemize}\hypertarget{a00488_release_notes_2025_06_changelog_protocol_changes}{}\doxysubsubsection{Protocol Changes}\label{a00488_release_notes_2025_06_changelog_protocol_changes}
+New commands\+:
+\begin{DoxyItemize}
+\item \mbox{\hyperlink{a00494_aaf8d2069e2c6bbecf4aa8f9819028e8aabd490a44e642e2140c77137688bcd1ee}{Get\+Time\+As\+Type}}
+\item \mbox{\hyperlink{a00494_aaf8d2069e2c6bbecf4aa8f9819028e8aa9eafa44f9d709b7a73a3bed552290a6b}{Subtract\+Locations}}
+\item \mbox{\hyperlink{a00494_aaf8d2069e2c6bbecf4aa8f9819028e8aa8efdfbd33ab36b97b5ce98aeba8afd0f}{Add\+Length\+To\+Location}}
+\item \mbox{\hyperlink{a00494_aaf8d2069e2c6bbecf4aa8f9819028e8aa9413a8862b5a7bd4df6096f784972863}{Subtract\+Positions}}
+\item \mbox{\hyperlink{a00494_aaf8d2069e2c6bbecf4aa8f9819028e8aa9eacd3b690cbc81c1648867e97935060}{Add\+Length\+To\+Position}}
+\item \mbox{\hyperlink{a00494_aaf8d2069e2c6bbecf4aa8f9819028e8aa5f1868686329d007075a4eae914510d6}{Import\+Audio\+To\+Clip\+List}}
+\item \mbox{\hyperlink{a00494_aaf8d2069e2c6bbecf4aa8f9819028e8aa383f5c5bd211e35eced9d556ea8f1b7e}{Spot\+Clips\+By\+ID}}
+\item \mbox{\hyperlink{a00494_aaf8d2069e2c6bbecf4aa8f9819028e8aa0bd3353a56081596101fd1d943125852}{Get\+Clip\+List}}
+\item \mbox{\hyperlink{a00494_aaf8d2069e2c6bbecf4aa8f9819028e8aa671d9f8a3caa4f17886bc2046bf855de}{Get\+Media\+File\+Info}}
+\item \mbox{\hyperlink{a00494_aaf8d2069e2c6bbecf4aa8f9819028e8aa2c5029ed9b03db9bdb68ddc73a48ed6e}{Create\+Audio\+Clips}}
+\item \mbox{\hyperlink{a00494_aaf8d2069e2c6bbecf4aa8f9819028e8aad3d350448cc0b45556fd0a7a9b2b12ce}{Get\+Export\+Mix\+Source\+List}}
+\item \mbox{\hyperlink{a00494_aaf8d2069e2c6bbecf4aa8f9819028e8aa0b264f3470c9f501c8889aad78755056}{Get\+Monitor\+Output\+Path}}
+\item \mbox{\hyperlink{a00494_aaf8d2069e2c6bbecf4aa8f9819028e8aa198c5b55e85e1cd4c83f7ebc31665a90}{Get\+Edit\+Selection}}
+\item \mbox{\hyperlink{a00494_aaf8d2069e2c6bbecf4aa8f9819028e8aa895df56983194986d50d47a6f46f8b15}{Bounce\+Track}}
+\item \mbox{\hyperlink{a00494_aaf8d2069e2c6bbecf4aa8f9819028e8aa2baf259aa7f07253912c7b0bb8ea4a8a}{Begin\+Scrub}}
+\item \mbox{\hyperlink{a00494_aaf8d2069e2c6bbecf4aa8f9819028e8aa85335660903171c19d6ce5c688cdfd08}{End\+Scrub}}
+\item \mbox{\hyperlink{a00494_aaf8d2069e2c6bbecf4aa8f9819028e8aa08a4a9172c44130854db26e5822e3e32}{Continue\+Scrub}}
+\item \mbox{\hyperlink{a00494_aaf8d2069e2c6bbecf4aa8f9819028e8aa12000baff54ebd9f088c53e498cf2841}{Enable\+Cue\+Pro\+Video\+Plug\+In}}
+\item \mbox{\hyperlink{a00494_aaf8d2069e2c6bbecf4aa8f9819028e8aa218f7adedac428016f51bb467ecbd029}{Update\+Video}}
+\item \mbox{\hyperlink{a00494_aaf8d2069e2c6bbecf4aa8f9819028e8aa1f1951979544e8fabaaf3a056cfa8cf8}{Enable\+API}}
+\item \mbox{\hyperlink{a00494_aaf8d2069e2c6bbecf4aa8f9819028e8aace2970d96f4e85370cfbdeb98dc17a3f}{Exchange\+Public\+Keys}}
+\end{DoxyItemize}
+
+New possible errors\+:
+\begin{DoxyItemize}
+\item \mbox{\hyperlink{a00494_a72aa3dec22d29b2aa82ee130b3e8d64ca0974f3340747d6ee0f6469f93bdf714a}{CEType\+\_\+\+PT\+\_\+\+Deprecated\+Parameter}}
+\item \mbox{\hyperlink{a00494_a72aa3dec22d29b2aa82ee130b3e8d64ca39d2e8cdb323842ef94bc889903a4320}{CEType\+\_\+\+PT\+\_\+\+Deprecated\+Parameter\+Value}}
+\end{DoxyItemize}
+
+New enumerations\+:
+\begin{DoxyItemize}
+\item \mbox{\hyperlink{a00494_afe36c75efd3e317b11accb64f3a63861}{Clip\+Type}}
+\item \mbox{\hyperlink{a00494_a999565e0d7e844183026916ee443c836}{Stem\+Format}}
+\item \mbox{\hyperlink{a00494_a2305faf2732031de325aa6a00235a9aa}{Stem\+Channel}}
+\item \mbox{\hyperlink{a00494_a62f5b9baafa876dc4493731ec8a33ad2}{MP3\+Encoding\+Options\+Constant\+Bit\+Rate}}
+\item \mbox{\hyperlink{a00494_a7734c1ae42079f6dbb389b8b52acd630}{MP3\+Encoding\+Options\+Quality}}
+\end{DoxyItemize}
+
+New messages\+:
+\begin{DoxyItemize}
+\item \mbox{\hyperlink{a02760}{Clip}}
+\item \mbox{\hyperlink{a02772}{Audio\+File\+Info}}
+\item \mbox{\hyperlink{a02784}{Stem\+Channel\+Id}}
+\item \mbox{\hyperlink{a02788}{Create\+Audio\+Clip\+Request\+Entry}}
+\item \mbox{\hyperlink{a02792}{Create\+Audio\+Clip\+Response\+Entry}}
+\item \mbox{\hyperlink{a02796}{Create\+Audio\+Clip\+Request\+Entry\+Clip\+Info}}
+\item \mbox{\hyperlink{a02268}{Audio\+Encoding\+Options}}
+\item \mbox{\hyperlink{a02264}{MP3\+Encoding\+Options}}
+\end{DoxyItemize}
+
+Existing command changes\+:
+\begin{DoxyItemize}
+\item Changes in \mbox{\hyperlink{a02036}{Request\+Header}} message
+\begin{DoxyItemize}
+\item \mbox{\hyperlink{a02036_a09c035a9bbb8296a09dfcfcc0c62de56}{version\+\_\+minor}} field was added
+\item \mbox{\hyperlink{a02036_ac3eea2a8ad35f84eeb9f00174f197679}{version\+\_\+revision}} field was added
+\end{DoxyItemize}
+\item Changes in \mbox{\hyperlink{a02048}{Response\+Header}} message
+\begin{DoxyItemize}
+\item \mbox{\hyperlink{a02048_a1403c9ca4289d8a9417e8c4da2b94c0e}{version}} field was added
+\item \mbox{\hyperlink{a02048_a09c035a9bbb8296a09dfcfcc0c62de56}{version\+\_\+minor}} field was added
+\item \mbox{\hyperlink{a02048_ac3eea2a8ad35f84eeb9f00174f197679}{version\+\_\+revision}} field was added
+\end{DoxyItemize}
+\item Changes in \mbox{\hyperlink{a02404}{Get\+PTSLVersion\+Response\+Body}} message
+\begin{DoxyItemize}
+\item \mbox{\hyperlink{a02404_a09c035a9bbb8296a09dfcfcc0c62de56}{version\+\_\+minor}} field was added
+\item \mbox{\hyperlink{a02404_ac3eea2a8ad35f84eeb9f00174f197679}{version\+\_\+revision}} field was added
+\end{DoxyItemize}
+\item Changes in \mbox{\hyperlink{a02120}{Spot\+Location\+Data}} message
+\begin{DoxyItemize}
+\item \mbox{\hyperlink{a02120_ac5cd0f9c920cbf8367fe0045051f651c}{location}} field was added
+\item \mbox{\hyperlink{a02120_a73449ab3f391b4539661345246c09a3b}{location\+\_\+value}} field was deprecated
+\item \mbox{\hyperlink{a02120_a6cf5c7a97bceb335bc2aca93a1402a35}{location\+\_\+options}} field was deprecated
+\end{DoxyItemize}
+\item Changes in \mbox{\hyperlink{a02296}{Export\+Session\+Info\+As\+Text\+Request\+Body}} message
+\begin{DoxyItemize}
+\item \mbox{\hyperlink{a02296_a60c3376fcc4b80646da0e4135928baf6}{location\+\_\+type}} field was added
+\item \mbox{\hyperlink{a02296_a24ed31a51dfccf0e368b88060f40902a}{track\+\_\+offset\+\_\+options}} field was deprecated
+\end{DoxyItemize}
+\item Changes in \mbox{\hyperlink{a02396}{Set\+Session\+Start\+Time\+Request\+Body}} message
+\begin{DoxyItemize}
+\item \mbox{\hyperlink{a02396_ac5cd0f9c920cbf8367fe0045051f651c}{location}} field was added
+\item \mbox{\hyperlink{a02396_ac18368330382799b2387219cbe13e18c}{session\+\_\+start\+\_\+time}} field was deprecated
+\item \mbox{\hyperlink{a02396_a41d7a3d44b4f966ca1006843a555d95f}{track\+\_\+offset\+\_\+opts}} field was deprecated
+\end{DoxyItemize}
+\item Changes in \mbox{\hyperlink{a02520}{Set\+Timeline\+Selection\+Request\+Body}} message
+\begin{DoxyItemize}
+\item \mbox{\hyperlink{a02520_a60c3376fcc4b80646da0e4135928baf6}{location\+\_\+type}} field was added
+\end{DoxyItemize}
+\item Changes in \mbox{\hyperlink{a02524}{Get\+Timeline\+Selection\+Request\+Body}} message
+\begin{DoxyItemize}
+\item \mbox{\hyperlink{a02524_a60c3376fcc4b80646da0e4135928baf6}{location\+\_\+type}} field was added
+\item \mbox{\hyperlink{a02524_aac1f33d3656550e2f51ae265ce81dae4}{time\+\_\+scale}} field was deprecated
+\end{DoxyItemize}
+\item Changes in \mbox{\hyperlink{a02620}{Set\+Main\+Counter\+Format\+Request\+Body}} message
+\begin{DoxyItemize}
+\item \mbox{\hyperlink{a02620_a60c3376fcc4b80646da0e4135928baf6}{location\+\_\+type}} field was added
+\item \mbox{\hyperlink{a02620_aac1f33d3656550e2f51ae265ce81dae4}{time\+\_\+scale}} field was deprecated
+\end{DoxyItemize}
+\item Changes in \mbox{\hyperlink{a02624}{Set\+Sub\+Counter\+Format\+Request\+Body}} message
+\begin{DoxyItemize}
+\item \mbox{\hyperlink{a02624_a60c3376fcc4b80646da0e4135928baf6}{location\+\_\+type}} field was added
+\item \mbox{\hyperlink{a02624_aac1f33d3656550e2f51ae265ce81dae4}{time\+\_\+scale}} field was deprecated
+\end{DoxyItemize}
+\item Changes in \mbox{\hyperlink{a02628}{Get\+Main\+Counter\+Format\+Response\+Body}} message
+\begin{DoxyItemize}
+\item \mbox{\hyperlink{a02628_adf21d8d8ac64913a35ab78e7dbb0408e}{current\+\_\+type}} field was added
+\item \mbox{\hyperlink{a02628_aa6998000044877ceb768ade17d00b122}{current\+\_\+setting}} field was deprecated
+\end{DoxyItemize}
+\item Changes in \mbox{\hyperlink{a02632}{Get\+Sub\+Counter\+Format\+Response\+Body}} message
+\begin{DoxyItemize}
+\item \mbox{\hyperlink{a02632_adf21d8d8ac64913a35ab78e7dbb0408e}{current\+\_\+type}} field was added
+\item \mbox{\hyperlink{a02632_aa6998000044877ceb768ade17d00b122}{current\+\_\+setting}} field was deprecated
+\end{DoxyItemize}
+\item Changes in \mbox{\hyperlink{a00494_a2c794c5c13ab4dd7e65bad031dbe41c3}{File\+Type}} enumeration
+\begin{DoxyItemize}
+\item \mbox{\hyperlink{a00494_a2c794c5c13ab4dd7e65bad031dbe41c3afe7d53e924a49ed5d2499b6a85a2faac}{FType\+\_\+\+MXF}} value was added
+\end{DoxyItemize}
+\item Changes in \mbox{\hyperlink{a00494_ab2cb221238621f99efd550db3a15432e}{AAFFile\+Bit\+Depth}} enumeration
+\begin{DoxyItemize}
+\item \mbox{\hyperlink{a00494_ab2cb221238621f99efd550db3a15432eabe2fdd10466cc219971c915d8cc31efe}{AAFFBDepth\+\_\+\+None}} value was added
+\end{DoxyItemize}
+\item Changes in Memory Locations (Create\+Memory\+Location, Edit\+Memory\+Location, Get\+Memory\+Locations)\+: added support of named rulers
+\begin{DoxyItemize}
+\item \mbox{\hyperlink{a00494_a80a851c93542214355352e288e8e7cbca3a11a87957b057581e6fda0ec0c97934}{Marker\+Location\+\_\+\+Named\+Ruler}} value was added
+\item Named ruler is specified by the \textquotesingle{}track\+\_\+name\textquotesingle{} field of the requested command
+\end{DoxyItemize}
+\item Changes in \mbox{\hyperlink{a02196}{File\+Location}} message
+\begin{DoxyItemize}
+\item \mbox{\hyperlink{a02196_aaee6f8ecfee8eb4f36f5c97e2f6295cb}{file\+\_\+id}} field was added
+\end{DoxyItemize}
+\item Changes in \mbox{\hyperlink{a00494_aaf8d2069e2c6bbecf4aa8f9819028e8aa32ac5a73f50c6daa2ec8b78acdab27b5}{Set\+Track\+Input\+Monitor\+State}} message
+\begin{DoxyItemize}
+\item Now supports Instrument track type
+\end{DoxyItemize}
+\item Changes in \mbox{\hyperlink{a02104}{Open\+Session\+Request\+Body}} message
+\begin{DoxyItemize}
+\item \mbox{\hyperlink{a02104_ae4840807df6da216ec6b39cb79a31d04}{behavior\+\_\+options}} field was added. Pass empty \char`\"{}behavior\+\_\+options\char`\"{} field to bypass all dialogs when opening a session
+\item \mbox{\hyperlink{a02100}{Open\+Session\+Behavior\+Options}} message was added and will be extended with possible options in the future
+\end{DoxyItemize}
+\item Changes in \mbox{\hyperlink{a02272}{Export\+Mix\+Request\+Body}} message
+\begin{DoxyItemize}
+\item \mbox{\hyperlink{a02272_af804ebfee3b3c3c6cc015bb58ccb3128}{audio\+\_\+encoding\+\_\+options}} field was added
+\begin{DoxyItemize}
+\item The field is used to suppress any encoding options dialog
+\end{DoxyItemize}
+\item \mbox{\hyperlink{a02272_ad2b55ccec2f232c00b50738d5d71e7b1}{start\+\_\+time}} field was added
+\item \mbox{\hyperlink{a02272_a49d866076c6162502bd4ed8afcfdb129}{end\+\_\+time}} field was added
+\end{DoxyItemize}
+\end{DoxyItemize}\hypertarget{a00488_autotoc_md19}{}\doxyparagraph{Upcoming API Features (\+Not Yet Available)}\label{a00488_autotoc_md19}
+This SDK release includes early references to several new APIs that are currently under development. While these APIs are visible in the package, they are not yet functional and should not be used in production environments.
+
+Upcoming commands\+:
+\begin{DoxyItemize}
+\item \mbox{\hyperlink{a00494_aaf8d2069e2c6bbecf4aa8f9819028e8aa17c3046e8e4fef2382edb3a0ddce10d0}{Create\+Batch\+Job}}
+\item \mbox{\hyperlink{a00494_aaf8d2069e2c6bbecf4aa8f9819028e8aa654ae43b848c95a769a333bd62e1b60e}{Get\+Batch\+Job\+Status}}
+\item \mbox{\hyperlink{a00494_aaf8d2069e2c6bbecf4aa8f9819028e8aad5c2ba4507d43e95710504bd00ce1420}{Complete\+Batch\+Job}}
+\item \mbox{\hyperlink{a00494_aaf8d2069e2c6bbecf4aa8f9819028e8aa6e4ef12a772e10ab94c0d1b3b6001d9a}{Cancel\+Batch\+Job}}
+\end{DoxyItemize}
+
+What to expect\+:
+\begin{DoxyItemize}
+\item These APIs may appear in the SDK documentation
+\item Attempting to use them will result in \mbox{\hyperlink{a00494_a72aa3dec22d29b2aa82ee130b3e8d64ca67d024cf02582b02658964710d80ae88}{CEType\+\_\+\+PT\+\_\+\+Unsupported\+Command}} error
+\item Full support and functionality will be introduced in a future release
+\end{DoxyItemize}
+
+Stay tuned for updates in upcoming releases. We’ll provide full documentation and usage examples once these APIs are ready. 

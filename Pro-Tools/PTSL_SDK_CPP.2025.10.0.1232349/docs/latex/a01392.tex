@@ -1,0 +1,180 @@
+\hypertarget{a01392}{}\doxysection{Create\+Session\+Request}
+\label{a01392}\index{CreateSessionRequest@{CreateSessionRequest}}
+
+
+{\ttfamily \#include $<$Cpp\+PTSLCommon.\+h$>$}
+
+
+
+\doxysubsection{Description}
+Structure that describes Create\+Session request data. 
+
+\begin{DoxyRefDesc}{Deprecated}
+\item[\mbox{\hyperlink{a00467__deprecated000138}{Deprecated}}]All API-\/specific types in the C++ client lib are deprecated starting in Pro Tools 2024.\+10 since we introduced general JSON-\/based request/response. \end{DoxyRefDesc}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::string \mbox{\hyperlink{a01392_a6988eac5a1a7cda277b503fa3edcbbe0}{session\+Name}}
+\item 
+bool \mbox{\hyperlink{a01392_a037b4703eaaba25c52a04d317ab49d92}{create\+From\+Template}}
+\item 
+std\+::string \mbox{\hyperlink{a01392_ac6101f76048b42c2dc263555ffb12d40}{template\+Group}}
+\item 
+std\+::string \mbox{\hyperlink{a01392_a8f29e400aff90a4833e3a038c6e33d52}{template\+Name}}
+\item 
+\mbox{\hyperlink{a00491_ab5859d16271d57af8488245b01a3ef02}{File\+Type}} \mbox{\hyperlink{a01392_a275da6deecefab1cc2d6151de27e84c6}{file\+Type}}
+\item 
+\mbox{\hyperlink{a00491_a1ae5868da68e356fd97e81b9deff43f3}{Sample\+Rate}} \mbox{\hyperlink{a01392_afb7316112f9d8e74b30331957e7ca9b3}{sample\+Rate}}
+\item 
+\mbox{\hyperlink{a00491_a132578a7286179037b8839ec0655f986}{IOSettings}} \mbox{\hyperlink{a01392_af5ea90b2ac3c01025f99c70b4b3b830b}{input\+Output\+Settings}}
+\item 
+bool \mbox{\hyperlink{a01392_a60dfed8ad3a2e9a8a34eb1a8ac7611ca}{is\+Interleaved}}
+\item 
+std\+::string \mbox{\hyperlink{a01392_a2ee6a0ef7f749c5f4d7293af5022c7c7}{session\+Location}}
+\item 
+bool \mbox{\hyperlink{a01392_a537ea857e7b84179bc2cf626d691f259}{is\+Cloud\+Project}}
+\item 
+bool \mbox{\hyperlink{a01392_ae37f1c494b8f030174213f29a6c4979f}{create\+From\+AAF}}
+\item 
+std\+::string \mbox{\hyperlink{a01392_a5f85004b414c1d17bf9a421d4ee37404}{path\+To\+AAF}}
+\item 
+\mbox{\hyperlink{a00491_ab3060258f412a1504264931383b6e58d}{Bit\+Depth}} \mbox{\hyperlink{a01392_a1fadcc557c1be269d159955118365635}{bit\+Depth}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{a01392_a6988eac5a1a7cda277b503fa3edcbbe0}\label{a01392_a6988eac5a1a7cda277b503fa3edcbbe0}} 
+\index{CreateSessionRequest@{CreateSessionRequest}!sessionName@{sessionName}}
+\index{sessionName@{sessionName}!CreateSessionRequest@{CreateSessionRequest}}
+\doxysubsubsection{\texorpdfstring{sessionName}{sessionName}}
+{\footnotesize\ttfamily std\+::string session\+Name}
+
+
+
+Referenced by \mbox{\hyperlink{a01328_a4cc4b586003cd573d35d1a5a6b09e764}{Cpp\+PTSLClient\+::\+Create\+Session()}}.
+
+\mbox{\Hypertarget{a01392_a037b4703eaaba25c52a04d317ab49d92}\label{a01392_a037b4703eaaba25c52a04d317ab49d92}} 
+\index{CreateSessionRequest@{CreateSessionRequest}!createFromTemplate@{createFromTemplate}}
+\index{createFromTemplate@{createFromTemplate}!CreateSessionRequest@{CreateSessionRequest}}
+\doxysubsubsection{\texorpdfstring{createFromTemplate}{createFromTemplate}}
+{\footnotesize\ttfamily bool create\+From\+Template}
+
+
+
+Referenced by \mbox{\hyperlink{a01328_a4cc4b586003cd573d35d1a5a6b09e764}{Cpp\+PTSLClient\+::\+Create\+Session()}}.
+
+\mbox{\Hypertarget{a01392_ac6101f76048b42c2dc263555ffb12d40}\label{a01392_ac6101f76048b42c2dc263555ffb12d40}} 
+\index{CreateSessionRequest@{CreateSessionRequest}!templateGroup@{templateGroup}}
+\index{templateGroup@{templateGroup}!CreateSessionRequest@{CreateSessionRequest}}
+\doxysubsubsection{\texorpdfstring{templateGroup}{templateGroup}}
+{\footnotesize\ttfamily std\+::string template\+Group}
+
+
+
+Referenced by \mbox{\hyperlink{a01328_a4cc4b586003cd573d35d1a5a6b09e764}{Cpp\+PTSLClient\+::\+Create\+Session()}}.
+
+\mbox{\Hypertarget{a01392_a8f29e400aff90a4833e3a038c6e33d52}\label{a01392_a8f29e400aff90a4833e3a038c6e33d52}} 
+\index{CreateSessionRequest@{CreateSessionRequest}!templateName@{templateName}}
+\index{templateName@{templateName}!CreateSessionRequest@{CreateSessionRequest}}
+\doxysubsubsection{\texorpdfstring{templateName}{templateName}}
+{\footnotesize\ttfamily std\+::string template\+Name}
+
+
+
+Referenced by \mbox{\hyperlink{a01328_a4cc4b586003cd573d35d1a5a6b09e764}{Cpp\+PTSLClient\+::\+Create\+Session()}}.
+
+\mbox{\Hypertarget{a01392_a275da6deecefab1cc2d6151de27e84c6}\label{a01392_a275da6deecefab1cc2d6151de27e84c6}} 
+\index{CreateSessionRequest@{CreateSessionRequest}!fileType@{fileType}}
+\index{fileType@{fileType}!CreateSessionRequest@{CreateSessionRequest}}
+\doxysubsubsection{\texorpdfstring{fileType}{fileType}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a00491_ab5859d16271d57af8488245b01a3ef02}{File\+Type}} file\+Type}
+
+
+
+Referenced by \mbox{\hyperlink{a01328_a4cc4b586003cd573d35d1a5a6b09e764}{Cpp\+PTSLClient\+::\+Create\+Session()}}.
+
+\mbox{\Hypertarget{a01392_afb7316112f9d8e74b30331957e7ca9b3}\label{a01392_afb7316112f9d8e74b30331957e7ca9b3}} 
+\index{CreateSessionRequest@{CreateSessionRequest}!sampleRate@{sampleRate}}
+\index{sampleRate@{sampleRate}!CreateSessionRequest@{CreateSessionRequest}}
+\doxysubsubsection{\texorpdfstring{sampleRate}{sampleRate}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a00491_a1ae5868da68e356fd97e81b9deff43f3}{Sample\+Rate}} sample\+Rate}
+
+
+
+Referenced by \mbox{\hyperlink{a01328_a4cc4b586003cd573d35d1a5a6b09e764}{Cpp\+PTSLClient\+::\+Create\+Session()}}.
+
+\mbox{\Hypertarget{a01392_af5ea90b2ac3c01025f99c70b4b3b830b}\label{a01392_af5ea90b2ac3c01025f99c70b4b3b830b}} 
+\index{CreateSessionRequest@{CreateSessionRequest}!inputOutputSettings@{inputOutputSettings}}
+\index{inputOutputSettings@{inputOutputSettings}!CreateSessionRequest@{CreateSessionRequest}}
+\doxysubsubsection{\texorpdfstring{inputOutputSettings}{inputOutputSettings}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a00491_a132578a7286179037b8839ec0655f986}{IOSettings}} input\+Output\+Settings}
+
+
+
+Referenced by \mbox{\hyperlink{a01328_a4cc4b586003cd573d35d1a5a6b09e764}{Cpp\+PTSLClient\+::\+Create\+Session()}}.
+
+\mbox{\Hypertarget{a01392_a60dfed8ad3a2e9a8a34eb1a8ac7611ca}\label{a01392_a60dfed8ad3a2e9a8a34eb1a8ac7611ca}} 
+\index{CreateSessionRequest@{CreateSessionRequest}!isInterleaved@{isInterleaved}}
+\index{isInterleaved@{isInterleaved}!CreateSessionRequest@{CreateSessionRequest}}
+\doxysubsubsection{\texorpdfstring{isInterleaved}{isInterleaved}}
+{\footnotesize\ttfamily bool is\+Interleaved}
+
+
+
+Referenced by \mbox{\hyperlink{a01328_a4cc4b586003cd573d35d1a5a6b09e764}{Cpp\+PTSLClient\+::\+Create\+Session()}}.
+
+\mbox{\Hypertarget{a01392_a2ee6a0ef7f749c5f4d7293af5022c7c7}\label{a01392_a2ee6a0ef7f749c5f4d7293af5022c7c7}} 
+\index{CreateSessionRequest@{CreateSessionRequest}!sessionLocation@{sessionLocation}}
+\index{sessionLocation@{sessionLocation}!CreateSessionRequest@{CreateSessionRequest}}
+\doxysubsubsection{\texorpdfstring{sessionLocation}{sessionLocation}}
+{\footnotesize\ttfamily std\+::string session\+Location}
+
+
+
+Referenced by \mbox{\hyperlink{a01328_a4cc4b586003cd573d35d1a5a6b09e764}{Cpp\+PTSLClient\+::\+Create\+Session()}}.
+
+\mbox{\Hypertarget{a01392_a537ea857e7b84179bc2cf626d691f259}\label{a01392_a537ea857e7b84179bc2cf626d691f259}} 
+\index{CreateSessionRequest@{CreateSessionRequest}!isCloudProject@{isCloudProject}}
+\index{isCloudProject@{isCloudProject}!CreateSessionRequest@{CreateSessionRequest}}
+\doxysubsubsection{\texorpdfstring{isCloudProject}{isCloudProject}}
+{\footnotesize\ttfamily bool is\+Cloud\+Project}
+
+
+
+Referenced by \mbox{\hyperlink{a01328_a4cc4b586003cd573d35d1a5a6b09e764}{Cpp\+PTSLClient\+::\+Create\+Session()}}.
+
+\mbox{\Hypertarget{a01392_ae37f1c494b8f030174213f29a6c4979f}\label{a01392_ae37f1c494b8f030174213f29a6c4979f}} 
+\index{CreateSessionRequest@{CreateSessionRequest}!createFromAAF@{createFromAAF}}
+\index{createFromAAF@{createFromAAF}!CreateSessionRequest@{CreateSessionRequest}}
+\doxysubsubsection{\texorpdfstring{createFromAAF}{createFromAAF}}
+{\footnotesize\ttfamily bool create\+From\+AAF}
+
+
+
+Referenced by \mbox{\hyperlink{a01328_a4cc4b586003cd573d35d1a5a6b09e764}{Cpp\+PTSLClient\+::\+Create\+Session()}}.
+
+\mbox{\Hypertarget{a01392_a5f85004b414c1d17bf9a421d4ee37404}\label{a01392_a5f85004b414c1d17bf9a421d4ee37404}} 
+\index{CreateSessionRequest@{CreateSessionRequest}!pathToAAF@{pathToAAF}}
+\index{pathToAAF@{pathToAAF}!CreateSessionRequest@{CreateSessionRequest}}
+\doxysubsubsection{\texorpdfstring{pathToAAF}{pathToAAF}}
+{\footnotesize\ttfamily std\+::string path\+To\+AAF}
+
+
+
+Referenced by \mbox{\hyperlink{a01328_a4cc4b586003cd573d35d1a5a6b09e764}{Cpp\+PTSLClient\+::\+Create\+Session()}}.
+
+\mbox{\Hypertarget{a01392_a1fadcc557c1be269d159955118365635}\label{a01392_a1fadcc557c1be269d159955118365635}} 
+\index{CreateSessionRequest@{CreateSessionRequest}!bitDepth@{bitDepth}}
+\index{bitDepth@{bitDepth}!CreateSessionRequest@{CreateSessionRequest}}
+\doxysubsubsection{\texorpdfstring{bitDepth}{bitDepth}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a00491_ab3060258f412a1504264931383b6e58d}{Bit\+Depth}} bit\+Depth}
+
+
+
+Referenced by \mbox{\hyperlink{a01328_a4cc4b586003cd573d35d1a5a6b09e764}{Cpp\+PTSLClient\+::\+Create\+Session()}}.
+
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{a00050}{Cpp\+PTSLCommon.\+h}}\end{DoxyCompactItemize}

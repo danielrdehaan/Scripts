@@ -1,0 +1,695 @@
+\hypertarget{a00017_source}{}\doxysection{Cpp\+PTSLClient.\+h}
+\label{a00017_source}\index{CppPTSLClient.h@{CppPTSLClient.h}}
+\mbox{\hyperlink{a00017}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{comment}{// Copyright 2020-\/2025 by Avid Technology, Inc.}}
+\DoxyCodeLine{2 \textcolor{comment}{// CONFIDENTIAL: this document contains confidential information of Avid. Do not disclose to any third party. Use of the information contained in this document is subject to an Avid SDK license.}}
+\DoxyCodeLine{3 }
+\DoxyCodeLine{9 \textcolor{preprocessor}{\#pragma once}}
+\DoxyCodeLine{10 }
+\DoxyCodeLine{11 \textcolor{preprocessor}{\#include <functional>}}
+\DoxyCodeLine{12 \textcolor{preprocessor}{\#include <map>}}
+\DoxyCodeLine{13 \textcolor{preprocessor}{\#include <memory>}}
+\DoxyCodeLine{14 \textcolor{preprocessor}{\#include <optional>}}
+\DoxyCodeLine{15 \textcolor{preprocessor}{\#include <string>}}
+\DoxyCodeLine{16 \textcolor{preprocessor}{\#include <thread>}}
+\DoxyCodeLine{17 }
+\DoxyCodeLine{18 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{a00035}{CppAsync.h}}"{}}}
+\DoxyCodeLine{19 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{a00050}{CppPTSLCommon.h}}"{}}}
+\DoxyCodeLine{20 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{a00047}{CppPTSLRequest.h}}"{}}}
+\DoxyCodeLine{21 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{a00005}{CppPTSLResponse.h}}"{}}}
+\DoxyCodeLine{22 \textcolor{preprocessor}{\#include "{}PtslCCppExport.h"{}}}
+\DoxyCodeLine{23 }
+\DoxyCodeLine{24 \textcolor{keyword}{namespace }\mbox{\hyperlink{a00491}{PTSLC\_CPP}}}
+\DoxyCodeLine{25 \{}
+\DoxyCodeLine{26 \textcolor{preprocessor}{\#if defined(\_WIN32)}}
+\DoxyCodeLine{30     \textcolor{keyword}{template} \textcolor{keyword}{class }PTSLC\_CPP\_EXPORT std::function<void(std::shared\_ptr<CommandResponse>)>;}
+\DoxyCodeLine{31 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{32 }
+\DoxyCodeLine{36     \textcolor{keyword}{struct }[[deprecated("{}Deprecated starting in 2024.10."{})]] DefaultRequestHandler;}
+\DoxyCodeLine{37 }
+\DoxyCodeLine{41     \textcolor{keyword}{class }PTSLC\_CPP\_EXPORT \mbox{\hyperlink{a01328}{CppPTSLClient}}}
+\DoxyCodeLine{42     \{}
+\DoxyCodeLine{43     \textcolor{keyword}{public}:}
+\DoxyCodeLine{47         std::function<void(std::shared\_ptr<CppPTSLResponse>)> \mbox{\hyperlink{a01328_ad50205dc2210e8a51c53d9715ed12e2c}{OnResponseReceived}};}
+\DoxyCodeLine{48 }
+\DoxyCodeLine{54         [[deprecated(\textcolor{stringliteral}{"{}This version of the function is deprecated. Please use OnResponseReceived instead."{}})]] std::}
+\DoxyCodeLine{55             function<void(std::shared\_ptr<CommandResponse>)>}
+\DoxyCodeLine{56                 \mbox{\hyperlink{a01328_a3011adc1912995aed11669640e5ca621}{OnResponseReceived\_V1\_Deprecated}};}
+\DoxyCodeLine{57 }
+\DoxyCodeLine{63         \textcolor{keyword}{explicit} \mbox{\hyperlink{a01328}{CppPTSLClient}}(\textcolor{keyword}{const} \mbox{\hyperlink{a01348}{ClientConfig}}\& config);}
+\DoxyCodeLine{64 }
+\DoxyCodeLine{68         \textcolor{keyword}{virtual} \mbox{\hyperlink{a01328}{\string~CppPTSLClient}}();}
+\DoxyCodeLine{69 }
+\DoxyCodeLine{73         \textcolor{keyword}{virtual} \textcolor{keywordtype}{bool} LaunchProTools();}
+\DoxyCodeLine{74 }
+\DoxyCodeLine{81         [[deprecated(\textcolor{stringliteral}{"{}Use SendRequest instead."{}})]] \textcolor{keywordtype}{void} MakeRequest(}
+\DoxyCodeLine{82             std::shared\_ptr<DefaultRequestHandler> handler, \mbox{\hyperlink{a00491_ae5152a79762c33c83fdb5752192e511c}{CommandId}} commandType);}
+\DoxyCodeLine{83 }
+\DoxyCodeLine{90         [[deprecated(\textcolor{stringliteral}{"{}Use SendRequest instead."{}})]] \textcolor{keywordtype}{void} MakeStreamingRequest(}
+\DoxyCodeLine{91             std::shared\_ptr<DefaultRequestHandler> handler, \mbox{\hyperlink{a00491_ae5152a79762c33c83fdb5752192e511c}{CommandId}} commandType);}
+\DoxyCodeLine{92 }
+\DoxyCodeLine{96         std::string GetSessionId() \textcolor{keyword}{const};}
+\DoxyCodeLine{97 }
+\DoxyCodeLine{101         \textcolor{keywordtype}{void} SetSessionId(\textcolor{keyword}{const} std::string\& sessionId);}
+\DoxyCodeLine{102 }
+\DoxyCodeLine{108         std::future<CppPTSLResponse> SendRequest(\mbox{\hyperlink{a01980}{CppPTSLRequest}} request, std::function<\textcolor{keywordtype}{void}(\textcolor{keyword}{const} \mbox{\hyperlink{a01984}{CppPTSLResponse}}\&)> responseCallback = \textcolor{keyword}{nullptr});}
+\DoxyCodeLine{109 }
+\DoxyCodeLine{113         \textcolor{keywordtype}{void} CancelRequests(\textcolor{keywordtype}{bool} waitForCancel = \textcolor{keyword}{true});}
+\DoxyCodeLine{114 }
+\DoxyCodeLine{115     \textcolor{keyword}{public}:}
+\DoxyCodeLine{128         [[deprecated(\textcolor{stringliteral}{"{}All API-\/specific functions (commands) are deprecated starting in Pro Tools 2024.10. "{}}}
+\DoxyCodeLine{129                      \textcolor{stringliteral}{"{}Please use a general JSON-\/based SendRequest function instead."{}})]] \textcolor{keyword}{virtual} std::}
+\DoxyCodeLine{130             shared\_ptr<GetTaskStatusResponse>}
+\DoxyCodeLine{131             GetTaskStatus(\textcolor{keyword}{const} \mbox{\hyperlink{a01384}{GetTaskStatusRequest}}\& request);}
+\DoxyCodeLine{132 }
+\DoxyCodeLine{141         [[deprecated(}
+\DoxyCodeLine{142             \textcolor{stringliteral}{"{}All API-\/specific functions (commands) are deprecated starting in Pro Tools 2024.10. "{}}}
+\DoxyCodeLine{143             \textcolor{stringliteral}{"{}Please use a general JSON-\/based SendRequest function instead."{}})]] \textcolor{keyword}{virtual} std::shared\_ptr<CommandResponse>}
+\DoxyCodeLine{144         CreateSession(\textcolor{keyword}{const} \mbox{\hyperlink{a01392}{CreateSessionRequest}}\& request);}
+\DoxyCodeLine{145 }
+\DoxyCodeLine{154         [[deprecated(}
+\DoxyCodeLine{155             \textcolor{stringliteral}{"{}All API-\/specific functions (commands) are deprecated starting in Pro Tools 2024.10. "{}}}
+\DoxyCodeLine{156             \textcolor{stringliteral}{"{}Please use a general JSON-\/based SendRequest function instead."{}})]] \textcolor{keyword}{virtual} std::shared\_ptr<CommandResponse>}
+\DoxyCodeLine{157         OpenSession(\textcolor{keyword}{const} \mbox{\hyperlink{a01396}{OpenSessionRequest}}\& request);}
+\DoxyCodeLine{158 }
+\DoxyCodeLine{167         [[deprecated(}
+\DoxyCodeLine{168             \textcolor{stringliteral}{"{}All API-\/specific functions (commands) are deprecated starting in Pro Tools 2024.10. "{}}}
+\DoxyCodeLine{169             \textcolor{stringliteral}{"{}Please use a general JSON-\/based SendRequest function instead."{}})]] \textcolor{keyword}{virtual} std::shared\_ptr<ImportResponse>}
+\DoxyCodeLine{170         Import(\textcolor{keyword}{const} \mbox{\hyperlink{a01412}{ImportRequest}}\& request);}
+\DoxyCodeLine{171 }
+\DoxyCodeLine{180         [[deprecated(\textcolor{stringliteral}{"{}All API-\/specific functions (commands) are deprecated starting in Pro Tools 2024.10. "{}}}
+\DoxyCodeLine{181                      \textcolor{stringliteral}{"{}Please use a general JSON-\/based SendRequest function instead."{}})]] \textcolor{keyword}{virtual} std::}
+\DoxyCodeLine{182             shared\_ptr<GetTrackListResponse>}
+\DoxyCodeLine{183             GetTrackList(\textcolor{keyword}{const} \mbox{\hyperlink{a01432}{GetTrackListRequest}}\& request);}
+\DoxyCodeLine{184 }
+\DoxyCodeLine{193         [[deprecated(}
+\DoxyCodeLine{194             \textcolor{stringliteral}{"{}All API-\/specific functions (commands) are deprecated starting in Pro Tools 2024.10. "{}}}
+\DoxyCodeLine{195             \textcolor{stringliteral}{"{}Please use a general JSON-\/based SendRequest function instead."{}})]] \textcolor{keyword}{virtual} std::shared\_ptr<CommandResponse>}
+\DoxyCodeLine{196         SelectAllClipsOnTrack(\textcolor{keyword}{const} \mbox{\hyperlink{a01440}{SelectAllClipsOnTrackRequest}}\& request);}
+\DoxyCodeLine{197 }
+\DoxyCodeLine{206         [[deprecated(}
+\DoxyCodeLine{207             \textcolor{stringliteral}{"{}All API-\/specific functions (commands) are deprecated starting in Pro Tools 2024.10. "{}}}
+\DoxyCodeLine{208             \textcolor{stringliteral}{"{}Please use a general JSON-\/based SendRequest function instead."{}})]] \textcolor{keyword}{virtual} std::shared\_ptr<CommandResponse>}
+\DoxyCodeLine{209         ExtendSelectionToTargetTracks(\textcolor{keyword}{const} \mbox{\hyperlink{a01448}{ExtendSelectionToTargetTracksRequest}}\& request);}
+\DoxyCodeLine{210 }
+\DoxyCodeLine{220         [[deprecated(}
+\DoxyCodeLine{221             \textcolor{stringliteral}{"{}All API-\/specific functions (commands) are deprecated starting in Pro Tools 2024.10. "{}}}
+\DoxyCodeLine{222             \textcolor{stringliteral}{"{}Please use a general JSON-\/based SendRequest function instead."{}})]] \textcolor{keyword}{virtual} std::shared\_ptr<CommandResponse>}
+\DoxyCodeLine{223         TrimToSelection(\textcolor{keyword}{const} \mbox{\hyperlink{a01372}{CommandRequest}}\& request);}
+\DoxyCodeLine{224 }
+\DoxyCodeLine{236         [[deprecated(}
+\DoxyCodeLine{237             \textcolor{stringliteral}{"{}All API-\/specific functions (commands) are deprecated starting in Pro Tools 2024.10. "{}}}
+\DoxyCodeLine{238             \textcolor{stringliteral}{"{}Please use a general JSON-\/based SendRequest function instead."{}})]] \textcolor{keyword}{virtual} std::shared\_ptr<CommandResponse>}
+\DoxyCodeLine{239         CreateFade(\textcolor{keyword}{const} \mbox{\hyperlink{a01456}{CreateFadesBasedOnPresetRequest}}\& request);}
+\DoxyCodeLine{240 }
+\DoxyCodeLine{252         [[deprecated(}
+\DoxyCodeLine{253             \textcolor{stringliteral}{"{}All API-\/specific functions (commands) are deprecated starting in Pro Tools 2024.10. "{}}}
+\DoxyCodeLine{254             \textcolor{stringliteral}{"{}Please use a general JSON-\/based SendRequest function instead."{}})]] \textcolor{keyword}{virtual} std::shared\_ptr<CommandResponse>}
+\DoxyCodeLine{255         RenameTrack(\textcolor{keyword}{const} \mbox{\hyperlink{a01464}{RenameTargetTrackRequest}}\& request);}
+\DoxyCodeLine{256 }
+\DoxyCodeLine{265         [[deprecated(}
+\DoxyCodeLine{266             \textcolor{stringliteral}{"{}All API-\/specific functions (commands) are deprecated starting in Pro Tools 2024.10. "{}}}
+\DoxyCodeLine{267             \textcolor{stringliteral}{"{}Please use a general JSON-\/based SendRequest function instead."{}})]] \textcolor{keyword}{virtual} std::shared\_ptr<CommandResponse>}
+\DoxyCodeLine{268         ConsolidateClip(\textcolor{keyword}{const} \mbox{\hyperlink{a01372}{CommandRequest}}\& request);}
+\DoxyCodeLine{269 }
+\DoxyCodeLine{278         [[deprecated(}
+\DoxyCodeLine{279             \textcolor{stringliteral}{"{}All API-\/specific functions (commands) are deprecated starting in Pro Tools 2024.10. "{}}}
+\DoxyCodeLine{280             \textcolor{stringliteral}{"{}Please use a general JSON-\/based SendRequest function instead."{}})]] \textcolor{keyword}{virtual} std::shared\_ptr<CommandResponse>}
+\DoxyCodeLine{281         ExportClipsAsFiles(\textcolor{keyword}{const} \mbox{\hyperlink{a01468}{ExportClipsAsFilesRequest}}\& request);}
+\DoxyCodeLine{282 }
+\DoxyCodeLine{291         [[deprecated(}
+\DoxyCodeLine{292             \textcolor{stringliteral}{"{}All API-\/specific functions (commands) are deprecated starting in Pro Tools 2024.10. "{}}}
+\DoxyCodeLine{293             \textcolor{stringliteral}{"{}Please use a general JSON-\/based SendRequest function instead."{}})]] \textcolor{keyword}{virtual} std::shared\_ptr<CommandResponse>}
+\DoxyCodeLine{294         ExportSelectedTracksAsAAFOMF(\textcolor{keyword}{const} \mbox{\hyperlink{a01472}{ExportSelectedTracksAsAAFOMFRequest}}\& request);}
+\DoxyCodeLine{295 }
+\DoxyCodeLine{304         [[deprecated(\textcolor{stringliteral}{"{}All API-\/specific functions (commands) are deprecated starting in Pro Tools 2024.10. "{}}}
+\DoxyCodeLine{305                      \textcolor{stringliteral}{"{}Please use a general JSON-\/based SendRequest function instead."{}})]] \textcolor{keyword}{virtual} std::}
+\DoxyCodeLine{306             shared\_ptr<RefreshTargetAudioFilesResponse>}
+\DoxyCodeLine{307             RefreshTargetAudioFiles(\textcolor{keyword}{const} \mbox{\hyperlink{a01476}{RefreshTargetAudioFilesRequest}}\& request);}
+\DoxyCodeLine{308 }
+\DoxyCodeLine{317         [[deprecated(}
+\DoxyCodeLine{318             \textcolor{stringliteral}{"{}All API-\/specific functions (commands) are deprecated starting in Pro Tools 2024.10. "{}}}
+\DoxyCodeLine{319             \textcolor{stringliteral}{"{}Please use a general JSON-\/based SendRequest function instead."{}})]] \textcolor{keyword}{virtual} std::shared\_ptr<CommandResponse>}
+\DoxyCodeLine{320         RefreshAllModifiedAudioFiles(\textcolor{keyword}{const} \mbox{\hyperlink{a01372}{CommandRequest}}\& request);}
+\DoxyCodeLine{321 }
+\DoxyCodeLine{330         [[deprecated(\textcolor{stringliteral}{"{}All API-\/specific functions (commands) are deprecated starting in Pro Tools 2024.10. "{}}}
+\DoxyCodeLine{331                      \textcolor{stringliteral}{"{}Please use a general JSON-\/based SendRequest function instead."{}})]] \textcolor{keyword}{virtual} std::}
+\DoxyCodeLine{332             shared\_ptr<GetFileLocationResponse>}
+\DoxyCodeLine{333             GetFileLocation(\textcolor{keyword}{const} \mbox{\hyperlink{a01488}{GetFileLocationRequest}}\& request);}
+\DoxyCodeLine{334 }
+\DoxyCodeLine{343         [[deprecated(}
+\DoxyCodeLine{344             \textcolor{stringliteral}{"{}All API-\/specific functions (commands) are deprecated starting in Pro Tools 2024.10. "{}}}
+\DoxyCodeLine{345             \textcolor{stringliteral}{"{}Please use a general JSON-\/based SendRequest function instead."{}})]] \textcolor{keyword}{virtual} std::shared\_ptr<CommandResponse>}
+\DoxyCodeLine{346         CloseSession(\textcolor{keyword}{const} \mbox{\hyperlink{a01504}{CloseSessionRequest}}\& request);}
+\DoxyCodeLine{347 }
+\DoxyCodeLine{356         [[deprecated(}
+\DoxyCodeLine{357             \textcolor{stringliteral}{"{}All API-\/specific functions (commands) are deprecated starting in Pro Tools 2024.10. "{}}}
+\DoxyCodeLine{358             \textcolor{stringliteral}{"{}Please use a general JSON-\/based SendRequest function instead."{}})]] \textcolor{keyword}{virtual} std::shared\_ptr<CommandResponse>}
+\DoxyCodeLine{359         SaveSession(\textcolor{keyword}{const} \mbox{\hyperlink{a01372}{CommandRequest}}\& request);}
+\DoxyCodeLine{360 }
+\DoxyCodeLine{369         [[deprecated(}
+\DoxyCodeLine{370             \textcolor{stringliteral}{"{}All API-\/specific functions (commands) are deprecated starting in Pro Tools 2024.10. "{}}}
+\DoxyCodeLine{371             \textcolor{stringliteral}{"{}Please use a general JSON-\/based SendRequest function instead."{}})]] \textcolor{keyword}{virtual} std::shared\_ptr<CommandResponse>}
+\DoxyCodeLine{372         SaveSessionAs(\textcolor{keyword}{const} \mbox{\hyperlink{a01508}{SaveSessionAsRequest}}\& request);}
+\DoxyCodeLine{373 }
+\DoxyCodeLine{382         [[deprecated(}
+\DoxyCodeLine{383             \textcolor{stringliteral}{"{}All API-\/specific functions (commands) are deprecated starting in Pro Tools 2024.10. "{}}}
+\DoxyCodeLine{384             \textcolor{stringliteral}{"{}Please use a general JSON-\/based SendRequest function instead."{}})]] \textcolor{keyword}{virtual} std::shared\_ptr<CommandResponse>}
+\DoxyCodeLine{385         Cut(\textcolor{keyword}{const} \mbox{\hyperlink{a01372}{CommandRequest}}\& request);}
+\DoxyCodeLine{386 }
+\DoxyCodeLine{395         [[deprecated(}
+\DoxyCodeLine{396             \textcolor{stringliteral}{"{}All API-\/specific functions (commands) are deprecated starting in Pro Tools 2024.10. "{}}}
+\DoxyCodeLine{397             \textcolor{stringliteral}{"{}Please use a general JSON-\/based SendRequest function instead."{}})]] \textcolor{keyword}{virtual} std::shared\_ptr<CommandResponse>}
+\DoxyCodeLine{398         Copy(\textcolor{keyword}{const} \mbox{\hyperlink{a01372}{CommandRequest}}\& request);}
+\DoxyCodeLine{399 }
+\DoxyCodeLine{408         [[deprecated(}
+\DoxyCodeLine{409             \textcolor{stringliteral}{"{}All API-\/specific functions (commands) are deprecated starting in Pro Tools 2024.10. "{}}}
+\DoxyCodeLine{410             \textcolor{stringliteral}{"{}Please use a general JSON-\/based SendRequest function instead."{}})]] \textcolor{keyword}{virtual} std::shared\_ptr<CommandResponse>}
+\DoxyCodeLine{411         Paste(\textcolor{keyword}{const} \mbox{\hyperlink{a01372}{CommandRequest}}\& request);}
+\DoxyCodeLine{412 }
+\DoxyCodeLine{421         [[deprecated(}
+\DoxyCodeLine{422             \textcolor{stringliteral}{"{}All API-\/specific functions (commands) are deprecated starting in Pro Tools 2024.10. "{}}}
+\DoxyCodeLine{423             \textcolor{stringliteral}{"{}Please use a general JSON-\/based SendRequest function instead."{}})]] \textcolor{keyword}{virtual} std::shared\_ptr<CommandResponse>}
+\DoxyCodeLine{424         Clear(\textcolor{keyword}{const} \mbox{\hyperlink{a01372}{CommandRequest}}\& request);}
+\DoxyCodeLine{425 }
+\DoxyCodeLine{434         [[deprecated(}
+\DoxyCodeLine{435             \textcolor{stringliteral}{"{}All API-\/specific functions (commands) are deprecated starting in Pro Tools 2024.10. "{}}}
+\DoxyCodeLine{436             \textcolor{stringliteral}{"{}Please use a general JSON-\/based SendRequest function instead."{}})]] \textcolor{keyword}{virtual} std::shared\_ptr<CommandResponse>}
+\DoxyCodeLine{437         CutSpecial(\textcolor{keyword}{const} \mbox{\hyperlink{a01512}{CutSpecialRequest}}\& request);}
+\DoxyCodeLine{438 }
+\DoxyCodeLine{447         [[deprecated(}
+\DoxyCodeLine{448             \textcolor{stringliteral}{"{}All API-\/specific functions (commands) are deprecated starting in Pro Tools 2024.10. "{}}}
+\DoxyCodeLine{449             \textcolor{stringliteral}{"{}Please use a general JSON-\/based SendRequest function instead."{}})]] \textcolor{keyword}{virtual} std::shared\_ptr<CommandResponse>}
+\DoxyCodeLine{450         CopySpecial(\textcolor{keyword}{const} \mbox{\hyperlink{a01516}{CopySpecialRequest}}\& request);}
+\DoxyCodeLine{451 }
+\DoxyCodeLine{460         [[deprecated(}
+\DoxyCodeLine{461             \textcolor{stringliteral}{"{}All API-\/specific functions (commands) are deprecated starting in Pro Tools 2024.10. "{}}}
+\DoxyCodeLine{462             \textcolor{stringliteral}{"{}Please use a general JSON-\/based SendRequest function instead."{}})]] \textcolor{keyword}{virtual} std::shared\_ptr<CommandResponse>}
+\DoxyCodeLine{463         ClearSpecial(\textcolor{keyword}{const} \mbox{\hyperlink{a01520}{ClearSpecialRequest}}\& request);}
+\DoxyCodeLine{464 }
+\DoxyCodeLine{473         [[deprecated(}
+\DoxyCodeLine{474             \textcolor{stringliteral}{"{}All API-\/specific functions (commands) are deprecated starting in Pro Tools 2024.10. "{}}}
+\DoxyCodeLine{475             \textcolor{stringliteral}{"{}Please use a general JSON-\/based SendRequest function instead."{}})]] \textcolor{keyword}{virtual} std::shared\_ptr<CommandResponse>}
+\DoxyCodeLine{476         PasteSpecial(\textcolor{keyword}{const} \mbox{\hyperlink{a01524}{PasteSpecialRequest}}\& request);}
+\DoxyCodeLine{477 }
+\DoxyCodeLine{484         [[deprecated(\textcolor{stringliteral}{"{}All API-\/specific functions (commands) are deprecated starting in Pro Tools 2024.10. "{}}}
+\DoxyCodeLine{485                      \textcolor{stringliteral}{"{}Please use a general JSON-\/based SendRequest function instead."{}})]] \textcolor{keyword}{virtual} std::}
+\DoxyCodeLine{486             shared\_ptr<GetEditModeResponse>}
+\DoxyCodeLine{487             GetEditMode(\textcolor{keyword}{const} \mbox{\hyperlink{a01372}{CommandRequest}}\& request);}
+\DoxyCodeLine{488 }
+\DoxyCodeLine{495         [[deprecated(}
+\DoxyCodeLine{496             \textcolor{stringliteral}{"{}All API-\/specific functions (commands) are deprecated starting in Pro Tools 2024.10. "{}}}
+\DoxyCodeLine{497             \textcolor{stringliteral}{"{}Please use a general JSON-\/based SendRequest function instead."{}})]] \textcolor{keyword}{virtual} std::shared\_ptr<CommandResponse>}
+\DoxyCodeLine{498         SetEditMode(\textcolor{keyword}{const} \mbox{\hyperlink{a01780}{SetEditModeRequest}}\& request);}
+\DoxyCodeLine{499 }
+\DoxyCodeLine{506         [[deprecated(\textcolor{stringliteral}{"{}All API-\/specific functions (commands) are deprecated starting in Pro Tools 2024.10. "{}}}
+\DoxyCodeLine{507                      \textcolor{stringliteral}{"{}Please use a general JSON-\/based SendRequest function instead."{}})]] \textcolor{keyword}{virtual} std::}
+\DoxyCodeLine{508             shared\_ptr<GetEditToolResponse>}
+\DoxyCodeLine{509             GetEditTool(\textcolor{keyword}{const} \mbox{\hyperlink{a01372}{CommandRequest}}\& request);}
+\DoxyCodeLine{510 }
+\DoxyCodeLine{517         [[deprecated(}
+\DoxyCodeLine{518             \textcolor{stringliteral}{"{}All API-\/specific functions (commands) are deprecated starting in Pro Tools 2024.10. "{}}}
+\DoxyCodeLine{519             \textcolor{stringliteral}{"{}Please use a general JSON-\/based SendRequest function instead."{}})]] \textcolor{keyword}{virtual} std::shared\_ptr<CommandResponse>}
+\DoxyCodeLine{520         SetEditTool(\textcolor{keyword}{const} \mbox{\hyperlink{a01788}{SetEditToolRequest}}\& request);}
+\DoxyCodeLine{521 }
+\DoxyCodeLine{528         [[deprecated(}
+\DoxyCodeLine{529             \textcolor{stringliteral}{"{}All API-\/specific functions (commands) are deprecated starting in Pro Tools 2024.10. "{}}}
+\DoxyCodeLine{530             \textcolor{stringliteral}{"{}Please use a general JSON-\/based SendRequest function instead."{}})]] \textcolor{keyword}{virtual} std::shared\_ptr<CommandResponse>}
+\DoxyCodeLine{531         RecallZoomPreset(\textcolor{keyword}{const} \mbox{\hyperlink{a01792}{RecallZoomPresetRequest}}\& request);}
+\DoxyCodeLine{532 }
+\DoxyCodeLine{539         [[deprecated(\textcolor{stringliteral}{"{}All API-\/specific functions (commands) are deprecated starting in Pro Tools 2024.10. "{}}}
+\DoxyCodeLine{540                      \textcolor{stringliteral}{"{}Please use a general JSON-\/based SendRequest function instead."{}})]] \textcolor{keyword}{virtual} std::}
+\DoxyCodeLine{541             shared\_ptr<GetEditModeOptionsResponse>}
+\DoxyCodeLine{542             GetEditModeOptions(\textcolor{keyword}{const} \mbox{\hyperlink{a01372}{CommandRequest}}\& request);}
+\DoxyCodeLine{543 }
+\DoxyCodeLine{550         [[deprecated(}
+\DoxyCodeLine{551             \textcolor{stringliteral}{"{}All API-\/specific functions (commands) are deprecated starting in Pro Tools 2024.10. "{}}}
+\DoxyCodeLine{552             \textcolor{stringliteral}{"{}Please use a general JSON-\/based SendRequest function instead."{}})]] \textcolor{keyword}{virtual} std::shared\_ptr<CommandResponse>}
+\DoxyCodeLine{553         SetEditModeOptions(\textcolor{keyword}{const} \mbox{\hyperlink{a01800}{SetEditModeOptionsRequest}}\& request);}
+\DoxyCodeLine{554 }
+\DoxyCodeLine{602         [[deprecated(}
+\DoxyCodeLine{603             \textcolor{stringliteral}{"{}All API-\/specific functions (commands) are deprecated starting in Pro Tools 2024.10. "{}}}
+\DoxyCodeLine{604             \textcolor{stringliteral}{"{}Please use a general JSON-\/based SendRequest function instead."{}})]] \textcolor{keyword}{virtual} std::shared\_ptr<CommandResponse>}
+\DoxyCodeLine{605         ExportMix(\textcolor{keyword}{const} \mbox{\hyperlink{a01560}{ExportMixRequest}}\& request);}
+\DoxyCodeLine{606 }
+\DoxyCodeLine{618         [[deprecated(\textcolor{stringliteral}{"{}All API-\/specific functions (commands) are deprecated starting in Pro Tools 2024.10. "{}}}
+\DoxyCodeLine{619                      \textcolor{stringliteral}{"{}Please use a general JSON-\/based SendRequest function instead."{}})]] \textcolor{keyword}{virtual} std::}
+\DoxyCodeLine{620             shared\_ptr<GetDynamicPropertiesResponse>}
+\DoxyCodeLine{621             GetDynamicProperties(\textcolor{keyword}{const} \mbox{\hyperlink{a01564}{GetDynamicPropertiesRequest}}\& request);}
+\DoxyCodeLine{622 }
+\DoxyCodeLine{631         [[deprecated(}
+\DoxyCodeLine{632             \textcolor{stringliteral}{"{}All API-\/specific functions (commands) are deprecated starting in Pro Tools 2024.10. "{}}}
+\DoxyCodeLine{633             \textcolor{stringliteral}{"{}Please use a general JSON-\/based SendRequest function instead."{}})]] \textcolor{keyword}{virtual} std::shared\_ptr<CommandResponse>}
+\DoxyCodeLine{634         Spot(\textcolor{keyword}{const} \mbox{\hyperlink{a01576}{SpotRequest}}\& request);}
+\DoxyCodeLine{635 }
+\DoxyCodeLine{644         [[deprecated(\textcolor{stringliteral}{"{}All API-\/specific functions (commands) are deprecated starting in Pro Tools 2024.10. "{}}}
+\DoxyCodeLine{645                      \textcolor{stringliteral}{"{}Please use a general JSON-\/based SendRequest function instead."{}})]] \textcolor{keyword}{virtual} std::}
+\DoxyCodeLine{646             shared\_ptr<ExportSessionInfoAsTextResponse>}
+\DoxyCodeLine{647             ExportSessionInfoAsText(\textcolor{keyword}{const} \mbox{\hyperlink{a01580}{ExportSessionInfoAsTextRequest}}\& request);}
+\DoxyCodeLine{648 }
+\DoxyCodeLine{657         [[deprecated(\textcolor{stringliteral}{"{}All API-\/specific functions (commands) are deprecated starting in Pro Tools 2024.10. "{}}}
+\DoxyCodeLine{658                      \textcolor{stringliteral}{"{}Please use a general JSON-\/based SendRequest function instead."{}})]] \textcolor{keyword}{virtual} std::}
+\DoxyCodeLine{659             shared\_ptr<SetPlaybackModeResponse>}
+\DoxyCodeLine{660             SetPlaybackMode(\textcolor{keyword}{const} \mbox{\hyperlink{a01588}{SetPlaybackModeRequest}}\& request);}
+\DoxyCodeLine{661 }
+\DoxyCodeLine{670         [[deprecated(\textcolor{stringliteral}{"{}All API-\/specific functions (commands) are deprecated starting in Pro Tools 2024.10. "{}}}
+\DoxyCodeLine{671                      \textcolor{stringliteral}{"{}Please use a general JSON-\/based SendRequest function instead."{}})]] \textcolor{keyword}{virtual} std::}
+\DoxyCodeLine{672             shared\_ptr<SetRecordModeResponse>}
+\DoxyCodeLine{673             SetRecordMode(\textcolor{keyword}{const} \mbox{\hyperlink{a01596}{SetRecordModeRequest}}\& request);}
+\DoxyCodeLine{674 }
+\DoxyCodeLine{681         [[deprecated(\textcolor{stringliteral}{"{}All API-\/specific functions (commands) are deprecated starting in Pro Tools 2024.10. "{}}}
+\DoxyCodeLine{682                      \textcolor{stringliteral}{"{}Please use a general JSON-\/based SendRequest function instead."{}})]] \textcolor{keyword}{virtual} std::}
+\DoxyCodeLine{683             shared\_ptr<GetSessionAudioFormatResponse>}
+\DoxyCodeLine{684             GetSessionAudioFormat(\textcolor{keyword}{const} \mbox{\hyperlink{a01372}{CommandRequest}}\& request);}
+\DoxyCodeLine{685 }
+\DoxyCodeLine{692         [[deprecated(\textcolor{stringliteral}{"{}All API-\/specific functions (commands) are deprecated starting in Pro Tools 2024.10. "{}}}
+\DoxyCodeLine{693                      \textcolor{stringliteral}{"{}Please use a general JSON-\/based SendRequest function instead."{}})]] \textcolor{keyword}{virtual} std::}
+\DoxyCodeLine{694             shared\_ptr<GetSessionSampleRateResponse>}
+\DoxyCodeLine{695             GetSessionSampleRate(\textcolor{keyword}{const} \mbox{\hyperlink{a01372}{CommandRequest}}\& request);}
+\DoxyCodeLine{696 }
+\DoxyCodeLine{703         [[deprecated(\textcolor{stringliteral}{"{}All API-\/specific functions (commands) are deprecated starting in Pro Tools 2024.10. "{}}}
+\DoxyCodeLine{704                      \textcolor{stringliteral}{"{}Please use a general JSON-\/based SendRequest function instead."{}})]] \textcolor{keyword}{virtual} std::}
+\DoxyCodeLine{705             shared\_ptr<GetSessionBitDepthResponse>}
+\DoxyCodeLine{706             GetSessionBitDepth(\textcolor{keyword}{const} \mbox{\hyperlink{a01372}{CommandRequest}}\& request);}
+\DoxyCodeLine{707 }
+\DoxyCodeLine{714         [[deprecated(\textcolor{stringliteral}{"{}All API-\/specific functions (commands) are deprecated starting in Pro Tools 2024.10. "{}}}
+\DoxyCodeLine{715                      \textcolor{stringliteral}{"{}Please use a general JSON-\/based SendRequest function instead."{}})]] \textcolor{keyword}{virtual} std::}
+\DoxyCodeLine{716             shared\_ptr<GetSessionInterleavedStateResponse>}
+\DoxyCodeLine{717             GetSessionInterleavedState(\textcolor{keyword}{const} \mbox{\hyperlink{a01372}{CommandRequest}}\& request);}
+\DoxyCodeLine{718 }
+\DoxyCodeLine{725         [[deprecated(\textcolor{stringliteral}{"{}All API-\/specific functions (commands) are deprecated starting in Pro Tools 2024.10. "{}}}
+\DoxyCodeLine{726                      \textcolor{stringliteral}{"{}Please use a general JSON-\/based SendRequest function instead."{}})]] \textcolor{keyword}{virtual} std::}
+\DoxyCodeLine{727             shared\_ptr<GetSessionTimeCodeRateResponse>}
+\DoxyCodeLine{728             GetSessionTimeCodeRate(\textcolor{keyword}{const} \mbox{\hyperlink{a01372}{CommandRequest}}\& request);}
+\DoxyCodeLine{729 }
+\DoxyCodeLine{736         [[deprecated(\textcolor{stringliteral}{"{}All API-\/specific functions (commands) are deprecated starting in Pro Tools 2024.10. "{}}}
+\DoxyCodeLine{737                      \textcolor{stringliteral}{"{}Please use a general JSON-\/based SendRequest function instead."{}})]] \textcolor{keyword}{virtual} std::}
+\DoxyCodeLine{738             shared\_ptr<GetSessionFeetFramesRateResponse>}
+\DoxyCodeLine{739             GetSessionFeetFramesRate(\textcolor{keyword}{const} \mbox{\hyperlink{a01372}{CommandRequest}}\& request);}
+\DoxyCodeLine{740 }
+\DoxyCodeLine{747         [[deprecated(\textcolor{stringliteral}{"{}All API-\/specific functions (commands) are deprecated starting in Pro Tools 2024.10. "{}}}
+\DoxyCodeLine{748                      \textcolor{stringliteral}{"{}Please use a general JSON-\/based SendRequest function instead."{}})]] \textcolor{keyword}{virtual} std::}
+\DoxyCodeLine{749             shared\_ptr<GetSessionAudioRatePullSettingsResponse>}
+\DoxyCodeLine{750             GetSessionAudioRatePullSettings(\textcolor{keyword}{const} \mbox{\hyperlink{a01372}{CommandRequest}}\& request);}
+\DoxyCodeLine{751 }
+\DoxyCodeLine{758         [[deprecated(\textcolor{stringliteral}{"{}All API-\/specific functions (commands) are deprecated starting in Pro Tools 2024.10. "{}}}
+\DoxyCodeLine{759                      \textcolor{stringliteral}{"{}Please use a general JSON-\/based SendRequest function instead."{}})]] \textcolor{keyword}{virtual} std::}
+\DoxyCodeLine{760             shared\_ptr<GetSessionVideoRatePullSettingsResponse>}
+\DoxyCodeLine{761             GetSessionVideoRatePullSettings(\textcolor{keyword}{const} \mbox{\hyperlink{a01372}{CommandRequest}}\& request);}
+\DoxyCodeLine{762 }
+\DoxyCodeLine{769         [[deprecated(\textcolor{stringliteral}{"{}All API-\/specific functions (commands) are deprecated starting in Pro Tools 2024.10. "{}}}
+\DoxyCodeLine{770                      \textcolor{stringliteral}{"{}Please use a general JSON-\/based SendRequest function instead."{}})]] \textcolor{keyword}{virtual} std::}
+\DoxyCodeLine{771             shared\_ptr<GetSessionNameResponse>}
+\DoxyCodeLine{772             GetSessionName(\textcolor{keyword}{const} \mbox{\hyperlink{a01372}{CommandRequest}}\& request);}
+\DoxyCodeLine{773 }
+\DoxyCodeLine{780         [[deprecated(\textcolor{stringliteral}{"{}All API-\/specific functions (commands) are deprecated starting in Pro Tools 2024.10. "{}}}
+\DoxyCodeLine{781                      \textcolor{stringliteral}{"{}Please use a general JSON-\/based SendRequest function instead."{}})]] \textcolor{keyword}{virtual} std::}
+\DoxyCodeLine{782             shared\_ptr<GetSessionPathResponse>}
+\DoxyCodeLine{783             GetSessionPath(\textcolor{keyword}{const} \mbox{\hyperlink{a01372}{CommandRequest}}\& request);}
+\DoxyCodeLine{784 }
+\DoxyCodeLine{791         [[deprecated(\textcolor{stringliteral}{"{}All API-\/specific functions (commands) are deprecated starting in Pro Tools 2024.10. "{}}}
+\DoxyCodeLine{792                      \textcolor{stringliteral}{"{}Please use a general JSON-\/based SendRequest function instead."{}})]] \textcolor{keyword}{virtual} std::}
+\DoxyCodeLine{793             shared\_ptr<GetSessionStartTimeResponse>}
+\DoxyCodeLine{794             GetSessionStartTime(\textcolor{keyword}{const} \mbox{\hyperlink{a01372}{CommandRequest}}\& request);}
+\DoxyCodeLine{795 }
+\DoxyCodeLine{802         [[deprecated(\textcolor{stringliteral}{"{}All API-\/specific functions (commands) are deprecated starting in Pro Tools 2024.10. "{}}}
+\DoxyCodeLine{803                      \textcolor{stringliteral}{"{}Please use a general JSON-\/based SendRequest function instead."{}})]] \textcolor{keyword}{virtual} std::}
+\DoxyCodeLine{804             shared\_ptr<GetSessionLengthResponse>}
+\DoxyCodeLine{805             GetSessionLength(\textcolor{keyword}{const} \mbox{\hyperlink{a01372}{CommandRequest}}\& request);}
+\DoxyCodeLine{806 }
+\DoxyCodeLine{813         [[deprecated(}
+\DoxyCodeLine{814             \textcolor{stringliteral}{"{}All API-\/specific functions (commands) are deprecated starting in Pro Tools 2024.10. "{}}}
+\DoxyCodeLine{815             \textcolor{stringliteral}{"{}Please use a general JSON-\/based SendRequest function instead."{}})]] \textcolor{keyword}{virtual} std::shared\_ptr<CommandResponse>}
+\DoxyCodeLine{816         SetSessionAudioFormat(\textcolor{keyword}{const} \mbox{\hyperlink{a01652}{SetSessionAudioFormatRequest}}\& request);}
+\DoxyCodeLine{817 }
+\DoxyCodeLine{824         [[deprecated(}
+\DoxyCodeLine{825             \textcolor{stringliteral}{"{}All API-\/specific functions (commands) are deprecated starting in Pro Tools 2024.10. "{}}}
+\DoxyCodeLine{826             \textcolor{stringliteral}{"{}Please use a general JSON-\/based SendRequest function instead."{}})]] \textcolor{keyword}{virtual} std::shared\_ptr<CommandResponse>}
+\DoxyCodeLine{827         SetSessionBitDepth(\textcolor{keyword}{const} \mbox{\hyperlink{a01656}{SetSessionBitDepthRequest}}\& request);}
+\DoxyCodeLine{828 }
+\DoxyCodeLine{835         [[deprecated(}
+\DoxyCodeLine{836             \textcolor{stringliteral}{"{}All API-\/specific functions (commands) are deprecated starting in Pro Tools 2024.10. "{}}}
+\DoxyCodeLine{837             \textcolor{stringliteral}{"{}Please use a general JSON-\/based SendRequest function instead."{}})]] \textcolor{keyword}{virtual} std::shared\_ptr<CommandResponse>}
+\DoxyCodeLine{838         SetSessionInterleavedState(\textcolor{keyword}{const} \mbox{\hyperlink{a01660}{SetSessionInterleavedStateRequest}}\& request);}
+\DoxyCodeLine{839 }
+\DoxyCodeLine{846         [[deprecated(}
+\DoxyCodeLine{847             \textcolor{stringliteral}{"{}All API-\/specific functions (commands) are deprecated starting in Pro Tools 2024.10. "{}}}
+\DoxyCodeLine{848             \textcolor{stringliteral}{"{}Please use a general JSON-\/based SendRequest function instead."{}})]] \textcolor{keyword}{virtual} std::shared\_ptr<CommandResponse>}
+\DoxyCodeLine{849         SetSessionTimeCodeRate(\textcolor{keyword}{const} \mbox{\hyperlink{a01664}{SetSessionTimeCodeRateRequest}}\& request);}
+\DoxyCodeLine{850 }
+\DoxyCodeLine{857         [[deprecated(}
+\DoxyCodeLine{858             \textcolor{stringliteral}{"{}All API-\/specific functions (commands) are deprecated starting in Pro Tools 2024.10. "{}}}
+\DoxyCodeLine{859             \textcolor{stringliteral}{"{}Please use a general JSON-\/based SendRequest function instead."{}})]] \textcolor{keyword}{virtual} std::shared\_ptr<CommandResponse>}
+\DoxyCodeLine{860         SetSessionFeetFramesRate(\textcolor{keyword}{const} \mbox{\hyperlink{a01668}{SetSessionFeetFramesRateRequest}}\& request);}
+\DoxyCodeLine{861 }
+\DoxyCodeLine{868         [[deprecated(}
+\DoxyCodeLine{869             \textcolor{stringliteral}{"{}All API-\/specific functions (commands) are deprecated starting in Pro Tools 2024.10. "{}}}
+\DoxyCodeLine{870             \textcolor{stringliteral}{"{}Please use a general JSON-\/based SendRequest function instead."{}})]] \textcolor{keyword}{virtual} std::shared\_ptr<CommandResponse>}
+\DoxyCodeLine{871         SetSessionAudioRatePullSettings(\textcolor{keyword}{const} \mbox{\hyperlink{a01672}{SetSessionAudioRatePullSettingsRequest}}\& request);}
+\DoxyCodeLine{872 }
+\DoxyCodeLine{879         [[deprecated(}
+\DoxyCodeLine{880             \textcolor{stringliteral}{"{}All API-\/specific functions (commands) are deprecated starting in Pro Tools 2024.10. "{}}}
+\DoxyCodeLine{881             \textcolor{stringliteral}{"{}Please use a general JSON-\/based SendRequest function instead."{}})]] \textcolor{keyword}{virtual} std::shared\_ptr<CommandResponse>}
+\DoxyCodeLine{882         SetSessionVideoRatePullSettings(\textcolor{keyword}{const} \mbox{\hyperlink{a01676}{SetSessionVideoRatePullSettingsRequest}}\& request);}
+\DoxyCodeLine{883 }
+\DoxyCodeLine{890         [[deprecated(}
+\DoxyCodeLine{891             \textcolor{stringliteral}{"{}All API-\/specific functions (commands) are deprecated starting in Pro Tools 2024.10. "{}}}
+\DoxyCodeLine{892             \textcolor{stringliteral}{"{}Please use a general JSON-\/based SendRequest function instead."{}})]] \textcolor{keyword}{virtual} std::shared\_ptr<CommandResponse>}
+\DoxyCodeLine{893         SetSessionStartTime(\textcolor{keyword}{const} \mbox{\hyperlink{a01680}{SetSessionStartTimeRequest}}\& request);}
+\DoxyCodeLine{894 }
+\DoxyCodeLine{901         [[deprecated(}
+\DoxyCodeLine{902             \textcolor{stringliteral}{"{}All API-\/specific functions (commands) are deprecated starting in Pro Tools 2024.10. "{}}}
+\DoxyCodeLine{903             \textcolor{stringliteral}{"{}Please use a general JSON-\/based SendRequest function instead."{}})]] \textcolor{keyword}{virtual} std::shared\_ptr<CommandResponse>}
+\DoxyCodeLine{904         SetSessionLength(\textcolor{keyword}{const} \mbox{\hyperlink{a01684}{SetSessionLengthRequest}}\& request);}
+\DoxyCodeLine{905 }
+\DoxyCodeLine{912         [[deprecated(\textcolor{stringliteral}{"{}All API-\/specific functions (commands) are deprecated starting in Pro Tools 2024.10. "{}}}
+\DoxyCodeLine{913                      \textcolor{stringliteral}{"{}Please use a general JSON-\/based SendRequest function instead."{}})]] \textcolor{keyword}{virtual} std::}
+\DoxyCodeLine{914             shared\_ptr<GetPTSLVersionResponse>}
+\DoxyCodeLine{915             GetPTSLVersion(\textcolor{keyword}{const} \mbox{\hyperlink{a01688}{GetPTSLVersionRequest}}\& request);}
+\DoxyCodeLine{916 }
+\DoxyCodeLine{923         [[deprecated(\textcolor{stringliteral}{"{}All API-\/specific functions (commands) are deprecated starting in Pro Tools 2024.10. "{}}}
+\DoxyCodeLine{924                      \textcolor{stringliteral}{"{}Please use a general JSON-\/based SendRequest function instead."{}})]] \textcolor{keyword}{virtual} std::}
+\DoxyCodeLine{925             shared\_ptr<GetPlaybackModeResponse>}
+\DoxyCodeLine{926             GetPlaybackMode(\textcolor{keyword}{const} \mbox{\hyperlink{a01372}{CommandRequest}}\& request);}
+\DoxyCodeLine{927 }
+\DoxyCodeLine{934         [[deprecated(\textcolor{stringliteral}{"{}All API-\/specific functions (commands) are deprecated starting in Pro Tools 2024.10. "{}}}
+\DoxyCodeLine{935                      \textcolor{stringliteral}{"{}Please use a general JSON-\/based SendRequest function instead."{}})]] \textcolor{keyword}{virtual} std::}
+\DoxyCodeLine{936             shared\_ptr<GetRecordModeResponse>}
+\DoxyCodeLine{937             GetRecordMode(\textcolor{keyword}{const} \mbox{\hyperlink{a01372}{CommandRequest}}\& request);}
+\DoxyCodeLine{938 }
+\DoxyCodeLine{945         [[deprecated(\textcolor{stringliteral}{"{}All API-\/specific functions (commands) are deprecated starting in Pro Tools 2024.10. "{}}}
+\DoxyCodeLine{946                      \textcolor{stringliteral}{"{}Please use a general JSON-\/based SendRequest function instead."{}})]] \textcolor{keyword}{virtual} std::}
+\DoxyCodeLine{947             shared\_ptr<GetTransportArmedResponse>}
+\DoxyCodeLine{948             GetTransportArmed(\textcolor{keyword}{const} \mbox{\hyperlink{a01372}{CommandRequest}}\& request);}
+\DoxyCodeLine{949 }
+\DoxyCodeLine{956         [[deprecated(\textcolor{stringliteral}{"{}All API-\/specific functions (commands) are deprecated starting in Pro Tools 2024.10. "{}}}
+\DoxyCodeLine{957                      \textcolor{stringliteral}{"{}Please use a general JSON-\/based SendRequest function instead."{}})]] \textcolor{keyword}{virtual} std::}
+\DoxyCodeLine{958             shared\_ptr<GetTransportStateResponse>}
+\DoxyCodeLine{959             GetTransportState(\textcolor{keyword}{const} \mbox{\hyperlink{a01372}{CommandRequest}}\& request);}
+\DoxyCodeLine{960 }
+\DoxyCodeLine{970         [[deprecated(\textcolor{stringliteral}{"{}All API-\/specific functions (commands) are deprecated starting in Pro Tools 2024.10. "{}}}
+\DoxyCodeLine{971                      \textcolor{stringliteral}{"{}Please use a general JSON-\/based SendRequest function instead."{}})]] \textcolor{keyword}{virtual} std::}
+\DoxyCodeLine{972             shared\_ptr<ClearMemoryLocationResponse>}
+\DoxyCodeLine{973             ClearMemoryLocation(\textcolor{keyword}{const} \mbox{\hyperlink{a01712}{ClearMemoryLocationRequest}}\& request);}
+\DoxyCodeLine{974 }
+\DoxyCodeLine{981         [[deprecated(}
+\DoxyCodeLine{982             \textcolor{stringliteral}{"{}All API-\/specific functions (commands) are deprecated starting in Pro Tools 2024.10. "{}}}
+\DoxyCodeLine{983             \textcolor{stringliteral}{"{}Please use a general JSON-\/based SendRequest function instead."{}})]] \textcolor{keyword}{virtual} std::shared\_ptr<CommandResponse>}
+\DoxyCodeLine{984         RenameSelectedClip(\textcolor{keyword}{const} \mbox{\hyperlink{a01724}{RenameSelectedClipRequest}}\& request);}
+\DoxyCodeLine{985 }
+\DoxyCodeLine{992         [[deprecated(}
+\DoxyCodeLine{993             \textcolor{stringliteral}{"{}All API-\/specific functions (commands) are deprecated starting in Pro Tools 2024.10. "{}}}
+\DoxyCodeLine{994             \textcolor{stringliteral}{"{}Please use a general JSON-\/based SendRequest function instead."{}})]] \textcolor{keyword}{virtual} std::shared\_ptr<CommandResponse>}
+\DoxyCodeLine{995         RenameTargetClip(\textcolor{keyword}{const} \mbox{\hyperlink{a01728}{RenameTargetClipRequest}}\& request);}
+\DoxyCodeLine{996 }
+\DoxyCodeLine{1005         [[deprecated(}
+\DoxyCodeLine{1006             \textcolor{stringliteral}{"{}All API-\/specific functions (commands) are deprecated starting in Pro Tools 2024.10. "{}}}
+\DoxyCodeLine{1007             \textcolor{stringliteral}{"{}Please use a general JSON-\/based SendRequest function instead."{}})]] \textcolor{keyword}{virtual} std::shared\_ptr<CommandResponse>}
+\DoxyCodeLine{1008         TogglePlayState(\textcolor{keyword}{const} \mbox{\hyperlink{a01372}{CommandRequest}}\& request);}
+\DoxyCodeLine{1009 }
+\DoxyCodeLine{1018         [[deprecated(}
+\DoxyCodeLine{1019             \textcolor{stringliteral}{"{}All API-\/specific functions (commands) are deprecated starting in Pro Tools 2024.10. "{}}}
+\DoxyCodeLine{1020             \textcolor{stringliteral}{"{}Please use a general JSON-\/based SendRequest function instead."{}})]] \textcolor{keyword}{virtual} std::shared\_ptr<CommandResponse>}
+\DoxyCodeLine{1021         ToggleRecordEnable(\textcolor{keyword}{const} \mbox{\hyperlink{a01372}{CommandRequest}}\& request);}
+\DoxyCodeLine{1022 }
+\DoxyCodeLine{1031         [[deprecated(}
+\DoxyCodeLine{1032             \textcolor{stringliteral}{"{}All API-\/specific functions (commands) are deprecated starting in Pro Tools 2024.10. "{}}}
+\DoxyCodeLine{1033             \textcolor{stringliteral}{"{}Please use a general JSON-\/based SendRequest function instead."{}})]] \textcolor{keyword}{virtual} std::shared\_ptr<CommandResponse>}
+\DoxyCodeLine{1034         PlayHalfSpeed(\textcolor{keyword}{const} \mbox{\hyperlink{a01372}{CommandRequest}}\& request);}
+\DoxyCodeLine{1035 }
+\DoxyCodeLine{1044         [[deprecated(}
+\DoxyCodeLine{1045             \textcolor{stringliteral}{"{}All API-\/specific functions (commands) are deprecated starting in Pro Tools 2024.10. "{}}}
+\DoxyCodeLine{1046             \textcolor{stringliteral}{"{}Please use a general JSON-\/based SendRequest function instead."{}})]] \textcolor{keyword}{virtual} std::shared\_ptr<CommandResponse>}
+\DoxyCodeLine{1047         RecordHalfSpeed(\textcolor{keyword}{const} \mbox{\hyperlink{a01372}{CommandRequest}}\& request);}
+\DoxyCodeLine{1048 }
+\DoxyCodeLine{1055         [[deprecated(}
+\DoxyCodeLine{1056             \textcolor{stringliteral}{"{}All API-\/specific functions (commands) are deprecated starting in Pro Tools 2024.10. "{}}}
+\DoxyCodeLine{1057             \textcolor{stringliteral}{"{}Please use a general JSON-\/based SendRequest function instead."{}})]] \textcolor{keyword}{virtual} std::shared\_ptr<CommandResponse>}
+\DoxyCodeLine{1058         EditMemoryLocation(\textcolor{keyword}{const} \mbox{\hyperlink{a01744}{EditMemoryLocationRequest}}\& request);}
+\DoxyCodeLine{1059 }
+\DoxyCodeLine{1067         [[deprecated(}
+\DoxyCodeLine{1068             \textcolor{stringliteral}{"{}All API-\/specific functions (commands) are deprecated starting in Pro Tools 2024.10. "{}}}
+\DoxyCodeLine{1069             \textcolor{stringliteral}{"{}Please use a general JSON-\/based SendRequest function instead."{}})]] \textcolor{keyword}{virtual} std::shared\_ptr<CommandResponse>}
+\DoxyCodeLine{1070         CreateMemoryLocation(\textcolor{keyword}{const} \mbox{\hyperlink{a01748}{CreateMemoryLocationRequest}}\& request);}
+\DoxyCodeLine{1071 }
+\DoxyCodeLine{1078         [[deprecated(\textcolor{stringliteral}{"{}All API-\/specific functions (commands) are deprecated starting in Pro Tools 2024.10. "{}}}
+\DoxyCodeLine{1079                      \textcolor{stringliteral}{"{}Please use a general JSON-\/based SendRequest function instead."{}})]] \textcolor{keyword}{virtual} std::}
+\DoxyCodeLine{1080             shared\_ptr<GetMemoryLocationsResponse>}
+\DoxyCodeLine{1081             GetMemoryLocations(\textcolor{keyword}{const} \mbox{\hyperlink{a01740}{GetMemoryLocationsRequest}}\& request);}
+\DoxyCodeLine{1082 }
+\DoxyCodeLine{1089         [[deprecated(\textcolor{stringliteral}{"{}All API-\/specific functions (commands) are deprecated starting in Pro Tools 2024.10. "{}}}
+\DoxyCodeLine{1090                      \textcolor{stringliteral}{"{}Please use a general JSON-\/based SendRequest function instead."{}})]] \textcolor{keyword}{virtual} std::}
+\DoxyCodeLine{1091             shared\_ptr<RegisterConnectionResponse>}
+\DoxyCodeLine{1092             RegisterConnection(\textcolor{keyword}{const} \mbox{\hyperlink{a01756}{RegisterConnectionRequest}}\& request);}
+\DoxyCodeLine{1093 }
+\DoxyCodeLine{1102         [[deprecated(}
+\DoxyCodeLine{1103             \textcolor{stringliteral}{"{}All API-\/specific functions (commands) are deprecated starting in Pro Tools 2024.10. "{}}}
+\DoxyCodeLine{1104             \textcolor{stringliteral}{"{}Please use a general JSON-\/based SendRequest function instead."{}})]] \textcolor{keyword}{virtual} std::shared\_ptr<CommandResponse>}
+\DoxyCodeLine{1105         CreateFadesBasedOnPreset(\textcolor{keyword}{const} \mbox{\hyperlink{a01456}{CreateFadesBasedOnPresetRequest}}\& request);}
+\DoxyCodeLine{1106 }
+\DoxyCodeLine{1115         [[deprecated(}
+\DoxyCodeLine{1116             \textcolor{stringliteral}{"{}All API-\/specific functions (commands) are deprecated starting in Pro Tools 2024.10. "{}}}
+\DoxyCodeLine{1117             \textcolor{stringliteral}{"{}Please use a general JSON-\/based SendRequest function instead."{}})]] \textcolor{keyword}{virtual} std::shared\_ptr<CommandResponse>}
+\DoxyCodeLine{1118         RenameTargetTrack(\textcolor{keyword}{const} \mbox{\hyperlink{a01464}{RenameTargetTrackRequest}}\& request);}
+\DoxyCodeLine{1119 }
+\DoxyCodeLine{1128         [[deprecated(\textcolor{stringliteral}{"{}All API-\/specific functions (commands) are deprecated starting in Pro Tools 2024.10. "{}}}
+\DoxyCodeLine{1129                      \textcolor{stringliteral}{"{}Please use a general JSON-\/based SendRequest function instead."{}})]] \textcolor{keyword}{virtual} std::}
+\DoxyCodeLine{1130             shared\_ptr<CreateNewTracksResponse>}
+\DoxyCodeLine{1131             CreateNewTracks(\textcolor{keyword}{const} \mbox{\hyperlink{a01764}{CreateNewTracksRequest}}\& request);}
+\DoxyCodeLine{1132 }
+\DoxyCodeLine{1141         [[deprecated(}
+\DoxyCodeLine{1142             \textcolor{stringliteral}{"{}All API-\/specific functions (commands) are deprecated starting in Pro Tools 2024.10. "{}}}
+\DoxyCodeLine{1143             \textcolor{stringliteral}{"{}Please use a general JSON-\/based SendRequest function instead."{}})]] \textcolor{keyword}{virtual} std::shared\_ptr<CommandResponse>}
+\DoxyCodeLine{1144         SetTimelineSelection(\textcolor{keyword}{const} \mbox{\hyperlink{a01804}{SetTimelineSelectionRequest}}\& request);}
+\DoxyCodeLine{1145 }
+\DoxyCodeLine{1152         [[deprecated(\textcolor{stringliteral}{"{}All API-\/specific functions (commands) are deprecated starting in Pro Tools 2024.10. "{}}}
+\DoxyCodeLine{1153                      \textcolor{stringliteral}{"{}Please use a general JSON-\/based SendRequest function instead."{}})]] \textcolor{keyword}{virtual} std::}
+\DoxyCodeLine{1154             shared\_ptr<GetTimelineSelectionResponse>}
+\DoxyCodeLine{1155             GetTimelineSelection(\textcolor{keyword}{const} \mbox{\hyperlink{a01808}{GetTimelineSelectionRequest}}\& request);}
+\DoxyCodeLine{1156 }
+\DoxyCodeLine{1163         [[deprecated(\textcolor{stringliteral}{"{}All API-\/specific functions (commands) are deprecated starting in Pro Tools 2024.10. "{}}}
+\DoxyCodeLine{1164                      \textcolor{stringliteral}{"{}Please use a general JSON-\/based SendRequest function instead."{}})]] \textcolor{keyword}{virtual} std::}
+\DoxyCodeLine{1165             shared\_ptr<SelectTracksByNameResponse>}
+\DoxyCodeLine{1166             SelectTracksByName(\textcolor{keyword}{const} \mbox{\hyperlink{a01816}{SelectTracksByNameRequest}}\& request);}
+\DoxyCodeLine{1167 }
+\DoxyCodeLine{1174         [[deprecated(\textcolor{stringliteral}{"{}All API-\/specific functions (commands) are deprecated starting in Pro Tools 2024.10. "{}}}
+\DoxyCodeLine{1175                      \textcolor{stringliteral}{"{}Please use a general JSON-\/based SendRequest function instead."{}})]] \textcolor{keyword}{virtual} std::}
+\DoxyCodeLine{1176             shared\_ptr<ImportVideoResponse>}
+\DoxyCodeLine{1177             ImportVideo(\textcolor{keyword}{const} \mbox{\hyperlink{a01828}{ImportVideoRequest}}\& request);}
+\DoxyCodeLine{1178 }
+\DoxyCodeLine{1185         [[deprecated(}
+\DoxyCodeLine{1186             \textcolor{stringliteral}{"{}All API-\/specific functions (commands) are deprecated starting in Pro Tools 2024.10. "{}}}
+\DoxyCodeLine{1187             \textcolor{stringliteral}{"{}Please use a general JSON-\/based SendRequest function instead."{}})]] \textcolor{keyword}{virtual} std::shared\_ptr<CommandResponse>}
+\DoxyCodeLine{1188         SelectMemoryLocation(\textcolor{keyword}{const} \mbox{\hyperlink{a01836}{SelectMemoryLocationRequest}}\& request);}
+\DoxyCodeLine{1189 }
+\DoxyCodeLine{1196         [[deprecated(}
+\DoxyCodeLine{1197             \textcolor{stringliteral}{"{}All API-\/specific functions (commands) are deprecated starting in Pro Tools 2024.10. "{}}}
+\DoxyCodeLine{1198             \textcolor{stringliteral}{"{}Please use a general JSON-\/based SendRequest function instead."{}})]] \textcolor{keyword}{virtual} std::shared\_ptr<CommandResponse>}
+\DoxyCodeLine{1199         SetTrackMuteState(\textcolor{keyword}{const} \mbox{\hyperlink{a01840}{SetTrackMuteStateRequest}}\& request);}
+\DoxyCodeLine{1200 }
+\DoxyCodeLine{1207         [[deprecated(}
+\DoxyCodeLine{1208             \textcolor{stringliteral}{"{}All API-\/specific functions (commands) are deprecated starting in Pro Tools 2024.10. "{}}}
+\DoxyCodeLine{1209             \textcolor{stringliteral}{"{}Please use a general JSON-\/based SendRequest function instead."{}})]] \textcolor{keyword}{virtual} std::shared\_ptr<CommandResponse>}
+\DoxyCodeLine{1210         SetTrackSoloState(\textcolor{keyword}{const} \mbox{\hyperlink{a01844}{SetTrackSoloStateRequest}}\& request);}
+\DoxyCodeLine{1211 }
+\DoxyCodeLine{1218         [[deprecated(}
+\DoxyCodeLine{1219             \textcolor{stringliteral}{"{}All API-\/specific functions (commands) are deprecated starting in Pro Tools 2024.10. "{}}}
+\DoxyCodeLine{1220             \textcolor{stringliteral}{"{}Please use a general JSON-\/based SendRequest function instead."{}})]] \textcolor{keyword}{virtual} std::shared\_ptr<CommandResponse>}
+\DoxyCodeLine{1221         SetTrackSoloSafeState(\textcolor{keyword}{const} \mbox{\hyperlink{a01848}{SetTrackSoloSafeStateRequest}}\& request);}
+\DoxyCodeLine{1222 }
+\DoxyCodeLine{1229         [[deprecated(}
+\DoxyCodeLine{1230             \textcolor{stringliteral}{"{}All API-\/specific functions (commands) are deprecated starting in Pro Tools 2024.10. "{}}}
+\DoxyCodeLine{1231             \textcolor{stringliteral}{"{}Please use a general JSON-\/based SendRequest function instead."{}})]] \textcolor{keyword}{virtual} std::shared\_ptr<CommandResponse>}
+\DoxyCodeLine{1232         SetTrackRecordEnableState(\textcolor{keyword}{const} \mbox{\hyperlink{a01852}{SetTrackRecordEnableStateRequest}}\& request);}
+\DoxyCodeLine{1233 }
+\DoxyCodeLine{1240         [[deprecated(}
+\DoxyCodeLine{1241             \textcolor{stringliteral}{"{}All API-\/specific functions (commands) are deprecated starting in Pro Tools 2024.10. "{}}}
+\DoxyCodeLine{1242             \textcolor{stringliteral}{"{}Please use a general JSON-\/based SendRequest function instead."{}})]] \textcolor{keyword}{virtual} std::shared\_ptr<CommandResponse>}
+\DoxyCodeLine{1243         SetTrackRecordSafeEnableState(\textcolor{keyword}{const} \mbox{\hyperlink{a01856}{SetTrackRecordSafeEnableStateRequest}}\& request);}
+\DoxyCodeLine{1244 }
+\DoxyCodeLine{1251         [[deprecated(}
+\DoxyCodeLine{1252             \textcolor{stringliteral}{"{}All API-\/specific functions (commands) are deprecated starting in Pro Tools 2024.10. "{}}}
+\DoxyCodeLine{1253             \textcolor{stringliteral}{"{}Please use a general JSON-\/based SendRequest function instead."{}})]] \textcolor{keyword}{virtual} std::shared\_ptr<CommandResponse>}
+\DoxyCodeLine{1254         SetTrackInputMonitorState(\textcolor{keyword}{const} \mbox{\hyperlink{a01860}{SetTrackInputMonitorStateRequest}}\& request);}
+\DoxyCodeLine{1255 }
+\DoxyCodeLine{1262         [[deprecated(}
+\DoxyCodeLine{1263             \textcolor{stringliteral}{"{}All API-\/specific functions (commands) are deprecated starting in Pro Tools 2024.10. "{}}}
+\DoxyCodeLine{1264             \textcolor{stringliteral}{"{}Please use a general JSON-\/based SendRequest function instead."{}})]] \textcolor{keyword}{virtual} std::shared\_ptr<CommandResponse>}
+\DoxyCodeLine{1265         SetTrackSmartDspState(\textcolor{keyword}{const} \mbox{\hyperlink{a01864}{SetTrackSmartDspStateRequest}}\& request);}
+\DoxyCodeLine{1266 }
+\DoxyCodeLine{1273         [[deprecated(}
+\DoxyCodeLine{1274             \textcolor{stringliteral}{"{}All API-\/specific functions (commands) are deprecated starting in Pro Tools 2024.10. "{}}}
+\DoxyCodeLine{1275             \textcolor{stringliteral}{"{}Please use a general JSON-\/based SendRequest function instead."{}})]] \textcolor{keyword}{virtual} std::shared\_ptr<CommandResponse>}
+\DoxyCodeLine{1276         SetTrackHiddenState(\textcolor{keyword}{const} \mbox{\hyperlink{a01868}{SetTrackHiddenStateRequest}}\& request);}
+\DoxyCodeLine{1277 }
+\DoxyCodeLine{1284         [[deprecated(}
+\DoxyCodeLine{1285             \textcolor{stringliteral}{"{}All API-\/specific functions (commands) are deprecated starting in Pro Tools 2024.10. "{}}}
+\DoxyCodeLine{1286             \textcolor{stringliteral}{"{}Please use a general JSON-\/based SendRequest function instead."{}})]] \textcolor{keyword}{virtual} std::shared\_ptr<CommandResponse>}
+\DoxyCodeLine{1287         SetTrackInactiveState(\textcolor{keyword}{const} \mbox{\hyperlink{a01872}{SetTrackInactiveStateRequest}}\& request);}
+\DoxyCodeLine{1288 }
+\DoxyCodeLine{1295         [[deprecated(}
+\DoxyCodeLine{1296             \textcolor{stringliteral}{"{}All API-\/specific functions (commands) are deprecated starting in Pro Tools 2024.10. "{}}}
+\DoxyCodeLine{1297             \textcolor{stringliteral}{"{}Please use a general JSON-\/based SendRequest function instead."{}})]] \textcolor{keyword}{virtual} std::shared\_ptr<CommandResponse>}
+\DoxyCodeLine{1298         SetTrackFrozenState(\textcolor{keyword}{const} \mbox{\hyperlink{a01876}{SetTrackFrozenStateRequest}}\& request);}
+\DoxyCodeLine{1299 }
+\DoxyCodeLine{1306         [[deprecated(}
+\DoxyCodeLine{1307             \textcolor{stringliteral}{"{}All API-\/specific functions (commands) are deprecated starting in Pro Tools 2024.10. "{}}}
+\DoxyCodeLine{1308             \textcolor{stringliteral}{"{}Please use a general JSON-\/based SendRequest function instead."{}})]] \textcolor{keyword}{virtual} std::shared\_ptr<CommandResponse>}
+\DoxyCodeLine{1309         SetTrackOnlineState(\textcolor{keyword}{const} \mbox{\hyperlink{a01880}{SetTrackOnlineStateRequest}}\& request);}
+\DoxyCodeLine{1310 }
+\DoxyCodeLine{1317         [[deprecated(}
+\DoxyCodeLine{1318             \textcolor{stringliteral}{"{}All API-\/specific functions (commands) are deprecated starting in Pro Tools 2024.10. "{}}}
+\DoxyCodeLine{1319             \textcolor{stringliteral}{"{}Please use a general JSON-\/based SendRequest function instead."{}})]] \textcolor{keyword}{virtual} std::shared\_ptr<CommandResponse>}
+\DoxyCodeLine{1320         SetTrackOpenState(\textcolor{keyword}{const} \mbox{\hyperlink{a01884}{SetTrackOpenStateRequest}}\& request);}
+\DoxyCodeLine{1321 }
+\DoxyCodeLine{1331         [[deprecated(\textcolor{stringliteral}{"{}All API-\/specific functions (commands) are deprecated starting in Pro Tools 2024.10. "{}}}
+\DoxyCodeLine{1332                      \textcolor{stringliteral}{"{}Please use a general JSON-\/based SendRequest function instead."{}})]] \textcolor{keyword}{virtual} std::}
+\DoxyCodeLine{1333             shared\_ptr<GetSessionIDsResponse>}
+\DoxyCodeLine{1334             GetSessionIDs(\textcolor{keyword}{const} \mbox{\hyperlink{a01372}{CommandRequest}}\& request);}
+\DoxyCodeLine{1335 }
+\DoxyCodeLine{1342         [[deprecated(\textcolor{stringliteral}{"{}All API-\/specific functions (commands) are deprecated starting in Pro Tools 2024.10. "{}}}
+\DoxyCodeLine{1343                      \textcolor{stringliteral}{"{}Please use a general JSON-\/based SendRequest function instead."{}})]] \textcolor{keyword}{virtual} std::}
+\DoxyCodeLine{1344             shared\_ptr<GetMemoryLocationsManageModeResponse>}
+\DoxyCodeLine{1345             GetMemoryLocationsManageMode(\textcolor{keyword}{const} \mbox{\hyperlink{a01372}{CommandRequest}}\& request);}
+\DoxyCodeLine{1346 }
+\DoxyCodeLine{1353         [[deprecated(}
+\DoxyCodeLine{1354             \textcolor{stringliteral}{"{}All API-\/specific functions (commands) are deprecated starting in Pro Tools 2024.10. "{}}}
+\DoxyCodeLine{1355             \textcolor{stringliteral}{"{}Please use a general JSON-\/based SendRequest function instead."{}})]] \textcolor{keyword}{virtual} std::shared\_ptr<CommandResponse>}
+\DoxyCodeLine{1356         SetMemoryLocationsManageMode(\textcolor{keyword}{const} \mbox{\hyperlink{a01896}{SetMemoryLocationsManageModeRequest}}\& request);}
+\DoxyCodeLine{1357 }
+\DoxyCodeLine{1364         [[deprecated(}
+\DoxyCodeLine{1365             \textcolor{stringliteral}{"{}All API-\/specific functions (commands) are deprecated starting in Pro Tools 2024.10. "{}}}
+\DoxyCodeLine{1366             \textcolor{stringliteral}{"{}Please use a general JSON-\/based SendRequest function instead."{}})]] \textcolor{keyword}{virtual} std::shared\_ptr<CommandResponse>}
+\DoxyCodeLine{1367         SetMainCounterFormat(\textcolor{keyword}{const} \mbox{\hyperlink{a01904}{SetMainCounterFormatRequest}}\& request);}
+\DoxyCodeLine{1368 }
+\DoxyCodeLine{1375         [[deprecated(}
+\DoxyCodeLine{1376             \textcolor{stringliteral}{"{}All API-\/specific functions (commands) are deprecated starting in Pro Tools 2024.10. "{}}}
+\DoxyCodeLine{1377             \textcolor{stringliteral}{"{}Please use a general JSON-\/based SendRequest function instead."{}})]] \textcolor{keyword}{virtual} std::shared\_ptr<CommandResponse>}
+\DoxyCodeLine{1378         SetSubCounterFormat(\textcolor{keyword}{const} \mbox{\hyperlink{a01908}{SetSubCounterFormatRequest}}\& request);}
+\DoxyCodeLine{1379 }
+\DoxyCodeLine{1386         [[deprecated(\textcolor{stringliteral}{"{}All API-\/specific functions (commands) are deprecated starting in Pro Tools 2024.10. "{}}}
+\DoxyCodeLine{1387                      \textcolor{stringliteral}{"{}Please use a general JSON-\/based SendRequest function instead."{}})]] \textcolor{keyword}{virtual} std::}
+\DoxyCodeLine{1388             shared\_ptr<GetMainCounterFormatResponse>}
+\DoxyCodeLine{1389             GetMainCounterFormat(\textcolor{keyword}{const} \mbox{\hyperlink{a01372}{CommandRequest}}\& request);}
+\DoxyCodeLine{1390 }
+\DoxyCodeLine{1397         [[deprecated(\textcolor{stringliteral}{"{}All API-\/specific functions (commands) are deprecated starting in Pro Tools 2024.10. "{}}}
+\DoxyCodeLine{1398                      \textcolor{stringliteral}{"{}Please use a general JSON-\/based SendRequest function instead."{}})]] \textcolor{keyword}{virtual} std::}
+\DoxyCodeLine{1399             shared\_ptr<GetSubCounterFormatResponse>}
+\DoxyCodeLine{1400             GetSubCounterFormat(\textcolor{keyword}{const} \mbox{\hyperlink{a01372}{CommandRequest}}\& request);}
+\DoxyCodeLine{1401 }
+\DoxyCodeLine{1408         [[deprecated(}
+\DoxyCodeLine{1409             \textcolor{stringliteral}{"{}All API-\/specific functions (commands) are deprecated starting in Pro Tools 2024.10. "{}}}
+\DoxyCodeLine{1410             \textcolor{stringliteral}{"{}Please use a general JSON-\/based SendRequest function instead."{}})]] \textcolor{keyword}{virtual} std::shared\_ptr<UndoResponse>}
+\DoxyCodeLine{1411         Undo(\textcolor{keyword}{const} \mbox{\hyperlink{a01924}{UndoRequest}}\& request);}
+\DoxyCodeLine{1412 }
+\DoxyCodeLine{1419         [[deprecated(}
+\DoxyCodeLine{1420             \textcolor{stringliteral}{"{}All API-\/specific functions (commands) are deprecated starting in Pro Tools 2024.10. "{}}}
+\DoxyCodeLine{1421             \textcolor{stringliteral}{"{}Please use a general JSON-\/based SendRequest function instead."{}})]] \textcolor{keyword}{virtual} std::shared\_ptr<RedoResponse>}
+\DoxyCodeLine{1422         Redo(\textcolor{keyword}{const} \mbox{\hyperlink{a01932}{RedoRequest}}\& request);}
+\DoxyCodeLine{1423 }
+\DoxyCodeLine{1430         [[deprecated(}
+\DoxyCodeLine{1431             \textcolor{stringliteral}{"{}All API-\/specific functions (commands) are deprecated starting in Pro Tools 2024.10. "{}}}
+\DoxyCodeLine{1432             \textcolor{stringliteral}{"{}Please use a general JSON-\/based SendRequest function instead."{}})]] \textcolor{keyword}{virtual} std::shared\_ptr<UndoAllResponse>}
+\DoxyCodeLine{1433         UndoAll(\textcolor{keyword}{const} \mbox{\hyperlink{a01372}{CommandRequest}}\& request);}
+\DoxyCodeLine{1434 }
+\DoxyCodeLine{1441         [[deprecated(}
+\DoxyCodeLine{1442             \textcolor{stringliteral}{"{}All API-\/specific functions (commands) are deprecated starting in Pro Tools 2024.10. "{}}}
+\DoxyCodeLine{1443             \textcolor{stringliteral}{"{}Please use a general JSON-\/based SendRequest function instead."{}})]] \textcolor{keyword}{virtual} std::shared\_ptr<RedoAllResponse>}
+\DoxyCodeLine{1444         RedoAll(\textcolor{keyword}{const} \mbox{\hyperlink{a01372}{CommandRequest}}\& request);}
+\DoxyCodeLine{1445 }
+\DoxyCodeLine{1452         [[deprecated(}
+\DoxyCodeLine{1453             \textcolor{stringliteral}{"{}All API-\/specific functions (commands) are deprecated starting in Pro Tools 2024.10. "{}}}
+\DoxyCodeLine{1454             \textcolor{stringliteral}{"{}Please use a general JSON-\/based SendRequest function instead."{}})]] \textcolor{keyword}{virtual} std::shared\_ptr<CommandResponse>}
+\DoxyCodeLine{1455         ClearUndoQueue(\textcolor{keyword}{const} \mbox{\hyperlink{a01372}{CommandRequest}}\& request);}
+\DoxyCodeLine{1456 }
+\DoxyCodeLine{1463         [[deprecated(}
+\DoxyCodeLine{1464             \textcolor{stringliteral}{"{}All API-\/specific functions (commands) are deprecated starting in Pro Tools 2024.10. "{}}}
+\DoxyCodeLine{1465             \textcolor{stringliteral}{"{}Please use a general JSON-\/based SendRequest function instead."{}})]] \textcolor{keyword}{virtual} std::shared\_ptr<CommandResponse>}
+\DoxyCodeLine{1466         SetTrackDSPModeSafeState(\textcolor{keyword}{const} \mbox{\hyperlink{a01948}{SetTrackDSPModeSafeStateRequest}}\& request);}
+\DoxyCodeLine{1467 }
+\DoxyCodeLine{1474         [[deprecated(\textcolor{stringliteral}{"{}All API-\/specific functions (commands) are deprecated starting in Pro Tools 2024.10. "{}}}
+\DoxyCodeLine{1475                      \textcolor{stringliteral}{"{}Please use a general JSON-\/based SendRequest function instead."{}})]] \textcolor{keyword}{virtual} std::}
+\DoxyCodeLine{1476             shared\_ptr<GetSessionSystemDelayInfoResponse>}
+\DoxyCodeLine{1477             GetSessionSystemDelayInfo(\textcolor{keyword}{const} \mbox{\hyperlink{a01372}{CommandRequest}}\& request);}
+\DoxyCodeLine{1478 }
+\DoxyCodeLine{1485         [[deprecated(}
+\DoxyCodeLine{1486             \textcolor{stringliteral}{"{}All API-\/specific functions (commands) are deprecated starting in Pro Tools 2024.10. "{}}}
+\DoxyCodeLine{1487             \textcolor{stringliteral}{"{}Please use a general JSON-\/based SendRequest function instead."{}})]] \textcolor{keyword}{virtual} std::shared\_ptr<CommandResponse>}
+\DoxyCodeLine{1488         GroupClips(\textcolor{keyword}{const} \mbox{\hyperlink{a01372}{CommandRequest}}\& request);}
+\DoxyCodeLine{1489 }
+\DoxyCodeLine{1496         [[deprecated(}
+\DoxyCodeLine{1497             \textcolor{stringliteral}{"{}All API-\/specific functions (commands) are deprecated starting in Pro Tools 2024.10. "{}}}
+\DoxyCodeLine{1498             \textcolor{stringliteral}{"{}Please use a general JSON-\/based SendRequest function instead."{}})]] \textcolor{keyword}{virtual} std::shared\_ptr<CommandResponse>}
+\DoxyCodeLine{1499         UngroupClips(\textcolor{keyword}{const} \mbox{\hyperlink{a01372}{CommandRequest}}\& request);}
+\DoxyCodeLine{1500 }
+\DoxyCodeLine{1507         [[deprecated(}
+\DoxyCodeLine{1508             \textcolor{stringliteral}{"{}All API-\/specific functions (commands) are deprecated starting in Pro Tools 2024.10. "{}}}
+\DoxyCodeLine{1509             \textcolor{stringliteral}{"{}Please use a general JSON-\/based SendRequest function instead."{}})]] \textcolor{keyword}{virtual} std::shared\_ptr<CommandResponse>}
+\DoxyCodeLine{1510         UngroupAllClips(\textcolor{keyword}{const} \mbox{\hyperlink{a01372}{CommandRequest}}\& request);}
+\DoxyCodeLine{1511 }
+\DoxyCodeLine{1518         [[deprecated(}
+\DoxyCodeLine{1519             \textcolor{stringliteral}{"{}All API-\/specific functions (commands) are deprecated starting in Pro Tools 2024.10. "{}}}
+\DoxyCodeLine{1520             \textcolor{stringliteral}{"{}Please use a general JSON-\/based SendRequest function instead."{}})]] \textcolor{keyword}{virtual} std::shared\_ptr<CommandResponse>}
+\DoxyCodeLine{1521         RegroupClips(\textcolor{keyword}{const} \mbox{\hyperlink{a01372}{CommandRequest}}\& request);}
+\DoxyCodeLine{1522 }
+\DoxyCodeLine{1532         [[deprecated(\textcolor{stringliteral}{"{}All API-\/specific functions (commands) are deprecated starting in Pro Tools 2024.10. "{}}}
+\DoxyCodeLine{1533                      \textcolor{stringliteral}{"{}Please use a general JSON-\/based SendRequest function instead."{}})]] \textcolor{keyword}{virtual} std::}
+\DoxyCodeLine{1534             shared\_ptr<HostReadyCheckResponse>}
+\DoxyCodeLine{1535             HostReadyCheck(\textcolor{keyword}{const} \mbox{\hyperlink{a01372}{CommandRequest}}\& request);}
+\DoxyCodeLine{1536 }
+\DoxyCodeLine{1545         [[deprecated(}
+\DoxyCodeLine{1546             \textcolor{stringliteral}{"{}All API-\/specific functions (commands) are deprecated starting in Pro Tools 2024.10. "{}}}
+\DoxyCodeLine{1547             \textcolor{stringliteral}{"{}Please use a general JSON-\/based SendRequest function instead."{}})]] \textcolor{keyword}{virtual} std::shared\_ptr<CommandResponse>}
+\DoxyCodeLine{1548         RepeatSelection(\textcolor{keyword}{const} \mbox{\hyperlink{a01960}{RepeatSelectionRequest}}\& request);}
+\DoxyCodeLine{1549 }
+\DoxyCodeLine{1558         [[deprecated(}
+\DoxyCodeLine{1559             \textcolor{stringliteral}{"{}All API-\/specific functions (commands) are deprecated starting in Pro Tools 2024.10. "{}}}
+\DoxyCodeLine{1560             \textcolor{stringliteral}{"{}Please use a general JSON-\/based SendRequest function instead."{}})]] \textcolor{keyword}{virtual} std::shared\_ptr<CommandResponse>}
+\DoxyCodeLine{1561         DuplicateSelection(\textcolor{keyword}{const} \mbox{\hyperlink{a01372}{CommandRequest}}\& request);}
+\DoxyCodeLine{1562 }
+\DoxyCodeLine{1566         [[deprecated(\textcolor{stringliteral}{"{}All API-\/specific functions (commands) are deprecated starting in Pro Tools 2024.10. "{}}}
+\DoxyCodeLine{1567                      \textcolor{stringliteral}{"{}Please use a general JSON-\/based SendRequest function instead."{}})]] \textcolor{keyword}{virtual} std::}
+\DoxyCodeLine{1568             shared\_ptr<ClearAllMemoryLocationsResponse>}
+\DoxyCodeLine{1569             ClearAllMemoryLocations(\textcolor{keyword}{const} \mbox{\hyperlink{a01372}{CommandRequest}}\& request);}
+\DoxyCodeLine{1570 }
+\DoxyCodeLine{1571     \textcolor{keyword}{protected}:}
+\DoxyCodeLine{1575         \textcolor{keywordtype}{void} Init();}
+\DoxyCodeLine{1576 }
+\DoxyCodeLine{1580         \textcolor{keywordtype}{void} Free();}
+\DoxyCodeLine{1581 }
+\DoxyCodeLine{1586         \textcolor{keywordtype}{void} HostReadyCheck();}
+\DoxyCodeLine{1587 }
+\DoxyCodeLine{1588     \textcolor{keyword}{private}:}
+\DoxyCodeLine{1589         \textcolor{keyword}{struct }\mbox{\hyperlink{a01340}{InternalData}};}
+\DoxyCodeLine{1590 }
+\DoxyCodeLine{1591     \textcolor{keyword}{private}:}
+\DoxyCodeLine{1597         std::string SessionId;}
+\DoxyCodeLine{1598 }
+\DoxyCodeLine{1602         \textcolor{keywordtype}{bool} m\_isHostReady;}
+\DoxyCodeLine{1603 }
+\DoxyCodeLine{1607         \mbox{\hyperlink{a01348}{ClientConfig}} m\_clientConfig;}
+\DoxyCodeLine{1608 }
+\DoxyCodeLine{1612         std::unique\_ptr<InternalData> m\_internalData;}
+\DoxyCodeLine{1613 }
+\DoxyCodeLine{1617         \textcolor{keyword}{mutable} std::mutex SessionIdMutex;}
+\DoxyCodeLine{1618 }
+\DoxyCodeLine{1619     \textcolor{keyword}{private}:}
+\DoxyCodeLine{1626         \textcolor{keywordtype}{bool} LocateServer();}
+\DoxyCodeLine{1627 }
+\DoxyCodeLine{1634         \textcolor{keywordtype}{void} PingTaskStatus(std::string responseReceivedTaskId, std::future<void> pingCancellationToken);}
+\DoxyCodeLine{1635 }
+\DoxyCodeLine{1639         [[deprecated(\textcolor{stringliteral}{"{}Deprecated starting in Pro Tools 2024.10. "{}}}
+\DoxyCodeLine{1640                      \textcolor{stringliteral}{"{}Please use SendHostNotReadyResponse for non-\/legacy code."{}})]] std::shared\_ptr<CommandResponse>}
+\DoxyCodeLine{1641         SendErrorResponse(\mbox{\hyperlink{a00491_ae5152a79762c33c83fdb5752192e511c}{CommandId}} commandType);}
+\DoxyCodeLine{1642 }
+\DoxyCodeLine{1646         \mbox{\hyperlink{a01984}{CppPTSLResponse}} SendErrorResponse(}
+\DoxyCodeLine{1647             \mbox{\hyperlink{a00491_ae5152a79762c33c83fdb5752192e511c}{CommandId}} commandType, \mbox{\hyperlink{a00491_a8fe9e0532a0e4ab36abdbc81b22f0645}{CommandErrorType}} errorType, \textcolor{keyword}{const} std::string\& errorMessage = \textcolor{stringliteral}{"{}"{}});}
+\DoxyCodeLine{1648 }
+\DoxyCodeLine{1652         \mbox{\hyperlink{a01984}{CppPTSLResponse}} SendHostNotReadyResponse(\mbox{\hyperlink{a00491_ae5152a79762c33c83fdb5752192e511c}{CommandId}} commandType);}
+\DoxyCodeLine{1653 }
+\DoxyCodeLine{1654         std::string LookForSessionId(\textcolor{keyword}{const} std::string\& responseBodyJson);}
+\DoxyCodeLine{1655     \};}
+\DoxyCodeLine{1656 \} \textcolor{comment}{// namespace PTSLC\_CPP}}
+
+\end{DoxyCode}

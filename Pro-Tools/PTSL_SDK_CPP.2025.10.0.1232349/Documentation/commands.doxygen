@@ -1,0 +1,21 @@
+/**
+@page page_commands Commands
+
+Lists of PTSL API commands by category. Note that a command may be listed in multiple categories. For lists of commands and changes by version, see 'Release Notes'
+
+| | |
+|------|-------|
+| @ref ptsl_category_all | List of all commands |
+| @ref ptsl_category_general | Commands related to general topics such as the RPC connection, versioning, and application status |
+| @ref ptsl_category_session_file | Commands related to Pro Tools session files (opening, closing, saving) |
+| @ref ptsl_category_session_read | Commands related to reading data from Pro Tools sessions |
+| @ref ptsl_category_session_write | Commands related to writing data to Pro Tools sessions |
+| @ref ptsl_category_editing | Commands for editing clips, tracks, and other session details |
+| @ref ptsl_category_export | Commands for exporting media or session information in various formats |
+| @ref ptsl_category_transport | Commands related to the Pro Tools Transport state |
+| @ref ptsl_category_utility | Commands related to the utility functions |
+| @ref ptsl_category_time_utility | Time unit functions |
+| @ref ptsl_category_events | Events from Pro Tools about actions and changes |
+| @ref ptsl_category_private_api | Private APIs |
+
+*/

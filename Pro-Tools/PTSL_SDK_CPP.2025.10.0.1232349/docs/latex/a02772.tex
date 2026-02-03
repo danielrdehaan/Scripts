@@ -1,0 +1,172 @@
+\hypertarget{a02772}{}\doxysection{Audio\+File\+Info}
+\label{a02772}\index{AudioFileInfo@{AudioFileInfo}}
+
+
+\doxysubsection{Description}
+Structure that describes audio file info. 
+
+\begin{DoxySince}{Since}
+Pro Tools 2025.\+06 
+\end{DoxySince}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+string \mbox{\hyperlink{a02772_aaee6f8ecfee8eb4f36f5c97e2f6295cb}{file\+\_\+id}} = 1
+\begin{DoxyCompactList}\small\item\em The local id of the file. \end{DoxyCompactList}\item 
+int32 \mbox{\hyperlink{a02772_a83ca9a40870c7dfbe4e799768246206e}{num\+\_\+channels}} = 2
+\begin{DoxyCompactList}\small\item\em The number of channels. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{a00494_af2a9590cc0fd8bf11342cc6c0cc15f1a}{Sample\+Rate}} \mbox{\hyperlink{a02772_a174ee7ba38e1bdb69e85e762d4f09341}{sample\+\_\+rate}} = 3
+\begin{DoxyCompactList}\small\item\em The sample rate. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{a00494_a1c8b18f3d81c2eb76de467806f5962ef}{Bit\+Depth}} \mbox{\hyperlink{a02772_aa62527e97f5aa26c70629984ae076fee}{encoding}} = 4
+\begin{DoxyCompactList}\small\item\em The encoding (16-\/bit int, 24-\/bit int, 32-\/bit int, 32-\/bit float) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{a00494_a2c794c5c13ab4dd7e65bad031dbe41c3}{File\+Type}} \mbox{\hyperlink{a02772_a7ea487a26790d4213c9bc8a27394f3b0}{file\+\_\+type}} = 5
+\begin{DoxyCompactList}\small\item\em The type of the file (WAV, AIFF, MXF currently) \end{DoxyCompactList}\item 
+string \mbox{\hyperlink{a02772_ac3393d9847b52854bdd752d15640c3de}{smpte\+\_\+uid}} = 6
+\begin{DoxyCompactList}\small\item\em The SMPTE ID of the file. \end{DoxyCompactList}\item 
+string \mbox{\hyperlink{a02772_ad21a017488b2ca131668212a62e5d1b9}{protools\+\_\+umid}} = 7
+\begin{DoxyCompactList}\small\item\em The id of the file. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{a02680}{Timeline\+Location}} \mbox{\hyperlink{a02772_a59e209a499ad641286e75a455246b905}{original\+\_\+timestamp}} = 8
+\begin{DoxyCompactList}\small\item\em The original timestamp of the file. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{a02680}{Timeline\+Location}} \mbox{\hyperlink{a02772_a5fc7a77c74e9fe7a219f7a384502e4ad}{user\+\_\+timestamp}} = 9
+\begin{DoxyCompactList}\small\item\em The user timestamp of the file. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{a02688}{Time\+Length}} \mbox{\hyperlink{a02772_a8fb916de342b54bbf30a4f7b53e8bc09}{length}} = 10
+\item 
+\mbox{\hyperlink{a00494_a999565e0d7e844183026916ee443c836}{Stem\+Format}} \mbox{\hyperlink{a02772_a8ecbd7a50ba763c34af26e607af157af}{stem\+\_\+format}} = 11
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{a02772_aaee6f8ecfee8eb4f36f5c97e2f6295cb}\label{a02772_aaee6f8ecfee8eb4f36f5c97e2f6295cb}} 
+\index{AudioFileInfo@{AudioFileInfo}!file\_id@{file\_id}}
+\index{file\_id@{file\_id}!AudioFileInfo@{AudioFileInfo}}
+\doxysubsubsection{\texorpdfstring{file\_id}{file\_id}}
+{\footnotesize\ttfamily string file\+\_\+id = 1}
+
+
+
+The local id of the file. 
+
+\begin{DoxySince}{Since}
+Pro Tools 2025.\+06 
+\end{DoxySince}
+\mbox{\Hypertarget{a02772_a83ca9a40870c7dfbe4e799768246206e}\label{a02772_a83ca9a40870c7dfbe4e799768246206e}} 
+\index{AudioFileInfo@{AudioFileInfo}!num\_channels@{num\_channels}}
+\index{num\_channels@{num\_channels}!AudioFileInfo@{AudioFileInfo}}
+\doxysubsubsection{\texorpdfstring{num\_channels}{num\_channels}}
+{\footnotesize\ttfamily int32 num\+\_\+channels = 2}
+
+
+
+The number of channels. 
+
+\begin{DoxySince}{Since}
+Pro Tools 2025.\+06 
+\end{DoxySince}
+\mbox{\Hypertarget{a02772_a174ee7ba38e1bdb69e85e762d4f09341}\label{a02772_a174ee7ba38e1bdb69e85e762d4f09341}} 
+\index{AudioFileInfo@{AudioFileInfo}!sample\_rate@{sample\_rate}}
+\index{sample\_rate@{sample\_rate}!AudioFileInfo@{AudioFileInfo}}
+\doxysubsubsection{\texorpdfstring{sample\_rate}{sample\_rate}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a00494_af2a9590cc0fd8bf11342cc6c0cc15f1a}{Sample\+Rate}} sample\+\_\+rate = 3}
+
+
+
+The sample rate. 
+
+\begin{DoxySince}{Since}
+Pro Tools 2025.\+06 
+\end{DoxySince}
+\mbox{\Hypertarget{a02772_aa62527e97f5aa26c70629984ae076fee}\label{a02772_aa62527e97f5aa26c70629984ae076fee}} 
+\index{AudioFileInfo@{AudioFileInfo}!encoding@{encoding}}
+\index{encoding@{encoding}!AudioFileInfo@{AudioFileInfo}}
+\doxysubsubsection{\texorpdfstring{encoding}{encoding}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a00494_a1c8b18f3d81c2eb76de467806f5962ef}{Bit\+Depth}} encoding = 4}
+
+
+
+The encoding (16-\/bit int, 24-\/bit int, 32-\/bit int, 32-\/bit float) 
+
+\begin{DoxySince}{Since}
+Pro Tools 2025.\+06 
+\end{DoxySince}
+\mbox{\Hypertarget{a02772_a7ea487a26790d4213c9bc8a27394f3b0}\label{a02772_a7ea487a26790d4213c9bc8a27394f3b0}} 
+\index{AudioFileInfo@{AudioFileInfo}!file\_type@{file\_type}}
+\index{file\_type@{file\_type}!AudioFileInfo@{AudioFileInfo}}
+\doxysubsubsection{\texorpdfstring{file\_type}{file\_type}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a00494_a2c794c5c13ab4dd7e65bad031dbe41c3}{File\+Type}} file\+\_\+type = 5}
+
+
+
+The type of the file (WAV, AIFF, MXF currently) 
+
+\begin{DoxySince}{Since}
+Pro Tools 2025.\+06 
+\end{DoxySince}
+\mbox{\Hypertarget{a02772_ac3393d9847b52854bdd752d15640c3de}\label{a02772_ac3393d9847b52854bdd752d15640c3de}} 
+\index{AudioFileInfo@{AudioFileInfo}!smpte\_uid@{smpte\_uid}}
+\index{smpte\_uid@{smpte\_uid}!AudioFileInfo@{AudioFileInfo}}
+\doxysubsubsection{\texorpdfstring{smpte\_uid}{smpte\_uid}}
+{\footnotesize\ttfamily string smpte\+\_\+uid = 6}
+
+
+
+The SMPTE ID of the file. 
+
+\begin{DoxySince}{Since}
+Pro Tools 2025.\+06 
+\end{DoxySince}
+\mbox{\Hypertarget{a02772_ad21a017488b2ca131668212a62e5d1b9}\label{a02772_ad21a017488b2ca131668212a62e5d1b9}} 
+\index{AudioFileInfo@{AudioFileInfo}!protools\_umid@{protools\_umid}}
+\index{protools\_umid@{protools\_umid}!AudioFileInfo@{AudioFileInfo}}
+\doxysubsubsection{\texorpdfstring{protools\_umid}{protools\_umid}}
+{\footnotesize\ttfamily string protools\+\_\+umid = 7}
+
+
+
+The id of the file. 
+
+\begin{DoxySince}{Since}
+Pro Tools 2025.\+06 
+\end{DoxySince}
+\mbox{\Hypertarget{a02772_a59e209a499ad641286e75a455246b905}\label{a02772_a59e209a499ad641286e75a455246b905}} 
+\index{AudioFileInfo@{AudioFileInfo}!original\_timestamp@{original\_timestamp}}
+\index{original\_timestamp@{original\_timestamp}!AudioFileInfo@{AudioFileInfo}}
+\doxysubsubsection{\texorpdfstring{original\_timestamp}{original\_timestamp}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a02680}{Timeline\+Location}} original\+\_\+timestamp = 8}
+
+
+
+The original timestamp of the file. 
+
+\begin{DoxySince}{Since}
+Pro Tools 2025.\+06 
+\end{DoxySince}
+\mbox{\Hypertarget{a02772_a5fc7a77c74e9fe7a219f7a384502e4ad}\label{a02772_a5fc7a77c74e9fe7a219f7a384502e4ad}} 
+\index{AudioFileInfo@{AudioFileInfo}!user\_timestamp@{user\_timestamp}}
+\index{user\_timestamp@{user\_timestamp}!AudioFileInfo@{AudioFileInfo}}
+\doxysubsubsection{\texorpdfstring{user\_timestamp}{user\_timestamp}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a02680}{Timeline\+Location}} user\+\_\+timestamp = 9}
+
+
+
+The user timestamp of the file. 
+
+\begin{DoxySince}{Since}
+Pro Tools 2025.\+06 
+\end{DoxySince}
+\mbox{\Hypertarget{a02772_a8fb916de342b54bbf30a4f7b53e8bc09}\label{a02772_a8fb916de342b54bbf30a4f7b53e8bc09}} 
+\index{AudioFileInfo@{AudioFileInfo}!length@{length}}
+\index{length@{length}!AudioFileInfo@{AudioFileInfo}}
+\doxysubsubsection{\texorpdfstring{length}{length}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a02688}{Time\+Length}} length = 10}
+
+\mbox{\Hypertarget{a02772_a8ecbd7a50ba763c34af26e607af157af}\label{a02772_a8ecbd7a50ba763c34af26e607af157af}} 
+\index{AudioFileInfo@{AudioFileInfo}!stem\_format@{stem\_format}}
+\index{stem\_format@{stem\_format}!AudioFileInfo@{AudioFileInfo}}
+\doxysubsubsection{\texorpdfstring{stem\_format}{stem\_format}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a00494_a999565e0d7e844183026916ee443c836}{Stem\+Format}} stem\+\_\+format = 11}
+
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{a00464}{PTSL.\+proto}}\end{DoxyCompactItemize}

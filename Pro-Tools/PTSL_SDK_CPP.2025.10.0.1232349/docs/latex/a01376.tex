@@ -1,0 +1,89 @@
+\hypertarget{a01376}{}\doxysection{Command\+Response}
+\label{a01376}\index{CommandResponse@{CommandResponse}}
+
+
+{\ttfamily \#include $<$Cpp\+PTSLCommon.\+h$>$}
+
+
+
+\doxysubsection{Description}
+Structure that describes common data of the command data. 
+
+\begin{DoxyRefDesc}{Deprecated}
+\item[\mbox{\hyperlink{a00467__deprecated000130}{Deprecated}}]Command\+Request/\+Command\+Response and nested structures are deprecated starting in Pro Tools 2024.\+10 and replaced with Cpp\+PTSLRequest/\+Cpp\+PTSLResponse classes. \end{DoxyRefDesc}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual \mbox{\hyperlink{a01376_a5ac6d03f10a553c14c7470c14a500b0d}{$\sim$\+Command\+Response}} ()
+\item 
+virtual std\+::string \mbox{\hyperlink{a01376_a04b21e1b76247b26a6ff24499de3de3c}{To\+String}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{a01356}{Command\+Header}} \mbox{\hyperlink{a01376_a8100753fbf415ca948ce38165c63557b}{header}}
+\item 
+\mbox{\hyperlink{a01360}{Command\+Status}} \mbox{\hyperlink{a01376_af071d7f1bd0d384a346d39f986cf9146}{status}}
+\item 
+std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{a01364}{Command\+Error}} $>$ $>$ \mbox{\hyperlink{a01376_a450ab3da1da8707cd44ebbecf379d90b}{errors}}
+\item 
+std\+::string \mbox{\hyperlink{a01376_a59792b941ab4ec3167a390213b131bd5}{json\+Body}}
+\item 
+std\+::string \mbox{\hyperlink{a01376_a7d8a2cda86885e9071038d9e36430a70}{json\+Error}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{a01376_a5ac6d03f10a553c14c7470c14a500b0d}\label{a01376_a5ac6d03f10a553c14c7470c14a500b0d}} 
+\index{CommandResponse@{CommandResponse}!````~CommandResponse@{$\sim$CommandResponse}}
+\index{````~CommandResponse@{$\sim$CommandResponse}!CommandResponse@{CommandResponse}}
+\doxysubsubsection{\texorpdfstring{$\sim$CommandResponse()}{~CommandResponse()}}
+{\footnotesize\ttfamily virtual $\sim$\mbox{\hyperlink{a01376}{Command\+Response}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{a01376_a04b21e1b76247b26a6ff24499de3de3c}\label{a01376_a04b21e1b76247b26a6ff24499de3de3c}} 
+\index{CommandResponse@{CommandResponse}!ToString@{ToString}}
+\index{ToString@{ToString}!CommandResponse@{CommandResponse}}
+\doxysubsubsection{\texorpdfstring{ToString()}{ToString()}}
+{\footnotesize\ttfamily virtual std\+::string To\+String (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{a01376_a8100753fbf415ca948ce38165c63557b}\label{a01376_a8100753fbf415ca948ce38165c63557b}} 
+\index{CommandResponse@{CommandResponse}!header@{header}}
+\index{header@{header}!CommandResponse@{CommandResponse}}
+\doxysubsubsection{\texorpdfstring{header}{header}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a01356}{Command\+Header}} header}
+
+\mbox{\Hypertarget{a01376_af071d7f1bd0d384a346d39f986cf9146}\label{a01376_af071d7f1bd0d384a346d39f986cf9146}} 
+\index{CommandResponse@{CommandResponse}!status@{status}}
+\index{status@{status}!CommandResponse@{CommandResponse}}
+\doxysubsubsection{\texorpdfstring{status}{status}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a01360}{Command\+Status}} status}
+
+\mbox{\Hypertarget{a01376_a450ab3da1da8707cd44ebbecf379d90b}\label{a01376_a450ab3da1da8707cd44ebbecf379d90b}} 
+\index{CommandResponse@{CommandResponse}!errors@{errors}}
+\index{errors@{errors}!CommandResponse@{CommandResponse}}
+\doxysubsubsection{\texorpdfstring{errors}{errors}}
+{\footnotesize\ttfamily std\+::vector$<$std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{a01364}{Command\+Error}}$>$ $>$ errors}
+
+\mbox{\Hypertarget{a01376_a59792b941ab4ec3167a390213b131bd5}\label{a01376_a59792b941ab4ec3167a390213b131bd5}} 
+\index{CommandResponse@{CommandResponse}!jsonBody@{jsonBody}}
+\index{jsonBody@{jsonBody}!CommandResponse@{CommandResponse}}
+\doxysubsubsection{\texorpdfstring{jsonBody}{jsonBody}}
+{\footnotesize\ttfamily std\+::string json\+Body}
+
+\mbox{\Hypertarget{a01376_a7d8a2cda86885e9071038d9e36430a70}\label{a01376_a7d8a2cda86885e9071038d9e36430a70}} 
+\index{CommandResponse@{CommandResponse}!jsonError@{jsonError}}
+\index{jsonError@{jsonError}!CommandResponse@{CommandResponse}}
+\doxysubsubsection{\texorpdfstring{jsonError}{jsonError}}
+{\footnotesize\ttfamily std\+::string json\+Error}
+
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{a00050}{Cpp\+PTSLCommon.\+h}}\end{DoxyCompactItemize}

@@ -1,0 +1,57 @@
+\hypertarget{a02944}{}\doxysection{Plugin\+Control\+Info}
+\label{a02944}\index{PluginControlInfo@{PluginControlInfo}}
+
+
+\doxysubsection{Description}
+Structure that specifies control details for a plugin in a \mbox{\hyperlink{a02948}{Track\+Control\+Id}}. 
+
+\begin{DoxySince}{Since}
+Pro Tools 2025.\+10 
+\end{DoxySince}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+int32 \mbox{\hyperlink{a02944_af97d58ff77c91badbe7d64b177b1b60f}{multimono\+\_\+index}} = 1
+\begin{DoxyCompactList}\small\item\em Specifies the multi-\/mono index of a plugin on an insert slot; used by mono inserts on wider track formats. \end{DoxyCompactList}\item 
+string \mbox{\hyperlink{a02944_acd72214ca0ea746194d14cd50225d7f2}{control\+\_\+id}} = 2
+\begin{DoxyCompactList}\small\item\em The internal ID of the plugin parameter that is specified in a \mbox{\hyperlink{a02948}{Track\+Control\+Id}}; e.\+g, Demo Dist “\+Filt”. \end{DoxyCompactList}\item 
+string \mbox{\hyperlink{a02944_a21ae142511ab409f0d41dc69ade10d2c}{control\+\_\+name}} = 3
+\begin{DoxyCompactList}\small\item\em The human readable name of the plugin parameter that is specified in a \mbox{\hyperlink{a02948}{Track\+Control\+Id}}; e.\+g, Demo Dist “\+Lowpass”. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{a02944_af97d58ff77c91badbe7d64b177b1b60f}\label{a02944_af97d58ff77c91badbe7d64b177b1b60f}} 
+\index{PluginControlInfo@{PluginControlInfo}!multimono\_index@{multimono\_index}}
+\index{multimono\_index@{multimono\_index}!PluginControlInfo@{PluginControlInfo}}
+\doxysubsubsection{\texorpdfstring{multimono\_index}{multimono\_index}}
+{\footnotesize\ttfamily int32 multimono\+\_\+index = 1}
+
+
+
+Specifies the multi-\/mono index of a plugin on an insert slot; used by mono inserts on wider track formats. 
+
+\mbox{\Hypertarget{a02944_acd72214ca0ea746194d14cd50225d7f2}\label{a02944_acd72214ca0ea746194d14cd50225d7f2}} 
+\index{PluginControlInfo@{PluginControlInfo}!control\_id@{control\_id}}
+\index{control\_id@{control\_id}!PluginControlInfo@{PluginControlInfo}}
+\doxysubsubsection{\texorpdfstring{control\_id}{control\_id}}
+{\footnotesize\ttfamily string control\+\_\+id = 2}
+
+
+
+The internal ID of the plugin parameter that is specified in a \mbox{\hyperlink{a02948}{Track\+Control\+Id}}; e.\+g, Demo Dist “\+Filt”. 
+
+When making control queries, either this parameter or control\+\_\+name can be specified. \mbox{\Hypertarget{a02944_a21ae142511ab409f0d41dc69ade10d2c}\label{a02944_a21ae142511ab409f0d41dc69ade10d2c}} 
+\index{PluginControlInfo@{PluginControlInfo}!control\_name@{control\_name}}
+\index{control\_name@{control\_name}!PluginControlInfo@{PluginControlInfo}}
+\doxysubsubsection{\texorpdfstring{control\_name}{control\_name}}
+{\footnotesize\ttfamily string control\+\_\+name = 3}
+
+
+
+The human readable name of the plugin parameter that is specified in a \mbox{\hyperlink{a02948}{Track\+Control\+Id}}; e.\+g, Demo Dist “\+Lowpass”. 
+
+When making control queries, either this parameter or control\+\_\+id can be specified. 
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{a00464}{PTSL.\+proto}}\end{DoxyCompactItemize}

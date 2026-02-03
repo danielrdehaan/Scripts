@@ -1,0 +1,66 @@
+{
+    "version": 6,
+    "cmakeMinimumRequired": {
+        "major": 3,
+        "minor": 25,
+        "patch": 0
+    },
+    "configurePresets": [
+        {
+            "name": "base",
+            "hidden": true,
+            "cacheVariables": {
+                "CMAKE_FIND_PACKAGE_PREFER_CONFIG": "ON",
+                "CMAKE_CONFIGURATION_TYPES": "Debug;Release"
+            }
+        },
+        {
+            "name": "xcode",
+            "generator": "Xcode",
+            "hidden": true,
+            "condition": {
+                "type": "equals",
+                "lhs": "${hostSystemName}",
+                "rhs": "Darwin"
+            }
+        },
+        {
+            "name": "ninja",
+            "generator": "Ninja Multi-Config",
+            "hidden": true
+        },
+        {
+            "name": "vs2022",
+            "generator": "Visual Studio 17 2022",
+            "architecture": "x64",
+            "hidden": true,
+            "condition": {
+                "type": "equals",
+                "lhs": "${hostSystemName}",
+                "rhs": "Windows"
+            }
+        },
+        {
+            "name": "vs2019",
+            "generator": "Visual Studio 16 2019",
+            "architecture": "x64",
+            "hidden": true,
+            "condition": {
+                "type": "equals",
+                "lhs": "${hostSystemName}",
+                "rhs": "Windows"
+            }
+        },
+        {
+            "name": "vs2017",
+            "generator": "Visual Studio 15 2017",
+            "architecture": "x64",
+            "hidden": true,
+            "condition": {
+                "type": "equals",
+                "lhs": "${hostSystemName}",
+                "rhs": "Windows"
+            }
+        }
+    ]
+}

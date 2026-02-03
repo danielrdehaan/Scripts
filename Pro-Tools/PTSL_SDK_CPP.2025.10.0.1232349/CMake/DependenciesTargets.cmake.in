@@ -1,0 +1,79 @@
+include_guard()
+
+set(DEPENDENCIES_ARCHITECTURE "@DEPENDENCIES_ARCHITECTURE@")
+set(DEPENDENCIES_CONFIGURATION "@DEPENDENCIES_CONFIGURATION@")
+set(DEPENDENCIES_NAMES "@DEPENDENCIES_NAMES@")
+set(SYSTEM_DEPENDENCIES_NAMES "@SYSTEM_DEPENDENCIES_NAMES@")
+set(FRAMEWORK_DEPENDENCIES_NAMES "@FRAMEWORK_DEPENDENCIES_NAMES@")
+
+set(DEPENDENCIES_ROOT_DIR "${CMAKE_CURRENT_LIST_DIR}/../@DEPENDENCIES_ROOT_DIR@")
+
+set(CURRENT_TARGET_NAME "@PROJECT_NAME@_Dependencies_@DEPENDENCIES_ARCHITECTURE@_@DEPENDENCIES_CONFIGURATION@")
+
+if(TARGET ${CURRENT_TARGET_NAME})
+    return()
+endif()
+
+message(STATUS "@PROJECT_NAME@: Creating target ${CURRENT_TARGET_NAME}")
+add_library(${CURRENT_TARGET_NAME} INTERFACE)
+
+# Search for bundled dependencies.
+foreach(DEPENDENCY IN LISTS DEPENDENCIES_NAMES)
+    unset(DEPENDENCY_PATH)
+    find_library(DEPENDENCY_PATH
+        NAMES "${DEPENDENCY}"
+        PATHS "${DEPENDENCIES_ROOT_DIR}"
+        NO_DEFAULT_PATH
+        NO_CACHE
+    )
+
+    if(NOT DEPENDENCY_PATH)
+        message(FATAL_ERROR "Dependency '${DEPENDENCY}' WAS not found in '${DEPENDENCIES_ROOT_DIR}'")
+    endif()
+
+    if (APPLE)
+        set(LIB_PREFIX "SHELL:LINKER:-load_hidden,")
+    endif()
+
+    target_link_options(${CURRENT_TARGET_NAME} INTERFACE "$<$<CONFIG:@DEPENDENCIES_CONFIGURATION@>:${LIB_PREFIX}${DEPENDENCY_PATH}>")
+endforeach()
+
+# Search for system dependencies.
+foreach(DEPENDENCY IN LISTS SYSTEM_DEPENDENCIES_NAMES)
+    unset(DEPENDENCY_PATH)
+    find_library(DEPENDENCY_PATH
+        NAMES "${DEPENDENCY}"
+        NO_CACHE
+    )
+
+    if(NOT DEPENDENCY_PATH)
+        message(FATAL_ERROR "System dependency '${DEPENDENCY}' was not found")
+    endif()
+
+    target_link_libraries(${CURRENT_TARGET_NAME} INTERFACE "$<$<CONFIG:@DEPENDENCIES_CONFIGURATION@>:${DEPENDENCY_PATH}>")
+endforeach()
+
+if(APPLE)
+    # Search for framework dependencies.
+    foreach(DEPENDENCY IN LISTS FRAMEWORK_DEPENDENCIES_NAMES)
+        unset(DEPENDENCY_PATH)
+        find_library(DEPENDENCY_PATH
+            NAMES "${DEPENDENCY}"
+            NO_CACHE
+        )
+
+        if(NOT DEPENDENCY_PATH)
+            message(FATAL_ERROR "Framework dependency '${DEPENDENCY}' was not found")
+        endif()
+
+        target_link_libraries(${CURRENT_TARGET_NAME} INTERFACE "$<$<CONFIG:@DEPENDENCIES_CONFIGURATION@>:${DEPENDENCY_PATH}>")
+    endforeach()
+endif()
+
+if(NOT TARGET @PROJECT_NAMESPACE@@DEPENDENCIES_TARGET_NAME@)
+    message(STATUS "@PROJECT_NAME@: Creating target @PROJECT_NAMESPACE@@DEPENDENCIES_TARGET_NAME@")
+    add_library(@PROJECT_NAME@_@DEPENDENCIES_TARGET_NAME@ INTERFACE)
+    add_library(@PROJECT_NAMESPACE@@DEPENDENCIES_TARGET_NAME@ ALIAS @PROJECT_NAME@_@DEPENDENCIES_TARGET_NAME@)
+endif()
+
+target_link_libraries(@PROJECT_NAME@_@DEPENDENCIES_TARGET_NAME@ INTERFACE ${CURRENT_TARGET_NAME})

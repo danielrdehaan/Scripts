@@ -1,0 +1,88 @@
+{
+    "version": 6,
+    "include": [
+        "../../CMake/PTSLPresets.json"
+    ],
+    "configurePresets": [
+        {
+            "name": "ptsl-dir-Darwin-arm64",
+            "hidden": true,
+            "toolchainFile": "${sourceDir}/MacBuild/arm64/Dependencies/conan_toolchain.cmake",
+            "binaryDir": "${sourceDir}/MacBuild/arm64",
+            "installDir": "${sourceDir}/../../install/arm64",
+            "cacheVariables": {
+                "INSTALL_DEBUG_PREFIX": "${sourceDir}/../../install/arm64/Debug/ptslcmd.2024.06.0",
+                "INSTALL_RELEASE_PREFIX": "${sourceDir}/../../install/arm64/Release/ptslcmd.2024.06.0",
+                "CMAKE_PREFIX_PATH": "${sourceDir}/../../install/arm64/Debug/PTSLC_CPP;${sourceDir}/../../install/arm64/Release/PTSLC_CPP",
+                "PTSLC_CPP_DEBUG_ROOT": "${sourceDir}/../../install/arm64/Debug/PTSLC_CPP",
+                "PTSLC_CPP_RELEASE_ROOT": "${sourceDir}/../../install/arm64/Release/PTSLC_CPP",
+                "EXECUTABLE_NAME": "ptslcmd.2024.06.0"
+            },
+            "condition": {
+                "type": "equals",
+                "lhs": "${hostSystemName}",
+                "rhs": "Darwin"
+            }
+        },
+        {
+            "name": "ptsl-dir-Darwin-x86_64",
+            "hidden": true,
+            "toolchainFile": "${sourceDir}/MacBuild/x86_64/Dependencies/conan_toolchain.cmake",
+            "binaryDir": "${sourceDir}/MacBuild/x86_64",
+            "installDir": "${sourceDir}/../../install/x86_64",
+            "cacheVariables": {
+                "INSTALL_DEBUG_PREFIX": "${sourceDir}/../../install/x86_64/Debug/ptslcmd.2024.06.0",
+                "INSTALL_RELEASE_PREFIX": "${sourceDir}/../../install/x86_64/Release/ptslcmd.2024.06.0",
+                "CMAKE_PREFIX_PATH": "${sourceDir}/../../install/x86_64/Debug/PTSLC_CPP;${sourceDir}/../../install/x86_64/Release/PTSLC_CPP",
+                "PTSLC_CPP_DEBUG_ROOT": "${sourceDir}/../../install/x86_64/Debug/PTSLC_CPP",
+                "PTSLC_CPP_RELEASE_ROOT": "${sourceDir}/../../install/x86_64/Release/PTSLC_CPP",
+                "EXECUTABLE_NAME": "ptslcmd.2024.06.0"
+            },
+            "condition": {
+                "type": "equals",
+                "lhs": "${hostSystemName}",
+                "rhs": "Darwin"
+            }
+        },
+        {
+            "name": "ptsl-dir-Darwin-x86_64_arm64",
+            "hidden": true,
+            "toolchainFile": "${sourceDir}/MacBuild/x86_64_arm64/Dependencies/universal_toolchain.cmake",
+            "binaryDir": "${sourceDir}/MacBuild/x86_64_arm64",
+            "installDir": "${sourceDir}/../../install/x86_64_arm64",
+            "cacheVariables": {
+                "INSTALL_DEBUG_PREFIX": "${sourceDir}/../../install/x86_64_arm64/Debug/ptslcmd.2024.06.0",
+                "INSTALL_RELEASE_PREFIX": "${sourceDir}/../../install/x86_64_arm64/Release/ptslcmd.2024.06.0",
+                "CMAKE_PREFIX_PATH": "${sourceDir}/../../install/x86_64_arm64/Debug/PTSLC_CPP;${sourceDir}/../../install/x86_64_arm64/Release/PTSLC_CPP",
+                "PTSLC_CPP_DEBUG_ROOT": "${sourceDir}/../../install/x86_64_arm64/Debug/PTSLC_CPP",
+                "PTSLC_CPP_RELEASE_ROOT": "${sourceDir}/../../install/x86_64_arm64/Release/PTSLC_CPP",
+                "EXECUTABLE_NAME": "ptslcmd.2024.06.0"
+            },
+            "condition": {
+                "type": "equals",
+                "lhs": "${hostSystemName}",
+                "rhs": "Darwin"
+            }
+        },
+        {
+            "name": "ptsl-dir-Windows-x86_64",
+            "hidden": true,
+            "toolchainFile": "${sourceDir}/WinBuild/x86_64/Dependencies/conan_toolchain.cmake",
+            "binaryDir": "${sourceDir}/WinBuild/x86_64",
+            "installDir": "${sourceDir}/../../install/x86_64",
+            "cacheVariables": {
+                "INSTALL_DEBUG_PREFIX": "${sourceDir}/../../install/x86_64/Debug/ptslcmd.2024.06.0",
+                "INSTALL_RELEASE_PREFIX": "${sourceDir}/../../install/x86_64/Release/ptslcmd.2024.06.0",
+                "CMAKE_PREFIX_PATH": "${sourceDir}/../../install/x86_64/Debug/PTSLC_CPP;${sourceDir}/../../install/x86_64/Release/PTSLC_CPP",
+                "PTSLC_CPP_DEBUG_ROOT": "${sourceDir}/../../install/x86_64/Debug/PTSLC_CPP",
+                "PTSLC_CPP_RELEASE_ROOT": "${sourceDir}/../../install/x86_64/Release/PTSLC_CPP",
+                "EXECUTABLE_NAME": "ptslcmd.2024.06.0"
+            },
+            "condition": {
+                "type": "equals",
+                "lhs": "${hostSystemName}",
+                "rhs": "Windows"
+            }
+        }
+    ]
+}

@@ -1,0 +1,69 @@
+\hypertarget{a00035_source}{}\doxysection{Cpp\+Async.\+h}
+\label{a00035_source}\index{CppAsync.h@{CppAsync.h}}
+\mbox{\hyperlink{a00035}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{comment}{// Copyright 2020-\/2021, 2023 by Avid Technology, Inc.}}
+\DoxyCodeLine{2 \textcolor{comment}{// CONFIDENTIAL: this document contains confidential information of Avid. Do not disclose to any third party. Use of the information contained in this document is subject to an Avid SDK license.}}
+\DoxyCodeLine{3 }
+\DoxyCodeLine{9 \textcolor{preprocessor}{\#pragma once}}
+\DoxyCodeLine{10 }
+\DoxyCodeLine{11 \textcolor{preprocessor}{\#include <chrono>}}
+\DoxyCodeLine{12 \textcolor{preprocessor}{\#include <future>}}
+\DoxyCodeLine{13 \textcolor{preprocessor}{\#include <iostream>}}
+\DoxyCodeLine{14 \textcolor{preprocessor}{\#include <mutex>}}
+\DoxyCodeLine{15 \textcolor{preprocessor}{\#include <stdexcept>}}
+\DoxyCodeLine{16 \textcolor{preprocessor}{\#include <string>}}
+\DoxyCodeLine{17 \textcolor{preprocessor}{\#include <utility>}}
+\DoxyCodeLine{18 }
+\DoxyCodeLine{19 \textcolor{keyword}{namespace }\mbox{\hyperlink{a00491}{PTSLC\_CPP}}}
+\DoxyCodeLine{20 \{}
+\DoxyCodeLine{25     \textcolor{keyword}{class }\mbox{\hyperlink{a01312}{TaskCancelledException}} : \textcolor{keyword}{public} std::runtime\_error}
+\DoxyCodeLine{26     \{}
+\DoxyCodeLine{27     \textcolor{keyword}{public}:}
+\DoxyCodeLine{31         \mbox{\hyperlink{a01312_a825a569b0093410a311f04f20a62af5f}{TaskCancelledException}}() : std::runtime\_error(\textcolor{stringliteral}{"{}TaskCancelledException"{}})}
+\DoxyCodeLine{32         \{}
+\DoxyCodeLine{33         \}}
+\DoxyCodeLine{34     \};}
+\DoxyCodeLine{35 }
+\DoxyCodeLine{40     \textcolor{keyword}{template} <\textcolor{keyword}{class} T>}
+\DoxyCodeLine{41     \textcolor{keywordtype}{bool} \mbox{\hyperlink{a00491_a9a933726d2eba8ed84d84ee7a103d259}{IsCancellationRequested}}(\textcolor{keyword}{const} std::future<T>\& cancellation)}
+\DoxyCodeLine{42     \{}
+\DoxyCodeLine{43         \textcolor{keywordtype}{bool} ready = cancellation.wait\_for(std::chrono::milliseconds(0)) == std::future\_status::ready;}
+\DoxyCodeLine{44         \textcolor{keywordflow}{return} ready;}
+\DoxyCodeLine{45     \}}
+\DoxyCodeLine{46 }
+\DoxyCodeLine{51     \textcolor{keyword}{template} <\textcolor{keyword}{class} T>}
+\DoxyCodeLine{52     \textcolor{keywordtype}{void} \mbox{\hyperlink{a00491_ac0f88800ff865784edd0d7339b3c884f}{AsyncDelay}}(\textcolor{keyword}{const} std::future<T>\& cancellation, std::chrono::milliseconds delay = std::chrono::milliseconds(1))}
+\DoxyCodeLine{53     \{}
+\DoxyCodeLine{54         \textcolor{keywordflow}{if} (cancellation.wait\_for(delay) == std::future\_status::ready)}
+\DoxyCodeLine{55         \{}
+\DoxyCodeLine{56             \textcolor{keywordflow}{throw} \mbox{\hyperlink{a01312}{TaskCancelledException}}();}
+\DoxyCodeLine{57         \}}
+\DoxyCodeLine{58     \}}
+\DoxyCodeLine{59 }
+\DoxyCodeLine{64     \textcolor{keyword}{template} <\textcolor{keyword}{class} Request, \textcolor{keyword}{class} Response, \textcolor{keyword}{class} ClientPtr, \textcolor{keyword}{class} ClientFunctionPtr>}
+\DoxyCodeLine{65     std::shared\_ptr<Response> \mbox{\hyperlink{a00491_ab8c0fedcf58a25f377729071b93cc7cd}{AsyncWait}}(ClientFunctionPtr func, ClientPtr ptr, \textcolor{keyword}{const} Request\& request)}
+\DoxyCodeLine{66     \{}
+\DoxyCodeLine{67         std::future<std::shared\_ptr<Response>> future = std::async(std::launch::async, func, ptr, request);}
+\DoxyCodeLine{68         std::shared\_ptr<Response> response = future.get();}
+\DoxyCodeLine{69         \textcolor{keywordflow}{return} response;}
+\DoxyCodeLine{70     \}}
+\DoxyCodeLine{71 }
+\DoxyCodeLine{72     \textcolor{keyword}{template} <\textcolor{keyword}{class }ClientPtr, \textcolor{keyword}{class }ClientFunction, \textcolor{keyword}{class}... Args>}
+\DoxyCodeLine{73     \textcolor{keywordtype}{void} \mbox{\hyperlink{a00491_a7d0ba9b448b09495b2a043d621257085}{AsyncWait2}}(ClientPtr caller, ClientFunction callerFunc, Args\&\&... args)}
+\DoxyCodeLine{74     \{}
+\DoxyCodeLine{75         std::future<void> future = std::async(std::launch::async, callerFunc, caller, std::forward<Args>(args)...);}
+\DoxyCodeLine{76         future.get();}
+\DoxyCodeLine{77     \}}
+\DoxyCodeLine{78 }
+\DoxyCodeLine{82     \textcolor{keyword}{class }\mbox{\hyperlink{a01316}{SafeLogger}}}
+\DoxyCodeLine{83     \{}
+\DoxyCodeLine{84     \textcolor{keyword}{public}:}
+\DoxyCodeLine{85         \textcolor{keyword}{static} \textcolor{keywordtype}{void} \mbox{\hyperlink{a01316_a121fffedde23cdfbe2031d4577a64934}{SyncPrint}}(\textcolor{keyword}{const} std::string\& iMsg);}
+\DoxyCodeLine{86 }
+\DoxyCodeLine{87     \textcolor{keyword}{private}:}
+\DoxyCodeLine{88         \textcolor{keyword}{static} std::mutex mLocker;}
+\DoxyCodeLine{89     \};}
+\DoxyCodeLine{90 \} \textcolor{comment}{// namespace PTSLC\_CPP}}
+
+\end{DoxyCode}

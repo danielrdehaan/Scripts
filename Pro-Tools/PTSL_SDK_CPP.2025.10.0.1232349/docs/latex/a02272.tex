@@ -1,0 +1,182 @@
+\hypertarget{a02272}{}\doxysection{Export\+Mix\+Request\+Body}
+\label{a02272}\index{ExportMixRequestBody@{ExportMixRequestBody}}
+
+
+\doxysubsection{Description}
+Structure that describes \mbox{\hyperlink{a00494_aaf8d2069e2c6bbecf4aa8f9819028e8aa81588c312ad565dfea8bb8421d1a0972}{CId\+\_\+\+Export\+Mix}} request data. \doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+string \mbox{\hyperlink{a02272_a9c26974aae7348ed515ef814b3392eab}{preset\+\_\+path}} = 1
+\begin{DoxyCompactList}\small\item\em (optional) A bounce preset file to load bounce settings from \end{DoxyCompactList}\item 
+string \mbox{\hyperlink{a02272_a755d42f2e9c635ce2213e0efad62b796}{file\+\_\+name}} = 2
+\begin{DoxyCompactList}\small\item\em The name of the file to export to. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{a00494_ab1acd24041b72f2426ef1c43b2bb99a2}{EM\+\_\+\+File\+Type}} \mbox{\hyperlink{a02272_a8a2dc0c4f45e07de33e49f766607cc4d}{file\+\_\+type}} = 3
+\begin{DoxyCompactList}\small\item\em The type of file to export to. \end{DoxyCompactList}\item 
+repeated \mbox{\hyperlink{a02232}{EM\+\_\+\+Source\+Info}} \mbox{\hyperlink{a02272_aa45d7a620708b2732ef0c62988433faa}{files\+\_\+list}} = 4
+\item 
+\mbox{\hyperlink{a02236}{EM\+\_\+\+Audio\+Info}} \mbox{\hyperlink{a02272_ae94110dd9e192f3806f3208d754c6ddb}{audio\+\_\+info}} = 5
+\begin{DoxyCompactList}\small\item\em Audio settings for the file being exported. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{a02248}{EM\+\_\+\+Video\+Info}} \mbox{\hyperlink{a02272_ac7aa795fae50e4144d2ff50f4fb91caa}{video\+\_\+info}} = 6
+\begin{DoxyCompactList}\small\item\em Vidio settings for the file being exported. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{a02256}{EM\+\_\+\+Location\+Info}} \mbox{\hyperlink{a02272_ad7693dfc9e6a051e8618addec119618d}{location\+\_\+info}} = 7
+\begin{DoxyCompactList}\small\item\em Specify where to export the file to. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{a02260}{EM\+\_\+\+Dolby\+Atmos\+Info}} \mbox{\hyperlink{a02272_acb7c384b98764dcf2cf9232ab87dd12d}{dolby\+\_\+atmos\+\_\+info}} = 8
+\begin{DoxyCompactList}\small\item\em Options for exporting a Dolby ADM file. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{a00494_a126460572c79fe538db9136e88d0ff62}{Triple\+Bool}} \mbox{\hyperlink{a02272_a5c4743d6c0ae40c625b2f64014de4e9d}{offline\+\_\+bounce}} = 9
+\begin{DoxyCompactList}\small\item\em Whether to export the file offline or in real-\/time. \end{DoxyCompactList}\item 
+repeated \mbox{\hyperlink{a02232}{EM\+\_\+\+Source\+Info}} \mbox{\hyperlink{a02272_a68146aaa5b60798c8b2ab6a3ee1b27ea}{mix\+\_\+source\+\_\+list}} = 10
+\begin{DoxyCompactList}\small\item\em The sources to export from\+: outputs, busses, etc. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{a02268}{Audio\+Encoding\+Options}} \mbox{\hyperlink{a02272_af804ebfee3b3c3c6cc015bb58ccb3128}{audio\+\_\+encoding\+\_\+options}} = 11
+\begin{DoxyCompactList}\small\item\em Encoding options for MP3 or other formats. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{a02680}{Timeline\+Location}} \mbox{\hyperlink{a02272_ad2b55ccec2f232c00b50738d5d71e7b1}{start\+\_\+time}} = 12
+\begin{DoxyCompactList}\small\item\em Position on the timeline to being exporting from; paired with \mbox{\hyperlink{a02272_a49d866076c6162502bd4ed8afcfdb129}{end\+\_\+time}}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{a02680}{Timeline\+Location}} \mbox{\hyperlink{a02272_a49d866076c6162502bd4ed8afcfdb129}{end\+\_\+time}} = 13
+\begin{DoxyCompactList}\small\item\em Position on the timeline to stop exporting at; paired with \mbox{\hyperlink{a02272_ad2b55ccec2f232c00b50738d5d71e7b1}{start\+\_\+time}}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{a02272_a9c26974aae7348ed515ef814b3392eab}\label{a02272_a9c26974aae7348ed515ef814b3392eab}} 
+\index{ExportMixRequestBody@{ExportMixRequestBody}!preset\_path@{preset\_path}}
+\index{preset\_path@{preset\_path}!ExportMixRequestBody@{ExportMixRequestBody}}
+\doxysubsubsection{\texorpdfstring{preset\_path}{preset\_path}}
+{\footnotesize\ttfamily string preset\+\_\+path = 1}
+
+
+
+(optional) A bounce preset file to load bounce settings from 
+
+\mbox{\Hypertarget{a02272_a755d42f2e9c635ce2213e0efad62b796}\label{a02272_a755d42f2e9c635ce2213e0efad62b796}} 
+\index{ExportMixRequestBody@{ExportMixRequestBody}!file\_name@{file\_name}}
+\index{file\_name@{file\_name}!ExportMixRequestBody@{ExportMixRequestBody}}
+\doxysubsubsection{\texorpdfstring{file\_name}{file\_name}}
+{\footnotesize\ttfamily string file\+\_\+name = 2}
+
+
+
+The name of the file to export to. 
+
+\mbox{\Hypertarget{a02272_a8a2dc0c4f45e07de33e49f766607cc4d}\label{a02272_a8a2dc0c4f45e07de33e49f766607cc4d}} 
+\index{ExportMixRequestBody@{ExportMixRequestBody}!file\_type@{file\_type}}
+\index{file\_type@{file\_type}!ExportMixRequestBody@{ExportMixRequestBody}}
+\doxysubsubsection{\texorpdfstring{file\_type}{file\_type}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a00494_ab1acd24041b72f2426ef1c43b2bb99a2}{EM\+\_\+\+File\+Type}} file\+\_\+type = 3}
+
+
+
+The type of file to export to. 
+
+\mbox{\Hypertarget{a02272_aa45d7a620708b2732ef0c62988433faa}\label{a02272_aa45d7a620708b2732ef0c62988433faa}} 
+\index{ExportMixRequestBody@{ExportMixRequestBody}!files\_list@{files\_list}}
+\index{files\_list@{files\_list}!ExportMixRequestBody@{ExportMixRequestBody}}
+\doxysubsubsection{\texorpdfstring{files\_list}{files\_list}}
+{\footnotesize\ttfamily repeated \mbox{\hyperlink{a02232}{EM\+\_\+\+Source\+Info}} files\+\_\+list = 4}
+
+\begin{DoxyRefDesc}{Deprecated}
+\item[\mbox{\hyperlink{a00467__deprecated001099}{Deprecated}}]files\+\_\+list is deprecated starting in Pro Tools 2023.\+03 Use \mbox{\hyperlink{a02272_a68146aaa5b60798c8b2ab6a3ee1b27ea}{Export\+Mix\+Request\+Body\+::mix\+\_\+source\+\_\+list}} instead \end{DoxyRefDesc}
+\mbox{\Hypertarget{a02272_ae94110dd9e192f3806f3208d754c6ddb}\label{a02272_ae94110dd9e192f3806f3208d754c6ddb}} 
+\index{ExportMixRequestBody@{ExportMixRequestBody}!audio\_info@{audio\_info}}
+\index{audio\_info@{audio\_info}!ExportMixRequestBody@{ExportMixRequestBody}}
+\doxysubsubsection{\texorpdfstring{audio\_info}{audio\_info}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a02236}{EM\+\_\+\+Audio\+Info}} audio\+\_\+info = 5}
+
+
+
+Audio settings for the file being exported. 
+
+\mbox{\Hypertarget{a02272_ac7aa795fae50e4144d2ff50f4fb91caa}\label{a02272_ac7aa795fae50e4144d2ff50f4fb91caa}} 
+\index{ExportMixRequestBody@{ExportMixRequestBody}!video\_info@{video\_info}}
+\index{video\_info@{video\_info}!ExportMixRequestBody@{ExportMixRequestBody}}
+\doxysubsubsection{\texorpdfstring{video\_info}{video\_info}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a02248}{EM\+\_\+\+Video\+Info}} video\+\_\+info = 6}
+
+
+
+Vidio settings for the file being exported. 
+
+\mbox{\Hypertarget{a02272_ad7693dfc9e6a051e8618addec119618d}\label{a02272_ad7693dfc9e6a051e8618addec119618d}} 
+\index{ExportMixRequestBody@{ExportMixRequestBody}!location\_info@{location\_info}}
+\index{location\_info@{location\_info}!ExportMixRequestBody@{ExportMixRequestBody}}
+\doxysubsubsection{\texorpdfstring{location\_info}{location\_info}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a02256}{EM\+\_\+\+Location\+Info}} location\+\_\+info = 7}
+
+
+
+Specify where to export the file to. 
+
+\mbox{\Hypertarget{a02272_acb7c384b98764dcf2cf9232ab87dd12d}\label{a02272_acb7c384b98764dcf2cf9232ab87dd12d}} 
+\index{ExportMixRequestBody@{ExportMixRequestBody}!dolby\_atmos\_info@{dolby\_atmos\_info}}
+\index{dolby\_atmos\_info@{dolby\_atmos\_info}!ExportMixRequestBody@{ExportMixRequestBody}}
+\doxysubsubsection{\texorpdfstring{dolby\_atmos\_info}{dolby\_atmos\_info}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a02260}{EM\+\_\+\+Dolby\+Atmos\+Info}} dolby\+\_\+atmos\+\_\+info = 8}
+
+
+
+Options for exporting a Dolby ADM file. 
+
+\mbox{\Hypertarget{a02272_a5c4743d6c0ae40c625b2f64014de4e9d}\label{a02272_a5c4743d6c0ae40c625b2f64014de4e9d}} 
+\index{ExportMixRequestBody@{ExportMixRequestBody}!offline\_bounce@{offline\_bounce}}
+\index{offline\_bounce@{offline\_bounce}!ExportMixRequestBody@{ExportMixRequestBody}}
+\doxysubsubsection{\texorpdfstring{offline\_bounce}{offline\_bounce}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a00494_a126460572c79fe538db9136e88d0ff62}{Triple\+Bool}} offline\+\_\+bounce = 9}
+
+
+
+Whether to export the file offline or in real-\/time. 
+
+\mbox{\Hypertarget{a02272_a68146aaa5b60798c8b2ab6a3ee1b27ea}\label{a02272_a68146aaa5b60798c8b2ab6a3ee1b27ea}} 
+\index{ExportMixRequestBody@{ExportMixRequestBody}!mix\_source\_list@{mix\_source\_list}}
+\index{mix\_source\_list@{mix\_source\_list}!ExportMixRequestBody@{ExportMixRequestBody}}
+\doxysubsubsection{\texorpdfstring{mix\_source\_list}{mix\_source\_list}}
+{\footnotesize\ttfamily repeated \mbox{\hyperlink{a02232}{EM\+\_\+\+Source\+Info}} mix\+\_\+source\+\_\+list = 10}
+
+
+
+The sources to export from\+: outputs, busses, etc. 
+
+\begin{DoxySince}{Since}
+Pro Tools 2023.\+03 
+\end{DoxySince}
+\mbox{\Hypertarget{a02272_af804ebfee3b3c3c6cc015bb58ccb3128}\label{a02272_af804ebfee3b3c3c6cc015bb58ccb3128}} 
+\index{ExportMixRequestBody@{ExportMixRequestBody}!audio\_encoding\_options@{audio\_encoding\_options}}
+\index{audio\_encoding\_options@{audio\_encoding\_options}!ExportMixRequestBody@{ExportMixRequestBody}}
+\doxysubsubsection{\texorpdfstring{audio\_encoding\_options}{audio\_encoding\_options}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a02268}{Audio\+Encoding\+Options}} audio\+\_\+encoding\+\_\+options = 11}
+
+
+
+Encoding options for MP3 or other formats. 
+
+Pass an empty structure to bypass the audio encoding dialog and use system defaults. \begin{DoxySince}{Since}
+Pro Tools 2025.\+06 
+\end{DoxySince}
+\mbox{\Hypertarget{a02272_ad2b55ccec2f232c00b50738d5d71e7b1}\label{a02272_ad2b55ccec2f232c00b50738d5d71e7b1}} 
+\index{ExportMixRequestBody@{ExportMixRequestBody}!start\_time@{start\_time}}
+\index{start\_time@{start\_time}!ExportMixRequestBody@{ExportMixRequestBody}}
+\doxysubsubsection{\texorpdfstring{start\_time}{start\_time}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a02680}{Timeline\+Location}} start\+\_\+time = 12}
+
+
+
+Position on the timeline to being exporting from; paired with \mbox{\hyperlink{a02272_a49d866076c6162502bd4ed8afcfdb129}{end\+\_\+time}}. 
+
+If not present the entire session is exported. \begin{DoxySince}{Since}
+Pro Tools 2025.\+06 
+\end{DoxySince}
+\mbox{\Hypertarget{a02272_a49d866076c6162502bd4ed8afcfdb129}\label{a02272_a49d866076c6162502bd4ed8afcfdb129}} 
+\index{ExportMixRequestBody@{ExportMixRequestBody}!end\_time@{end\_time}}
+\index{end\_time@{end\_time}!ExportMixRequestBody@{ExportMixRequestBody}}
+\doxysubsubsection{\texorpdfstring{end\_time}{end\_time}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a02680}{Timeline\+Location}} end\+\_\+time = 13}
+
+
+
+Position on the timeline to stop exporting at; paired with \mbox{\hyperlink{a02272_ad2b55ccec2f232c00b50738d5d71e7b1}{start\+\_\+time}}. 
+
+\begin{DoxySince}{Since}
+Pro Tools 2025.\+06 
+\end{DoxySince}
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{a00464}{PTSL.\+proto}}\end{DoxyCompactItemize}

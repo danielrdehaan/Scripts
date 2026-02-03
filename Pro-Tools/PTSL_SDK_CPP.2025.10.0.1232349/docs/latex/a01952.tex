@@ -1,0 +1,51 @@
+\hypertarget{a01952}{}\doxysection{Get\+Session\+System\+Delay\+Info\+Response}
+\label{a01952}\index{GetSessionSystemDelayInfoResponse@{GetSessionSystemDelayInfoResponse}}
+
+
+{\ttfamily \#include $<$Cpp\+PTSLCommon.\+h$>$}
+
+
+
+\doxysubsection{Description}
+Structure that describes Get\+Session\+System\+Delay\+Info response data. 
+
+Supported starting in Pro Tools 2024.\+06
+
+\begin{DoxyRefDesc}{Deprecated}
+\item[\mbox{\hyperlink{a00467__deprecated000337}{Deprecated}}]All API-\/specific types in the C++ client lib are deprecated starting in Pro Tools 2024.\+10 since we introduced general JSON-\/based request/response. \end{DoxyRefDesc}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+int32\+\_\+t \mbox{\hyperlink{a01952_a1d729f4e1d4190c5ae352ae22e11a148}{samples}}
+\begin{DoxyCompactList}\small\item\em The System Delay value of the current session measured in samples. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{a01952_a71c9c0a809acc021de77b354c859e2b0}{delay\+Compensation\+Enabled}}
+\begin{DoxyCompactList}\small\item\em Indicates whether the Delay Compensation is enabled ({\ttfamily true}) or disabled ({\ttfamily false}). \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{a01952_a1d729f4e1d4190c5ae352ae22e11a148}\label{a01952_a1d729f4e1d4190c5ae352ae22e11a148}} 
+\index{GetSessionSystemDelayInfoResponse@{GetSessionSystemDelayInfoResponse}!samples@{samples}}
+\index{samples@{samples}!GetSessionSystemDelayInfoResponse@{GetSessionSystemDelayInfoResponse}}
+\doxysubsubsection{\texorpdfstring{samples}{samples}}
+{\footnotesize\ttfamily int32\+\_\+t samples}
+
+
+
+The System Delay value of the current session measured in samples. 
+
+\mbox{\Hypertarget{a01952_a71c9c0a809acc021de77b354c859e2b0}\label{a01952_a71c9c0a809acc021de77b354c859e2b0}} 
+\index{GetSessionSystemDelayInfoResponse@{GetSessionSystemDelayInfoResponse}!delayCompensationEnabled@{delayCompensationEnabled}}
+\index{delayCompensationEnabled@{delayCompensationEnabled}!GetSessionSystemDelayInfoResponse@{GetSessionSystemDelayInfoResponse}}
+\doxysubsubsection{\texorpdfstring{delayCompensationEnabled}{delayCompensationEnabled}}
+{\footnotesize\ttfamily bool delay\+Compensation\+Enabled}
+
+
+
+Indicates whether the Delay Compensation is enabled ({\ttfamily true}) or disabled ({\ttfamily false}). 
+
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{a00050}{Cpp\+PTSLCommon.\+h}}\end{DoxyCompactItemize}

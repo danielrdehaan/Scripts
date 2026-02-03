@@ -1,0 +1,99 @@
+\hypertarget{a00446}{}\doxysection{PTSL\+\_\+\+Versions.\+h File Reference}
+\label{a00446}\index{PTSL\_Versions.h@{PTSL\_Versions.h}}
+{\ttfamily \#include $<$map$>$}\newline
+{\ttfamily \#include $<$string$>$}\newline
+
+
+\doxysubsection{Description}
+Provides the current versions of the PTSL SDK and its API methods (commands). 
+
+PTSL SDK versions are defined both for the PTSL connection API as a whole and for each PTSL Client API command.
+
+Compatibility information for specific releases is noted in the \textquotesingle{}Release Notes\textquotesingle{} tab.
+
+The versions are managed by the PTSL SDK developers, so C++ Client Wrapper customers don\textquotesingle{}t have to worry about them.
+
+The API version used by the C++ Client Wrapper is passed to Pro Tools as a default field of \mbox{\hyperlink{a02036}{ptsl\+::\+Request\+Header}} (see \mbox{\hyperlink{a00014}{Cpp\+PTSLC\+\_\+\+Default\+Request.\+cpp}})
+
+If there is a change in the connection API, or a change in the C++ PTSL Client wrapper implementation which breaks backwards compatibility, the value of \mbox{\hyperlink{a00446_a83c5961efacc6c06e3e75877c239ebb1}{PTSL\+\_\+\+VERSION}} will be updated.
+
+If an application that uses the C++ Client Wrapper attempts to issue PTSL commands to a Pro Tools application that does not support the client\textquotesingle{}s API version, a \mbox{\hyperlink{a00491_a8fe9e0532a0e4ab36abdbc81b22f0645aa5efd83cacf898e2156e4886847934ab}{SDK\+\_\+\+Version\+Mismatch}} error will be returned with an appropriate error message.
+
+As soon as an API method (command) of the PTSL Client wrapper is changed, its version will be updated in \mbox{\hyperlink{a00446_a2ec9138f29c475b3c7bd7ed90974e35f}{PTSL\+\_\+\+CLIENT\+\_\+\+API\+\_\+\+VERSIONS}} . Currently these command versions are not used. \doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+static const int32\+\_\+t \mbox{\hyperlink{a00446_a83c5961efacc6c06e3e75877c239ebb1}{PTSL\+\_\+\+VERSION}} = 2025
+\begin{DoxyCompactList}\small\item\em The version of PTSL Host SDK or PTSL Client wrapper itself, depending on where the \mbox{\hyperlink{a00446}{PTSL\+\_\+\+Versions.\+h}} file is included. \end{DoxyCompactList}\item 
+static const int32\+\_\+t \mbox{\hyperlink{a00446_a319bb998f296db332fcf141a17ddde51}{PTSL\+\_\+\+VERSION\+\_\+\+MAJOR}} = \mbox{\hyperlink{a00446_a83c5961efacc6c06e3e75877c239ebb1}{PTSL\+\_\+\+VERSION}}
+\item 
+static const int32\+\_\+t \mbox{\hyperlink{a00446_aebd924e2eb16cd106f649341a704a181}{PTSL\+\_\+\+VERSION\+\_\+\+MINOR}} = 10
+\begin{DoxyCompactList}\small\item\em The minor version of PTSL Host SDK or PTSL Client wrapper itself, depending on where the \mbox{\hyperlink{a00446}{PTSL\+\_\+\+Versions.\+h}} file is included. \end{DoxyCompactList}\item 
+static const int32\+\_\+t \mbox{\hyperlink{a00446_adfe4744878f39a2ac2cd8035f26067c8}{PTSL\+\_\+\+VERSION\+\_\+\+REVISION}} = 0
+\begin{DoxyCompactList}\small\item\em The revision version of PTSL Host SDK or PTSL Client wrapper itself, depending on where the \mbox{\hyperlink{a00446}{PTSL\+\_\+\+Versions.\+h}} file is included. \end{DoxyCompactList}\item 
+static const std\+::map$<$ std\+::string, int32\+\_\+t $>$ \mbox{\hyperlink{a00446_a2ec9138f29c475b3c7bd7ed90974e35f}{PTSL\+\_\+\+CLIENT\+\_\+\+API\+\_\+\+VERSIONS}}
+\begin{DoxyCompactList}\small\item\em The versions of PTSL Client API methods. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Variable Documentation}
+\mbox{\Hypertarget{a00446_a83c5961efacc6c06e3e75877c239ebb1}\label{a00446_a83c5961efacc6c06e3e75877c239ebb1}} 
+\index{PTSL\_Versions.h@{PTSL\_Versions.h}!PTSL\_VERSION@{PTSL\_VERSION}}
+\index{PTSL\_VERSION@{PTSL\_VERSION}!PTSL\_Versions.h@{PTSL\_Versions.h}}
+\doxysubsubsection{\texorpdfstring{PTSL\_VERSION}{PTSL\_VERSION}}
+{\footnotesize\ttfamily const int32\+\_\+t PTSL\+\_\+\+VERSION = 2025\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+The version of PTSL Host SDK or PTSL Client wrapper itself, depending on where the \mbox{\hyperlink{a00446}{PTSL\+\_\+\+Versions.\+h}} file is included. 
+
+\mbox{\Hypertarget{a00446_a319bb998f296db332fcf141a17ddde51}\label{a00446_a319bb998f296db332fcf141a17ddde51}} 
+\index{PTSL\_Versions.h@{PTSL\_Versions.h}!PTSL\_VERSION\_MAJOR@{PTSL\_VERSION\_MAJOR}}
+\index{PTSL\_VERSION\_MAJOR@{PTSL\_VERSION\_MAJOR}!PTSL\_Versions.h@{PTSL\_Versions.h}}
+\doxysubsubsection{\texorpdfstring{PTSL\_VERSION\_MAJOR}{PTSL\_VERSION\_MAJOR}}
+{\footnotesize\ttfamily const int32\+\_\+t PTSL\+\_\+\+VERSION\+\_\+\+MAJOR = \mbox{\hyperlink{a00446_a83c5961efacc6c06e3e75877c239ebb1}{PTSL\+\_\+\+VERSION}}\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Referenced by \mbox{\hyperlink{a01328_a412aa26ea7f844d7c19984ddcc53adf7}{Cpp\+PTSLClient\+::\+Get\+PTSLVersion()}}, and \mbox{\hyperlink{a01328_a2c6a9bfa639cab78fcb3d4159c460c5f}{Cpp\+PTSLClient\+::\+Send\+Request()}}.
+
+\mbox{\Hypertarget{a00446_aebd924e2eb16cd106f649341a704a181}\label{a00446_aebd924e2eb16cd106f649341a704a181}} 
+\index{PTSL\_Versions.h@{PTSL\_Versions.h}!PTSL\_VERSION\_MINOR@{PTSL\_VERSION\_MINOR}}
+\index{PTSL\_VERSION\_MINOR@{PTSL\_VERSION\_MINOR}!PTSL\_Versions.h@{PTSL\_Versions.h}}
+\doxysubsubsection{\texorpdfstring{PTSL\_VERSION\_MINOR}{PTSL\_VERSION\_MINOR}}
+{\footnotesize\ttfamily const int32\+\_\+t PTSL\+\_\+\+VERSION\+\_\+\+MINOR = 10\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+The minor version of PTSL Host SDK or PTSL Client wrapper itself, depending on where the \mbox{\hyperlink{a00446}{PTSL\+\_\+\+Versions.\+h}} file is included. 
+
+Should be updated manually when PT Host, PTSL Server or PTSL Client wrapper updates and goes to release. 
+
+Referenced by \mbox{\hyperlink{a01328_a2c6a9bfa639cab78fcb3d4159c460c5f}{Cpp\+PTSLClient\+::\+Send\+Request()}}.
+
+\mbox{\Hypertarget{a00446_adfe4744878f39a2ac2cd8035f26067c8}\label{a00446_adfe4744878f39a2ac2cd8035f26067c8}} 
+\index{PTSL\_Versions.h@{PTSL\_Versions.h}!PTSL\_VERSION\_REVISION@{PTSL\_VERSION\_REVISION}}
+\index{PTSL\_VERSION\_REVISION@{PTSL\_VERSION\_REVISION}!PTSL\_Versions.h@{PTSL\_Versions.h}}
+\doxysubsubsection{\texorpdfstring{PTSL\_VERSION\_REVISION}{PTSL\_VERSION\_REVISION}}
+{\footnotesize\ttfamily const int32\+\_\+t PTSL\+\_\+\+VERSION\+\_\+\+REVISION = 0\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+The revision version of PTSL Host SDK or PTSL Client wrapper itself, depending on where the \mbox{\hyperlink{a00446}{PTSL\+\_\+\+Versions.\+h}} file is included. 
+
+Should be updated manually when PT Host, PTSL Server or PTSL Client wrapper updates and goes to release. 
+
+Referenced by \mbox{\hyperlink{a01328_a2c6a9bfa639cab78fcb3d4159c460c5f}{Cpp\+PTSLClient\+::\+Send\+Request()}}.
+
+\mbox{\Hypertarget{a00446_a2ec9138f29c475b3c7bd7ed90974e35f}\label{a00446_a2ec9138f29c475b3c7bd7ed90974e35f}} 
+\index{PTSL\_Versions.h@{PTSL\_Versions.h}!PTSL\_CLIENT\_API\_VERSIONS@{PTSL\_CLIENT\_API\_VERSIONS}}
+\index{PTSL\_CLIENT\_API\_VERSIONS@{PTSL\_CLIENT\_API\_VERSIONS}!PTSL\_Versions.h@{PTSL\_Versions.h}}
+\doxysubsubsection{\texorpdfstring{PTSL\_CLIENT\_API\_VERSIONS}{PTSL\_CLIENT\_API\_VERSIONS}}
+{\footnotesize\ttfamily const std\+::map$<$std\+::string, int32\+\_\+t$>$ PTSL\+\_\+\+CLIENT\+\_\+\+API\+\_\+\+VERSIONS\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+The versions of PTSL Client API methods. 
+
+
+
+Referenced by \mbox{\hyperlink{a01328_a412aa26ea7f844d7c19984ddcc53adf7}{Cpp\+PTSLClient\+::\+Get\+PTSLVersion()}}.
+

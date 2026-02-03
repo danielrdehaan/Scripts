@@ -1,0 +1,20 @@
+diff --git a/cmakedeps_macros.cmake b/cmakedeps_macros.cmake
+index 3da3487..9c906bc 100644
+--- a/cmakedeps_macros.cmake
++++ b/cmakedeps_macros.cmake
+@@ -29,10 +29,13 @@ function(conan_package_library_targets libraries package_libdir deps_target out_
+             set(_LIB_NAME CONAN_LIB::${package_name}_${_LIBRARY_NAME}${config_suffix})
+             if(NOT TARGET ${_LIB_NAME})
+                 # Create a micro-target for each lib/a found
+-                add_library(${_LIB_NAME} UNKNOWN IMPORTED)
++                add_library(${_LIB_NAME}_imported UNKNOWN IMPORTED) # cmakedeps_hidden.patch: using INTERFACE library to mask the IMPORTED target with the idea of applying linker flags. See below
++                add_library(${_LIB_NAME} INTERFACE IMPORTED) # cmakedeps_hidden.patch
+             endif()
+             # Link library file
+-            set_target_properties(${_LIB_NAME} PROPERTIES IMPORTED_LOCATION${config_suffix} ${CONAN_FOUND_LIBRARY})
++            set_target_properties(${_LIB_NAME}_imported PROPERTIES IMPORTED_LOCATION${config_suffix} ${CONAN_FOUND_LIBRARY}) # cmakedeps_hidden.patch
++            string(SUBSTRING "${config_suffix}" 1 -1 PTSL_HIDDEN_PATCH_CONFIG) # cmakedeps_hidden.patch: Replacing _DEBUG with DEBUG
++            target_link_options(${_LIB_NAME} INTERFACE "$<$<STREQUAL:$<UPPER_CASE:$<CONFIG>>,$<UPPER_CASE:${PTSL_HIDDEN_PATCH_CONFIG}>>:SHELL:LINKER:-load_hidden,$<TARGET_FILE:${_LIB_NAME}_imported>>") # cmakedeps_hidden.patch: INTERFACE target depends on the IMPORTED but applies '-load_hidden' to it for "visibility hidden"
+             list(APPEND _out_libraries_target ${_LIB_NAME})
+             message(VERBOSE "Conan: Found: ${CONAN_FOUND_LIBRARY}")
+         else()

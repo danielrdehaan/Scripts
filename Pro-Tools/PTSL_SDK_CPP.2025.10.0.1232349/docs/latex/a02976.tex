@@ -1,0 +1,66 @@
+\hypertarget{a02976}{}\doxysection{Set\+Track\+Control\+Breakpoints\+Request\+Body}
+\label{a02976}\index{SetTrackControlBreakpointsRequestBody@{SetTrackControlBreakpointsRequestBody}}
+
+
+\doxysubsection{Description}
+Structure that describes Set\+Track\+Control\+Breakpoints request data. 
+
+See \mbox{\hyperlink{a00494_aaf8d2069e2c6bbecf4aa8f9819028e8aa94627054c47f4ee964037fbad2f32889}{CId\+\_\+\+Set\+Track\+Control\+Breakpoints}}. \doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+string \mbox{\hyperlink{a02976_a6b0ebbd85f0b29b66f90c3b0857d6191}{track\+\_\+id}} = 1
+\begin{DoxyCompactList}\small\item\em Provide the ID string of the track that the control is attached to. \end{DoxyCompactList}\item 
+string \mbox{\hyperlink{a02976_a8a1b964744fc8edfd57c077d8d916076}{track\+\_\+name}} = 2
+\begin{DoxyCompactList}\small\item\em Provide the name of the track that the control is attached to. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{a02948}{Track\+Control\+Id}} \mbox{\hyperlink{a02976_ab1150cf390a97472df7938a55c06cc6f}{control\+\_\+id}} = 3
+\begin{DoxyCompactList}\small\item\em Locate the control to assign a value to on its track. \end{DoxyCompactList}\item 
+repeated \mbox{\hyperlink{a02956}{Track\+Control\+Breakpoint}} \mbox{\hyperlink{a02976_a4f6dc98a2f68b3191282d16420ac20be}{breakpoints}} = 4
+\begin{DoxyCompactList}\small\item\em A static value to assign for a control, or a series of values to assign as automation breakpoints. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{a02976_a6b0ebbd85f0b29b66f90c3b0857d6191}\label{a02976_a6b0ebbd85f0b29b66f90c3b0857d6191}} 
+\index{SetTrackControlBreakpointsRequestBody@{SetTrackControlBreakpointsRequestBody}!track\_id@{track\_id}}
+\index{track\_id@{track\_id}!SetTrackControlBreakpointsRequestBody@{SetTrackControlBreakpointsRequestBody}}
+\doxysubsubsection{\texorpdfstring{track\_id}{track\_id}}
+{\footnotesize\ttfamily string track\+\_\+id = 1}
+
+
+
+Provide the ID string of the track that the control is attached to. 
+
+Either this or \mbox{\hyperlink{a02976_a8a1b964744fc8edfd57c077d8d916076}{track\+\_\+name}} is required. \mbox{\Hypertarget{a02976_a8a1b964744fc8edfd57c077d8d916076}\label{a02976_a8a1b964744fc8edfd57c077d8d916076}} 
+\index{SetTrackControlBreakpointsRequestBody@{SetTrackControlBreakpointsRequestBody}!track\_name@{track\_name}}
+\index{track\_name@{track\_name}!SetTrackControlBreakpointsRequestBody@{SetTrackControlBreakpointsRequestBody}}
+\doxysubsubsection{\texorpdfstring{track\_name}{track\_name}}
+{\footnotesize\ttfamily string track\+\_\+name = 2}
+
+
+
+Provide the name of the track that the control is attached to. 
+
+Either this or \mbox{\hyperlink{a02976_a6b0ebbd85f0b29b66f90c3b0857d6191}{track\+\_\+id}} is required. \mbox{\Hypertarget{a02976_ab1150cf390a97472df7938a55c06cc6f}\label{a02976_ab1150cf390a97472df7938a55c06cc6f}} 
+\index{SetTrackControlBreakpointsRequestBody@{SetTrackControlBreakpointsRequestBody}!control\_id@{control\_id}}
+\index{control\_id@{control\_id}!SetTrackControlBreakpointsRequestBody@{SetTrackControlBreakpointsRequestBody}}
+\doxysubsubsection{\texorpdfstring{control\_id}{control\_id}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a02948}{Track\+Control\+Id}} control\+\_\+id = 3}
+
+
+
+Locate the control to assign a value to on its track. 
+
+\mbox{\Hypertarget{a02976_a4f6dc98a2f68b3191282d16420ac20be}\label{a02976_a4f6dc98a2f68b3191282d16420ac20be}} 
+\index{SetTrackControlBreakpointsRequestBody@{SetTrackControlBreakpointsRequestBody}!breakpoints@{breakpoints}}
+\index{breakpoints@{breakpoints}!SetTrackControlBreakpointsRequestBody@{SetTrackControlBreakpointsRequestBody}}
+\doxysubsubsection{\texorpdfstring{breakpoints}{breakpoints}}
+{\footnotesize\ttfamily repeated \mbox{\hyperlink{a02956}{Track\+Control\+Breakpoint}} breakpoints = 4}
+
+
+
+A static value to assign for a control, or a series of values to assign as automation breakpoints. 
+
+These breakpoints will replace existing breakpoints. The complete series of breakpoints should be passed in for a given control on a given track. 
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{a00464}{PTSL.\+proto}}\end{DoxyCompactItemize}

@@ -1,0 +1,45 @@
+\hypertarget{a02736}{}\doxysection{Import\+Audio\+To\+Clip\+List\+Response\+Entry}
+\label{a02736}\index{ImportAudioToClipListResponseEntry@{ImportAudioToClipListResponseEntry}}
+
+
+\doxysubsection{Description}
+Import\+Audio\+To\+Clip\+List response entry for a single requested audio file. 
+
+\begin{DoxySince}{Since}
+Pro Tools 2025.\+06 
+\end{DoxySince}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+string \mbox{\hyperlink{a02736_ae37873147d2bcace70ba1c837db4d399}{original\+\_\+input\+\_\+path}} = 1
+\begin{DoxyCompactList}\small\item\em Original input file path. \end{DoxyCompactList}\item 
+repeated \mbox{\hyperlink{a02740}{Import\+Audio\+To\+Clip\+List\+Response\+Entry\+File}} \mbox{\hyperlink{a02736_a8763ca85f4b9eaeaaef113b02a28c14f}{destination\+\_\+file\+\_\+list}} = 2
+\begin{DoxyCompactList}\small\item\em List of imported audio files. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{a02736_ae37873147d2bcace70ba1c837db4d399}\label{a02736_ae37873147d2bcace70ba1c837db4d399}} 
+\index{ImportAudioToClipListResponseEntry@{ImportAudioToClipListResponseEntry}!original\_input\_path@{original\_input\_path}}
+\index{original\_input\_path@{original\_input\_path}!ImportAudioToClipListResponseEntry@{ImportAudioToClipListResponseEntry}}
+\doxysubsubsection{\texorpdfstring{original\_input\_path}{original\_input\_path}}
+{\footnotesize\ttfamily string original\+\_\+input\+\_\+path = 1}
+
+
+
+Original input file path. 
+
+\mbox{\Hypertarget{a02736_a8763ca85f4b9eaeaaef113b02a28c14f}\label{a02736_a8763ca85f4b9eaeaaef113b02a28c14f}} 
+\index{ImportAudioToClipListResponseEntry@{ImportAudioToClipListResponseEntry}!destination\_file\_list@{destination\_file\_list}}
+\index{destination\_file\_list@{destination\_file\_list}!ImportAudioToClipListResponseEntry@{ImportAudioToClipListResponseEntry}}
+\doxysubsubsection{\texorpdfstring{destination\_file\_list}{destination\_file\_list}}
+{\footnotesize\ttfamily repeated \mbox{\hyperlink{a02740}{Import\+Audio\+To\+Clip\+List\+Response\+Entry\+File}} destination\+\_\+file\+\_\+list = 2}
+
+
+
+List of imported audio files. 
+
+This will have multiple entries if a multichannel audio file was split into multi-\/mono. 
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{a00464}{PTSL.\+proto}}\end{DoxyCompactItemize}

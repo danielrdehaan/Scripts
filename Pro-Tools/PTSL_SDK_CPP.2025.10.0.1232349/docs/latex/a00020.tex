@@ -1,0 +1,26 @@
+\hypertarget{a00020}{}\doxysection{Cpp\+Crypto\+Utils.\+cpp File Reference}
+\label{a00020}\index{CppCryptoUtils.cpp@{CppCryptoUtils.cpp}}
+{\ttfamily \#include \char`\"{}Cpp\+Crypto\+Utils.\+h\char`\"{}}\newline
+{\ttfamily \#include $<$memory$>$}\newline
+{\ttfamily \#include $<$stdexcept$>$}\newline
+{\ttfamily \#include $<$openssl/bio.\+h$>$}\newline
+{\ttfamily \#include $<$openssl/err.\+h$>$}\newline
+{\ttfamily \#include $<$openssl/evp.\+h$>$}\newline
+{\ttfamily \#include $<$openssl/pem.\+h$>$}\newline
+
+
+\doxysubsection{Description}
+Implementation file for the \mbox{\hyperlink{a00008}{Cpp\+Crypto\+Utils.\+h}}. 
+
+\doxysubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{a00491}{PTSLC\+\_\+\+CPP}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+std\+::vector$<$ unsigned char $>$ \mbox{\hyperlink{a00491_a26d6edf2ea9d3b2050a7da06ce198528}{encrypt}} (const std\+::string \&text, const std\+::string \&encryption\+Key)
+\begin{DoxyCompactList}\small\item\em Encrypts a text string with given RSA key. \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{a00491_a88c65ff99e368873c60cae0c9c27f3a3}{encode\+Base64}} (const std\+::vector$<$ unsigned char $>$ \&data)
+\begin{DoxyCompactList}\small\item\em Encodes byte array into base 64 string. \end{DoxyCompactList}\end{DoxyCompactItemize}

@@ -1,0 +1,177 @@
+\hypertarget{a02760}{}\doxysection{Clip}
+\label{a02760}\index{Clip@{Clip}}
+
+
+\doxysubsection{Description}
+Structure that describes Pro Tools clip. 
+
+\begin{DoxySince}{Since}
+Pro Tools 2025.\+06 
+\end{DoxySince}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+string \mbox{\hyperlink{a02760_aaee6f8ecfee8eb4f36f5c97e2f6295cb}{file\+\_\+id}} = 1
+\begin{DoxyCompactList}\small\item\em Source file identifier. \end{DoxyCompactList}\item 
+string \mbox{\hyperlink{a02760_a695e5abf568d1c686ec0fb0821295c17}{clip\+\_\+id}} = 2
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{a02760}{Clip}} identifier. \end{DoxyCompactList}\item 
+string \mbox{\hyperlink{a02760_ab5031385c7b8f3984a4e7392df0ea425}{clip\+\_\+full\+\_\+name}} = 3
+\begin{DoxyCompactList}\small\item\em Full name. \end{DoxyCompactList}\item 
+string \mbox{\hyperlink{a02760_aaef30a7941c8cb60e656ffdcf2cf7153}{clip\+\_\+root\+\_\+name}} = 4
+\begin{DoxyCompactList}\small\item\em Base name. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{a00494_afe36c75efd3e317b11accb64f3a63861}{Clip\+Type}} \mbox{\hyperlink{a02760_a51f15db778664ff0838f1a433b3b3dc2}{clip\+\_\+type}} = 5
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{a02760}{Clip}} type. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{a02684}{Media\+Time\+Position}} \mbox{\hyperlink{a02760_a981c16b7bcf1b6b42dd12130162e8e7a}{start\+\_\+point}} = 6
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{a02760}{Clip}} start point. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{a02684}{Media\+Time\+Position}} \mbox{\hyperlink{a02760_afddc21a265e7aaa0e6396e655963e069}{end\+\_\+point}} = 7
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{a02760}{Clip}} end point. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{a02684}{Media\+Time\+Position}} \mbox{\hyperlink{a02760_ab965759672bee41a018bdabe4c1972da}{sync\+\_\+point}} = 8
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{a02760}{Clip}} sync point. \end{DoxyCompactList}\item 
+string \mbox{\hyperlink{a02760_ade9bfeaa1feaa211063a99e8b11ca6da}{group\+\_\+name}} = 9
+\begin{DoxyCompactList}\small\item\em Multitrack Group clip name which current clip is a part of. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{a02684}{Media\+Time\+Position}} \mbox{\hyperlink{a02760_ab043d0a718c58a7a7606d7efbed6bb5a}{src\+\_\+start\+\_\+point}} = 10
+\begin{DoxyCompactList}\small\item\em Start sample position in file. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{a02684}{Media\+Time\+Position}} \mbox{\hyperlink{a02760_a120325209290e4f79ffee897839819dd}{src\+\_\+end\+\_\+point}} = 11
+\begin{DoxyCompactList}\small\item\em End sample position in file. \end{DoxyCompactList}\item 
+int32 \mbox{\hyperlink{a02760_a1439e3aacde90dff6f26b325ff0c3fc4}{transpose\+\_\+semitones}} = 12
+\begin{DoxyCompactList}\small\item\em Number of semitones in pitch transposition. \end{DoxyCompactList}\item 
+int32 \mbox{\hyperlink{a02760_a5720ca7e4fd17782d0e718eb35e3e600}{transpose\+\_\+cents}} = 13
+\begin{DoxyCompactList}\small\item\em Number of cents in pitch transposition. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{a02760_aaee6f8ecfee8eb4f36f5c97e2f6295cb}\label{a02760_aaee6f8ecfee8eb4f36f5c97e2f6295cb}} 
+\index{Clip@{Clip}!file\_id@{file\_id}}
+\index{file\_id@{file\_id}!Clip@{Clip}}
+\doxysubsubsection{\texorpdfstring{file\_id}{file\_id}}
+{\footnotesize\ttfamily string file\+\_\+id = 1}
+
+
+
+Source file identifier. 
+
+\mbox{\Hypertarget{a02760_a695e5abf568d1c686ec0fb0821295c17}\label{a02760_a695e5abf568d1c686ec0fb0821295c17}} 
+\index{Clip@{Clip}!clip\_id@{clip\_id}}
+\index{clip\_id@{clip\_id}!Clip@{Clip}}
+\doxysubsubsection{\texorpdfstring{clip\_id}{clip\_id}}
+{\footnotesize\ttfamily string clip\+\_\+id = 2}
+
+
+
+\mbox{\hyperlink{a02760}{Clip}} identifier. 
+
+\mbox{\Hypertarget{a02760_ab5031385c7b8f3984a4e7392df0ea425}\label{a02760_ab5031385c7b8f3984a4e7392df0ea425}} 
+\index{Clip@{Clip}!clip\_full\_name@{clip\_full\_name}}
+\index{clip\_full\_name@{clip\_full\_name}!Clip@{Clip}}
+\doxysubsubsection{\texorpdfstring{clip\_full\_name}{clip\_full\_name}}
+{\footnotesize\ttfamily string clip\+\_\+full\+\_\+name = 3}
+
+
+
+Full name. 
+
+\mbox{\Hypertarget{a02760_aaef30a7941c8cb60e656ffdcf2cf7153}\label{a02760_aaef30a7941c8cb60e656ffdcf2cf7153}} 
+\index{Clip@{Clip}!clip\_root\_name@{clip\_root\_name}}
+\index{clip\_root\_name@{clip\_root\_name}!Clip@{Clip}}
+\doxysubsubsection{\texorpdfstring{clip\_root\_name}{clip\_root\_name}}
+{\footnotesize\ttfamily string clip\+\_\+root\+\_\+name = 4}
+
+
+
+Base name. 
+
+\mbox{\Hypertarget{a02760_a51f15db778664ff0838f1a433b3b3dc2}\label{a02760_a51f15db778664ff0838f1a433b3b3dc2}} 
+\index{Clip@{Clip}!clip\_type@{clip\_type}}
+\index{clip\_type@{clip\_type}!Clip@{Clip}}
+\doxysubsubsection{\texorpdfstring{clip\_type}{clip\_type}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a00494_afe36c75efd3e317b11accb64f3a63861}{Clip\+Type}} clip\+\_\+type = 5}
+
+
+
+\mbox{\hyperlink{a02760}{Clip}} type. 
+
+\mbox{\Hypertarget{a02760_a981c16b7bcf1b6b42dd12130162e8e7a}\label{a02760_a981c16b7bcf1b6b42dd12130162e8e7a}} 
+\index{Clip@{Clip}!start\_point@{start\_point}}
+\index{start\_point@{start\_point}!Clip@{Clip}}
+\doxysubsubsection{\texorpdfstring{start\_point}{start\_point}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a02684}{Media\+Time\+Position}} start\+\_\+point = 6}
+
+
+
+\mbox{\hyperlink{a02760}{Clip}} start point. 
+
+\mbox{\Hypertarget{a02760_afddc21a265e7aaa0e6396e655963e069}\label{a02760_afddc21a265e7aaa0e6396e655963e069}} 
+\index{Clip@{Clip}!end\_point@{end\_point}}
+\index{end\_point@{end\_point}!Clip@{Clip}}
+\doxysubsubsection{\texorpdfstring{end\_point}{end\_point}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a02684}{Media\+Time\+Position}} end\+\_\+point = 7}
+
+
+
+\mbox{\hyperlink{a02760}{Clip}} end point. 
+
+\mbox{\Hypertarget{a02760_ab965759672bee41a018bdabe4c1972da}\label{a02760_ab965759672bee41a018bdabe4c1972da}} 
+\index{Clip@{Clip}!sync\_point@{sync\_point}}
+\index{sync\_point@{sync\_point}!Clip@{Clip}}
+\doxysubsubsection{\texorpdfstring{sync\_point}{sync\_point}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a02684}{Media\+Time\+Position}} sync\+\_\+point = 8}
+
+
+
+\mbox{\hyperlink{a02760}{Clip}} sync point. 
+
+\mbox{\Hypertarget{a02760_ade9bfeaa1feaa211063a99e8b11ca6da}\label{a02760_ade9bfeaa1feaa211063a99e8b11ca6da}} 
+\index{Clip@{Clip}!group\_name@{group\_name}}
+\index{group\_name@{group\_name}!Clip@{Clip}}
+\doxysubsubsection{\texorpdfstring{group\_name}{group\_name}}
+{\footnotesize\ttfamily string group\+\_\+name = 9}
+
+
+
+Multitrack Group clip name which current clip is a part of. 
+
+\mbox{\Hypertarget{a02760_ab043d0a718c58a7a7606d7efbed6bb5a}\label{a02760_ab043d0a718c58a7a7606d7efbed6bb5a}} 
+\index{Clip@{Clip}!src\_start\_point@{src\_start\_point}}
+\index{src\_start\_point@{src\_start\_point}!Clip@{Clip}}
+\doxysubsubsection{\texorpdfstring{src\_start\_point}{src\_start\_point}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a02684}{Media\+Time\+Position}} src\+\_\+start\+\_\+point = 10}
+
+
+
+Start sample position in file. 
+
+\mbox{\Hypertarget{a02760_a120325209290e4f79ffee897839819dd}\label{a02760_a120325209290e4f79ffee897839819dd}} 
+\index{Clip@{Clip}!src\_end\_point@{src\_end\_point}}
+\index{src\_end\_point@{src\_end\_point}!Clip@{Clip}}
+\doxysubsubsection{\texorpdfstring{src\_end\_point}{src\_end\_point}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a02684}{Media\+Time\+Position}} src\+\_\+end\+\_\+point = 11}
+
+
+
+End sample position in file. 
+
+\mbox{\Hypertarget{a02760_a1439e3aacde90dff6f26b325ff0c3fc4}\label{a02760_a1439e3aacde90dff6f26b325ff0c3fc4}} 
+\index{Clip@{Clip}!transpose\_semitones@{transpose\_semitones}}
+\index{transpose\_semitones@{transpose\_semitones}!Clip@{Clip}}
+\doxysubsubsection{\texorpdfstring{transpose\_semitones}{transpose\_semitones}}
+{\footnotesize\ttfamily int32 transpose\+\_\+semitones = 12}
+
+
+
+Number of semitones in pitch transposition. 
+
+\mbox{\Hypertarget{a02760_a5720ca7e4fd17782d0e718eb35e3e600}\label{a02760_a5720ca7e4fd17782d0e718eb35e3e600}} 
+\index{Clip@{Clip}!transpose\_cents@{transpose\_cents}}
+\index{transpose\_cents@{transpose\_cents}!Clip@{Clip}}
+\doxysubsubsection{\texorpdfstring{transpose\_cents}{transpose\_cents}}
+{\footnotesize\ttfamily int32 transpose\+\_\+cents = 13}
+
+
+
+Number of cents in pitch transposition. 
+
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{a00464}{PTSL.\+proto}}\end{DoxyCompactItemize}

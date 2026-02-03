@@ -1,0 +1,24 @@
+# Copyright 2021-2025 by Avid Technology, Inc.
+# CONFIDENTIAL: this document contains confidential information of Avid. Do not disclose to any third party. Use of the information contained in this document is subject to an Avid SDK license.
+
+bottle==0.12.25
+certifi==2025.4.26
+charset-normalizer==3.4.2
+cmake==3.25.0
+colorama==0.4.6
+conan==1.66.0
+fasteners==0.19
+idna==3.10
+Jinja2==3.1.6
+MarkupSafe==3.0.2
+node-semver==0.6.1
+patch-ng==1.17.4
+pluginbase==1.0.1
+Pygments==2.19.1
+PyJWT==2.10.1
+python-dateutil==2.9.0.post0
+PyYAML==6.0.2
+requests==2.32.3
+six==1.16.0
+tqdm==4.67.1
+urllib3==1.26.20

@@ -1,0 +1,48 @@
+\hypertarget{a00428_source}{}\doxysection{Constants.\+h}
+\label{a00428_source}\index{Constants.h@{Constants.h}}
+\mbox{\hyperlink{a00428}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{comment}{// Copyright 2024-\/2025 by Avid Technology, Inc.}}
+\DoxyCodeLine{2 \textcolor{comment}{// CONFIDENTIAL: this document contains confidential information of Avid. Do not disclose to any third party. Use of the information contained in this document is subject to an Avid SDK license.}}
+\DoxyCodeLine{3 }
+\DoxyCodeLine{4 \textcolor{preprocessor}{\#pragma once}}
+\DoxyCodeLine{5 }
+\DoxyCodeLine{9 \textcolor{keyword}{class }\mbox{\hyperlink{a01992}{Constants}}}
+\DoxyCodeLine{10 \{}
+\DoxyCodeLine{11 \textcolor{keyword}{public}:}
+\DoxyCodeLine{12     \textcolor{comment}{// PTSL Cmd argument names:}}
+\DoxyCodeLine{13     \textcolor{keyword}{inline} \textcolor{keyword}{static} \textcolor{keyword}{const} std::string \mbox{\hyperlink{a01992_adb52dc4187c0ebc3e0dcad8cf5510282}{JSON\_REQUEST\_CMD\_ARG}} = \textcolor{stringliteral}{"{}-\/json\_request"{}};}
+\DoxyCodeLine{14     \textcolor{keyword}{inline} \textcolor{keyword}{static} \textcolor{keyword}{const} std::string \mbox{\hyperlink{a01992_adb4bdac88475e72e52dd06c06689f86f}{JSON\_HEADER\_CMD\_ARG}} = \textcolor{stringliteral}{"{}-\/json\_header"{}};}
+\DoxyCodeLine{15     \textcolor{keyword}{inline} \textcolor{keyword}{static} \textcolor{keyword}{const} std::string \mbox{\hyperlink{a01992_acf5cf0a09be075d6e282aa404f4b09a3}{HELP\_CMD\_ARG}} = \textcolor{stringliteral}{"{}-\/help"{}};}
+\DoxyCodeLine{16     \textcolor{keyword}{inline} \textcolor{keyword}{static} \textcolor{keyword}{const} std::string \mbox{\hyperlink{a01992_a5209e331d4dc776cd1322bac799aa41e}{LIST\_CMD\_ARG}} = \textcolor{stringliteral}{"{}-\/list"{}};}
+\DoxyCodeLine{17     \textcolor{keyword}{inline} \textcolor{keyword}{static} \textcolor{keyword}{const} std::string \mbox{\hyperlink{a01992_af464392efbf535fb77ee5a7685c2e084}{FILE\_CMD\_ARG}} = \textcolor{stringliteral}{"{}-\/file"{}};}
+\DoxyCodeLine{18     \textcolor{keyword}{inline} \textcolor{keyword}{static} \textcolor{keyword}{const} std::string \mbox{\hyperlink{a01992_a87bd382423778ee72ec398cf8b1163e7}{SESSION\_ID\_CMD\_ARG}} = \textcolor{stringliteral}{"{}-\/header:session\_id"{}};}
+\DoxyCodeLine{19     \textcolor{keyword}{inline} \textcolor{keyword}{static} \textcolor{keyword}{const} std::string \mbox{\hyperlink{a01992_aca439e5544b8484bc08ddc73c626d6ee}{ENCRYPTION\_KEY\_ARG}} = \textcolor{stringliteral}{"{}-\/encryption\_key"{}};}
+\DoxyCodeLine{20 }
+\DoxyCodeLine{21     \textcolor{comment}{// PTSL Cmd argument parsing:}}
+\DoxyCodeLine{22     \textcolor{keyword}{inline} \textcolor{keyword}{static} \textcolor{keyword}{const} \textcolor{keywordtype}{char} \mbox{\hyperlink{a01992_adf740b146e536d1b67597396f01ef143}{PARAMETER\_PREFIX}} = \textcolor{charliteral}{'-\/'};}
+\DoxyCodeLine{23     \textcolor{keyword}{inline} \textcolor{keyword}{static} \textcolor{keyword}{const} std::string \mbox{\hyperlink{a01992_ae7bb693723949a82b79056d35c2efb44}{PARAMETERLESS\_ARGS\_KEY}} = \textcolor{stringliteral}{"{}(-\/)"{}};}
+\DoxyCodeLine{24 }
+\DoxyCodeLine{25     \textcolor{comment}{// JSON file script tags:}}
+\DoxyCodeLine{26     \textcolor{keyword}{inline} \textcolor{keyword}{static} \textcolor{keyword}{const} std::string \mbox{\hyperlink{a01992_a5842000ba30d1698a0b41dd5841452e1}{COMMANDS\_JSON\_TAG}} = \textcolor{stringliteral}{"{}commands"{}};}
+\DoxyCodeLine{27     \textcolor{keyword}{inline} \textcolor{keyword}{static} \textcolor{keyword}{const} std::string \mbox{\hyperlink{a01992_a698670f04559aae35d5e9d149619a44a}{COMMAND\_NAME\_JSON\_TAG}} = \textcolor{stringliteral}{"{}command\_name"{}};}
+\DoxyCodeLine{28     \textcolor{keyword}{inline} \textcolor{keyword}{static} \textcolor{keyword}{const} std::string \mbox{\hyperlink{a01992_ad2ffe03310763eef51ee733e5190ca4d}{COMMAND\_VERSION\_JSON\_TAG}} = \textcolor{stringliteral}{"{}version"{}};}
+\DoxyCodeLine{29     \textcolor{keyword}{inline} \textcolor{keyword}{static} \textcolor{keyword}{const} std::string \mbox{\hyperlink{a01992_a9525e1f6a3d18a9b5b391bd6dc90f6b9}{COMMAND\_REQUEST\_BODY\_JSON\_TAG}} = \textcolor{stringliteral}{"{}json\_request"{}};}
+\DoxyCodeLine{30     \textcolor{keyword}{inline} \textcolor{keyword}{static} \textcolor{keyword}{const} std::string \mbox{\hyperlink{a01992_a69bc22a99ad3b009b5d502598cd0f658}{COMMAND\_HEADER\_JSON\_TAG}} = \textcolor{stringliteral}{"{}json\_header"{}};}
+\DoxyCodeLine{31     \textcolor{keyword}{inline} \textcolor{keyword}{static} \textcolor{keyword}{const} std::string \mbox{\hyperlink{a01992_a178c5d13981efd2107b10d3c79d16393}{COMMAND\_ENCRYPTION\_KEY}} = \textcolor{stringliteral}{"{}encryption\_key"{}};}
+\DoxyCodeLine{32 }
+\DoxyCodeLine{33     \textcolor{comment}{// JSON response tags:}}
+\DoxyCodeLine{34     \textcolor{keyword}{inline} \textcolor{keyword}{static} \textcolor{keyword}{const} std::string \mbox{\hyperlink{a01992_aef7cd01471960875a074bcc3408ed978}{RESPONSE\_HEADER}} = \textcolor{stringliteral}{"{}header"{}};}
+\DoxyCodeLine{35     \textcolor{keyword}{inline} \textcolor{keyword}{static} \textcolor{keyword}{const} std::string \mbox{\hyperlink{a01992_a003dbd322a05b91896d0520e19bb7ce3}{RESPONSE\_BODY}} = \textcolor{stringliteral}{"{}responseBodyJson"{}};}
+\DoxyCodeLine{36     \textcolor{keyword}{inline} \textcolor{keyword}{static} \textcolor{keyword}{const} std::string \mbox{\hyperlink{a01992_ad25feaa33d7de936009108e51408cc4f}{RESPONSE\_ERROR}} = \textcolor{stringliteral}{"{}responseErrorJson"{}};}
+\DoxyCodeLine{37     \textcolor{keyword}{inline} \textcolor{keyword}{static} \textcolor{keyword}{const} std::string \mbox{\hyperlink{a01992_a5f3cf9ade2ff4aeeec4a51c6b8bb0b3f}{RESPONSE\_HEADER\_TASK\_ID}} = \textcolor{stringliteral}{"{}taskId"{}};}
+\DoxyCodeLine{38     \textcolor{keyword}{inline} \textcolor{keyword}{static} \textcolor{keyword}{const} std::string \mbox{\hyperlink{a01992_a7b81a421a48139d3e2fb121769c6629c}{RESPONSE\_HEADER\_COMMAND}} = \textcolor{stringliteral}{"{}command"{}};}
+\DoxyCodeLine{39     \textcolor{keyword}{inline} \textcolor{keyword}{static} \textcolor{keyword}{const} std::string \mbox{\hyperlink{a01992_ae498863ebb54c3e01a68f1e582293464}{RESPONSE\_HEADER\_STATUS}} = \textcolor{stringliteral}{"{}status"{}};}
+\DoxyCodeLine{40     \textcolor{keyword}{inline} \textcolor{keyword}{static} \textcolor{keyword}{const} std::string \mbox{\hyperlink{a01992_ab66b2d42ad9bc3a50972eb8bb3d9576d}{RESPONSE\_HEADER\_PROGRESS}} = \textcolor{stringliteral}{"{}progress"{}};}
+\DoxyCodeLine{41     \textcolor{keyword}{inline} \textcolor{keyword}{static} \textcolor{keyword}{const} std::string \mbox{\hyperlink{a01992_acd847ac769932f5f7f9a39f8d2d0abb6}{RESPONSE\_HEADER\_VERSION}} = \textcolor{stringliteral}{"{}version"{}};}
+\DoxyCodeLine{42     \textcolor{keyword}{inline} \textcolor{keyword}{static} \textcolor{keyword}{const} std::string \mbox{\hyperlink{a01992_a69ddab44a33e3cbbfa13168ffefd1bf5}{RESPONSE\_HEADER\_VERSION\_MINOR}} = \textcolor{stringliteral}{"{}versionMinor"{}};}
+\DoxyCodeLine{43     \textcolor{keyword}{inline} \textcolor{keyword}{static} \textcolor{keyword}{const} std::string \mbox{\hyperlink{a01992_a06cf2b4d853e06b6cc1f223943d4ddb8}{RESPONSE\_HEADER\_VERSION\_REVISION}} = \textcolor{stringliteral}{"{}versionRevision"{}};}
+\DoxyCodeLine{44     \textcolor{keyword}{inline} \textcolor{keyword}{static} \textcolor{keyword}{const} std::string \mbox{\hyperlink{a01992_a9412ef7fb741b532d353bbee9a001e84}{RESPONSE\_HEADER\_VERSIONED\_RESPONSE\_HEADER\_JSON}} = \textcolor{stringliteral}{"{}versionedResponseHeaderJson"{}};}
+\DoxyCodeLine{45 \};}
+
+\end{DoxyCode}

@@ -1,0 +1,15 @@
+\hypertarget{a00481}{}\doxysection{Version 2023.03}
+\label{a00481}\index{Version 2023.03@{Version 2023.03}}
+\hypertarget{a00481_release_notes_2023_03_compatibility}{}\doxysubsection{Compatibility}\label{a00481_release_notes_2023_03_compatibility}
+PTSL SDK 2023.\+03 uses \mbox{\hyperlink{a00446_a83c5961efacc6c06e3e75877c239ebb1}{PTSL\+\_\+\+VERSION}} 1 of the client interface
+
+Pro Tools 2023.\+3 is compatible with clients using \mbox{\hyperlink{a00446_a83c5961efacc6c06e3e75877c239ebb1}{PTSL\+\_\+\+VERSION}} 1 and higher\hypertarget{a00481_release_notes_2023_03_changelog}{}\doxysubsection{Changelog}\label{a00481_release_notes_2023_03_changelog}
+\hypertarget{a00481_release_notes_2023_03_changelog_developer_certificates_have_been_deprecated}{}\doxysubsubsection{Developer certificates have been deprecated}\label{a00481_release_notes_2023_03_changelog_developer_certificates_have_been_deprecated}
+You no longer need to obtain a developer certificate to establish a PTSL connection to Pro Tools. Use the new \mbox{\hyperlink{a01328_aca497935e1b825a7c9cd5e28e7c2080b}{Register\+Connection}} command to establish connections to Pro Tools 2023.\+3 and higher.
+
+Authorize\+Connection has been deprecated. This command, which was used with certificates in previous versions of the scripting SDK, will continue to work but will be removed in a future release.\hypertarget{a00481_release_notes_2023_03_changelog_command_changes}{}\doxysubsubsection{Command changes}\label{a00481_release_notes_2023_03_changelog_command_changes}
+
+\begin{DoxyItemize}
+\item \mbox{\hyperlink{a01328_aa6482f7604906dcdcb8fc5f3c77e09d9}{Rename\+Track}} {\ttfamily track\+Id} is now deprecated. Use {\ttfamily current\+Track\+Name} instead.
+\item \mbox{\hyperlink{a01328_a2fb834727f02bdc4db8432508b5a8ed6}{Export\+Mix}} {\ttfamily files\+List} is now deprecated. Use {\ttfamily mix\+Source\+List} instead. 
+\end{DoxyItemize}

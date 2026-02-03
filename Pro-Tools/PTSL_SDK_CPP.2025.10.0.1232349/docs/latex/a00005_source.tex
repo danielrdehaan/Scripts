@@ -1,0 +1,76 @@
+\hypertarget{a00005_source}{}\doxysection{Cpp\+PTSLResponse.\+h}
+\label{a00005_source}\index{CppPTSLResponse.h@{CppPTSLResponse.h}}
+\mbox{\hyperlink{a00005}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{comment}{// Copyright 2024-\/2025 by Avid Technology, Inc.}}
+\DoxyCodeLine{2 \textcolor{comment}{// CONFIDENTIAL: this document contains confidential information of Avid. Do not disclose to any third party. Use of the information contained in this document is subject to an Avid SDK license.}}
+\DoxyCodeLine{3 }
+\DoxyCodeLine{11 \textcolor{preprocessor}{\#pragma once}}
+\DoxyCodeLine{12 }
+\DoxyCodeLine{13 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{a00050}{CppPTSLCommon.h}}"{}}}
+\DoxyCodeLine{14 \textcolor{preprocessor}{\#include "{}PtslCCppExport.h"{}}}
+\DoxyCodeLine{15 }
+\DoxyCodeLine{16 \textcolor{keyword}{namespace }\mbox{\hyperlink{a00491}{PTSLC\_CPP}}}
+\DoxyCodeLine{17 \{}
+\DoxyCodeLine{18     \textcolor{keyword}{class }PTSLC\_CPP\_EXPORT \mbox{\hyperlink{a01984}{CppPTSLResponse}}}
+\DoxyCodeLine{19     \{}
+\DoxyCodeLine{20     \textcolor{keyword}{public}:}
+\DoxyCodeLine{21         \mbox{\hyperlink{a01984_adfa7785b957ed93662787756fdafa525}{CppPTSLResponse}}() = \textcolor{keywordflow}{default};}
+\DoxyCodeLine{22         \mbox{\hyperlink{a01984}{CppPTSLResponse}}(}
+\DoxyCodeLine{23             \mbox{\hyperlink{a00491_ae5152a79762c33c83fdb5752192e511c}{CommandId}} commandId, \textcolor{keyword}{const} std::string\& responseBodyJson = \textcolor{stringliteral}{"{}"{}}, \textcolor{keyword}{const} std::string\& responseErrorJson = \textcolor{stringliteral}{"{}"{}});}
+\DoxyCodeLine{24 }
+\DoxyCodeLine{25         std::string GetTaskId() \textcolor{keyword}{const};}
+\DoxyCodeLine{26         \textcolor{keywordtype}{void} SetTaskId(\textcolor{keyword}{const} std::string\& taskId);}
+\DoxyCodeLine{27 }
+\DoxyCodeLine{28         \mbox{\hyperlink{a00491_ae5152a79762c33c83fdb5752192e511c}{CommandId}} GetCommandId() \textcolor{keyword}{const};}
+\DoxyCodeLine{29         \textcolor{keywordtype}{void} SetCommandId(\textcolor{keyword}{const} \mbox{\hyperlink{a00491_ae5152a79762c33c83fdb5752192e511c}{CommandId}}\& commandId);}
+\DoxyCodeLine{30 }
+\DoxyCodeLine{31         \mbox{\hyperlink{a00491_a0927ccfbc4e114cef1f18c6f260d230b}{CommandStatusType}} GetStatus() \textcolor{keyword}{const};}
+\DoxyCodeLine{32         \textcolor{keywordtype}{void} SetStatus(\textcolor{keyword}{const} \mbox{\hyperlink{a00491_a0927ccfbc4e114cef1f18c6f260d230b}{CommandStatusType}}\& status);}
+\DoxyCodeLine{33 }
+\DoxyCodeLine{34         int32\_t GetProgress() \textcolor{keyword}{const};}
+\DoxyCodeLine{35         \textcolor{keywordtype}{void} SetProgress(\textcolor{keyword}{const} int32\_t progress);}
+\DoxyCodeLine{36 }
+\DoxyCodeLine{37         std::string GetResponseBodyJson() \textcolor{keyword}{const};}
+\DoxyCodeLine{38         \textcolor{keywordtype}{void} SetResponseBodyJson(\textcolor{keyword}{const} std::string\& responseBodyJson);}
+\DoxyCodeLine{39 }
+\DoxyCodeLine{40         std::string GetResponseErrorJson() \textcolor{keyword}{const};}
+\DoxyCodeLine{41         \textcolor{keywordtype}{void} SetResponseErrorJson(\textcolor{keyword}{const} std::string\& responseErrorJson);}
+\DoxyCodeLine{42 }
+\DoxyCodeLine{43         \mbox{\hyperlink{a01368}{ResponseError}} GetResponseErrorList() \textcolor{keyword}{const};}
+\DoxyCodeLine{44 }
+\DoxyCodeLine{45         int32\_t GetVersion() \textcolor{keyword}{const};}
+\DoxyCodeLine{46         \textcolor{keywordtype}{void} SetVersion(\textcolor{keyword}{const} int32\_t version);}
+\DoxyCodeLine{47 }
+\DoxyCodeLine{48         int32\_t GetVersionMinor() \textcolor{keyword}{const};}
+\DoxyCodeLine{49         \textcolor{keywordtype}{void} SetVersionMinor(\textcolor{keyword}{const} int32\_t versionMinor);}
+\DoxyCodeLine{50 }
+\DoxyCodeLine{51         int32\_t GetVersionRevision() \textcolor{keyword}{const};}
+\DoxyCodeLine{52         \textcolor{keywordtype}{void} SetVersionRevision(\textcolor{keyword}{const} int32\_t versionRevision);}
+\DoxyCodeLine{53 }
+\DoxyCodeLine{54         std::string GetVersionedResponseHeaderJson() \textcolor{keyword}{const};}
+\DoxyCodeLine{55         \textcolor{keywordtype}{void} SetVersionedResponseHeaderJson(\textcolor{keyword}{const} std::string\& versionedRequestHeaderJson);}
+\DoxyCodeLine{56 }
+\DoxyCodeLine{57     \textcolor{keyword}{private}:}
+\DoxyCodeLine{58         \textcolor{keywordtype}{void} ParseResponseError();}
+\DoxyCodeLine{59 }
+\DoxyCodeLine{60         \textcolor{comment}{// data of response header}}
+\DoxyCodeLine{61         std::string mTaskId = \textcolor{stringliteral}{"{}"{}};}
+\DoxyCodeLine{62         \mbox{\hyperlink{a00491_ae5152a79762c33c83fdb5752192e511c}{CommandId}} mCommandId = \mbox{\hyperlink{a00491_ae5152a79762c33c83fdb5752192e511ca4ef09114e92ba09563b8842a38837f6b}{CommandId::CId\_None}};}
+\DoxyCodeLine{63         \mbox{\hyperlink{a00491_a0927ccfbc4e114cef1f18c6f260d230b}{CommandStatusType}} mStatus = \mbox{\hyperlink{a00494_aacda182df7dba8ce63a50654d7232ba8a4e0f80f7b124b16851a6c4c64da8f663}{CommandStatusType::TStatus\_Failed}};}
+\DoxyCodeLine{64         int32\_t mProgress = 0;}
+\DoxyCodeLine{65         int32\_t mVersion = 0;}
+\DoxyCodeLine{66         int32\_t mVersionMinor = 0;}
+\DoxyCodeLine{67         int32\_t mVersionRevision = 0;}
+\DoxyCodeLine{68         std::string mVersionedResponseHeaderJson = \textcolor{stringliteral}{"{}"{}};}
+\DoxyCodeLine{69 }
+\DoxyCodeLine{70         \textcolor{comment}{// data of response body}}
+\DoxyCodeLine{71         std::string mResponseBodyJson = \textcolor{stringliteral}{"{}"{}};}
+\DoxyCodeLine{72         std::string mResponseErrorJson = \textcolor{stringliteral}{"{}"{}};}
+\DoxyCodeLine{73 }
+\DoxyCodeLine{74         \textcolor{comment}{// parsed data of response error}}
+\DoxyCodeLine{75         \mbox{\hyperlink{a01368}{ResponseError}} mResponseErrorList;}
+\DoxyCodeLine{76     \};}
+\DoxyCodeLine{77 \} \textcolor{comment}{// namespace PTSLC\_CPP}}
+
+\end{DoxyCode}

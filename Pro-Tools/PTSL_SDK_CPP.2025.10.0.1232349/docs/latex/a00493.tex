@@ -1,0 +1,72 @@
+\hypertarget{a00493}{}\doxysection{comments\+::parser Namespace Reference}
+\label{a00493}\index{comments::parser@{comments::parser}}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{a00493_abb93ec5bd3811336ec91c60a016fd33a}{BOOST\+\_\+\+SPIRIT\+\_\+\+DEFINE}} (\mbox{\hyperlink{a00493_aa640437fe1d526b26d996ede3cf8be8d}{comments\+\_\+filter}})
+\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+auto \mbox{\hyperlink{a00493_a881801ff9e9e4ea77c4d9dc463bb972e}{cppcomment}} = x3\+::omit\mbox{[}x3\+::lit(\char`\"{}//\char`\"{}) $>$$>$ $\ast$(x3\+::char\+\_\+ -\/ (x3\+::eol $\vert$ x3\+::eoi))\mbox{]}
+\item 
+auto \mbox{\hyperlink{a00493_af5008a792d5032916bf5cfdfa6dd6459}{ccomment}} = x3\+::omit\mbox{[}x3\+::lit(\char`\"{}/$\ast$\char`\"{}) $>$ $\ast$(x3\+::char\+\_\+ -\/ x3\+::lit(\char`\"{}$\ast$/\char`\"{})) $>$ x3\+::lit(\char`\"{}$\ast$/\char`\"{})\mbox{]}
+\item 
+auto \mbox{\hyperlink{a00493_a176e534fdfac8271bc01415f773684fc}{qstring\+\_\+simple}} = x3\+::lexeme\mbox{[}x3\+::char\+\_\+(\textquotesingle{}\char`\"{}\textquotesingle{}) $>$ $\ast$(x3\+::string(\char`\"{}\textbackslash{}\textbackslash{}\textbackslash{}\char`\"{}\char`\"{}) $\vert$ $\sim$x3\+::char\+\_\+(\textquotesingle{}\char`\"{}\textquotesingle{})) $>$ x3\+::char\+\_\+(\textquotesingle{}\char`\"{}\textquotesingle{})\mbox{]}
+\item 
+const x3\+::rule$<$ struct comments\+\_\+filter, std\+::vector$<$ std\+::string $>$ $>$ \mbox{\hyperlink{a00493_aa640437fe1d526b26d996ede3cf8be8d}{comments\+\_\+filter}} = \char`\"{}comments\+\_\+filter\char`\"{}
+\item 
+auto \mbox{\hyperlink{a00493_a1e808ac96c8efc210b4550282a4a33e6}{comments\+\_\+filter\+\_\+def}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{a00493_abb93ec5bd3811336ec91c60a016fd33a}\label{a00493_abb93ec5bd3811336ec91c60a016fd33a}} 
+\index{comments::parser@{comments::parser}!BOOST\_SPIRIT\_DEFINE@{BOOST\_SPIRIT\_DEFINE}}
+\index{BOOST\_SPIRIT\_DEFINE@{BOOST\_SPIRIT\_DEFINE}!comments::parser@{comments::parser}}
+\doxysubsubsection{\texorpdfstring{BOOST\_SPIRIT\_DEFINE()}{BOOST\_SPIRIT\_DEFINE()}}
+{\footnotesize\ttfamily BOOST\+\_\+\+SPIRIT\+\_\+\+DEFINE (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{a00493_aa640437fe1d526b26d996ede3cf8be8d}{comments\+\_\+filter}}}]{ }\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Variable Documentation}
+\mbox{\Hypertarget{a00493_a881801ff9e9e4ea77c4d9dc463bb972e}\label{a00493_a881801ff9e9e4ea77c4d9dc463bb972e}} 
+\index{comments::parser@{comments::parser}!cppcomment@{cppcomment}}
+\index{cppcomment@{cppcomment}!comments::parser@{comments::parser}}
+\doxysubsubsection{\texorpdfstring{cppcomment}{cppcomment}}
+{\footnotesize\ttfamily auto cppcomment = x3\+::omit\mbox{[}x3\+::lit(\char`\"{}//\char`\"{}) $>$$>$ $\ast$(x3\+::char\+\_\+ -\/ (x3\+::eol $\vert$ x3\+::eoi))\mbox{]}}
+
+\mbox{\Hypertarget{a00493_af5008a792d5032916bf5cfdfa6dd6459}\label{a00493_af5008a792d5032916bf5cfdfa6dd6459}} 
+\index{comments::parser@{comments::parser}!ccomment@{ccomment}}
+\index{ccomment@{ccomment}!comments::parser@{comments::parser}}
+\doxysubsubsection{\texorpdfstring{ccomment}{ccomment}}
+{\footnotesize\ttfamily auto ccomment = x3\+::omit\mbox{[}x3\+::lit(\char`\"{}/$\ast$\char`\"{}) $>$ $\ast$(x3\+::char\+\_\+ -\/ x3\+::lit(\char`\"{}$\ast$/\char`\"{})) $>$ x3\+::lit(\char`\"{}$\ast$/\char`\"{})\mbox{]}}
+
+\mbox{\Hypertarget{a00493_a176e534fdfac8271bc01415f773684fc}\label{a00493_a176e534fdfac8271bc01415f773684fc}} 
+\index{comments::parser@{comments::parser}!qstring\_simple@{qstring\_simple}}
+\index{qstring\_simple@{qstring\_simple}!comments::parser@{comments::parser}}
+\doxysubsubsection{\texorpdfstring{qstring\_simple}{qstring\_simple}}
+{\footnotesize\ttfamily auto qstring\+\_\+simple = x3\+::lexeme\mbox{[}x3\+::char\+\_\+(\textquotesingle{}\char`\"{}\textquotesingle{}) $>$ $\ast$(x3\+::string(\char`\"{}\textbackslash{}\textbackslash{}\textbackslash{}\char`\"{}\char`\"{}) $\vert$ $\sim$x3\+::char\+\_\+(\textquotesingle{}\char`\"{}\textquotesingle{})) $>$ x3\+::char\+\_\+(\textquotesingle{}\char`\"{}\textquotesingle{})\mbox{]}}
+
+\mbox{\Hypertarget{a00493_aa640437fe1d526b26d996ede3cf8be8d}\label{a00493_aa640437fe1d526b26d996ede3cf8be8d}} 
+\index{comments::parser@{comments::parser}!comments\_filter@{comments\_filter}}
+\index{comments\_filter@{comments\_filter}!comments::parser@{comments::parser}}
+\doxysubsubsection{\texorpdfstring{comments\_filter}{comments\_filter}}
+{\footnotesize\ttfamily const x3\+::rule$<$struct comments\+\_\+filter, std\+::vector$<$std\+::string$>$ $>$ comments\+\_\+filter = \char`\"{}comments\+\_\+filter\char`\"{}}
+
+
+
+Referenced by \mbox{\hyperlink{a02000_a9f67db559db48252e620520670e2b430}{File\+Script\+Parser\+::\+Parse()}}.
+
+\mbox{\Hypertarget{a00493_a1e808ac96c8efc210b4550282a4a33e6}\label{a00493_a1e808ac96c8efc210b4550282a4a33e6}} 
+\index{comments::parser@{comments::parser}!comments\_filter\_def@{comments\_filter\_def}}
+\index{comments\_filter\_def@{comments\_filter\_def}!comments::parser@{comments::parser}}
+\doxysubsubsection{\texorpdfstring{comments\_filter\_def}{comments\_filter\_def}}
+{\footnotesize\ttfamily auto comments\+\_\+filter\+\_\+def}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{=}
+\DoxyCodeLine{            *(\mbox{\hyperlink{a00493_a176e534fdfac8271bc01415f773684fc}{qstring\_simple}} | \mbox{\hyperlink{a00493_a881801ff9e9e4ea77c4d9dc463bb972e}{cppcomment}} | \mbox{\hyperlink{a00493_af5008a792d5032916bf5cfdfa6dd6459}{ccomment}} | +(char\_ -\/ (x3::lit(\textcolor{charliteral}{'"{}'}) | x3::lit(\textcolor{stringliteral}{"{}//"{}}) | x3::lit(\textcolor{stringliteral}{"{}/*"{}}))))}
+
+\end{DoxyCode}

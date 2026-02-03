@@ -1,0 +1,49 @@
+\hypertarget{a02200}{}\doxysection{Get\+File\+Location\+Request\+Body}
+\label{a02200}\index{GetFileLocationRequestBody@{GetFileLocationRequestBody}}
+
+
+\doxysubsection{Description}
+Structure that describes Get\+File\+Location request data. \doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+int32 \mbox{\hyperlink{a02200_a5fd5f2662579f44d6aea0ddd8ce6082d}{page\+\_\+limit}} = 1
+\item 
+repeated \mbox{\hyperlink{a00494_ac176a32798538af896a135b298e6f7e1}{File\+Location\+Type\+Filter}} \mbox{\hyperlink{a02200_ac2cd407fa525ec032f614b0c1b99fc02}{file\+\_\+filters}} = 2
+\item 
+\mbox{\hyperlink{a02068}{Pagination\+Request}} \mbox{\hyperlink{a02200_a4e3c2dae8310ae3f4086bebe2d455e9a}{pagination\+\_\+request}} = 3
+\begin{DoxyCompactList}\small\item\em Enable pagination and control limit and offset. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{a02200_a5fd5f2662579f44d6aea0ddd8ce6082d}\label{a02200_a5fd5f2662579f44d6aea0ddd8ce6082d}} 
+\index{GetFileLocationRequestBody@{GetFileLocationRequestBody}!page\_limit@{page\_limit}}
+\index{page\_limit@{page\_limit}!GetFileLocationRequestBody@{GetFileLocationRequestBody}}
+\doxysubsubsection{\texorpdfstring{page\_limit}{page\_limit}}
+{\footnotesize\ttfamily int32 page\+\_\+limit = 1}
+
+\begin{DoxyRefDesc}{Deprecated}
+\item[\mbox{\hyperlink{a00467__deprecated001056}{Deprecated}}]since Pro Tools 2023.\+09, use pagination\+\_\+request \end{DoxyRefDesc}
+\mbox{\Hypertarget{a02200_ac2cd407fa525ec032f614b0c1b99fc02}\label{a02200_ac2cd407fa525ec032f614b0c1b99fc02}} 
+\index{GetFileLocationRequestBody@{GetFileLocationRequestBody}!file\_filters@{file\_filters}}
+\index{file\_filters@{file\_filters}!GetFileLocationRequestBody@{GetFileLocationRequestBody}}
+\doxysubsubsection{\texorpdfstring{file\_filters}{file\_filters}}
+{\footnotesize\ttfamily repeated \mbox{\hyperlink{a00494_ac176a32798538af896a135b298e6f7e1}{File\+Location\+Type\+Filter}} file\+\_\+filters = 2}
+
+\mbox{\Hypertarget{a02200_a4e3c2dae8310ae3f4086bebe2d455e9a}\label{a02200_a4e3c2dae8310ae3f4086bebe2d455e9a}} 
+\index{GetFileLocationRequestBody@{GetFileLocationRequestBody}!pagination\_request@{pagination\_request}}
+\index{pagination\_request@{pagination\_request}!GetFileLocationRequestBody@{GetFileLocationRequestBody}}
+\doxysubsubsection{\texorpdfstring{pagination\_request}{pagination\_request}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a02068}{Pagination\+Request}} pagination\+\_\+request = 3}
+
+
+
+Enable pagination and control limit and offset. 
+
+\begin{DoxySince}{Since}
+Pro Tools 2023.\+09 
+\end{DoxySince}
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{a00464}{PTSL.\+proto}}\end{DoxyCompactItemize}

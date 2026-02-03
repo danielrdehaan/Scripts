@@ -1,0 +1,180 @@
+\hypertarget{a01580}{}\doxysection{Export\+Session\+Info\+As\+Text\+Request}
+\label{a01580}\index{ExportSessionInfoAsTextRequest@{ExportSessionInfoAsTextRequest}}
+
+
+{\ttfamily \#include $<$Cpp\+PTSLCommon.\+h$>$}
+
+
+
+\doxysubsection{Description}
+Structure that describes Export\+Session\+Info\+As\+Text request data. 
+
+\begin{DoxyRefDesc}{Deprecated}
+\item[\mbox{\hyperlink{a00467__deprecated000224}{Deprecated}}]All API-\/specific types in the C++ client lib are deprecated starting in Pro Tools 2024.\+10 since we introduced general JSON-\/based request/response. \end{DoxyRefDesc}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{a01580_a89cf1f3cf7b9bf72efa8218449f14a52}{include\+File\+List}}
+\item 
+bool \mbox{\hyperlink{a01580_a7eac1ddf22b93e9a9c0a706919da527b}{include\+Clip\+List}}
+\item 
+bool \mbox{\hyperlink{a01580_ae332ac03225d79a36cb8d8126528230d}{include\+Markers}}
+\item 
+bool \mbox{\hyperlink{a01580_a2643fad119fc7817abcf2466049204b7}{include\+Plugin\+List}}
+\item 
+bool \mbox{\hyperlink{a01580_a450d8cee6085c39700c688c430907e0b}{include\+Track\+EDLs}}
+\item 
+bool \mbox{\hyperlink{a01580_a6205b352cc10ef60d4be95e7135b40b5}{show\+Sub\+Frames}}
+\item 
+bool \mbox{\hyperlink{a01580_a99ee137dce940f3bda51c1d891b824da}{include\+User\+Timestamps}}
+\item 
+\mbox{\hyperlink{a00491_a65abc6b07cc79b7d7cf3eeef77a27133}{Track\+List\+Type}} \mbox{\hyperlink{a01580_a064f949a2c82995efcbc3cef0b828e2f}{track\+List\+Type}}
+\item 
+\mbox{\hyperlink{a00491_acf28c71859d08ee58a196b6e6c904547}{Fade\+Handling\+Type}} \mbox{\hyperlink{a01580_a8cb17860b872f0732aa2e350431bfd12}{fade\+Handling\+Type}}
+\item 
+\mbox{\hyperlink{a00491_aca704862f862634822651397791086c3}{Track\+Offset\+Options}} \mbox{\hyperlink{a01580_ab88a41e4266ef89feeee8e19c4bcd43b}{track\+Offset\+Options}}
+\item 
+\mbox{\hyperlink{a00491_a2464753aa86b72a5d6fcdf551e459a05}{Text\+As\+File\+Format}} \mbox{\hyperlink{a01580_a3d1dd66c50e3cc12c651f29671b69744}{text\+As\+File\+Format}}
+\item 
+\mbox{\hyperlink{a00491_a2b100d86bca5bdcbd231163f3dfba27d}{ESI\+\_\+\+Output\+Type}} \mbox{\hyperlink{a01580_a12af246dca6e2c6e35ebf692f357da7f}{output\+Type}}
+\item 
+std\+::string \mbox{\hyperlink{a01580_af8b2bd66ffc3fbf507c9d89cadfacf27}{output\+Path}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{a01580_a89cf1f3cf7b9bf72efa8218449f14a52}\label{a01580_a89cf1f3cf7b9bf72efa8218449f14a52}} 
+\index{ExportSessionInfoAsTextRequest@{ExportSessionInfoAsTextRequest}!includeFileList@{includeFileList}}
+\index{includeFileList@{includeFileList}!ExportSessionInfoAsTextRequest@{ExportSessionInfoAsTextRequest}}
+\doxysubsubsection{\texorpdfstring{includeFileList}{includeFileList}}
+{\footnotesize\ttfamily bool include\+File\+List}
+
+
+
+Referenced by \mbox{\hyperlink{a01328_a9672d50a2fcd59c88844f213f2262435}{Cpp\+PTSLClient\+::\+Export\+Session\+Info\+As\+Text()}}.
+
+\mbox{\Hypertarget{a01580_a7eac1ddf22b93e9a9c0a706919da527b}\label{a01580_a7eac1ddf22b93e9a9c0a706919da527b}} 
+\index{ExportSessionInfoAsTextRequest@{ExportSessionInfoAsTextRequest}!includeClipList@{includeClipList}}
+\index{includeClipList@{includeClipList}!ExportSessionInfoAsTextRequest@{ExportSessionInfoAsTextRequest}}
+\doxysubsubsection{\texorpdfstring{includeClipList}{includeClipList}}
+{\footnotesize\ttfamily bool include\+Clip\+List}
+
+
+
+Referenced by \mbox{\hyperlink{a01328_a9672d50a2fcd59c88844f213f2262435}{Cpp\+PTSLClient\+::\+Export\+Session\+Info\+As\+Text()}}.
+
+\mbox{\Hypertarget{a01580_ae332ac03225d79a36cb8d8126528230d}\label{a01580_ae332ac03225d79a36cb8d8126528230d}} 
+\index{ExportSessionInfoAsTextRequest@{ExportSessionInfoAsTextRequest}!includeMarkers@{includeMarkers}}
+\index{includeMarkers@{includeMarkers}!ExportSessionInfoAsTextRequest@{ExportSessionInfoAsTextRequest}}
+\doxysubsubsection{\texorpdfstring{includeMarkers}{includeMarkers}}
+{\footnotesize\ttfamily bool include\+Markers}
+
+
+
+Referenced by \mbox{\hyperlink{a01328_a9672d50a2fcd59c88844f213f2262435}{Cpp\+PTSLClient\+::\+Export\+Session\+Info\+As\+Text()}}.
+
+\mbox{\Hypertarget{a01580_a2643fad119fc7817abcf2466049204b7}\label{a01580_a2643fad119fc7817abcf2466049204b7}} 
+\index{ExportSessionInfoAsTextRequest@{ExportSessionInfoAsTextRequest}!includePluginList@{includePluginList}}
+\index{includePluginList@{includePluginList}!ExportSessionInfoAsTextRequest@{ExportSessionInfoAsTextRequest}}
+\doxysubsubsection{\texorpdfstring{includePluginList}{includePluginList}}
+{\footnotesize\ttfamily bool include\+Plugin\+List}
+
+
+
+Referenced by \mbox{\hyperlink{a01328_a9672d50a2fcd59c88844f213f2262435}{Cpp\+PTSLClient\+::\+Export\+Session\+Info\+As\+Text()}}.
+
+\mbox{\Hypertarget{a01580_a450d8cee6085c39700c688c430907e0b}\label{a01580_a450d8cee6085c39700c688c430907e0b}} 
+\index{ExportSessionInfoAsTextRequest@{ExportSessionInfoAsTextRequest}!includeTrackEDLs@{includeTrackEDLs}}
+\index{includeTrackEDLs@{includeTrackEDLs}!ExportSessionInfoAsTextRequest@{ExportSessionInfoAsTextRequest}}
+\doxysubsubsection{\texorpdfstring{includeTrackEDLs}{includeTrackEDLs}}
+{\footnotesize\ttfamily bool include\+Track\+EDLs}
+
+
+
+Referenced by \mbox{\hyperlink{a01328_a9672d50a2fcd59c88844f213f2262435}{Cpp\+PTSLClient\+::\+Export\+Session\+Info\+As\+Text()}}.
+
+\mbox{\Hypertarget{a01580_a6205b352cc10ef60d4be95e7135b40b5}\label{a01580_a6205b352cc10ef60d4be95e7135b40b5}} 
+\index{ExportSessionInfoAsTextRequest@{ExportSessionInfoAsTextRequest}!showSubFrames@{showSubFrames}}
+\index{showSubFrames@{showSubFrames}!ExportSessionInfoAsTextRequest@{ExportSessionInfoAsTextRequest}}
+\doxysubsubsection{\texorpdfstring{showSubFrames}{showSubFrames}}
+{\footnotesize\ttfamily bool show\+Sub\+Frames}
+
+
+
+Referenced by \mbox{\hyperlink{a01328_a9672d50a2fcd59c88844f213f2262435}{Cpp\+PTSLClient\+::\+Export\+Session\+Info\+As\+Text()}}.
+
+\mbox{\Hypertarget{a01580_a99ee137dce940f3bda51c1d891b824da}\label{a01580_a99ee137dce940f3bda51c1d891b824da}} 
+\index{ExportSessionInfoAsTextRequest@{ExportSessionInfoAsTextRequest}!includeUserTimestamps@{includeUserTimestamps}}
+\index{includeUserTimestamps@{includeUserTimestamps}!ExportSessionInfoAsTextRequest@{ExportSessionInfoAsTextRequest}}
+\doxysubsubsection{\texorpdfstring{includeUserTimestamps}{includeUserTimestamps}}
+{\footnotesize\ttfamily bool include\+User\+Timestamps}
+
+
+
+Referenced by \mbox{\hyperlink{a01328_a9672d50a2fcd59c88844f213f2262435}{Cpp\+PTSLClient\+::\+Export\+Session\+Info\+As\+Text()}}.
+
+\mbox{\Hypertarget{a01580_a064f949a2c82995efcbc3cef0b828e2f}\label{a01580_a064f949a2c82995efcbc3cef0b828e2f}} 
+\index{ExportSessionInfoAsTextRequest@{ExportSessionInfoAsTextRequest}!trackListType@{trackListType}}
+\index{trackListType@{trackListType}!ExportSessionInfoAsTextRequest@{ExportSessionInfoAsTextRequest}}
+\doxysubsubsection{\texorpdfstring{trackListType}{trackListType}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a00491_a65abc6b07cc79b7d7cf3eeef77a27133}{Track\+List\+Type}} track\+List\+Type}
+
+
+
+Referenced by \mbox{\hyperlink{a01328_a9672d50a2fcd59c88844f213f2262435}{Cpp\+PTSLClient\+::\+Export\+Session\+Info\+As\+Text()}}.
+
+\mbox{\Hypertarget{a01580_a8cb17860b872f0732aa2e350431bfd12}\label{a01580_a8cb17860b872f0732aa2e350431bfd12}} 
+\index{ExportSessionInfoAsTextRequest@{ExportSessionInfoAsTextRequest}!fadeHandlingType@{fadeHandlingType}}
+\index{fadeHandlingType@{fadeHandlingType}!ExportSessionInfoAsTextRequest@{ExportSessionInfoAsTextRequest}}
+\doxysubsubsection{\texorpdfstring{fadeHandlingType}{fadeHandlingType}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a00491_acf28c71859d08ee58a196b6e6c904547}{Fade\+Handling\+Type}} fade\+Handling\+Type}
+
+
+
+Referenced by \mbox{\hyperlink{a01328_a9672d50a2fcd59c88844f213f2262435}{Cpp\+PTSLClient\+::\+Export\+Session\+Info\+As\+Text()}}.
+
+\mbox{\Hypertarget{a01580_ab88a41e4266ef89feeee8e19c4bcd43b}\label{a01580_ab88a41e4266ef89feeee8e19c4bcd43b}} 
+\index{ExportSessionInfoAsTextRequest@{ExportSessionInfoAsTextRequest}!trackOffsetOptions@{trackOffsetOptions}}
+\index{trackOffsetOptions@{trackOffsetOptions}!ExportSessionInfoAsTextRequest@{ExportSessionInfoAsTextRequest}}
+\doxysubsubsection{\texorpdfstring{trackOffsetOptions}{trackOffsetOptions}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a00491_aca704862f862634822651397791086c3}{Track\+Offset\+Options}} track\+Offset\+Options}
+
+
+
+Referenced by \mbox{\hyperlink{a01328_a9672d50a2fcd59c88844f213f2262435}{Cpp\+PTSLClient\+::\+Export\+Session\+Info\+As\+Text()}}.
+
+\mbox{\Hypertarget{a01580_a3d1dd66c50e3cc12c651f29671b69744}\label{a01580_a3d1dd66c50e3cc12c651f29671b69744}} 
+\index{ExportSessionInfoAsTextRequest@{ExportSessionInfoAsTextRequest}!textAsFileFormat@{textAsFileFormat}}
+\index{textAsFileFormat@{textAsFileFormat}!ExportSessionInfoAsTextRequest@{ExportSessionInfoAsTextRequest}}
+\doxysubsubsection{\texorpdfstring{textAsFileFormat}{textAsFileFormat}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a00491_a2464753aa86b72a5d6fcdf551e459a05}{Text\+As\+File\+Format}} text\+As\+File\+Format}
+
+
+
+Referenced by \mbox{\hyperlink{a01328_a9672d50a2fcd59c88844f213f2262435}{Cpp\+PTSLClient\+::\+Export\+Session\+Info\+As\+Text()}}.
+
+\mbox{\Hypertarget{a01580_a12af246dca6e2c6e35ebf692f357da7f}\label{a01580_a12af246dca6e2c6e35ebf692f357da7f}} 
+\index{ExportSessionInfoAsTextRequest@{ExportSessionInfoAsTextRequest}!outputType@{outputType}}
+\index{outputType@{outputType}!ExportSessionInfoAsTextRequest@{ExportSessionInfoAsTextRequest}}
+\doxysubsubsection{\texorpdfstring{outputType}{outputType}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a00491_a2b100d86bca5bdcbd231163f3dfba27d}{ESI\+\_\+\+Output\+Type}} output\+Type}
+
+
+
+Referenced by \mbox{\hyperlink{a01328_a9672d50a2fcd59c88844f213f2262435}{Cpp\+PTSLClient\+::\+Export\+Session\+Info\+As\+Text()}}.
+
+\mbox{\Hypertarget{a01580_af8b2bd66ffc3fbf507c9d89cadfacf27}\label{a01580_af8b2bd66ffc3fbf507c9d89cadfacf27}} 
+\index{ExportSessionInfoAsTextRequest@{ExportSessionInfoAsTextRequest}!outputPath@{outputPath}}
+\index{outputPath@{outputPath}!ExportSessionInfoAsTextRequest@{ExportSessionInfoAsTextRequest}}
+\doxysubsubsection{\texorpdfstring{outputPath}{outputPath}}
+{\footnotesize\ttfamily std\+::string output\+Path}
+
+
+
+Referenced by \mbox{\hyperlink{a01328_a9672d50a2fcd59c88844f213f2262435}{Cpp\+PTSLClient\+::\+Export\+Session\+Info\+As\+Text()}}.
+
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{a00050}{Cpp\+PTSLCommon.\+h}}\end{DoxyCompactItemize}

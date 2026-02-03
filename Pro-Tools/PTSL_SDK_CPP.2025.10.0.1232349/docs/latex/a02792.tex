@@ -1,0 +1,33 @@
+\hypertarget{a02792}{}\doxysection{Create\+Audio\+Clip\+Response\+Entry}
+\label{a02792}\index{CreateAudioClipResponseEntry@{CreateAudioClipResponseEntry}}
+
+
+\doxysubsection{Description}
+Structure that describes Create\+Audio\+Clip single multi-\/channel clip response data. 
+
+\begin{DoxySince}{Since}
+Pro Tools 2025.\+06 
+\end{DoxySince}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+repeated string \mbox{\hyperlink{a02792_aff44d27c7964b329d79072cd1ae2fef7}{clip\+\_\+ids}} = 1
+\begin{DoxyCompactList}\small\item\em IDs of the created subclips forming the multichannel clip. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{a02792_aff44d27c7964b329d79072cd1ae2fef7}\label{a02792_aff44d27c7964b329d79072cd1ae2fef7}} 
+\index{CreateAudioClipResponseEntry@{CreateAudioClipResponseEntry}!clip\_ids@{clip\_ids}}
+\index{clip\_ids@{clip\_ids}!CreateAudioClipResponseEntry@{CreateAudioClipResponseEntry}}
+\doxysubsubsection{\texorpdfstring{clip\_ids}{clip\_ids}}
+{\footnotesize\ttfamily repeated string clip\+\_\+ids = 1}
+
+
+
+IDs of the created subclips forming the multichannel clip. 
+
+The order of IDs corresponds to the order of subclips in the request (\mbox{\hyperlink{a02788_a82289d0326d4ad7a3fbf4ae82a2626b0}{Create\+Audio\+Clip\+Request\+Entry.\+clip\+\_\+info}}). 
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{a00464}{PTSL.\+proto}}\end{DoxyCompactItemize}

@@ -1,0 +1,151 @@
+\hypertarget{a04105_autotoc_md31}{}\doxysubsection{Overview}\label{a04105_autotoc_md31}
+The Pro Tools Event System, introduced in the 2025.\+06 release, enables Pro Tools to send real-\/time notifications to subscribed clients. This system allows clients to subscribe to specific events, unsubscribe from them, and receive event notifications as they occur in real-\/time.
+
+The event system consists of three main API calls\+:
+\begin{DoxyItemize}
+\item \mbox{\hyperlink{a00494_aaf8d2069e2c6bbecf4aa8f9819028e8aa3123650ddf7f82ade0c8def87b1f7f40}{Subscribe\+To\+Events}} -\/ Subscribe to specific events
+\item \mbox{\hyperlink{a00494_aaf8d2069e2c6bbecf4aa8f9819028e8aabc3d3419d76198a03985575dff948bce}{Poll\+Events}} -\/ Receive real-\/time event notifications
+\item \mbox{\hyperlink{a00494_aaf8d2069e2c6bbecf4aa8f9819028e8aa4890bca2c334308b21af02d39e25b1ee}{Unsubscribe\+From\+Events}} -\/ Unsubscribe from events
+\end{DoxyItemize}\hypertarget{a04105_autotoc_md32}{}\doxysubsection{Key Concepts}\label{a04105_autotoc_md32}
+\hypertarget{a04105_autotoc_md33}{}\doxysubsubsection{Event Subscriptions}\label{a04105_autotoc_md33}
+Each subscription is uniquely identified by the combination of\+:
+\begin{DoxyItemize}
+\item PTSL session
+\item Event\+Id
+\item Filter data (optional)
+\end{DoxyItemize}
+
+Any difference in filter data results in a new subscription, which is managed independently, even if they share the same Event\+Id. For example, you can subscribe to track record-\/enabled state changes for multiple specific tracks by creating separate subscriptions with different track IDs in the filter data.\hypertarget{a04105_autotoc_md34}{}\doxysubsubsection{Event Priority}\label{a04105_autotoc_md34}
+All event-\/related APIs are processed with higher execution priority compared to normal API commands, ensuring timely delivery of events without blocking other API operations.\hypertarget{a04105_autotoc_md35}{}\doxysubsection{Workflow}\label{a04105_autotoc_md35}
+\hypertarget{a04105_autotoc_md36}{}\doxysubsubsection{Step 1\+: Subscribe to Events}\label{a04105_autotoc_md36}
+Use \mbox{\hyperlink{a00494_aaf8d2069e2c6bbecf4aa8f9819028e8aa3123650ddf7f82ade0c8def87b1f7f40}{Subscribe\+To\+Events}} to add specified events to the subscription list for your PTSL session.
+
+Request Example\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{  "{}events"{}: [}
+\DoxyCodeLine{    \{}
+\DoxyCodeLine{      "{}event\_id"{}: "{}EId\_TrackRecordEnabledStateChanged"{},}
+\DoxyCodeLine{      "{}event\_data\_json"{}: "{}\{\(\backslash\)"{}track\_id\(\backslash\)"{}: \(\backslash\)"{}\{00000000-\/2a000000-\/9a9525e4-\/f1611e09\}\(\backslash\)"{}\}"{}}
+\DoxyCodeLine{    \}}
+\DoxyCodeLine{  ]}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+\hypertarget{a04105_autotoc_md37}{}\doxysubsubsection{Step 2\+: Start Polling for Events}\label{a04105_autotoc_md37}
+Use \mbox{\hyperlink{a00494_aaf8d2069e2c6bbecf4aa8f9819028e8aabc3d3419d76198a03985575dff948bce}{Poll\+Events}} to begin receiving real-\/time events. This is a long-\/polling API that streams events using the Intermediate Responses mechanism.
+
+Important Notes\+:
+\begin{DoxyItemize}
+\item Operates indefinitely without a typical end condition
+\item Only one active Poll\+Events connection is allowed per PTSL session
+\item If a new Poll\+Events call is made, the previous call is terminated
+\item Runs immediately, bypassing the command queue
+\item Not affected by the timeout mechanism
+\item Does not suppress Pro Tools UI alerts
+\end{DoxyItemize}
+
+Response Example\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{  "{}event"{}: \{}
+\DoxyCodeLine{    "{}event\_id"{}: "{}EId\_TrackRecordEnabledStateChanged"{},}
+\DoxyCodeLine{    "{}event\_data\_json"{}: "{}\{\(\backslash\)"{}track\_id\(\backslash\)"{}: \(\backslash\)"{}\{00000000-\/2a000000-\/9a9525e4-\/f1611e09\}\(\backslash\)"{}, \(\backslash\)"{}state\(\backslash\)"{}: true\}"{}}
+\DoxyCodeLine{  \}}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+\hypertarget{a04105_autotoc_md38}{}\doxysubsubsection{Step 3\+: Unsubscribe from Events (\+Optional)}\label{a04105_autotoc_md38}
+Use \mbox{\hyperlink{a00494_aaf8d2069e2c6bbecf4aa8f9819028e8aa4890bca2c334308b21af02d39e25b1ee}{Unsubscribe\+From\+Events}} to remove events from your subscription list.
+
+Request Example\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{  "{}events"{}: [}
+\DoxyCodeLine{    \{}
+\DoxyCodeLine{      "{}event\_id"{}: "{}EId\_TrackRecordEnabledStateChanged"{},}
+\DoxyCodeLine{      "{}event\_data\_json"{}: "{}\{\(\backslash\)"{}track\_id\(\backslash\)"{}: \(\backslash\)"{}\{00000000-\/2a000000-\/9a9525e4-\/f1611e09\}\(\backslash\)"{}\}"{}}
+\DoxyCodeLine{    \}}
+\DoxyCodeLine{  ]}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+\hypertarget{a04105_autotoc_md39}{}\doxysubsection{Complete Example\+: Track Record-\/\+Enabled State Monitoring}\label{a04105_autotoc_md39}
+Here\textquotesingle{}s a complete example showing how to monitor record-\/enabled state changes for a specific track\+:\hypertarget{a04105_autotoc_md40}{}\doxysubsubsection{1. Subscribe to the Event}\label{a04105_autotoc_md40}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{// SubscribeToEvents Request}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{  "{}events"{}: [}
+\DoxyCodeLine{    \{}
+\DoxyCodeLine{      "{}event\_id"{}: "{}EId\_TrackRecordEnabledStateChanged"{},}
+\DoxyCodeLine{      "{}event\_data\_json"{}: "{}\{\(\backslash\)"{}track\_id\(\backslash\)"{}: \(\backslash\)"{}\{00000000-\/2a000000-\/9a9525e4-\/f1611e09\}\(\backslash\)"{}\}"{}}
+\DoxyCodeLine{    \}}
+\DoxyCodeLine{  ]}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+\hypertarget{a04105_autotoc_md41}{}\doxysubsubsection{2. Start Polling}\label{a04105_autotoc_md41}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{// PollEvents Request (no parameters needed)}
+\DoxyCodeLine{\{\}}
+
+\end{DoxyCode}
+\hypertarget{a04105_autotoc_md42}{}\doxysubsubsection{3. Receive Events}\label{a04105_autotoc_md42}
+When the track\textquotesingle{}s record-\/enabled state changes, you\textquotesingle{}ll receive\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{// PollEvents Response (Intermediate Response)}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{  "{}event"{}: \{}
+\DoxyCodeLine{    "{}event\_id"{}: "{}EId\_TrackRecordEnabledStateChanged"{},}
+\DoxyCodeLine{    "{}event\_data\_json"{}: "{}\{\(\backslash\)"{}track\_id\(\backslash\)"{}: \(\backslash\)"{}\{00000000-\/2a000000-\/9a9525e4-\/f1611e09\}\(\backslash\)"{}, \(\backslash\)"{}state\(\backslash\)"{}: true\}"{}}
+\DoxyCodeLine{  \}}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+\hypertarget{a04105_autotoc_md43}{}\doxysubsubsection{4. Unsubscribe (when done)}\label{a04105_autotoc_md43}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{// UnsubscribeFromEvents Request}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{  "{}events"{}: [}
+\DoxyCodeLine{    \{}
+\DoxyCodeLine{      "{}event\_id"{}: "{}EId\_TrackRecordEnabledStateChanged"{},}
+\DoxyCodeLine{      "{}event\_data\_json"{}: "{}\{\(\backslash\)"{}track\_id\(\backslash\)"{}: \(\backslash\)"{}\{00000000-\/2a000000-\/9a9525e4-\/f1611e09\}\(\backslash\)"{}\}"{}}
+\DoxyCodeLine{    \}}
+\DoxyCodeLine{  ]}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+\hypertarget{a04105_autotoc_md44}{}\doxysubsection{C++ Client Usage}\label{a04105_autotoc_md44}
+For C++ clients, you can use the {\ttfamily response\+Callback} parameter with {\ttfamily Send\+Request} to process streamed events in real-\/time\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include <iostream>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include <PTSLC\_CPP/CppPTSLClient.h>}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keywordtype}{int} \mbox{\hyperlink{a00431_a0ddf1224851353fc92bfbff6f499fa97}{main}}()}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{    \mbox{\hyperlink{a01328}{PTSLC\_CPP::CppPTSLClient}} client\{\mbox{\hyperlink{a01348}{PTSLC\_CPP::ClientConfig}}}
+\DoxyCodeLine{    \{}
+\DoxyCodeLine{        \textcolor{stringliteral}{"{}localhost:31416"{}}, }
+\DoxyCodeLine{        \mbox{\hyperlink{a00491_a9040e7076b29b0373495a63ac61be8d8af262774f2bf17e64359b775ac3ff34d6}{PTSLC\_CPP::Mode::ProTools}},}
+\DoxyCodeLine{        \mbox{\hyperlink{a00491_aa516dcb01cdf2456a2fe79447299c3cba93cba07454f06a4a960172bbd6e2a435}{PTSLC\_CPP::SkipHostLaunch::Yes}}}
+\DoxyCodeLine{    \}\};}
+\DoxyCodeLine{}
+\DoxyCodeLine{    \mbox{\hyperlink{a01980}{PTSLC\_CPP::CppPTSLRequest}} req\{\mbox{\hyperlink{a00491_ae5152a79762c33c83fdb5752192e511ca0a3f33ddd45805cee6aafbc5da168c85}{PTSLC\_CPP::CommandId::CId\_PollEvents}}, \textcolor{stringliteral}{"{}"{}}\};}
+\DoxyCodeLine{    req.SetSessionId(\textcolor{stringliteral}{"{}c3ea3ad7-\/4274-\/4d84-\/93a1-\/894377b0ec99"{}}); \textcolor{comment}{// Reuse the session id in which SubscribeToEvents was issued}}
+\DoxyCodeLine{    }
+\DoxyCodeLine{    client.SendRequest(req, [](\textcolor{keyword}{const} \mbox{\hyperlink{a01984}{PTSLC\_CPP::CppPTSLResponse}}\& response)}
+\DoxyCodeLine{    \{}
+\DoxyCodeLine{        std::cout << response.\mbox{\hyperlink{a01984_a830904d6ccd5018f4de41ab57ff023ce}{GetResponseBodyJson}}() << std::endl;}
+\DoxyCodeLine{    \}).get(); \textcolor{comment}{// Blocks here almost forever}}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+\hypertarget{a04105_autotoc_md45}{}\doxysubsection{Event-\/\+Specific Documentation}\label{a04105_autotoc_md45}
+For detailed information about specific events, including their filter and response data structures, refer to the individual event documentation -\/ \mbox{\hyperlink{a00494_a4cf8d4a4d56e9f795518b6541ddeb5bf}{Event\+Id}} 

@@ -1,0 +1,5578 @@
+/**
+ * Copyright 2020-2024 by Avid Technology, Inc.
+ * CONFIDENTIAL: this document contains confidential information of Avid. Do not disclose to any third party. Use of the information contained in this document is subject to an Avid SDK license.
+ *
+ * @file
+ * @brief 2024.10 PTSL protocol definition file
+ *
+ * - See @ref ptsl::CommandId "CommandId" to check all available commands
+ * - See @ref ptsl::Request "Request" message as the payload for all requests
+ * - See @ref ptsl::Response "Response" message as the payload for all responses (both with/no error)
+ * - See <tt><COMMAND_NAME>RequestBody</tt> to view actual request payload of the command (that's stored in the Request)
+ * - See <tt><COMMAND_NAME>ResponseBody</tt> to view actual response payload of the command (that's stored in the Response)
+ * - See @ref ptsl::SendGrpcRequest "PTSL.SendGrpcRequest" and @ref ptsl::SendGrpcStreamingRequest "PTSL.SendGrpcStreamingRequest" as the only RPC that operate with messages above
+ */
+
+// @cond hidden_from_doxygen
+syntax = "proto3";
+// @endcond
+
+package ptsl_2024_10_0;
+
+/**
+ * Service for handling different types of Pro Tools commands using PTSL Client.
+ */
+service PTSL
+{
+	/**
+	 * Send generic gRPC request and receive generic response.
+	 */
+	rpc SendGrpcRequest (Request) returns (Response);
+
+	/**
+	 * Send generic gRPC request and receive generic streaming responses.
+	 */
+	rpc SendGrpcStreamingRequest (Request) returns (stream Response);
+}
+
+// TODO: Remove _ between @ and the doxygen command name everywhere in the doc comments. This way proto-file command docs will show up in Commands category menus. Example: @_category_super -> @category_super
+
+/**
+ * Pro Tools command type.
+ */
+enum CommandId
+{
+	// @cond hidden_from_doxygen
+	reserved 60;
+	// @endcond
+	/**
+	 * AuthorizeConnection is removed since Pro Tools 2023.12
+	 */
+	reserved "AuthorizeConnection";
+
+	/**
+	 * Creates a new Pro Tools session.
+	 *
+	 * @request_body_type CreateSessionRequestBody
+	 *
+	 * @request_body_json_example
+	 * {
+	 * 	"session_name": "session_name",
+	 * 	"session_location": "/Users/username/Documents/sessions/",
+	 * 	"file_type": "FT_WAVE",
+	 * 	"sample_rate": "SR_44100",
+	 * 	"bit_depth": "Bit16",
+	 * 	"input_output_settings": "IO_Last",
+	 * 	"is_interleaved": true,
+	 * 	"is_cloud_project": false,
+	 * 	"create_from_template": true,
+	 * 	"template_group": "Getting Started",
+	 * 	"template_name": "Beats"
+	 * }
+	 * @end_example
+	 *
+	 * @_category_session_file
+	 * @_category_all
+	 *
+	 * @since Pro Tools 2022.12
+	 * @_ingroup ptsl_version_2022_12
+	 */
+	CreateSession = 0;
+
+	/**
+	 * Opens a Pro Tools session.
+	 *
+	 * @request_body_type OpenSessionRequestBody
+	 *
+	 * @request_body_json_example
+	 * {
+	 * 	"session_path": "/Path/to/session_name.ptx"
+	 * }
+	 * @end_example
+	 *
+	 * @_category_session_file
+	 * @_category_all
+	 *
+	 * @since Pro Tools 2022.12
+	 * @_ingroup ptsl_version_2022_12
+	 */
+	OpenSession = 1;
+
+	/**
+	 * Imports existing Pro Tools session.
+	 * 
+	 * TODO Add json examples for request and response after splitting command by import type.
+	 *
+	 * @_category_session_file
+	 * @_category_session_write
+	 * @_category_all
+	 *
+	 * @since Pro Tools 2022.12
+	 * @_ingroup ptsl_version_2022_12
+	 */
+	Import = 2;
+
+	/**
+	 * Gets list of tracks from session.
+	 
+	 * @request_body_type GetTrackListRequestBody
+	 *
+	 * @request_body_json_example
+	 * {
+	 * 	"track_filter_list": [{"filter": "Selected", "is_inverted": true}],
+	 * 	"is_filter_list_additive": true,
+	 * 	"pagination_request": {
+	 * 		"limit": 0,
+	 * 		"offset": 0
+	 * 	}
+	 * }
+	 * @end_example
+	 *
+	 * @response_body_type GetTrackListResponseBody
+	 *
+	 * @response_body_json_example
+	 * {
+	 * 	"track_list": [{
+	 * 		"name": "Audio 1",
+	 * 		"type": "TT_Audio",
+	 * 		"format": "TF_Mono",
+	 * 		"color": "#ff13355f",
+	 * 		"id": "{00000000-2a000000-d072e1e1-aa4193d5}",
+	 * 		"id_compressed": "dvK0gQ4EfY0aaaacOaaaaa",
+	 * 		"index": 2,
+	 * 		"parent_folder_id": "{00000000-2a000000-2b75e1e1-b81bc33c}",
+	 * 		"parent_folder_name": "Folder 1",
+	 * 		"timebase": "TTB_Samples",
+	 * 		"track_attributes": {
+	 * 			"contains_automation": false,
+	 * 			"contains_clips": false,
+	 * 			"is_frozen": false,
+	 * 			"is_hidden": "None",
+	 * 			"is_inactive": "None",
+	 * 			"is_input_monitoring_on": "None",
+	 * 			"is_locked": false,
+	 * 			"is_muted": false,
+	 * 			"is_online": false,
+	 * 			"is_open": false,
+	 * 			"is_record_enabled": false,
+	 * 			"is_record_enabled_safe": false,
+	 * 			"is_selected": "SetImplicitly",
+	 * 			"is_smart_dsp_on": false,
+	 * 			"is_smart_dsp_on_safe": false,
+	 * 			"is_soloed": false,
+	 * 			"is_soloed_safe": false
+	 * 		}
+	 * 	}],
+	 * 	"pagination_response": {
+	 * 		"limit": 0,
+	 * 		"offset": 0,
+	 * 		"total": 1
+	 * 	}
+	 * }
+	 * @end_example
+	 *
+	 * @_category_session_read
+	 * @_category_all
+	 *
+	 * @since Pro Tools 2022.12
+	 * @_ingroup ptsl_version_2022_12
+	 */
+	GetTrackList = 3;
+
+	/**
+	 * Selects all clips on the selected track.
+	 *
+	 * @request_body_type SelectAllClipsOnTrackRequestBody
+	 *
+	 * @request_body_json_example
+	 * {
+	 * 	"track_name": "track name"
+	 * }
+	 * @end_example
+	 *
+	 * @_category_editing
+	 * @_category_all
+	 *
+	 * @since Pro Tools 2022.12
+	 * @_ingroup ptsl_version_2022_12
+	 */
+	SelectAllClipsOnTrack = 4;
+
+	/**
+	 * Extends selection to target tracks.
+	 *
+	 * @request_body_type ExtendSelectionToTargetTracksRequestBody
+	 *
+	 * @request_body_json_example
+	 * {
+	 * 	"tracks_to_extend_to": ["track1", "track2"]
+	 * }
+	 * @end_example
+	 *
+	 * @_category_editing
+	 * @_category_all
+	 *
+	 * @since Pro Tools 2022.12
+	 * @_ingroup ptsl_version_2022_12
+	 */
+	ExtendSelectionToTargetTracks = 5;
+
+	/**
+	 * Trims clips to selection.
+	 *
+	 * @_category_editing
+	 * @_category_all
+	 *
+	 * @since Pro Tools 2022.12
+	 * @_ingroup ptsl_version_2022_12
+	 */
+	TrimToSelection = 6;
+
+	/**
+	 * Creates fades on clips from specified preset.
+	 *
+	 * @request_body_type CreateFadesBasedOnPresetRequestBody
+	 *
+	 * @request_body_json_example
+	 * {
+	 * 	"fade_preset_name": "fade preset name",
+	 * 	"auto_adjust_bounds": true
+	 * }
+	 * @end_example
+	 *
+	 * @_category_editing
+	 * @_category_all
+	 *
+	 * @since Pro Tools 2022.12
+	 * @_ingroup ptsl_version_2023_09
+	 */
+	CreateFadesBasedOnPreset = 7;
+
+	/**
+	 * Renames selected track.
+	 *
+	 * @request_body_type RenameTargetTrackRequestBody
+	 *
+	 * @request_body_json_example
+	 * {
+	 * 	"new_name": "Audio 1 - Renamed",
+	 * 	"current_name": "Audio 1"
+	 * }
+	 * @end_example
+	 *
+	 * @_category_editing
+	 * @_category_all
+	 *
+	 * @since Pro Tools 2022.12
+	 * @_ingroup ptsl_version_2023_09
+	 */
+	RenameTargetTrack = 8;
+
+	/**
+	 * Consolidates selected clips.
+	 *
+	 * @_category_editing
+	 * @_category_all
+	 *
+	 * @since Pro Tools 2022.12
+	 * @_ingroup ptsl_version_2022_12
+	 */
+	ConsolidateClip = 9;
+
+	/**
+	 * Exports selected clips as files.
+	 *
+	 * @request_body_type ExportClipsAsFilesRequestBody
+	 *
+	 * @request_body_json_example
+	 * {
+	 * 	"file_path": "/Path/to/existing/folder/",
+	 * 	"format": "EF_Mono",
+	 * 	"file_type": "WAV",
+	 * 	"bit_depth": "Bit16",
+	 * 	"duplicate_names": "AutoRenaming",
+	 * 	"enforce_avid_compatibility": true,
+	 * 	"sample_rate_custom": 4000
+	 * }
+	 * @end_example
+	 *
+	 * @_category_export
+	 * @_category_all
+	 *
+	 * @since Pro Tools 2022.12
+	 * @_ingroup ptsl_version_2022_12
+	 */
+	ExportClipsAsFiles = 10;
+
+	/**
+	 * Exports selected tracks as AAF/OMF.
+	 * @request_body_type ExportSelectedTracksAsAAFOMFRequestBody
+	 *
+	 * @request_body_json_example
+	 * {
+	 * 	"file_type": "AAF_WAV",
+	 * 	"bit_depth": "AAF_Bit16",
+	 * 	"copy_option": "CopyFromSourceMedia",
+	 * 	"enforce_media_composer_compatibility": false,
+	 * 	"quantize_edits_to_frame_boundaries": false,
+	 * 	"export_stereo_as_multichannel": true,
+	 * 	"container_file_name": "container_file_name",
+	 * 	"container_file_location": "/Users/username/Documents/container_file_location/",
+	 * 	"asset_file_location": "/Users/username/Documents/asset_file_location/",
+	 * 	"comments": "comments",
+	 * 	"sequence_name": "sequence_name"
+	 * }
+	 * @end_example
+	 *
+	 * @_category_export
+	 * @_category_all
+	 *
+	 * @since Pro Tools 2022.12
+	 * @_ingroup ptsl_version_2022_12
+	 */
+	ExportSelectedTracksAsAAFOMF = 11;
+
+	/**
+	 * Gets task execution status.
+	 *
+	 * Only returns the status of the task that is currently in progress.
+	 * So it should be called asynchronously in parallel to the requested PTSL Command.
+	 *
+	 * @request_body_type GetTaskStatusRequestBody
+	 *
+	 * @request_body_json_example
+	 * {
+	 * 	"task_id": "af797e04-d0fb-459c-bd2b-6e1c6f999ec6"
+	 * }
+	 * @end_example
+	 *
+	 * @response_body_type GetTaskStatusResponseBody
+	 *
+	 * @response_body_json_example
+	 * {
+	 * 	"task_id": "af797e04-d0fb-459c-bd2b-6e1c6f999ec6",
+	 * 	"status": "Completed",
+	 * 	"progress": 100
+	 * }
+	 * @end_example
+	 *
+	 * @_category_general
+	 * @_category_all
+	 *
+	 * @since Pro Tools 2022.12
+	 * @_ingroup ptsl_version_2022_12
+	 */
+	GetTaskStatus = 12;
+
+	/**
+	 * Checks to see if the Pro Tools application is fully loaded and ready to execute PTSL commands.
+	 *
+	 * @response_body_type HostReadyCheckResponseBody
+	 *
+	 * @response_body_json_example
+	 * {
+	 * 	"is_host_ready": true
+	 * }
+	 * @end_example
+	 *
+	 * @_category_general
+	 * @_category_all
+	 *
+	 * @since Pro Tools 2022.12
+	 * @_ingroup ptsl_version_2024_06
+	 */
+	HostReadyCheck = 13;
+
+	/**
+	 * Forces rescan the file list or forces recalculate waveforms for the specific files.
+	 *
+	 * @request_body_type RefreshTargetAudioFilesRequestBody
+	 *
+	 * @request_body_json_example
+	 * {
+	 * 	"file_list": ["/Path/to/Audio_1.wav", "/Path/to/Audio_2.wav"]
+	 * }
+	 * @end_example
+	 *
+	 * @response_body_type RefreshTargetAudioFilesResponseBody
+	 *
+	 * @response_body_json_example
+	 * {
+	 * 	"success_count": 1,
+	 * 	"failure_count": 1,
+	 * 	"failure_list": ["/Path/to/Audio_1.wav"]
+	 * }
+	 * @end_example
+	 *
+	 * @_category_session_write
+	 * @_category_all
+	 *
+	 * @since Pro Tools 2022.12
+	 * @_ingroup ptsl_version_2022_12
+	 */
+	RefreshTargetAudioFiles = 14;
+
+	/**
+	 * Refreshes modified files in the session.
+	 *
+	 * @_category_session_write
+	 * @_category_all
+	 *
+	 * @since Pro Tools 2022.12
+	 * @_ingroup ptsl_version_2022_12
+	 */
+	RefreshAllModifiedAudioFiles = 15;
+
+	/**
+	 * Gets an optionally filtered list of the media files referenced by the session.
+	 *
+	 * @request_body_type GetFileLocationRequestBody
+	 * 
+	 * @request_body_json_example
+	 * {
+	 * 	"file_filters": ["NotOnTimeline_Files", "Video_Files"],
+	 * 	"pagination_request": {
+	 * 		"limit": 0,
+	 * 		"offset": 0
+	 * 	}
+	 * }
+	 * @end_example
+	 * 
+	 * @response_body_type GetFileLocationResponseBody
+	 *
+	 * @response_body_json_example
+	 *{
+	 * "file_locations": [{
+	 * 	"info": {
+	 * 		"is_online": true
+	 * 	},
+	 * 	"path": "/Path/to/Audio 1_03.wav"
+	 * },
+	 * {
+	 * 	"info": {
+	 * 		"is_online": false
+	 * 	},
+	 * 	"path": "/Path/to/Video.mp4"
+	 * }],
+	 * 	"pagination_response": {
+	 * 		"limit": 0,
+	 * 		"offset": 0,
+	 * 		"total": 2
+	 * 	}
+	 * } 
+	 * @end_example
+	 *
+	 * @_category_editing
+	 * @_category_all
+	 *
+	 * @since Pro Tools 2022.12
+	 * @_ingroup ptsl_version_2022_12
+	 */
+	GetFileLocation = 16;
+
+	/**
+	 * Closes a Pro Tools session.
+	 *
+	 * @request_body_type CloseSessionRequestBody
+	 *
+	 * @request_body_json_example
+	 * {
+	 * 	"save_on_close": true
+	 * }
+	 * @end_example
+	 *
+	 * @_category_session_file
+	 * @_category_all
+	 *
+	 * @since Pro Tools 2022.12
+	 * @_ingroup ptsl_version_2022_12
+	 */
+	CloseSession = 17;
+
+	/**
+	 * Saves a Pro Tools session.
+	 *
+	 * @_category_session_file
+	 * @_category_all
+	 *
+	 * @since Pro Tools 2022.12
+	 * @_ingroup ptsl_version_2022_12
+	 */
+	SaveSession = 18;
+
+	/**
+	 * Saves Pro Tools session as a new session.
+	 *
+	 * @request_body_type SaveSessionAsRequestBody
+	 *
+	 * @request_body_json_example
+	 * {
+	 * 	"session_name": "Test",
+	 * 	"session_location": "/Path/to/existing/folder"
+	 * }
+	 * @end_example
+	 *
+	 * @_category_session_file
+	 * @_category_export
+	 * @_category_all
+	 *
+	 * @since Pro Tools 2022.12
+	 * @_ingroup ptsl_version_2022_12
+	 */
+	SaveSessionAs = 19;
+
+	/**
+	 * Cuts data on track.
+	 *
+	 * @_category_editing
+	 * @_category_all
+	 *
+	 * @since Pro Tools 2022.12
+	 * @_ingroup ptsl_version_2022_12
+	 */
+	Cut = 20;
+
+	/**
+	 * Copies data on track.
+	 *
+	 * @_category_editing
+	 * @_category_all
+	 *
+	 * @since Pro Tools 2022.12
+	 * @_ingroup ptsl_version_2022_12
+	 */
+	Copy = 21;
+
+	/**
+	 * Pastes data on track.
+	 *
+	 * @_category_editing
+	 * @_category_all
+	 *
+	 * @since Pro Tools 2022.12
+	 * @_ingroup ptsl_version_2022_12
+	 */
+	Paste = 22;
+
+	/**
+	 * Clears data on track.
+	 *
+	 * @_category_editing
+	 * @_category_all
+	 *
+	 * @since Pro Tools 2022.12
+	 * @_ingroup ptsl_version_2022_12
+	 */
+	Clear = 23;
+
+	/**
+	 * Cuts data on track by filtering data type.
+	 *
+	 * @request_body_type CutSpecialRequestBody
+	 *
+	 * @request_body_json_example
+	 * {
+	 * 	"automation_data_option": "All_Automation"
+	 * }
+	 * @end_example
+	 *
+	 * @_category_editing
+	 * @_category_all
+	 *
+	 * @since Pro Tools 2022.12
+	 * @_ingroup ptsl_version_2022_12
+	 */
+	CutSpecial = 24;
+
+	/**
+	 * Copies data on track by filtering data type.
+	 *
+	 * @request_body_type CopySpecialRequestBody
+	 *
+	 * @request_body_json_example
+	 * {
+	 * 	"automation_data_option": "All_Automation"
+	 * }
+	 * @end_example
+	 *
+	 * @_category_editing
+	 * @_category_all
+	 *
+	 * @since Pro Tools 2022.12
+	 * @_ingroup ptsl_version_2022_12
+	 */
+	CopySpecial = 25;
+
+	/**
+	 * Clears data on track by filtering data type.
+	 *
+	 * @request_body_type ClearSpecialRequestBody
+	 *
+	 * @request_body_json_example
+	 * {
+	 * 	"automation_data_option": "All_Automation"
+	 * }
+	 * @end_example
+	 *
+	 * @_category_editing
+	 * @_category_all
+	 *
+	 * @since Pro Tools 2022.12
+	 * @_ingroup ptsl_version_2022_12
+	 */
+	ClearSpecial = 26;
+
+	/**
+	 * Pastes data on track by filtering data type.
+	 *
+	 * @request_body_type PasteSpecialRequestBody
+	 *
+	 * @request_body_json_example
+	 * {
+	 * 	"paste_special_option": "MergeMidi"
+	 * }
+	 * @end_example
+	 *
+	 * @_category_editing
+	 * @_category_all
+	 *
+	 * @since Pro Tools 2022.12
+	 * @_ingroup ptsl_version_2022_12
+	 */
+	PasteSpecial = 27;
+
+	/**
+	 * @brief Renders all or part of the session to one or more files.
+	 *
+	 * @details Export Mix (Bounce Mix) can export an entire mix, including sub-mixes, to multiple file
+	 * formats without having to create extra dedicated audio tracks in the session for bus recording.
+	 * Different options and settings are available depending on the selected FileType. The options are
+	 * organized in sections including Audio, Video, Location, and Dolby Atmos. Here's a breakdown of how the
+	 * sections are used for each FileType:
+	 *
+	 * - WAV
+	 *    -# has no Video section
+	 *    -# has a unique field called DeliveryFormat (only shown if Interleaved is selected as the file format and there are multiple mix sources)
+	 *
+	 * - AIF
+	 *    -# has no Video section
+	 *
+	 * - MP3
+	 *    -# has no Video section
+	 *    -# does not allow multiple mix sources
+	 *    -# does not allow mix sources greater than 0
+	 *    -# does not allow specifying Bit Depth value (always a 16Bit)
+	 *    -# Sample Rate is limited to 48k and 44.1k
+	 *    -# Import after Bounce is not available
+	 *
+	 * - MXF OPAtom
+	 *    -# has no Video section
+	 *    -# File format is multi-mono
+	 *    -# Bit Depth is only 16Bit and 24Bit
+	 *    -# Sample Rate is limited to 48k and 44.1k
+	 *    -# Pad to frame boundary is hard-coded to ON
+	 *
+	 * - WAV (Dolby Atmos ADM BWF)
+	 *    -# has no Audio section
+	 *    -# has no Video section
+	 *    -# has Dolby Atmos section (unique to this format)
+	 *    -# has FFOA (bool) default to False
+	 *    -# if FFOA is true then there's an option to enter TimeCode value
+	 *        -# TimeCode value will match the session frame rate
+	 *        -# Frame rate will always be 23.976 and 30 non-drop (if Frame rate is 60 -> it will still be 30)
+	 *    -# has Embed Program-level Metadata
+	 *
+	 * @request_body_type ExportMixRequestBody
+	 *
+	 * @request_body_json_example
+	 * {
+	 * 	"preset_path": "/Users/username/Documents/Pro Tools/Pro Tools Presets/Bounce/bounce_preset_1.ptpreset",
+	 * 	"file_name": "file_name",
+	 * 	"file_type": "EM_WAV",
+	 * 	"location_info": {
+	 * 		"file_destination": "EM_FD_Directory",
+	 * 		"directory": "/Users/username/export_folder/",
+	 * 		"import_after_bounce": "TB_False"
+	 * 	},
+	 * 	"audio_info": {
+	 * 		"export_format": "EF_Interleaved",
+	 * 		"bit_depth": "Bit16",
+	 * 		"sample_rate": "SR_44100",
+	 * 		"pad_to_frame_boundary": "TB_False",
+	 * 		"delivery_format": "EM_DF_FilePerMixSource"
+	 * 	},
+	 * 	"video_info": {
+	 * 		"include_video": "TB_False"
+	 * 	},
+	 * 	"offline_bounce": "TB_True",
+	 * 	"mix_source_list": [{
+	 * 		"source_type": "Bus",
+	 * 		"name": "Bus 1"
+	 * 	},
+	 * 	{
+	 * 		"source_type": "Bus",
+	 * 		"name": "Bus 1-2"
+	 * 	}]
+	 * }
+	 * @end_example
+	 *
+	 * @_category_export
+	 * @_category_all
+	 *
+	 * @since Pro Tools 2022.12
+	 * @_ingroup ptsl_version_2022_12
+	 */
+	ExportMix = 28;
+
+	/**
+	 * Places clips at exact locations.
+	 *
+	 * @request_body_type SpotRequestBody
+	 *
+	 * @request_body_json_example
+	 * {
+	 * 	"location_data": {
+	 * 		"location_type": "Start",
+	 * 		"location_value": "3|2|100",
+	 * 		"location_options": "BarsBeats"
+	 * 	}
+	 * }
+	 * @end_example
+	 *
+	 * @_category_editing
+	 * @_category_all
+	 *
+	 * @since Pro Tools 2022.12
+	 * @_ingroup ptsl_version_2022_12
+	 */
+	Spot = 29;
+
+	/**
+	 * Provides session data as text.
+	 *
+	 * @request_body_type ExportSessionInfoAsTextRequestBody
+	 *
+	 * @request_body_json_example
+	 * {
+	 * 	"include_file_list": true,
+	 * 	"include_clip_list": true,
+	 * 	"include_markers": true,
+	 * 	"include_plugin_list": true,
+	 * 	"include_track_edls": true,
+	 * 	"show_sub_frames": true,
+	 * 	"include_user_timestamps": true,
+	 * 	"track_list_type": "AllTracks",
+	 * 	"fade_handling_type": "ShowCrossfades",
+	 * 	"track_offset_options": "BarsBeats",
+	 * 	"text_as_file_format": "UTF8",
+	 * 	"output_type": "ESI_File",
+	 * 	"output_path": "/path/to/session_info.txt"
+	 * }
+	 * @end_example
+	 *
+	 * @response_body_type ExportSessionInfoAsTextResponseBody
+	 *
+	 * @response_body_json_example
+	 * {
+	 * 	"session_info": ""
+	 * }
+	 * @end_example
+	 *
+	 * @_category_session_file
+	 * @_category_export
+	 * @_category_all
+	 *
+	 * @since Pro Tools 2022.12
+	 * @_ingroup ptsl_version_2022_12
+	 */
+	ExportSessionInfoAsText = 30;
+
+	/**
+	 * Gets dynamic properties from the host application.
+	 *
+	 * @note Use dynamic properties to query the application about its support for features such as codecs
+	 * that are not directly bound to a particular version of the API or host application.
+	 *
+	 * TODO Add json examples for request and response after the command will be supported.
+	 *
+	 * @sa DynamicPropertyType
+	 *
+	 * @_category_general
+	 * @_category_all
+	 *
+	 * @since Pro Tools 2022.12
+	 * @_ingroup ptsl_version_2022_12
+	 */
+	GetDynamicProperties = 31;
+
+	/**
+	 * Sets playback mode.
+	 *
+	 * @request_body_type SetPlaybackModeRequestBody
+	 *
+	 * @request_body_json_example
+	 * {
+	 * 	"playback_mode": "PM_Normal"
+	 * }
+	 * @end_example
+	 *
+	 * @_category_transport
+	 * @_category_all
+	 *
+	 * @since Pro Tools 2022.12
+	 * @_ingroup ptsl_version_2022_12
+	 */
+	SetPlaybackMode = 32;
+
+	/**
+	 * Sets record mode.
+	 *
+	 * @request_body_type SetRecordModeRequestBody
+	 *
+	 * @request_body_json_example
+	 * {
+	 * 	"record_mode": "RM_Normal",
+	 * 	"record_arm_transport": true
+	 * }
+	 * @end_example
+	 *
+	 * @_category_transport
+	 * @_category_all
+	 *
+	 * @since Pro Tools 2022.12
+	 * @_ingroup ptsl_version_2022_12
+	 */
+	SetRecordMode = 33;
+
+	/**
+	 * Gets current session audio files format.
+	 *
+	 * @response_body_type GetSessionAudioFormatResponseBody
+	 *
+	 * @response_body_json_example
+	 * {
+	 * 	"current_setting": "SAF_WAVE",
+	 * 	"possible_settings": ["SAF_WAVE", "SAF_AIFF"]
+	 * }
+	 * @end_example
+	 *
+	 * @_category_session_read
+	 * @_category_all
+	 *
+	 * @since Pro Tools 2022.12
+	 * @_ingroup ptsl_version_2022_12
+	 */
+	GetSessionAudioFormat = 34;
+
+	/**
+	 * Gets current session sample rate.
+	 *
+	 * @response_body_type GetSessionSampleRateResponseBody
+	 *
+	 * @response_body_json_example
+	 * {
+	 * 	"sample_rate": "SR_48000"
+	 * }
+	 * @end_example
+	 *
+	 * @_category_session_read
+	 * @_category_all
+	 *
+	 * @since Pro Tools 2022.12
+	 * @_ingroup ptsl_version_2022_12
+	 */
+	GetSessionSampleRate = 35;
+
+	/**
+	 * Gets current session bit depth.
+	 *
+	 * @response_body_type GetSessionBitDepthResponseBody
+	 *
+	 * @response_body_json_example
+	 * {
+	 * 	"current_setting": "Bit16",
+	 * 	"possible_settings": ["Bit16", "Bit24", "Bit32Float"]
+	 * }
+	 * @end_example
+	 *
+	 * @_category_session_read
+	 * @_category_all
+	 *
+	 * @since Pro Tools 2022.12
+	 * @_ingroup ptsl_version_2022_12
+	 */
+	GetSessionBitDepth = 36;
+
+	/**
+	 * Gets current session interleaved state.
+	 *
+	 * @response_body_type GetSessionInterleavedStateResponseBody
+	 *
+	 * @response_body_json_example
+	 * {
+	 * 	"current_setting": true,
+	 * 	"possible_settings": [true, false]
+	 * }
+	 * @end_example
+	 *
+	 * @_category_session_read
+	 * @_category_all
+	 *
+	 * @since Pro Tools 2022.12
+	 * @_ingroup ptsl_version_2022_12
+	 */
+	GetSessionInterleavedState = 37;
+
+	/**
+	 * Gets current session time code rate.
+	 *
+	 * @response_body_type GetSessionTimeCodeRateResponseBody
+	 *
+	 * @response_body_json_example
+	 * {
+	 * 	"current_setting": "STCR_Fps23976", 
+	 * 	"possible_settings": ["STCR_Fps23976", "STCR_Fps24", "STCR_Fps25", "STCR_Fps2997", "STCR_Fps2997Drop", "STCR_Fps30", "STCR_Fps30Drop", "STCR_Fps47952", "STCR_Fps48", "STCR_Fps50", "STCR_Fps5994", "STCR_Fps5994Drop", "STCR_Fps60", "STCR_Fps60Drop", "STCR_Fps100", "STCR_Fps11988", "STCR_Fps11988Drop", "STCR_Fps120", "STCR_Fps120Drop"]
+	 * }
+	 * @end_example
+	 *
+	 * @_category_session_read
+	 * @_category_all
+	 *
+	 * @since Pro Tools 2022.12
+	 * @_ingroup ptsl_version_2022_12
+	 */
+	GetSessionTimeCodeRate = 38;
+
+	/**
+	 * Gets current session feet+frames rate.
+	 *
+	 * @response_body_type GetSessionFeetFramesRateResponseBody
+	 *
+	 * @response_body_json_example
+	 * {
+	 * 	"current_setting": "SFFR_Fps23976",
+	 * 	"possible_settings": ["SFFR_Fps23976", "SFFR_Fps24", "SFFR_Fps25"]
+	 * }
+	 * @end_example
+	 *
+	 * @_category_session_read
+	 * @_category_all
+	 *
+	 * @since Pro Tools 2022.12
+	 * @_ingroup ptsl_version_2022_12
+	 */
+	GetSessionFeetFramesRate = 39;
+
+	/**
+	 * Gets current session audio rate pull up/down.
+	 *
+	 * @response_body_type GetSessionAudioRatePullSettingsResponseBody
+	 *
+	 * @response_body_json_example
+	 * {
+	 * 	"current_setting": "SRP_None",
+	 * 	"possible_settings": ["SRP_None", "SRP_Up01", "SRP_Down01", "SRP_Up4", "SRP_Up4Up01", "SRP_Up4Down01", "SRP_Down4", "SRP_Down4Up01", "SRP_Down4Down01"]
+	 * }
+	 * @end_example
+	 *
+	 * @_category_session_read
+	 * @_category_all
+	 *
+	 * @since Pro Tools 2022.12
+	 * @_ingroup ptsl_version_2022_12
+	 */
+	GetSessionAudioRatePullSettings = 40;
+
+	/**
+	 * Gets current session video rate pull up/down.
+	 *
+	 * @response_body_type GetSessionVideoRatePullSettingsResponseBody
+	 *
+	 * @response_body_json_example
+	 * {
+	 * 	"current_setting": "SRP_None", 
+	 * 	"possible_settings": ["SRP_None", "SRP_Up01", "SRP_Down01"]
+	 * }
+	 * @end_example
+	 *
+	 * @_category_session_read
+	 * @_category_all
+	 *
+	 * @since Pro Tools 2022.12
+	 * @_ingroup ptsl_version_2022_12
+	 */
+	GetSessionVideoRatePullSettings = 41;
+
+	/**
+	 * Gets current session name.
+	 *
+	 * @response_body_type GetSessionNameResponseBody
+	 *
+	 * @response_body_json_example
+	 * {
+	 * 	"session_name": "Test1"
+	 * }
+	 * @end_example
+	 *
+	 * @_category_session_read
+	 * @_category_all
+	 *
+	 * @since Pro Tools 2022.12
+	 * @_ingroup ptsl_version_2022_12
+	 */
+	GetSessionName = 42;
+
+	/**
+	 * Gets current session path.
+	 *
+	 * @response_body_type GetSessionPathResponseBody
+	 *
+	 * @response_body_json_example
+	 * {
+	 * 	"session_path": {
+	 * 		"info": {
+	 * 			"is_online": false
+	 * 		},
+	 * 		"path": "D:/Test/Test.ptx"
+	 * 	}
+	 * }
+	 * @end_example
+	 *
+	 * @_category_session_read
+	 * @_category_all
+	 *
+	 * @since Pro Tools 2022.12
+	 * @_ingroup ptsl_version_2022_12
+	 */
+	GetSessionPath = 43;
+
+	/**
+	 * Gets current session start time.
+	 *
+	 * @response_body_type GetSessionStartTimeResponseBody
+	 *
+	 * @response_body_json_example
+	 * {
+	 * 	"session_start_time": "00:00:00:00.00"
+	 * }
+	 * @end_example
+	 *
+	 * @_category_session_read
+	 * @_category_all
+	 *
+	 * @since Pro Tools 2022.12
+	 * @_ingroup ptsl_version_2022_12
+	 */
+	GetSessionStartTime = 44;
+
+	/**
+	 * Gets current session length.
+	 *
+	 * @response_body_type GetSessionLengthResponseBody
+	 *
+	 * @response_body_json_example
+	 * {
+	 * 	"session_length": "24:00:00:00"
+	 * }
+	 * @end_example
+	 *
+	 * @_category_session_read
+	 * @_category_all
+	 *
+	 * @since Pro Tools 2022.12
+	 * @_ingroup ptsl_version_2022_12
+	 */
+	GetSessionLength = 45;
+
+	/**
+	 * Sets current session audio files format.
+	 *
+	 * @request_body_type SetSessionAudioFormatRequestBody
+	 *
+	 * @request_body_json_example
+	 * {
+	 * 	"audio_format": "SAF_WAVE"
+	 * }
+	 * @end_example
+	 *
+	 * @_category_session_write
+	 * @_category_all
+	 *
+	 * @since Pro Tools 2022.12
+	 * @_ingroup ptsl_version_2022_12
+	 */
+	SetSessionAudioFormat = 46;
+
+	/**
+	 * Sets current session bit depth.
+	 *
+	 * @request_body_type SetSessionBitDepthRequestBody
+	 *
+	 * @request_body_json_example
+	 * {
+	 * 	"bit_depth": "Bit16"
+	 * }
+	 * @end_example
+	 *
+	 * @_category_session_write
+	 * @_category_all
+	 *
+	 * @since Pro Tools 2022.12
+	 * @_ingroup ptsl_version_2022_12
+	 */
+	SetSessionBitDepth = 47;
+
+	/**
+	 * Sets current session interleaved state.
+	 *
+	 * @request_body_type SetSessionInterleavedStateRequestBody
+	 *
+	 * @request_body_json_example
+	 * {
+	 * 	"interleaved_state": true
+	 * }
+	 * @end_example
+	 *
+	 * @_category_session_write
+	 * @_category_all
+	 *
+	 * @since Pro Tools 2022.12
+	 * @_ingroup ptsl_version_2022_12
+	 */
+	SetSessionInterleavedState = 48;
+
+	/**
+	 * Sets current session time code rate.
+	 *
+	 * @request_body_type SetSessionTimeCodeRateRequestBody
+	 *
+	 * @request_body_json_example
+	 * {
+	 * 	"time_code_rate": "STCR_Fps23976"
+	 * }
+	 * @end_example
+	 *
+	 * @_category_session_write
+	 * @_category_all
+	 *
+	 * @since Pro Tools 2022.12
+	 * @_ingroup ptsl_version_2022_12
+	 */
+	SetSessionTimeCodeRate = 49;
+
+	/**
+	 * Sets current session feet+frames rate.
+	 *
+	 * @request_body_type SetSessionFeetFramesRateRequestBody
+	 *
+	 * @request_body_json_example
+	 * {
+	 * 	"feet_frames_rate": "SFFR_Fps23976"
+	 * }
+	 * @end_example
+	 *
+	 * @_category_session_write
+	 * @_category_all
+	 *
+	 * @since Pro Tools 2022.12
+	 * @_ingroup ptsl_version_2022_12
+	 */
+	SetSessionFeetFramesRate = 50;
+
+	/**
+	 * Sets current session audio rate pull up/down.
+	 *
+	 * @request_body_type SetSessionAudioRatePullSettingsRequestBody
+	 *
+	 * @request_body_json_example
+	 * {
+	 * 	"audio_rate_pull": "SRP_Up01"
+	 * }
+	 * @end_example
+	 *
+	 * @_category_session_write
+	 * @_category_all
+	 *
+	 * @since Pro Tools 2022.12
+	 * @_ingroup ptsl_version_2022_12
+	 */
+	SetSessionAudioRatePullSettings = 51;
+
+	/**
+	 * Sets current session video rate pull up/down.
+	 *
+	 * @request_body_type SetSessionVideoRatePullSettingsRequestBody
+	 *
+	 * @request_body_json_example
+	 * {
+	 * 	"video_rate_pull": "SRP_Up01"
+	 * }
+	 * @end_example
+	 *
+	 * @_category_session_write
+	 * @_category_all
+	 *
+	 * @since Pro Tools 2022.12
+	 * @_ingroup ptsl_version_2022_12
+	 */
+	SetSessionVideoRatePullSettings = 52;
+
+	/**
+	 * Sets current session start time.
+	 *
+	 * @request_body_type SetSessionStartTimeRequestBody
+	 *
+	 * @request_body_json_example
+	 * {
+	 * 	"session_start_time": "0|0|000",
+	 * 	"track_offset_opts": "BarsBeats",
+	 * 	"maintain_relative_position": false
+	 * }
+	 * @end_example
+	 *
+	 * @_category_session_write
+	 * @_category_all
+	 *
+	 * @since Pro Tools 2022.12
+	 * @_ingroup ptsl_version_2022_12
+	 */
+	SetSessionStartTime = 53;
+
+	/**
+	 * Sets current session length.
+	 *
+	 * @request_body_type SetSessionLengthRequestBody
+	 *
+	 * @request_body_json_example
+	 * {
+	 * 	"session_length": "06:00:00:00"
+	 * }
+	 * @end_example
+	 *
+	 * @_category_session_write
+	 * @_category_all
+	 *
+	 * @since Pro Tools 2022.12
+	 * @_ingroup ptsl_version_2022_12
+	 */
+	SetSessionLength = 54;
+
+	/**
+	 * Gets current version of PTSL Host, Client, and API commands.
+	 *
+	 * @response_body_type GetPTSLVersionResponseBody
+	 *
+	 * @response_body_json_example
+	 * {
+	 * 	"version": 5
+	 * }
+	 * @end_example
+	 *
+	 * @_category_general
+	 * @_category_all
+	 *
+	 * @since Pro Tools 2022.12
+	 * @_ingroup ptsl_version_2022_12
+	 */
+	GetPTSLVersion = 55;
+
+	/**
+	 * Gets current playback mode.
+	 *
+	 * @response_body_type GetPlaybackModeResponseBody
+	 *
+	 * @request_body_json_example
+	 * {
+	 * 	"current_settings": ["PM_Normal"],
+	 * 	"possible_settings": ["PM_Normal", "PM_Loop", "PM_DynamicTransport"]
+	 * }
+	 * @end_example
+	 *
+	 * @_category_transport
+	 * @_category_all
+	 *
+	 * @since Pro Tools 2022.12
+	 * @_ingroup ptsl_version_2022_12
+	 */
+	GetPlaybackMode = 56;
+
+	/**
+	 * Gets current record mode.
+	 *
+	 * @response_body_type GetRecordModeResponseBody
+	 *
+	 * @request_body_json_example
+	 * {
+	 * 	"current_setting": "RM_Normal",
+	 * 	"possible_settings": ["RM_Normal", "RM_Loop", "RM_Destructive", "RM_QuickPunch", "RM_TrackPunch", "RM_DestructivePunch"]
+	 * }
+	 * @end_example
+	 *
+	 * @_category_transport
+	 * @_category_all
+	 *
+	 * @since Pro Tools 2022.12
+	 * @_ingroup ptsl_version_2022_12
+	 */
+	GetRecordMode = 57;
+
+	/**
+	 * Gets transport armed.
+	 *
+	 * @response_body_type GetTransportArmedResponseBody
+	 *
+	 * @response_body_json_example
+	 * {
+	 * 	"is_transport_armed": true
+	 * }
+	 * @end_example
+	 *
+	 * @_category_transport
+	 * @_category_all
+	 *
+	 * @since Pro Tools 2022.12
+	 * @_ingroup ptsl_version_2022_12
+	 */
+	GetTransportArmed = 58;
+
+	/**
+	 * Gets current transport state.
+	 *
+	 * @response_body_type GetTransportStateResponseBody
+	 *
+	 * @response_body_json_example
+	 * {
+	 * 	"current_setting": "TS_TransportPlaying", 
+	 * 	"possible_settings": ["TS_TransportPlaying", "TS_TransportStopped", "TS_TransportRecording", "TS_TransportPlayingHalfSpeed", "TS_TransportRecordingHalfSpeed", "TS_TransportFastForward", "TS_TransportRewind", "TS_TransportScrub", "TS_TransportShuttle", "TS_TransportPrimed", "TS_TransportIsCueing", "TS_TransportIsCued", "TS_TransportIsCuedForPreview", "TS_TransportIsStopping", "TS_TransportIsPreviewing"]
+	 * }
+	 * @end_example
+	 *
+	 * @_category_transport
+	 * @_category_all
+	 *
+	 * @since Pro Tools 2022.12
+	 * @_ingroup ptsl_version_2022_12
+	 */
+	GetTransportState = 59;
+
+	/**
+	 * Removes memory locations corresponding to the numbers provided in the list.
+	 * @note Memory location enumeration should start with 1 (using 0 or negative numbers may result in undefined behavior).
+	 *
+	 * @request_body_type ClearMemoryLocationRequestBody
+	 *
+	 * @request_body_json_example
+	 * {
+	 * 	"location_list": [1, 2]
+	 * }
+	 * @end_example
+	 *
+	 * @response_body_type ClearMemoryLocationResponseBody
+	 *
+	 * @response_body_json_example 
+	 * {
+	 * 	"success_count": 1,
+	 * 	"failure_count": 1,
+	 * 	"failure_list": [2]
+	 * }
+	 * @end_example
+	 
+	 * @_category_editing
+	 * @_category_all
+	 *
+	 * @since Pro Tools 2023.03.
+	 *
+	 * @_ingroup ptsl_version_2023_03
+	 */
+	ClearMemoryLocation = 61;
+
+	/**
+	 * Renames a clip that was selected in the Pro Tools.
+	 *
+	 * @request_body_type RenameSelectedClipRequestBody
+	 *
+	 * @request_body_json_example
+	 * {
+	 * 	"clip_location": "CL_ClipsList",
+	 * 	"new_name": "NewName",
+	 * 	"rename_file": true
+	 * }
+	 * @end_example
+	 *
+	 * @_category_editing
+	 * @_category_all
+	 *
+	 * @since Pro Tools 2023.03.
+	 *
+	 * @_ingroup ptsl_version_2023_03
+	 */
+	RenameSelectedClip = 62;
+
+	/**
+	 * Renames a clip that was selected in the Pro Tools.
+	 *
+	 * @request_body_type RenameTargetClipRequestBody
+	 *
+	 * @request_body_json_example
+	 * {
+	 * 	"clip_name":  "CurrentName",
+	 * 	"new_name": "NewName",
+	 * 	"rename_file": true
+	 * }
+	 * @end_example
+	 *
+	 * @_category_editing
+	 * @_category_all
+	 *
+	 * @since Pro Tools 2023.03.
+	 *
+	 * @_ingroup ptsl_version_2023_03
+	 */
+	RenameTargetClip = 63;
+
+	/**
+	 * Toggles current play state (behaves the same as the button press).
+	 *
+	 * @_category_transport
+	 * @_category_all
+	 *
+	 * @since Pro Tools 2023.03
+	 * @_ingroup ptsl_version_2023_03
+	 */
+	TogglePlayState = 64;
+
+	/**
+	 * Toggles current record enable (behaves the same as the button press).
+	 *
+	 * @_category_transport
+	 * @_category_all
+	 *
+	 * @since Pro Tools 2023.03
+	 * @_ingroup ptsl_version_2023_03
+	 */
+	ToggleRecordEnable = 65;
+
+	/**
+	 * Plays with half speed.
+	 *
+	 * @_category_transport
+	 * @_category_all
+	 *
+	 * @since Pro Tools 2023.03
+	 * @_ingroup ptsl_version_2023_03
+	 */
+	PlayHalfSpeed = 66;
+
+	/**
+	 * Records with half speed.
+	 *
+	 * @_category_transport
+	 * @_category_all
+	 *
+	 * @since Pro Tools 2023.03
+	 * @_ingroup ptsl_version_2023_03
+	 */
+	RecordHalfSpeed = 67;
+
+	/**
+	 * Edits memory location.
+	 *
+	 * @request_body_type EditMemoryLocationRequestBody
+	 *
+	 * @request_body_json_example
+	 * {
+	 * 	"number": 1,
+	 * 	"name": "Location 1",
+	 * 	"start_time": "00:00:00",
+	 * 	"end_time": "00:00:00",
+	 * 	"time_properties": "TP_Marker",
+	 * 	"reference": "MLR_Absolute",
+	 * 	"general_properties": {
+	 * 		"zoom_settings": false,
+	 * 		"pre_post_roll_times": false,
+	 * 		"track_visibility": false,
+	 * 		"track_heights": false,
+	 * 		"group_enables": false,
+	 * 		"window_configuration": true,
+	 * 		"window_configuration_index": 1,
+	 * 		"venue_snapshot_index": 1
+	 * 	},
+	 * 	"comments": "comments",
+	 * 	"color_index": 1,
+	 * 	"location": "MLC_Track",
+	 * 	"track_name": "Audio 1"
+	 * }
+	 * @end_example
+	 *
+	 * @_category_editing
+	 * @_category_all
+	 *
+	 * @since Pro Tools 2023.03
+	 * @_ingroup ptsl_version_2023_03
+	 */
+	EditMemoryLocation = 68;
+
+	/**
+	 * Gets memory locations.
+	 *
+	 * @request_body_type GetMemoryLocationsRequestBody
+	 *
+	 * @request_body_json_example
+	 * {
+	 * 	"pagination_request": {
+	 * 		"limit": 0,
+	 * 		"offset": 0
+	 * 	}
+	 * }
+	 * @end_example
+	 *
+	 * @response_body_type GetMemoryLocationsResponseBody
+	 *
+	 * @response_body_json_example 
+	 * {
+	 * 	"memory_locations": [{
+	 * 		"name": "Location 1",
+	 * 		"number": 1,
+	 * 		"location": "MLC_MainRuler",
+	 * 		"reference": "MLR_Absolute",
+	 * 		"start_time": "5",
+	 * 		"end_time": "5",
+	 * 		"time_properties": "TP_Marker",
+	 * 		"color_index": 7,
+	 * 		"comments": "",
+	 * 		"general_properties": {
+	 * 			"group_enables": false,
+	 * 			"pre_post_roll_times": false,
+	 * 			"track_heights": false,
+	 * 			"track_visibility": false,
+	 * 			"window_configuration": false,
+	 * 			"window_configuration_index": 0,
+	 * 			"window_configuration_name": "(none)",
+	 * 			"zoom_settings": false
+	 * 		}
+	 * 	}],
+	 * 	"pagination_response": {
+	 * 		"limit": 0,
+	 * 		"offset": 0,
+	 * 		"total": 1
+	 * 	}
+	 * }
+	 * @end_example
+	 *
+	 * @_category_editing
+	 * @_category_all
+	 *
+	 * @since Pro Tools 2023.03
+	 * @_ingroup ptsl_version_2023_03
+	 */
+	GetMemoryLocations = 69;
+
+	/**
+	 * Submits registration information to create a new connection.
+	 *
+	 * @request_body_type RegisterConnectionRequestBody
+	 * @response_body_type RegisterConnectionResponseBody
+	 *
+	 * @request_body_json_example
+	 * {
+	 * 	"company_name": "MyCompany",
+	 * 	"application_name": "MyApp"
+	 * }
+	 * @end_example
+	 *
+	 * @response_body_json_example
+	 * {
+	 * 	"session_id":"bb004310-c92f-48ed-8c0b-ee301024fdce"
+	 * }
+	 * @end_example
+	 *
+	 * @note This API provides PTSL Session ID; please don't confuse it with Pro Tools sessions.
+	 *
+	 * @_category_general
+	 * @_category_all
+	 *
+	 * @since Pro Tools 2023.03
+	 * @_ingroup ptsl_version_2023_03
+	 */
+	RegisterConnection = 70;
+
+	/**
+	 * Creates memory location.
+	 *
+	 * @request_body_type CreateMemoryLocationRequestBody
+	 *
+	 * @request_body_json_example
+	 * {
+	 * 	"number": 1,
+	 * 	"name": "name",
+	 * 	"start_time": "0",
+	 * 	"end_time": "123",
+	 * 	"time_properties": "TP_Selection",
+	 * 	"reference": "MLR_FollowTrackTimebase",
+	 * 	"general_properties": {
+	 * 		"zoom_settings": false,
+	 * 		"pre_post_roll_times": false,
+	 * 		"track_visibility": false,
+	 * 		"track_heights": false,
+	 * 		"group_enables": false,
+	 * 		"window_configuration": true,
+	 * 		"window_configuration_index": 1,
+	 * 		"venue_snapshot_index": 1
+	 * 	},
+	 * 	"comments": "comments",
+	 * 	"color_index": 1,
+	 * 	"location": "MLC_Track",
+	 * 	"track_name": "Audio 1"
+	 * }
+	 * @end_example
+	 *
+	 * @_category_editing
+	 * @_category_all
+	 *
+	 * @since Pro Tools 2023.06
+	 * @_ingroup ptsl_version_2023_06
+	 */
+	CreateMemoryLocation = 71;
+
+	/**
+	 * Creates new tracks.
+	 *
+	 * @request_body_type CreateNewTracksRequestBody
+	 *
+	 * @request_body_json_example
+	 * {
+	 * 	"number_of_tracks": 1,
+	 * 	"track_name": "track_name",
+	 * 	"track_format": "TF_Mono",
+	 * 	"track_type": "TT_Audio",
+	 * 	"track_timebase": "TTB_Samples",
+	 * 	"pagination_request": {
+	 * 		"limit": 0,
+	 * 		"offset": 0
+	 * 	},
+	 * 	"insertion_point_position": "TIPoint_After",
+	 * 	"insertion_point_track_name": "Audio 1"
+	 * }
+	 * @end_example
+	 *
+	 * @response_body_type CreateNewTracksResponseBody
+	 *
+	 * @response_body_json_example
+	 * {
+	 * 	"created_track_names": ["track_name"],
+	 * 	"number_of_tracks": 1,
+	 * 	"pagination_response": {
+	 * 		"limit": 0,
+	 * 		"offset": 0,
+	 * 		"total": 1
+	 * 	}
+	 * }
+	 * @end_example
+	 *
+	 * @_category_editing
+	 * @_category_all
+	 *
+	 * @since Pro Tools 2023.09
+	 * @_ingroup ptsl_version_2023_09
+	 */
+	CreateNewTracks = 72;
+
+	/**
+	 * Selects tracks by specified names without using wildcards.
+	 *
+	 * @request_body_type SelectTracksByNameRequestBody
+	 *
+	 * @request_body_json_example
+	 * {
+	 * 	"track_names":  ["track1"],
+	 * 	"selection_mode": "SM_Replace",
+	 * 	"pagination_request": {
+	 * 		"limit": 0,
+	 * 		"offset": 0
+	 * 	}
+	 * }
+	 * @end_example
+	 *
+	 * @response_body_type SelectTracksByNameResponseBody
+	 *
+	 * @response_body_json_example 
+	 * {
+	 * 	"track_list": [{
+	 * 		"name": "Audio 1",
+	 * 		"type": "TT_Audio",
+	 * 		"format": "TF_Mono",
+	 * 		"color": "#ff13355f",
+	 * 		"id": "{00000000-2a000000-d072e1e1-aa4193d5}",
+	 * 		"id_compressed": "dvK0gQ4EfY0aaaacOaaaaa",
+	 * 		"index": 2,
+	 * 		"parent_folder_id": "{00000000-2a000000-2b75e1e1-b81bc33c}",
+	 * 		"parent_folder_name": "Folder 1",
+	 * 		"timebase": "TTB_Samples",
+	 * 		"track_attributes": {
+	 * 			"contains_automation": false,
+	 * 			"contains_clips": false,
+	 * 			"is_frozen": false,
+	 * 			"is_hidden": "None",
+	 * 			"is_inactive": "None",
+	 * 			"is_input_monitoring_on": "None",
+	 * 			"is_locked": false,
+	 * 			"is_muted": false,
+	 * 			"is_online": false,
+	 * 			"is_open": false,
+	 * 			"is_record_enabled": false,
+	 * 			"is_record_enabled_safe": false,
+	 * 			"is_selected": "SetImplicitly",
+	 * 			"is_smart_dsp_on": false,
+	 * 			"is_smart_dsp_on_safe": false,
+	 * 			"is_soloed": false,
+	 * 			"is_soloed_safe": false
+	 * 		}
+	 * 	}],
+	 * 	"pagination_response": {
+	 * 		"limit": 0,
+	 * 		"offset": 0,
+	 * 		"total": 1
+	 * 	}
+	 * }
+	 * @end_example
+	 *
+	 * @_category_editing
+	 * @_category_all
+	 *
+	 * @since Pro Tools 2023.09
+	 * @_ingroup ptsl_version_2023_09
+	 */
+	SelectTracksByName = 73;
+
+	/**
+	 * Gets edit mode.
+	 *
+	 * @response_body_type GetEditModeResponseBody
+	 *
+	 * @response_body_json_example
+	 * {
+	 * 	"current_setting": "EMO_Shuffle",
+	 * 	"possible_settings": ["EMO_Shuffle", "EMO_Slip", "EMO_Spot", "EMO_GridAbsolute", "EMO_GridRelative", "EMO_ShuffleSnapToGridAbsolute", "EMO_SlipSnapToGridAbsolute", "EMO_SpotSnapToGridAbsolute", "EMO_ShuffleSnapToGridRelative", "EMO_SlipSnapToGridRelative", "EMO_SpotSnapToGridRelative"]
+	 * }
+	 * @end_example
+	 *
+	 * @_category_session_read
+	 * @_category_all
+	 *
+	 * @since Pro Tools 2023.09
+	 * @_ingroup ptsl_version_2023_09
+	 */
+	GetEditMode = 74;
+
+	/**
+	 * Sets edit mode.
+	 *
+	 * @request_body_type SetEditModeRequestBody
+	 *
+	 * @request_body_json_example
+	 * {
+	 * 	"edit_mode": "EMO_Shuffle"
+	 * }
+	 * @end_example
+	 *
+	 * @_category_session_write
+	 * @_category_all
+	 *
+	 * @since Pro Tools 2023.09
+	 * @_ingroup ptsl_version_2023_09
+	 */
+	SetEditMode = 75;
+
+	/**
+	 * Gets current edit tool.
+	 *
+	 * @response_body_type GetEditToolResponseBody
+	 *
+	 * @response_body_json_example
+	 * {
+	 * 	"current_setting": "ET_ZoomNormal",
+	 * 	"possible_settings": ["ET_ZoomNormal", "ET_ZoomSingle", "ET_TrimStandard", "ET_TrimTce", "ET_TrimScrub", "ET_TrimLoop", "ET_Selector", "ET_GrabberTime", "ET_GrabberSeparation", "ET_GrabberObject", "ET_SmartTool", "ET_Scrubber", "ET_PencilFreeHand", "ET_PencilLine", "ET_PencilTriangle", "ET_PencilSquare", "ET_PencilRandom", "ET_PencilParabolic", "ET_PencilSCurve"]
+	 * }
+	 * @end_example
+	 *
+	 * @_category_session_read
+	 * @_category_all
+	 *
+	 * @since Pro Tools 2023.09
+	 * @_ingroup ptsl_version_2023_09
+	 */
+	GetEditTool = 76;
+
+	/**
+	 * Sets edit tool.
+	 *
+	 * @request_body_type SetEditToolRequestBody
+	 *
+	 * @request_body_json_example
+	 * {
+	 * 	"edit_tool": "ET_ZoomNormal"
+	 * }
+	 * @end_example
+	 *
+	 * @_category_session_write
+	 * @_category_all
+	 *
+	 * @since Pro Tools 2023.09
+	 * @_ingroup ptsl_version_2023_09
+	 */
+	SetEditTool = 77;
+
+	/**
+	 * Recalls zoom preset.
+	 *
+	 * @request_body_type RecallZoomPresetRequestBody
+	 *
+	 * @request_body_json_example
+	 * {
+	 * 	"zoom_preset": 1
+	 * }
+	 * @end_example
+	 *
+	 * @_category_session_write
+	 * @_category_all
+	 *
+	 * @since Pro Tools 2023.09
+	 * @_ingroup ptsl_version_2023_09
+	 */
+	RecallZoomPreset = 78;
+
+	/**
+	 * Gets current edit mode options.
+	 *
+	 * @response_body_type GetEditModeOptionsResponseBody
+	 *
+	 * @response_body_json_example
+	 * {
+	 * 	"edit_mode_options":{
+	 * 		"tab_to_transients": true, 
+	 * 		"link_timeline_and_edit_selection": true, 
+	 * 		"link_track_and_edit_selection": true, 
+	 * 		"insertion_follows_playback": true, 
+	 * 		"automation_follows_edit": true, 
+	 * 		"markers_follow_edit": true, 
+	 * 		"layered_editing": true
+	 * 	}
+	 * }
+	 * @end_example
+	 *
+	 * @_category_session_read
+	 * @_category_all
+	 *
+	 * @since Pro Tools 2023.09
+	 * @_ingroup ptsl_version_2023_09
+	 */
+	GetEditModeOptions = 79;
+
+	/**
+	 * Sets edit mode options.
+	 *
+	 * @request_body_type SetEditModeOptionsRequestBody
+	 *
+	 * @request_body_json_example
+	 * {
+	 * 	"edit_mode_options": {
+	 * 		"tab_to_transients": true,
+	 * 		"link_timeline_and_edit_selection": true,
+	 * 		"link_track_and_edit_selection": true,
+	 * 		"insertion_follows_playback": true,
+	 * 		"automation_follows_edit": true,
+	 * 		"markers_follow_edit": true,
+	 * 		"mirrored_midi_editing": true,
+	 * 		"layered_editing": true
+	 * 	}
+	 * }
+	 * @end_example
+	 *
+	 * @_category_session_write
+	 * @_category_all
+	 *
+	 * @since Pro Tools 2023.09
+	 * @_ingroup ptsl_version_2023_09
+	 */
+	SetEditModeOptions = 80;
+
+	/**
+	 * Sets timeline selection.
+	 * @request_body_type SetTimelineSelectionRequestBody
+	 *
+	 * @request_body_json_example
+	 * {
+	 * 	"play_start_marker_time": "25",
+	 * 	"in_time": "20",
+	 * 	"out_time": "30",
+	 * 	"pre_roll_start_time": "15",
+	 * 	"post_roll_stop_time": "35",
+	 * 	"pre_roll_enabled": "TB_True",
+	 * 	"post_roll_enabled": "TB_True"
+	 * }
+	 * @end_example
+	 *
+	 * @_category_transport
+	 * @_category_all
+	 *
+	 * @since Pro Tools 2023.09
+	 * @_ingroup ptsl_version_2023_09
+	 */
+	SetTimelineSelection = 81;
+
+	/**
+	 * Gets timeline selection.
+	 *
+	 * @request_body_type GetTimelineSelectionRequestBody
+	 *
+	 * @request_body_json_example
+	 * {
+	 * 	"time_scale": "Samples"
+	 * }
+	 * @end_example
+	 *
+	 * @response_body_type GetTimelineSelectionResponseBody
+	 *
+	 * @response_body_json_example
+	 * {
+	 * 	"in_time": "998424",
+	 * 	"out_time": "1098424",
+	 * 	"play_start_marker_time": "998424",
+	 * 	"post_roll_enabled": false,
+	 * 	"post_roll_stop_time": "1098424",
+	 * 	"pre_roll_enabled": false,
+	 * 	"pre_roll_start_time": "998424"
+	 * }
+	 * @end_example
+	 *
+	 * @_category_transport
+	 * @_category_all
+	 *
+	 * @since Pro Tools 2023.09
+	 * @_ingroup ptsl_version_2023_09
+	 */
+	GetTimelineSelection = 82;
+
+	/**
+	 * Imports Video file(s) into the session.
+	 *
+	 *@request_body_type ImportVideoRequestBody
+	 *
+	 * @request_body_json_example
+	 * {
+	 * 	"video_file_list": ["/Path/to/video_1.mp4", "/Path/to/video_2.mp4"],
+	 * 	"destination": "MD_NewTrack",
+	 * 	"location": "ML_Spot",
+	 * 	"spot_location_data": {
+	 * 		"location_type": "Start",
+	 * 		"location_value": "00:10.360",
+	 * 		"location_options": "MinSecs"
+	 * 	},
+	 * 	"gaps_between_clips": 5,
+	 * 	"import_audio_from_file": true,
+	 * 	"audio_destination_path": "/Path/to/folder/",
+	 * 	"remove_existing_video_tracks": false,
+	 * 	"remove_existing_video_clips": false,
+	 * 	"clear_destination_video_track_playlist": false
+	 * }
+	 * @end_example
+	 * 
+	 * @response_body_type ImportVideoResponseBody
+	 *
+	 * @response_body_json_example
+	 * {
+	 * 	"failure_list": [{
+	 * 		"failure_message": "File was not found",
+	 * 		"file_path": "/Path/to/non_existing_file.mp4"
+	 * 	}]
+	 * }
+	 * @end_example
+	 *
+	 * @_category_session_write
+	 * @_category_all
+	 *
+	 * @since Pro Tools 2023.12
+	 * @_ingroup ptsl_version_2023_12
+	 */
+	ImportVideo = 83;
+
+	/**
+	 * Selects the memory location specified.
+	 *
+	 * @request_body_type SelectMemoryLocationRequestBody
+	 *
+	 * @request_body_json_example
+	 * {
+	 * 	"number": 1
+	 * }
+	 * @end_example
+	 *
+	 * @_category_editing
+	 * @_category_all
+	 *
+	 * @since Pro Tools 2023.12
+	 * @_ingroup ptsl_version_2023_12
+	 */
+	SelectMemoryLocation = 84;
+
+	/**
+	 * Sets the `mute` state of the specified tracks (except Video and MasterFader types of tracks).
+	 *
+	 * @request_body_type SetTrackMuteStateRequestBody
+	 *
+	 * @request_body_json_example
+	 * {
+	 * 	"track_names": ["track1", "track2"],
+	 * 	"enabled": true
+	 * }
+	 * @end_example
+	 *
+	 * @_category_editing
+	 * @_category_all
+	 *
+	 * @since Pro Tools 2023.12
+	 * @_ingroup ptsl_version_2023_12
+	 */
+	SetTrackMuteState = 85;
+
+	/**
+	 * Sets the `solo` state of the specified tracks (except Video and MasterFader types of tracks).
+	 *
+	 * @request_body_type SetTrackSoloStateRequestBody
+	 *
+	 * @request_body_json_example
+	 * {
+	 * 	"track_names": ["track1", "track2"],
+	 * 	"enabled": true
+	 * }
+	 * @end_example
+	 *
+	 * @_category_editing
+	 * @_category_all
+	 *
+	 * @since Pro Tools 2023.12
+	 * @_ingroup ptsl_version_2023_12
+	 */
+	SetTrackSoloState = 86;
+
+	/**
+	 * Sets the `solo safe` state of the specified tracks (except Video and MasterFader types of tracks).
+	 *
+	 * @request_body_type SetTrackSoloSafeStateRequestBody
+	 *
+	 * @request_body_json_example
+	 * {
+	 * 	"track_names": ["track1", "track2"],
+	 * 	"enabled": true
+	 * }
+	 * @end_example
+	 *
+	 * @_category_editing
+	 * @_category_all
+	 *
+	 * @since Pro Tools 2023.12
+	 * @_ingroup ptsl_version_2023_12
+	 */
+	SetTrackSoloSafeState = 87;
+
+	/**
+	 * Sets the `record enable` state of the specified tracks (Audio, Instrument, Midi and VCA types of tracks only).
+	 *
+	 * @request_body_type SetTrackRecordEnableStateRequestBody
+	 *
+	 * @request_body_json_example
+	 * {
+	 * 	"track_names": ["track1", "track2"],
+	 * 	"enabled": true
+	 * }
+	 * @end_example
+	 *
+	 * @_category_editing
+	 * @_category_all
+	 *
+	 * @since Pro Tools 2023.12
+	 * @_ingroup ptsl_version_2023_12
+	 */
+	SetTrackRecordEnableState = 88;
+
+	/**
+	 * Sets the `record safe enable` state of the specified tracks (Audio, Instrument, Midi and VCA types of tracks only).
+	 *
+	 * @request_body_type SetTrackRecordSafeEnableStateRequestBody
+	 *
+	 * @request_body_json_example
+	 * {
+	 * 	"track_names": ["track1", "track2"],
+	 * 	"enabled": true
+	 * }
+	 * @end_example
+	 *
+	 * @_category_editing
+	 * @_category_all
+	 *
+	 * @since Pro Tools 2023.12
+	 * @_ingroup ptsl_version_2023_12
+	 */
+	SetTrackRecordSafeEnableState = 89;
+
+	/**
+	 * Sets the `input monitor` state of the specified tracks (Audio and VCA types of tracks only).
+	 *
+	 * @request_body_type SetTrackInputMonitorStateRequestBody
+	 *
+	 * @request_body_json_example
+	 * {
+	 * 	"track_names": ["track1", "track2"],
+	 * 	"enabled": true
+	 * }
+	 * @end_example
+	 *
+	 * @_category_editing
+	 * @_category_all
+	 *
+	 * @since Pro Tools 2023.12
+	 * @_ingroup ptsl_version_2023_12
+	 */
+	SetTrackInputMonitorState = 90;
+
+	/**
+	 * Sets the `smart DSP` state of the specified tracks (except Video, Midi, VCA and Basic Folder types of tracks).
+	 *
+	 * @request_body_type SetTrackSmartDspStateRequestBody
+	 *
+	 * @request_body_json_example
+	 * {
+	 * 	"track_names": ["track1", "track2"],
+	 * 	"enabled": true
+	 * }
+	 * @end_example
+	 *
+	 * @_category_editing
+	 * @_category_all
+	 *
+	 * @since Pro Tools 2023.12
+	 * @_ingroup ptsl_version_2023_12
+	 */
+	SetTrackSmartDspState = 91;
+
+	/**
+	 * Sets the `hidden` state of the specified tracks.
+	 *
+	 * @request_body_type SetTrackHiddenStateRequestBody
+	 *
+	 * @request_body_json_example
+	 * {
+	 * 	"track_names": ["track1", "track2"],
+	 * 	"enabled": true
+	 * }
+	 * @end_example
+	 *
+	 * @_category_editing
+	 * @_category_all
+	 *
+	 * @since Pro Tools 2023.12
+	 * @_ingroup ptsl_version_2023_12
+	 */
+	SetTrackHiddenState = 92;
+
+	/**
+	 * Set the `inactive` state of the specified tracks (except Video tracks).
+	 *
+	 * @request_body_type SetTrackInactiveStateRequestBody
+	 *
+	 * @request_body_json_example
+	 * {
+	 * 	"track_names": ["track1", "track2"],
+	 * 	"enabled": true
+	 * }
+	 * @end_example
+	 *
+	 * @_category_editing
+	 * @_category_all
+	 *
+	 * @since Pro Tools 2023.12
+	 * @_ingroup ptsl_version_2023_12
+	 */
+	SetTrackInactiveState = 93;
+
+	/**
+	 * Sets the `frozen` state of the specified tracks (Audio, Instrument, AuxInput and Routing Folder types of tracks only).
+	 *
+	 * @request_body_type SetTrackFrozenStateRequestBody
+	 *
+	 * @request_body_json_example
+	 * {
+	 * 	"track_names": ["track1", "track2"],
+	 * 	"enabled": true
+	 * }
+	 * @end_example
+	 *
+	 * @_category_editing
+	 * @_category_all
+	 *
+	 * @since Pro Tools 2023.12
+	 * @_ingroup ptsl_version_2023_12
+	 */
+	SetTrackFrozenState = 94;
+
+	/**
+	 * Sets the `online` state of the specified tracks (Video tracks only).
+	 *
+	 * @request_body_type SetTrackOnlineStateRequestBody
+	 *
+	 * @request_body_json_example
+	 * {
+	 * 	"track_name": "track1", 
+	 *  "enabled": true
+	 * }
+	 * @end_example
+	 *
+	 * @_category_editing
+	 * @_category_all
+	 *
+	 * @since Pro Tools 2023.12
+	 * @_ingroup ptsl_version_2023_12
+	 */
+	SetTrackOnlineState = 95;
+
+	/**
+	 * Sets the `open` state of the specified tracks (Folder tracks only).
+	 *
+	 * @request_body_type SetTrackOpenStateRequestBody
+	 *
+	 * @request_body_json_example
+	 * {
+	 * 	"track_names": ["track1", "track2"],
+	 * 	"enabled": true
+	 * }
+	 * @end_example
+	 *
+	 * @_category_editing
+	 * @_category_all
+	 *
+	 * @since Pro Tools 2023.12
+	 * @_ingroup ptsl_version_2023_12
+	 */
+	SetTrackOpenState = 96;
+
+	/**
+	 * Provides originId, instanceId and parentId of the current opened session:
+	 * - originId is the main ID of the session (or project), and it remains the same in all variations of the session through Save As, Save Copy In, etc.
+	 * - instanceId is unique for each session variation. In a new/original session file, the instanceId is equal to originId. When variants are introduced via Save As, Save Copy In, and several others, instanceId is set to a new unique ID.
+	 * - parentId is set to the instanceId of the source session for sessions based off of a previous session. For new/original sessions, the parentId is set to zeros. That means parentId is equal to originId for first-generation variants, and is different for second and later generation variations.
+	 *
+	 * @response_body_type GetSessionIDsResponseBody
+	 *
+	 * @request_body_json_example
+	 * {
+	 * 	"origin_id": "{00000000-2a000000-086ed1e0-94ef763d}",
+	 * 	"instance_id": "{00000000-2a000000-086ed1e0-94ef763d}",
+	 * 	"parent_id": "{00000000-00000000-00000000-00000000}"
+	 * }
+	 * @end_example
+	 *
+	 * @_category_session_file
+	 * @_category_all
+	 *
+	 * @since Pro Tools 2024.03
+	 * @_ingroup ptsl_version_2024_03
+	 */
+	GetSessionIDs = 97;
+
+	/**
+	 * Returns the Memory Locations Manage Mode state (see menu Window -> Memory Locations in the UI).
+	 *
+	 * @response_body_type GetMemoryLocationsManageModeResponseBody
+	 *
+	 * @response_body_json_example
+	 * {
+	 * 	"enabled": true
+	 * }
+	 * @end_example
+	 *
+	 * @_category_editing
+	 * @_category_all
+	 *
+	 * @since Pro Tools 2024.06
+	 * @_ingroup ptsl_version_2024_06
+	 */
+	GetMemoryLocationsManageMode = 98;
+
+	/**
+	 * Sets the Memory Locations Manage Mode (see menu Window -> Memory Locations in the UI).
+	 *
+	 * @request_body_type SetMemoryLocationsManageModeRequestBody
+	 *
+	 * @request_body_json_example
+	 * {
+	 * 	"enabled": true
+	 * }
+	 * @end_example
+	 *
+	 * @_category_editing
+	 * @_category_all
+	 *
+	 * @since Pro Tools 2024.06
+	 * @_ingroup ptsl_version_2024_06
+	 */
+	SetMemoryLocationsManageMode = 99;
+
+	/**
+	 * Sets the time format of the Main Counter.
+	 *
+	 * @request_body_type SetMainCounterFormatRequestBody
+	 *
+	 * @request_body_json_example
+	 * {
+	 * 	"time_scale": "BarsBeats"
+	 * }
+	 * @end_example
+	 *
+	 * @_category_session_write
+	 * @_category_all
+	 *
+	 * @since Pro Tools 2024.06
+	 * @_ingroup ptsl_version_2024_06
+	 */
+	SetMainCounterFormat = 100;
+
+	/**
+	 * Sets the time format of the Sub Counter.
+	 *
+	 * @request_body_type SetSubCounterFormatRequestBody
+	 *
+	 * @request_body_json_example
+	 * {
+	 * 	"time_scale": "BarsBeats"
+	 * }
+	 * @end_example
+	 *
+	 * @_category_session_write
+	 * @_category_all
+	 *
+	 * @since Pro Tools 2024.06
+	 * @_ingroup ptsl_version_2024_06
+	 */
+	SetSubCounterFormat = 101;
+
+	/**
+	 * Gets the time format of the Main Counter.
+	 *
+	 * @response_body_type GetMainCounterFormatResponseBody
+	 *
+	 * @request_body_json_example
+	 * {
+	 * 	"current_setting": "BarsBeats",
+	 * 	"possible_settings": ["BarsBeats", "MinSecs", "TimeCode", "FeetFrames", "Samples"]
+	 * }
+	 * @end_example
+	 *
+	 * @_category_session_read
+	 * @_category_all
+	 *
+	 * @since Pro Tools 2024.06
+	 * @_ingroup ptsl_version_2024_06
+	 */
+	GetMainCounterFormat = 102;
+
+	/**
+	 * Returns the time format of the Sub Counter.
+	 *
+	 * @response_body_type GetSubCounterFormatResponseBody
+	 *
+	 * @response_body_json_example
+	 * {
+	 * 	"current_setting": "BarsBeats", 
+	 * 	"possible_settings": ["BarsBeats", "MinSecs", "TimeCode", "FeetFrames", "Samples"]
+	 * }
+	 * @end_example
+	 *
+	 * @_category_session_read
+	 * @_category_all
+	 *
+	 * @since Pro Tools 2024.06
+	 * @_ingroup ptsl_version_2024_06
+	 */
+	GetSubCounterFormat = 103;
+
+	/**
+	 * Undoes the last N operations. Successfully undone operations are returned in the response.
+	 *
+	 * @request_body_type UndoRequestBody
+	 *
+	 * @request_body_json_example
+	 * {
+	 * 	"levels": 1
+	 * }
+	 * @end_example
+	 *
+	 * @response_body_type UndoResponseBody
+	 *
+	 * @response_body_json_example 
+	 * {
+	 * 	"operations": [{
+	 * 		"details": "00:00:00:00 to 00:00:00:01",
+	 * 		"operation": "Change Session Start",
+	 * 		"time": "2024-08-26T12:43:18+0300"
+	 * 	}]
+	 * }
+	 * @end_example
+	 *
+	 * @_category_editing
+	 * @_category_all
+	 *
+	 * @since Pro Tools 2024.06
+	 * @_ingroup ptsl_version_2024_06
+	 */
+	Undo = 104;
+
+	/**
+	 * Redoes the last N operations. Successfully redone operations are returned in the response.
+	 *
+	 * @request_body_type RedoRequestBody
+	 *
+	 * @request_body_json_example
+	 * {
+	 * 	"levels": 1
+	 * }
+	 * @end_example
+	 *
+	 * @response_body_type RedoResponseBody
+	 *
+	 * @response_body_json_example 
+	 * {
+	 * 	"operations": [{
+	 * 		"details": "00:00:00:00 to 00:00:00:01",
+	 * 		"operation": "Change Session Start",
+	 * 		"time": "2024-08-26T12:43:18+0300"
+	 * 	}]
+	 * }
+	 * @end_example
+	 *
+	 * @_category_editing
+	 * @_category_all
+	 *
+	 * @since Pro Tools 2024.06
+	 * @_ingroup ptsl_version_2024_06
+	 */
+	Redo = 105;
+
+	/**
+	 * Undoes all operations listed in Undo History.
+	 *
+	 * @response_body_type UndoAllResponseBody
+	 *
+	 * @response_body_json_example
+	 * {
+	 * 	"operations": [{
+	 * 		"details": "00:00:00:00 to 00:00:00:01",
+	 * 		"operation": "Change Session Start",
+	 * 		"time": "2024-08-26T12:43:18+0300"
+	 * 	}]
+	 * }
+	 * @end_example
+	 *
+	 * @_category_editing
+	 * @_category_all
+	 *
+	 * @since Pro Tools 2024.06
+	 * @_ingroup ptsl_version_2024_06
+	 */
+	UndoAll = 106;
+
+	/**
+	 * Redoes all operations listed in Undo History.
+	 *
+	 * @response_body_type RedoAllResponseBody
+	 *
+	 * @response_body_json_example
+	 * {
+	 * 	"operations": [{
+	 * 		"details": "00:00:00:00 to 00:00:00:01",
+	 * 		"operation": "Change Session Start",
+	 * 		"time": "2024-08-26T12:43:18+0300"
+	 * 	}]
+	 * }
+	 * @end_example
+	 *
+	 * @_category_editing
+	 * @_category_all
+	 *
+	 * @since Pro Tools 2024.06
+	 * @_ingroup ptsl_version_2024_06
+	 */
+	RedoAll = 107;
+
+	/**
+	 * Clears the undo queue.
+	 *
+	 * @_category_editing
+	 * @_category_all
+	 *
+	 * @since Pro Tools 2024.06
+	 * @_ingroup ptsl_version_2024_06
+	 */
+	ClearUndoQueue = 108;
+
+	/**
+	 * Sets the DSP Mode Safe state for the specified tracks.
+	 *
+	 * @request_body_type SetTrackDSPModeSafeStateRequestBody
+	 *
+	 * @request_body_json_example
+	 * {
+	 * 	"track_names": ["track1", "track2"],
+	 * 	"enabled": true
+	 * }
+	 * @end_example
+	 *
+	 * @_category_editing
+	 * @_category_all
+	 *
+	 * @since Pro Tools 2024.06
+	 * @_ingroup ptsl_version_2024_06
+	 */
+	SetTrackDSPModeSafeState = 109;
+
+	/**
+	 * Provides the System Delay value and the Delay Compensation state of the current session.
+	 *
+	 * @response_body_type GetSessionSystemDelayInfoResponseBody
+	 *
+	 * @response_body_json_example
+	 * {
+	 * 	"samples": 12345, 
+	 * 	"delay_compensation_enabled": true
+	 * }
+	 * @end_example
+	 *
+	 * @_category_session_read_commands
+	 * @_category_all
+	 *
+	 * @since Pro Tools 2024.06
+	 * @_ingroup ptsl_version_2024_06
+	 */
+	GetSessionSystemDelayInfo = 110;
+
+	/**
+	 * Creates a new clip group based on the Edit selection made across tracks.
+	 *
+	 * @_category_editing
+	 * @_category_all
+	 *
+	 * @since Pro Tools 2024.06
+	 * @_ingroup ptsl_version_2024_06
+	 */
+	GroupClips = 111;
+
+	/**
+	 * Reveals all underlying clips and any nested clip groups within a selected clip group, making them independent and editable.
+	 * @note Only the front-most top-level clip group will be ungrouped; any underlying clip groups will be preserved.
+	 *
+	 * @_category_editing
+	 * @_category_all
+	 *
+	 * @since Pro Tools 2024.06
+	 * @_ingroup ptsl_version_2024_06
+	 */
+	UngroupClips = 112;
+
+	/**
+	 * Reveals all clips within a selected clip group and any of its nested clip groups, making them independent and editable.
+	 *
+	 * @_category_editing
+	 * @_category_all
+	 *
+	 * @since Pro Tools 2024.06
+	 * @_ingroup ptsl_version_2024_06
+	 */
+	UngroupAllClips = 113;
+
+	/**
+	 * Reassembles a previously ungrouped clip group, including any nested clip groups, restoring its original structure.
+	 *
+	 * @_category_editing
+	 * @_category_all
+	 *
+	 * @since Pro Tools 2024.06
+	 * @_ingroup ptsl_version_2024_06
+	 */
+	RegroupClips = 114;
+
+	/**
+	 * Lets you specify the number of times the selected material is duplicated.
+	 *
+	 * @request_body_type RepeatSelectionRequestBody
+	 *
+	 * @request_body_json_example
+	 * {
+	 * 	"num_repeats": 1
+	 * }
+	 * @end_example
+	 *
+	 * @_category_editing
+	 * @_category_all
+	 *
+	 * @since Pro Tools 2024.06
+	 * @_ingroup ptsl_version_2024_06
+	 */
+	RepeatSelection = 115;
+
+	/**
+	 * Copies a selection and places it immediately after the end of the selection.
+	 *
+	 * @_category_editing
+	 * @_category_all
+	 *
+	 * @since Pro Tools 2024.06
+	 * @_ingroup ptsl_version_2024_06
+	 */
+	DuplicateSelection = 116;
+	
+	/**
+	 * Clears all the memory locations in the session.
+	 *
+	 * @response_body_type ClearAllMemoryLocationsResponseBody
+	 *
+	 * @response_body_json_example
+	 * {
+	 * 	"success_count": 1,
+	 * 	"failure_count": 0,
+	 * 	"failure_list": []
+	 * }
+	 * @end_example
+	 *
+	 * @since Pro Tools 2024.10
+	 * @_ingroup ptsl_version_2024_10
+	 */
+	ClearAllMemoryLocations = 117;
+}
+
+/**
+ * Status of execution of the Pro Tools task.
+ */
+enum TaskStatus
+{
+	Queued = 0;
+	Pending = 1;
+	InProgress = 2;
+	Completed = 3;
+	Failed = 4;
+	WaitingForUserInput = 5;	// need wait for user input, for example if Pro Tools license required
+	CompletedWithBadResponse = 6;	// the command executed successfully, but the host returned an invalid response
+	FailedWithBadErrorResponse = 7;	// the command failed and the host returned an invalid error response 
+}
+
+/**
+ * Type of the error message which can be returned to user.
+ * It can be OS error or Pro Tools error.
+ */
+enum CommandErrorType
+{
+	// Operation System errors
+	OS_WritePermissions = 0;					// command hits write permissions
+	OS_ErrorCode = 1;							// other OS error
+	OS_NoLocationFound = 2;						// the specified location does not exist
+	OS_NoSessionFound = 3;						// the specified session does not exist
+	/** @deprecated OS_FilePathLocation is deprecated starting in Pro Tools 2023.06
+	 * Replaced with @ref OS_NoFilePathFound
+	 */
+	OS_FilePathLocation = 4;					// the specified file path could not be found
+	OS_ReadError = 5;							// command hits read permissions or can not read specified file
+	OS_DiskSpace = 6;							// not enough free space on disk 
+	OS_DuplicateName = 7;						// the session name to be created is a duplicate of some existing
+	OS_IllegalCharacters = 8;					// the session name contains illegal characters/symbols
+	OS_CharactersLimit = 9;						// the session/track name is too long (250 characters allowed)
+	OS_ProToolsIsNotAvailable = 10;				// Pro Tools is not responding during a specified timeout
+	OS_NoFilePathFound = 11;					// the specified file path could not be found
+	// Pro Tools errors
+	PT_UnknownError = 100;						// an unspecified error occurred during execution of a command
+	PT_NoTemplateGroup = 101;					// template group does not exist
+	PT_NoTemplate = 102;						// template name does not exist
+	PT_SampleRateMismatch = 103;				// cannot copy/link source media because SRC is on and sample rates don't match
+	PT_NoVideoTrackFound = 104;					// cannot copy/link source media because no video track found in the session
+	PT_NoTracksFound = 105;						// warning. no tracks matched because no tracks exist in source
+	PT_NoOpenedSession = 106;					// session is not open
+	PT_NoTrackFound = 107;						// specified track(s) not found
+	PT_NoClipsFound = 108;						// specified track contains no clips
+	PT_NoSelection = 109;						// no selection was found
+	PT_RecordDrive = 110;						// the volume is not designated as a record drive
+	PT_NoPresetFound = 111;						// preset does not exist in the specified location
+	PT_FileTypeMXF = 112;						// MXF is only available when 'Enforce Media Composer compatibility' is on
+	PT_CopyOptionCopy = 113;					// copy option are unavailable if 'Quantize Edits to Frame Boundaries' is checked
+	PT_CopyOptionLink = 114;					// link option are unavailable if 'Quantize Edits to Frame Boundaries' is checked
+	PT_QuantizeEdits = 115;						// 'Quantize Edits to Frame Boundaries' can't be false if 'Enforce Media Composer compatibility' is true
+	PT_ExportAsMultichannel = 116;				// warning. 'Export Stereo, 5.1 and 7.1 Tracks as Multichannel' is not applicable because no tracks of that format are contained within the export selection
+	PT_IllegalCharactersComments = 117;			// comments contain illegal characters
+	PT_IllegalCharactersSequenceName = 118;		// sequence name contains illegal characters
+	PT_MaxCharactersComments = 119;				// comments exceed the maximum character limit
+	PT_MaxCharactersSequenceName = 120;			// sequence name exceeds the maximum character limit
+	PT_NoSequenceName = 121;					// sequence name can't be empty
+	PT_InvalidTask = 122;						// the specified task does not exist
+	PT_FileNotFound = 123;						// specified files were not found
+	PT_InvalidSelection = 124;					// unable to perform action because of invalid selection
+	PT_ReadOnlySession = 125;					// the session is located on a read-only drive and cannot be saved without user intervention
+	PT_InvalidParameter = 126;					// One or more parameters are invalid
+	PT_Forbidden = 127;							// operation is not allowed
+	PT_NoTimelineFound = 128;					// no timeline was found
+	PT_ArgumentOutOfRange = 129;				// argument is out of range
+	PT_ForbiddenTrackType = 130;				// operation is not allowed for the specified track type
+	PT_NoVideoEngineFound = 131;				// video engine is not installed or unavailable
+	PT_NoDspHardwareFound = 132;				// DSP hardware is not connected or unavailable
+	/**
+	 * Requested command is not supported by the current version of Pro Tools
+	 *
+	 * @since Pro Tools 2024.06
+	 */
+	PT_UnsupportedCommand = 133;
+	/**
+	 * Pro Tools is not fully ready to execute all PTSL commands
+	 *
+	 * @since Pro Tools 2024.06
+	 */
+	PT_HostNotReady = 134;
+	/**
+	 * Operation cannot be done because of some restrictions, limitations or other reasons
+	 *
+	 * @since Pro Tools 2024.06
+	 */
+	PT_CannotBeDone = 135;
+	/**
+	 * @since Pro Tools 2024.06
+	 */
+	PT_ResponseLengthExceeded = 136;            // Result message larger than maximum possible gRPC message size
+	/*
+	 * PTSL command was terminated due to timeout
+	 *
+	 * Supported starting in Pro Tools 2024.10
+	 */
+	PT_CommandTimeout = 137;
+	/*
+	 * ProTools is busy with another operation, try again later
+	 * Supported starting in Pro Tools 2024.10
+	 */
+	PT_HostIsBusy = 138;
+
+	// Special:
+	PT_Info = 200;								// not an error or warning, just some information about command execution
+
+	// SDK errors
+	SDK_VersionMismatch = 401;					// Versions of PTSL Host and PTSL Client are mismatched
+	SDK_NotImplemented = 402;					// Some PTSL functional is not implemented at the PT side
+	SDK_SessionIdParseError = 403;				// Unable to parse the session id from the RegisterCOnnection response
+
+	// The 5XX range is reserved for gRPC errors.
+	SDK_GrpcGeneric = 501;						// Generic gRPC error
+}
+
+/**
+ * Type of Pro Tools track.
+ */
+enum TrackType
+{
+	option allow_alias = true;
+	TT_Unknown = 0;
+	Unknown = 0; // @deprecated since Pro Tools 2023.09
+	TT_Midi = 1;
+	Midi = 1; // @deprecated since Pro Tools 2023.09
+	TT_Audio = 2;
+	AudioTrack = 2; // @deprecated since Pro Tools 2023.09
+	TT_Aux = 3;
+	Aux = 3; // @deprecated since Pro Tools 2023.09
+	TT_Video = 4;
+	VideoTrack = 4; // @deprecated since Pro Tools 2023.09
+	TT_Vca = 5;
+	Vca = 5; // @deprecated since Pro Tools 2023.09
+	TT_Tempo = 6;
+	Tempo = 6; // @deprecated since Pro Tools 2023.09
+	TT_Markers = 7;
+	Markers = 7; // @deprecated since Pro Tools 2023.09
+	TT_Meter = 8;
+	Meter = 8; // @deprecated since Pro Tools 2023.09
+	TT_KeySignature = 9;
+	KeySignature = 9; // @deprecated since Pro Tools 2023.09
+	TT_ChordSymbols = 10;
+	ChordSymbols = 10; // @deprecated since Pro Tools 2023.09
+	TT_Instrument = 11;
+	Instrument = 11; // @deprecated since Pro Tools 2023.09
+	TT_Master = 12;
+	Master = 12; // @deprecated since Pro Tools 2023.09
+	TT_Heat = 13;
+	Heat = 13; // @deprecated since Pro Tools 2023.09
+	TT_BasicFolder = 14;
+	BasicFolder = 14; // @deprecated since Pro Tools 2023.09
+	TT_RoutingFolder = 15;
+	RoutingFolder = 15; // @deprecated since Pro Tools 2023.09
+	TT_CompLane = 16;
+	CompLane = 16; // @deprecated since Pro Tools 2023.09
+}
+
+/**
+ * Format of Pro Tools track.
+ */
+enum TrackFormat
+{
+	TF_Unknown = 0;
+	TF_Mono = 1;
+	TF_Stereo = 2;
+	TF_LCR = 3;
+	TF_LCRS = 4;
+	TF_Quad = 5;
+	TF_5_0 = 6;
+	TF_5_1 = 7;
+	TF_5_0_2 = 8;
+	TF_5_1_2 = 9;
+	TF_5_0_4 = 10;
+	TF_5_1_4 = 11;
+	TF_6_0 = 12;
+	TF_6_1 = 13;
+	TF_7_0 = 14;
+	TF_7_1 = 15;
+	TF_7_0_SDDS = 16;
+	TF_7_1_SDDS = 17;
+	TF_7_0_2 = 18;
+	TF_7_1_2 = 19;
+	TF_7_0_4 = 20;
+	TF_7_1_4 = 21;
+	TF_7_0_6 = 22;
+	TF_7_1_6 = 23;
+	TF_9_0_4 = 24;
+	TF_9_1_4 = 25;
+	TF_9_0_6 = 26;
+	TF_9_1_6 = 27;
+	TF_1stOrderAmbisonics = 28;
+	TF_2ndOrderAmbisonics = 29;
+	TF_3rdOrderAmbisonics = 30;
+	TF_4thOrderAmbisonics = 31;
+	TF_5thOrderAmbisonics = 32;
+	TF_6thOrderAmbisonics = 33;
+	TF_7thOrderAmbisonics = 34;
+	TF_None = 35; // @since Pro Tools 2024.03
+	TF_2_1 = 36; // @since Pro Tools 2024.03
+	TF_Overhead = 37; // @since Pro Tools 2024.03
+}
+
+/**
+ * Timebase of Pro Tools track.
+ */
+enum TrackTimebase
+{
+	TTB_Unknown = 0;
+	TTB_Samples = 1;
+	TTB_Ticks = 2;
+	TTB_None = 3; // @since Pro Tools 2024.03
+}
+
+/**
+ * Stub empty message for initializing default request.
+ */
+message EmptyMessage
+{
+
+}
+
+/**
+ * Structure that describes common data of the error message.
+ */
+message CommandError
+{
+	CommandErrorType command_error_type = 1;	// type of the possible command error
+	string command_error_message = 2;	// error or warning message
+	bool is_warning = 3;	// if error is defined as a warning, command execution should be completed successfully 
+}
+
+/**
+ * Structure that describes error response during command execution.
+ */
+message ResponseError
+{
+	repeated CommandError errors = 1; // a list of occured errors/warnings
+}
+
+/**
+ * Structure that describes common data of Pro Tools request message.
+ */
+message RequestHeader
+{
+	string task_id = 1;		// unique identifier for each command, fill on Server side
+	CommandId command = 2;	// type of the command
+	int32 version = 3;		// current version of PTSL Client API
+	string session_id = 4;	// client's session ID (it's received as a result of the RegisterConnection command)
+}
+
+/**
+ * Structure that describes Pro Tools request.
+ */
+message Request
+{
+	RequestHeader header = 1;		// request header structure
+	string request_body_json = 2;	// json string with client's request
+}
+
+/**
+ * Structure that describes common data of Pro Tools response message.
+ */
+message ResponseHeader
+{
+	string task_id = 1;		// unique identifier for each command
+	CommandId command = 2;	// type of the command
+	TaskStatus status = 3;	// status of command execution
+	int32 progress = 4;		// progress of command execution in percentage
+}
+
+/**
+ * Structure that describes Pro Tools response.
+ */
+message Response
+{
+	ResponseHeader header = 1;		// response header structure
+	string response_body_json = 2;	// json string with Pro Tools response
+	string response_error_json = 3;	// json string with Pro Tools error/warning message
+}
+
+/**
+ * Structure that describes pagination request parameters for responses with large lists of data.
+ */
+message PaginationRequest
+{
+	int32 limit = 1;		// maximum length of the list of data per one response 
+	int32 offset = 2;		// size of the list of data for current response
+}
+
+/** 
+ * @deprecated since Pro Tools 2023.09, use PaginationRequest
+ * Structure that describes pagination request parameters for responses with large lists of data.
+ */
+message Pagination
+{
+	int32 total = 1;	// length of the list of data 
+	int32 limit = 2;	// maximum length of the list of data per one response 
+	int32 offset = 3;	// size of the list of data for current response
+}
+
+/**
+ * Structure that describes pagination for large lists of data in responses.
+ */
+message PaginationResponse
+{
+	int32 total = 1;	// length of the list of data 
+	int32 limit = 2;	// maximum length of the list of data per one response 
+	int32 offset = 3;	// size of the list of data for current response
+}
+
+/**
+ * Type of the state and the way a track attribute is set.
+ */
+enum TrackAttributeState
+{
+	None = 0;
+	SetExplicitly = 1;
+	SetImplicitly = 2;
+	SetExplicitlyAndImplicitly = 3;
+}
+
+/**
+ * Structure that describes Pro Tools track attributes.
+ */
+message TrackAttributes
+{
+	TrackAttributeState is_inactive = 1;            // active/inactive implicitly/explicitly
+	TrackAttributeState is_hidden = 2;              // hidden/shown implicitly/explicitly
+	TrackAttributeState is_selected = 3;            // selected implicitly/explicitly
+	bool contains_clips = 4;                        // contains clips
+	bool contains_automation = 5;                   // contains automation
+	bool is_soloed = 6;                             // soloed/unsoloed
+	bool is_record_enabled = 7;                     // record enabled/non-record enabled
+	TrackAttributeState is_input_monitoring_on = 8; // input monitoring on/off implicitly/explicitly
+	bool is_smart_dsp_on = 9;                       // smart DSP state (on/off)
+	bool is_locked = 10;                            // locked state
+	bool is_muted = 11;                             // muted state
+	bool is_frozen = 12;                            // frozen state
+	bool is_open = 13;                              // open/closed state
+	bool is_online = 14;                            // provides the status of a video track's Video Online button
+	bool is_record_enabled_safe = 15; // @since Pro Tools 2024.03
+	bool is_smart_dsp_on_safe = 16; // @since Pro Tools 2024.03
+	bool is_soloed_safe = 17; // @since Pro Tools 2024.03
+}
+
+/**
+ * Structure that describes Pro Tools track.
+ */
+message Track
+{
+    string name = 1;                        // track name
+    TrackType type = 2;                     // track type
+    string id = 3;                          // track id	(HEX string)
+    int32 index = 4;                        // track index
+    string color = 5;                       // track color (HEX value)
+    TrackAttributes track_attributes = 6;   // track attributes
+    string id_compressed = 7;               // track id	(string as in the GUI)
+    TrackFormat format = 8; // @since Pro Tools 2024.03
+    TrackTimebase timebase = 9; // @since Pro Tools 2024.03
+    string parent_folder_name = 10;         // track parent folder name @since Pro Tools 2024.10
+    string parent_folder_id = 11;           //  track parent folder id (HEX string) @since Pro Tools 2024.10
+}
+
+/**
+ * Structure that describes GetTaskStatus request data.
+ */
+message GetTaskStatusRequestBody
+{
+	string task_id = 1;		// requested command id
+}
+
+/**
+ * Structure that describes GetTaskStatus response data.
+ */
+message GetTaskStatusResponseBody
+{
+	string task_id = 1;		// requested command id
+	TaskStatus status = 2;	// requested command execution status
+	int32 progress = 3;		// progress of requested command execution in percentage
+}
+
+/**
+ * Type of Pro Tools file.
+ */
+enum FileType
+{
+	FT_WAVE = 0;
+	FT_AIFF = 1;
+	FT_AAF = 2;
+	FT_OMF = 3;
+}
+
+/**
+ * Type of Pro Tools input/output settings.
+ */
+enum IOSettings
+{
+	IO_None = 0;
+	IO_Last = 1;
+	IO_StereoMix = 2;
+	IO_51FilmMix = 3;
+	IO_51SMPTEMix = 4;
+	IO_51DTSMix = 5;
+	IO_UserDefined = 6;
+}
+
+/**
+ * Structure that describes CreateSession request data.
+ */
+message CreateSessionRequestBody
+{
+	string session_name = 1;
+	bool create_from_template = 2;
+	string template_group = 3;
+	string template_name = 4;
+	FileType file_type = 5; // Acceptable values (WAVE|AIFF|AAF|OMF).
+	SampleRate sample_rate = 6; // Acceptable values (44100|48000|88200|96000|176400|192000).
+	IOSettings input_output_settings = 7;
+	bool is_interleaved = 8;
+	string session_location = 9;
+	bool is_cloud_project = 10;
+	bool create_from_aaf = 11;
+	string path_to_aaf = 12;
+	BitDepth bit_depth = 13; // Acceptable values (16|24|32).
+}
+
+/**
+ * Structure that describes OpenSession request data.
+ */
+message OpenSessionRequestBody
+{
+	string session_path = 1;
+}
+
+/**
+ * Types of data which can be imported into Pro Tools.
+ */
+enum ImportType
+{
+	Session = 0;
+	Audio = 1;
+}
+
+/**
+ * Audio import options.
+ */
+enum AudioMediaOptions
+{
+	LinkToSourceAudio = 0;	// where possible. default if sample rate matches
+	CopyFromSourceAudio = 1;
+	ConsolidateFromSourceAudio = 2;
+	ForceToTargetSessionFormat = 3;  // default if sample rate does not match
+}
+
+/**
+ * Video import options.
+ */
+enum VideoMediaOptions
+{
+	LinkToSourceVideo = 0;	// where possible
+	CopyFromSourceVideo = 1;
+	ImportAsOfflineSatelliteMedia = 2;	// will not support
+}
+
+/**
+ * Options for matching tracks during import.
+ */
+enum MatchTrackOptions
+{
+	MT_None = 0;
+	MT_MatchTracks = 1;
+	MT_ImportAsNewTrack = 2;
+}
+
+/**
+ * Options for time code mapping.
+ */
+enum TimeCodeMappingOptions
+{
+	MaintainAbsoluteTimeCodeValues = 0;
+	MaintainRelativeTimeCodeValues = 1;
+	MapStartTimeCodeTo = 2;
+}
+
+/**
+ * Options for track offsets.
+ */
+enum TrackOffsetOptions
+{
+	BarsBeats = 0;
+	MinSecs = 1;
+	TimeCode = 2;
+	FeetFrames = 3;
+	Samples = 4;
+}
+
+/**
+ * Types of conversion quality.
+ */
+enum ConversionQuality
+{
+	Low = 0;	// fastest
+	Good = 1;
+	Better = 2;
+	Best = 3;
+	TweakHead = 4;	// slowest
+}
+
+/**
+ * Options for playlists import.
+ */
+enum MainPlaylistOptions
+{
+	ImportReplaceExistingPlaylists = 0;
+	ImportOverlayNewOnExistingPlaylists = 1;
+	DoNotImport = 2;
+}
+
+/**
+ * Audio import operations.
+ */
+enum AudioOperations
+{
+	AddAudio = 0;
+	CopyAudio = 1;
+	ConvertAudio = 2;
+	Default = 3;
+}
+
+/**
+ * Types of destination.
+ */
+enum MediaDestination
+{
+	MD_None = 0;
+	MD_MainVideoTrack = 1;
+	MD_NewTrack = 2;
+	MD_ClipList = 3;
+}
+
+/**
+ * Types of location in the session.
+ */
+enum MediaLocation
+{
+	ML_None = 0;
+	ML_SessionStart = 1;
+	ML_SongStart = 2;
+	ML_Selection = 3;
+	ML_Spot = 4;
+}
+
+/**
+ * Types of track list filters.
+ */
+enum TrackListFilter
+{
+    All = 0;
+    Selected = 1;                       // in any way - explicitly or/and implicitly
+    SelectedExplicitly = 2;
+    SelectedImplicitly = 3;
+    WithClipsOnMainPlaylist = 4;
+    WithAutomationOnMainPlaylist = 5;
+    Inactive = 6;                       // in any way - explicitly or/and implicitly
+    InactiveExplicitly = 7;
+    InactiveImplicitly = 8;
+    Hidden = 9;                         // in any way - explicitly or/and implicitly
+    HiddenExplicitly = 10;
+    HiddenImplicitly = 11;
+    Locked = 12;
+    Muted = 13;
+    Frozen = 14;
+    Open = 15;
+    Online = 16;
+}
+
+/**
+ * Structure that describes track data for import.
+ */
+message TrackDataToImport
+{
+	string track_data_preset_path = 1;
+	bool clip_gain = 2;
+	bool clips_and_media = 3;
+	bool volume_automation = 4;
+}
+
+/**
+ * Structure that describes other session data for import.
+ */
+message SessionDataImport
+{
+	bool tempo_meter_map = 1;
+	bool key_signature_choed_map = 2;
+	bool markers_memory_locations = 3;
+	bool window_configurations = 4;
+	bool mic_pre_settings = 5;
+	bool heat_master_settings = 6;
+}
+
+/**
+ * Structure that describes session for import.
+ */
+message SessionData
+{
+	/**
+	 * media options
+	 */
+	AudioMediaOptions audio_options = 1;
+	int32 audio_handle_size = 2;	// available for consolidate_from_source_media option (in ms)
+	VideoMediaOptions video_options = 3;
+
+	/**
+	 * tracks
+	 */
+	MatchTrackOptions match_options = 4;
+
+	/**
+	 * session data
+	 */
+
+	/**
+	 * main playlist options
+	 */
+	MainPlaylistOptions playlist_options = 5;
+
+	/**
+	 * track data to import
+	 */
+	TrackDataToImport track_data_to_import = 6;
+
+	/**
+	 * time code mapping options
+	 */
+	TimeCodeMappingOptions timecode_mapping_units = 7;
+	string timecode_mapping_start_time = 8;
+	bool adjust_session_start_time_to_match_source = 9;
+
+	//// import. not being used now
+	// SessionDataImport import = 10;
+
+	//// track offset options. not being used now
+	// TrackOffsetOptions track_offset_units = 11;
+	// int32 track_offset_value = 12;
+
+	//// sample rate conversion options. not being used now
+	// bool apply_sample_rate_conversion = 13;
+	// int32 source_sample_rate = 14;
+	// ConversionQuality conversion_quality = 15;
+}
+
+/**
+ * The types of location for Spot.
+ */
+enum SpotLocationType
+{
+	Start = 0;
+	SyncPoint = 1;
+	End = 2;
+}
+
+/**
+ * Structure that describes location data.
+ */
+message SpotLocationData
+{
+	SpotLocationType location_type = 1;
+	string location_value = 2;
+	TrackOffsetOptions location_options = 3; // @since Pro Tools 2023.06
+}
+
+/**
+ * Structure that describes audio for import.
+ */
+message AudioData
+{
+	repeated string file_list = 1;
+	AudioOperations audio_operations = 2;
+	string destination_path = 3;
+	/** 
+	 * @deprecated since Pro Tools 2023.09, use audio_destination
+	 */
+	MediaDestination destination = 4;
+	/** 
+	 * @deprecated since Pro Tools 2023.09, use audio_location
+	 */
+	MediaLocation location = 5; 
+	/** 
+	 * @since Pro Tools 2023.06
+	 */
+	SpotLocationData location_data = 6;
+	/** 
+	 * @since Pro Tools 2023.09
+	 */
+	MediaDestination audio_destination = 7;
+	/** 
+	 * @since Pro Tools 2023.09
+	 */
+	MediaLocation audio_location = 8;
+}
+
+/**
+ * Structure that describes Import request data.
+ */
+message ImportRequestBody
+{
+	string session_path = 1;
+	ImportType import_type = 2;
+	SessionData session_data = 3;
+	AudioData audio_data = 4;
+}
+
+/**
+ * TODO Doesn't work
+ * Structure that describes Import response data.
+ */
+message ImportResponseBody
+{
+	/** 
+	 * @deprecated since Pro Tools 2023.09, use audio_data
+	 */
+	repeated string file_list = 1;
+	/** 
+	 * @deprecated since Pro Tools 2023.09, use audio_data
+	 */
+	AudioOperations audio_operations = 2;
+	/** 
+	 * @deprecated since Pro Tools 2023.09, use audio_data
+	 */
+	string destination_path = 3;
+	/** 
+	 * @since Pro Tools 2023.09
+	 */
+	AudioData audio_data = 4;
+}
+
+/**
+ * Structure that describes track list filter that can be inverted (e.g. active => inactive).
+ */
+message TrackListInvertibleFilter
+{
+	TrackListFilter filter = 1;
+	bool is_inverted = 2;
+}
+
+/**
+ * Structure that describes GetTrackList request data.
+ */
+message GetTrackListRequestBody
+{
+	/** 
+	 * @deprecated since Pro Tools 2023.09, use pagination_request
+	 */
+	int32 page_limit = 1;
+	repeated TrackListInvertibleFilter track_filter_list = 2;
+	bool is_filter_list_additive = 3; // TRUE for OR, FALSE for AND
+	/** 
+	 * @since Pro Tools 2023.09
+	 * Enable pagination and control limit and offset
+	 */
+	PaginationRequest pagination_request = 4;
+}
+
+/**
+ * Structure that describes GetTrackList response data.
+ */
+message GetTrackListResponseBody
+{
+	/** 
+	 * @deprecated since Pro Tools 2023.09, use pagination_response
+	 */
+	Pagination stats = 1;
+	repeated Track track_list = 2;
+	/** 
+	 * @since Pro Tools 2023.09
+	 */
+	PaginationResponse pagination_response = 3;
+}
+
+/**
+ * Structure that describes SelectAllClipsOnTrack request data.
+ */
+message SelectAllClipsOnTrackRequestBody
+{
+	string track_name = 1;
+}
+
+/**
+ * Structure that describes SelectAllClipsOnTrack response data.
+ */
+message SelectAllClipsOnTrackResponseBody
+{
+	string track_name = 1;	// fill this field in case of error or warning
+}
+
+/**
+ * Structure that describes ExtendSelectionToTargetTracks request data.
+ */
+message ExtendSelectionToTargetTracksRequestBody
+{
+	repeated string tracks_to_extend_to = 1;
+}
+
+/**
+ * Structure that describes ExtendSelectionToTargetTracks response data.
+ */
+message ExtendSelectionToTargetTracksResponseBody
+{
+	repeated string tracks_to_extend_to = 1;	// fill this field in case of error or warning
+}
+
+/**
+ * Structure that describes CreateFadesBasedOnPreset request data.
+ */
+message CreateFadesBasedOnPresetRequestBody
+{
+	string fade_preset_name = 1;
+	bool auto_adjust_bounds = 2;
+}
+
+/**
+ * Structure that describes CreateFadesBasedOnPreset response data.
+ */
+message CreateFadesBasedOnPresetResponseBody
+{
+	string fade_preset_name = 1;	// fill this field in case of error or warning
+}
+
+/**
+ * Structure that describes RenameTargetTrack request data.
+ */
+message RenameTargetTrackRequestBody
+{
+	/** @deprecated
+	 * track_id is deprecated starting in Pro Tools 2023.03 
+	 * Use RenameTargetTrackRequestBody::current_name instead
+	 */
+	string track_id = 1;
+	string new_name = 2;
+	string current_name = 3; // @since Pro Tools 2023.03
+}
+
+/**
+ * Exported clips format.
+ */
+enum ExportFormat
+{
+	EF_None = 0;
+	EF_Mono = 1;
+	EF_MultipleMono = 2;
+	EF_Interleaved = 3;	// default
+}
+
+/**
+ * The types of files which the clips will be exported to.
+ */
+enum ExportFileType
+{
+	WAV = 0;
+	AIFF = 1;
+	MXF = 2;	// 	can't be selected unless 'Enforce Avid Compatibility is ON
+	MP3 = 3;	// is not supported
+	QuickTime = 4;	// is not supported
+}
+
+/**
+ * Available bit depth for exported file.
+ */
+enum BitDepth
+{
+	Bit_None = 0;
+	Bit16 = 1;
+	Bit24 = 2;
+	Bit32Float = 3;
+}
+
+/**
+ * Types of possible duplicate names resolution.
+ */
+enum ResolveDuplicateNamesBy
+{
+	AutoRenaming = 0; // default
+	ReplacingWithNewFiles = 1;
+}
+
+/**
+ * Structure that describes ExportClipsAsFiles request data.
+ */
+message ExportClipsAsFilesRequestBody
+{
+	string file_path = 1;	// destination directory
+	ExportFormat format = 2;
+	ExportFileType file_type = 3;	// default to session value
+	BitDepth bit_depth = 4;		// default to session value
+	ResolveDuplicateNamesBy duplicate_names = 5;
+	bool enforce_avid_compatibility = 6;	// false by default
+	int32 sample_rate_custom = 7; // @since Pro Tools 2024.03
+}
+
+/**
+ * The types of files which the tracks will be exported to as AAF/OMF.
+ */
+enum ExportAsAAFFileType
+{
+	AAF_WAV = 0;
+	AAF_AIFF = 1;
+	AAF_MXF = 2;	// only available when 'Enforce Media Composer compatibility is ON
+	AAF_Embedded = 3;
+}
+
+/**
+ * Available bit depth for file exported as AAF/OMF.
+ */
+enum AAFFileBitDepth
+{
+	AAF_Bit16 = 0;
+	AAF_Bit24 = 1;
+}
+
+/**
+ * Available options for copying media while exporting tracks as AAF/OMF files.
+ */
+enum CopyOption
+{
+	ConsolidateFromSourceMedia = 0;	// default
+	CopyFromSourceMedia = 1;
+	LinkFromSourceMedia = 2;
+}
+
+/**
+ * Structure that describes ExportSelectedTracksAsAAFOMF request data.
+ */
+message ExportSelectedTracksAsAAFOMFRequestBody
+{
+	ExportAsAAFFileType file_type = 2;
+	AAFFileBitDepth bit_depth = 3;
+	CopyOption copy_option = 4;	// ConsolidateFromSourceMedia by default.
+	bool enforce_media_composer_compatibility = 5;	// true by default.
+	bool quantize_edits_to_frame_boundaries = 6;  // true by default, always checked when 'Enforce Media Composer compatibility' is ON.
+	bool export_stereo_as_multichannel = 7;  // true by default, but not always applicable, false is only available if those track stems are included in the selection invoking the export dialog.
+	string container_file_name = 9;	// suppress and pass through sequence name if not specified.
+	string container_file_location = 10; // destination directory.
+	string asset_file_location = 11;
+	string comments = 12;
+	string sequence_name = 13;
+}
+
+/**
+ * Structure that describes RefreshTargetAudioFiles request data.
+ */
+message RefreshTargetAudioFilesRequestBody
+{
+	repeated string file_list = 1;
+}
+
+/**
+ * Structure that describes RefreshTargetAudioFiles response data.
+ */
+message RefreshTargetAudioFilesResponseBody
+{
+	int32 success_count = 1;
+	int32 failure_count = 2;
+	repeated string failure_list = 3;
+}
+
+/**
+ * Types of the filters which can be applied for session file gathering.
+ */
+enum FileLocationTypeFilter
+{
+	All_Files = 0;
+	OnTimeline_Files = 1;
+	NotOnTimeline_Files = 2;
+	Online_Files = 3;
+	Offline_Files = 4;
+	Audio_Files = 5;
+	Video_Files = 6;
+	Rendered_Files = 7;
+
+	SelectedClipsTimeline = 101;
+	SelectedClipsClipsList = 102;
+}
+
+/**
+ * Structure that describes file info.
+ */
+message FileLocationInfo
+{
+	bool is_online = 1;
+}
+
+/**
+ * Structure that describes file location and its info.
+ */
+message FileLocation
+{
+	string path = 1;
+	FileLocationInfo info = 2;
+}
+
+/**
+ * Structure that describes GetFileLocation request data.
+ */
+message GetFileLocationRequestBody
+{
+	/** 
+	 * @deprecated since Pro Tools 2023.09, use pagination_request
+	 */
+	int32 page_limit = 1;
+	repeated FileLocationTypeFilter file_filters = 2;
+	/** 
+	 * @since Pro Tools 2023.09
+	 * Enable pagination and control limit and offset
+	 */
+	PaginationRequest pagination_request = 3;
+}
+
+/**
+ * Structure that describes GetFileLocation response data.
+ */
+message GetFileLocationResponseBody
+{
+	/** 
+	 * @deprecated since Pro Tools 2023.09, use pagination_response
+	 */
+	Pagination stats = 1;
+	repeated FileLocation file_locations = 2;
+	/** 
+	 * @since Pro Tools 2023.09
+	 */
+	PaginationResponse pagination_response = 3;
+}
+
+/**
+ * Structure that describes CloseSession request data.
+ */
+message CloseSessionRequestBody
+{
+	bool save_on_close = 1;
+}
+
+/**
+ * Structure that describes SaveSessionAs request data.
+ */
+message SaveSessionAsRequestBody
+{
+	string session_name = 1;
+	string session_location = 2;
+}
+
+/**
+ * Automation data options used with cut/copy/clear commands.
+ */
+enum AutomationDataOptions
+{
+	All_Automation = 0;
+	Pan_Automation = 1;
+	PlugIn_Automation = 2;
+	Clip_Gain = 3;
+	Clip_Effects = 4;
+}
+
+/**
+ * Options used with the paste special command.
+ */
+enum PasteSpecialOptions
+{
+	option allow_alias = true;
+	Merge = 0;  // @deprecated since Pro Tools 2023.12
+	MergeMidi = 0;
+	Repeat_To_Fill_Selection = 1;
+	To_Current_Automation_Type = 2;
+	MergeMarkers = 3;
+}
+
+/**
+ * Structure that describes CutSpecial request data.
+ */
+message CutSpecialRequestBody
+{
+	AutomationDataOptions automation_data_option = 1;
+}
+
+/**
+ * Structure that describes CopySpecial request data.
+ */
+message CopySpecialRequestBody
+{
+	AutomationDataOptions automation_data_option = 1;
+}
+
+/**
+ * Structure that describes ClearSpecial request data.
+ */
+message ClearSpecialRequestBody
+{
+	AutomationDataOptions automation_data_option = 1;
+}
+
+/**
+ * Structure that describes PasteSpecial request data.
+ */
+message PasteSpecialRequestBody
+{
+	PasteSpecialOptions paste_special_option = 1;
+}
+
+/**
+ * Boolean with "unset" value.
+ */
+enum TripleBool
+{
+	TB_None = 0;
+	TB_False = 1;
+	TB_True = 2;
+}
+
+/**
+ * Available source types for mix source.
+ */
+enum EM_SourceType
+{
+	PhysicalOut = 0;
+	Bus = 1;
+	Output = 2;
+}
+
+/**
+ * Available compression type for audio.
+ */
+enum CompressionType
+{
+	CT_None = 0;
+	CT_PCM = 1; // Currently unchangeable, but it may be in the future
+}
+
+/**
+ * Type of Pro Tools session/project sample rate.
+ */
+enum SampleRate
+{
+	// TODO: support the new Enum values in 2024.03
+	// do not change the order:
+	SR_None = 0;
+	SR_44100 = 44100;
+	SR_48000 = 48000;
+	SR_96000 = 96000;
+	SR_176400 = 176400;
+	SR_192000 = 192000;
+	SR_88200 = 88200; // @since Pro Tools 2023.03
+}
+
+/**
+ * Available options for export video.
+ */
+enum EM_VideoExportOptions
+{
+	VE_None = 0;
+	VE_SameAsSource = 1;
+	VE_Transcode = 2;
+}
+
+/**
+ * Available file type for mix export.
+ */
+enum EM_FileType
+{
+	EM_None = 0;
+	EM_MOV = 1;
+	EM_WAV = 2;
+	EM_AIFF = 3;
+	EM_MP3 = 4;
+	EM_MXFOPAtom = 5;
+	EM_WAVADM = 6;
+}
+
+/**
+ * Available types that describe file destination.
+ */
+enum EM_FileDestination
+{
+	EM_FD_None = 0;
+	EM_FD_SessionFolder = 1;
+	EM_FD_Directory = 2;
+}
+
+/**
+ * Available delivery formats.
+ */
+enum EM_DeliveryFormat
+{
+	EM_DF_None = 0;
+	EM_DF_FilePerMixSource = 1;
+	EM_DF_SingleFile = 2;
+}
+
+/**
+ * Structure that describes mix source.
+ */
+message EM_SourceInfo
+{
+	EM_SourceType source_type = 1;
+	string name = 2;
+}
+
+/**
+ * Structure that describes information for audio section in the Bounce Mix window.
+ */
+message EM_AudioInfo
+{
+	CompressionType compression_type = 1;
+	ExportFormat export_format = 2;
+	BitDepth bit_depth = 3;
+	SampleRate sample_rate = 4;
+	TripleBool pad_to_frame_boundary = 5;
+	EM_DeliveryFormat delivery_format = 6;
+	/**
+	 * Custom sample rate to override the sample_rate field. Use non zero values to enable this field.
+	 *
+	 * @since Pro Tools 2024.06
+	 */
+	int32 sample_rate_custom = 7;
+}
+
+/**
+ * Structure that describes container for property.
+ */
+message PropertyContainer
+{
+	string container_name = 1; // (required) name of property field
+	DP_ValueTypes type = 2; // (required) data type of value
+	string value = 3; // (required) value to associate with the property field
+}
+
+/**
+ * Structure that describes information for codec in video section for Export Mix.
+ */
+message EM_CodecInfo
+{
+	string codec_name = 1; // (required)
+	repeated PropertyContainer property_list = 2; // (required)
+}
+
+/**
+ * Structure that describes information for video section in the Bounce Mix window.
+ */
+message EM_VideoInfo
+{
+	TripleBool include_video = 1;
+	EM_VideoExportOptions export_option = 2;
+	TripleBool replace_timecode_track = 3;
+	EM_CodecInfo codec_info = 4;
+}
+
+/**
+ * Structure that describes information for import options if importAfterBounce is true.
+ */
+message EM_ImportOptions
+{
+	MediaDestination import_destination = 1;
+	MediaLocation import_location = 2;
+	int32 gaps_between_clips = 3;
+	TripleBool import_audio_from_file = 4;
+	TripleBool remove_existing_video_tracks = 5;
+	TripleBool remove_existing_video_clips = 6;
+	TripleBool clear_destination_video_track_playlist = 7;
+}
+
+/**
+ * Structure that describes information for location section in the Bounce Mix window.
+ */
+message EM_LocationInfo
+{
+	TripleBool import_after_bounce = 1;
+	EM_ImportOptions import_options = 2;
+	EM_FileDestination file_destination = 3;
+	string directory = 4;
+}
+
+/**
+ * Structure that describes information for dolby atmos section in the Bounce Mix window.
+ */
+message EM_DolbyAtmosInfo
+{
+	TripleBool add_first_frame_of_action = 1;
+	string timecode_value = 2;
+	int32 frame_rate = 3;
+	repeated PropertyContainer property_list = 4;
+}
+
+/**
+ * Structure that describes ExportMix request data.
+ */
+message ExportMixRequestBody
+{
+	string preset_path = 1;
+	string file_name = 2;
+	EM_FileType file_type = 3;
+	/** @deprecated
+	 * files_list is deprecated starting in Pro Tools 2023.03 
+	 * Use ExportMixRequestBody::mix_source_list instead
+	 */
+	repeated EM_SourceInfo files_list = 4;
+	EM_AudioInfo audio_info = 5;
+	EM_VideoInfo video_info = 6;
+	EM_LocationInfo location_info = 7;
+	EM_DolbyAtmosInfo dolby_atmos_info = 8;
+	TripleBool offline_bounce = 9;
+	repeated EM_SourceInfo mix_source_list = 10; // @since Pro Tools 2023.03
+}
+
+/**
+ * Available data types that describe dynamic property.
+ */
+enum DP_ValueTypes
+{
+	DP_VT_double = 0;
+	DP_VT_float = 1;
+	DP_VT_int32 = 2;
+	DP_VT_int64 = 3;
+	DP_VT_uint32 = 4;
+	DP_VT_uint64 = 5;
+	DP_VT_sint32 = 6;
+	DP_VT_sint64 = 7;
+	DP_VT_fixed32 = 8;
+	DP_VT_fixed64 = 9;
+	DP_VT_sfixed32 = 10;
+	DP_VT_sfixed64 = 11;
+	DP_VT_bool = 12;
+	DP_VT_string = 13;
+	DP_VT_bytes = 14;
+	DP_VT_enum = 15;
+	DP_VT_object = 16;
+}
+
+/**
+ * Structure that describes dynamic property.
+ */
+message PropertyDescriptor
+{
+	string name = 1; // (required) name of property field - matches the field name in the message object for the associated dynamic property type
+	DP_ValueTypes value_type = 2; // (required) type of value expected
+	string object_type = 3; // (optional) // name of message object
+	bool required = 4; // (required) is the property required
+	string description = 5; // (required) brief description of the property
+	string units = 6; //(optional) expected units for this property if applicable
+	repeated string accepted_values = 7; // (optional) - a list of accepted values
+	string max_value = 8; // (optional)
+	string min_value = 9; // (optional)
+}
+
+/**
+ * Available dynamic properties types.
+ */
+enum DynamicPropertyType
+{
+	DP_EM_CodecInfo = 0;
+	DP_EM_DolbyAtmosInfo = 1;
+}
+
+/**
+ * Structure that describes GetDynamicProperties request data.
+ */
+message GetDynamicPropertiesRequestBody
+{
+	DynamicPropertyType property_type = 1;
+}
+
+/**
+ * Structure that describes GetDynamicProperties group.
+ */
+message GetDynamicPropertiesGroup
+{
+	repeated PropertyContainer key_list = 1;
+	repeated PropertyDescriptor property_list = 2;
+}
+
+/**
+ * Structure that describes GetDynamicProperties response data.
+ */
+message GetDynamicPropertiesResponseBody
+{
+	DynamicPropertyType property_type = 1;
+	repeated GetDynamicPropertiesGroup group_list = 2;
+}
+
+/**
+ * Structure that describes Spot request data.
+ */
+message SpotRequestBody
+{
+	/** @deprecated
+	 * track_offset_options is deprecated starting in Pro Tools 2023.06
+	 * Use SpotRequestBody::location_data::location_options instead
+	 */
+	TrackOffsetOptions track_offset_options = 1;
+	SpotLocationData location_data = 2;
+}
+
+/**
+ * Available track list types.
+ */
+enum TrackListType
+{
+	AllTracks = 0;
+	SelectedTracksOnly = 1;
+}
+
+/**
+ * Available fade handling types.
+ */
+enum FadeHandlingType
+{
+	ShowCrossfades = 0;
+	DontShowCrossfades = 1;
+	CombineCrossfadedClips = 2;
+}
+
+/**
+ * Available file formats.
+ */
+enum TextAsFileFormat
+{
+	TextEdit = 0;
+	UTF8 = 1;
+}
+
+/**
+ * Available output types.
+ */
+enum ESI_OutputType
+{
+	ESI_File = 0;
+	ESI_String = 1;
+	ESI_Unknown = 2;
+}
+
+/**
+ * Structure that describes ExportSessionInfoAsText request data.
+ */
+message ExportSessionInfoAsTextRequestBody
+{
+	bool include_file_list = 1; // true by default
+	bool include_clip_list = 2; // true by default
+	bool include_markers = 3; // true by default
+	bool include_plugin_list = 4; // true by default
+	bool include_track_edls = 5; // true by default
+	bool show_sub_frames  = 6; // false by default, only available if includeTrackEDL is checked
+	bool include_user_timestamps = 7; // false by default, only available if includeTrackEDL is checked
+	TrackListType track_list_type = 8; // only available if includeTrackEDL is checked
+	FadeHandlingType fade_handling_type = 9; // only available if includeTrackEDL is checked
+	TrackOffsetOptions track_offset_options = 10;
+	TextAsFileFormat text_as_file_format = 11;
+	ESI_OutputType output_type = 12;
+	string output_path = 13; 
+}
+
+/**
+ * Structure that describes ExportSessionInfoAsText response data.
+ */
+message ExportSessionInfoAsTextResponseBody
+{
+	string session_info = 1; // fill this field in case of ESI_OutputType is ESI_String.
+}
+
+/**
+ * Types of the playback mode.
+ */
+enum PM_PlaybackMode
+{
+	PM_Normal = 0;
+	PM_Loop = 1;
+	PM_DynamicTransport = 2;
+}
+
+/**
+ * Structure that describes SetPlaybackMode request data.
+ */
+message SetPlaybackModeRequestBody
+{
+	PM_PlaybackMode playback_mode = 1;
+}
+
+/**
+ * Structure that describes SetPlaybackMode response data.
+ */
+message SetPlaybackModeResponseBody
+{
+	PM_PlaybackMode current_playback_mode = 1;
+	repeated PM_PlaybackMode playback_mode_list = 2;
+}
+
+/**
+ * Types of the record mode.
+ */
+enum RM_RecordMode
+{
+	RM_Normal = 0;
+	RM_Loop = 1;
+	RM_Destructive = 2;
+	RM_QuickPunch = 3;
+	RM_TrackPunch = 4;
+	RM_DestructivePunch = 5;
+}
+
+/**
+ * Structure that describes SetRecordMode request data.
+ */
+message SetRecordModeRequestBody
+{
+	RM_RecordMode record_mode = 1;
+	bool record_arm_transport = 2;
+}
+
+/**
+ * Structure that describes SetRecordMode response data.
+ */
+message SetRecordModeResponseBody
+{
+	RM_RecordMode current_record_mode = 1;
+	repeated RM_RecordMode record_mode_list = 2;
+}
+
+/**
+ * Type of session audio file format.
+ */
+enum SessionAudioFormat
+{
+	SAF_WAVE = 0;
+	SAF_AIFF = 1;
+}
+
+/**
+ * Type of session time code rate.
+ */
+enum SessionTimeCodeRate
+{
+	STCR_Fps23976 = 0;
+	STCR_Fps24 = 1;
+	STCR_Fps25 = 2;
+	STCR_Fps2997 = 3;
+	STCR_Fps2997Drop = 4;
+	STCR_Fps30 = 5;
+	STCR_Fps30Drop = 6;
+	STCR_Fps47952 = 7;
+	STCR_Fps48 = 8;
+	STCR_Fps50 = 9;
+	STCR_Fps5994 = 10;
+	STCR_Fps5994Drop = 11;
+	STCR_Fps60 = 12;
+	STCR_Fps60Drop = 13;
+	STCR_Fps100 = 14;
+	STCR_Fps11988 = 15;
+	STCR_Fps11988Drop = 16;
+	STCR_Fps120 = 17;
+	STCR_Fps120Drop = 18;
+}
+
+/**
+ * Type of session feet+frames rate.
+ */
+enum SessionFeetFramesRate
+{
+	SFFR_Fps23976 = 0;
+	SFFR_Fps24 = 1;
+	SFFR_Fps25 = 2;
+}
+
+/**
+ * Type of session audio/video rate pull up/down.
+ */
+enum SessionRatePull
+{
+	SRP_None = 0;
+	SRP_Up01 = 1;
+	SRP_Down01 = 2;
+	SRP_Up4 = 3;
+	SRP_Up4Up01 = 4;
+	SRP_Up4Down01 = 5;
+	SRP_Down4 = 6;
+	SRP_Down4Up01 = 7;
+	SRP_Down4Down01 = 8;
+}
+
+/**
+ * Structure that describes GetSessionAudioFormat response data.
+ */
+message GetSessionAudioFormatResponseBody
+{
+	SessionAudioFormat current_setting = 1;
+	repeated SessionAudioFormat possible_settings = 2;
+}
+
+/**
+ * Structure that describes GetSessionSampleRate response data.
+ */
+message GetSessionSampleRateResponseBody
+{
+	SampleRate sample_rate = 1;
+}
+
+/**
+ * Structure that describes GetSessionBitDepth response data.
+ */
+message GetSessionBitDepthResponseBody
+{
+	BitDepth current_setting = 1;
+	repeated BitDepth possible_settings = 2;
+}
+
+/**
+ * Structure that describes GetSessionInterleavedState response data.
+ */
+message GetSessionInterleavedStateResponseBody
+{
+	bool current_setting = 1;
+	repeated bool possible_settings = 2;
+}
+
+/**
+ * Structure that describes GetSessionTimeCodeRate response data.
+ */
+message GetSessionTimeCodeRateResponseBody
+{
+	SessionTimeCodeRate current_setting = 1;
+	repeated SessionTimeCodeRate possible_settings = 2;
+}
+
+/**
+ * Structure that describes GetSessionFeetFramesRate response data.
+ */
+message GetSessionFeetFramesRateResponseBody
+{
+	SessionFeetFramesRate current_setting = 1;
+	repeated SessionFeetFramesRate possible_settings = 2;
+}
+
+/**
+ * Structure that describes GetSessionAudioRatePullSettings response data.
+ */
+message GetSessionAudioRatePullSettingsResponseBody
+{
+	SessionRatePull current_setting = 1;
+	repeated SessionRatePull possible_settings = 2;
+}
+
+/**
+ * Structure that describes GetSessionVideoRatePullSettings response data.
+ */
+message GetSessionVideoRatePullSettingsResponseBody
+{
+	SessionRatePull current_setting = 1;
+	repeated SessionRatePull possible_settings = 2;
+}
+
+/**
+ * Structure that describes GetSessionName response data.
+ */
+message GetSessionNameResponseBody
+{
+	string session_name = 1;
+}
+
+/**
+ * Structure that describes GetSessionPath response data.
+ */
+message GetSessionPathResponseBody
+{
+	FileLocation session_path = 1;
+}
+
+/**
+ * Structure that describes GetSessionStartTime response data.
+ */
+message GetSessionStartTimeResponseBody
+{
+	string session_start_time = 1;
+}
+
+/**
+ * Structure that describes GetSessionLength response data.
+ */
+message GetSessionLengthResponseBody
+{
+	string session_length = 1;
+}
+
+/**
+ * Structure that describes SetSessionAudioFormat request data.
+ */
+message SetSessionAudioFormatRequestBody
+{
+	SessionAudioFormat audio_format = 1;
+}
+
+/**
+ * Structure that describes SetSessionBitDepth request data.
+ */
+message SetSessionBitDepthRequestBody
+{
+	BitDepth bit_depth = 1;
+}
+
+/**
+ * Structure that describes SetSessionInterleavedState request data.
+ */
+message SetSessionInterleavedStateRequestBody
+{
+	bool interleaved_state = 1;
+}
+
+/**
+ * Structure that describes SetSessionTimeCodeRate request data.
+ */
+message SetSessionTimeCodeRateRequestBody
+{
+	SessionTimeCodeRate time_code_rate = 1;
+}
+
+/**
+ * Structure that describes SetSessionFeetFramesRate request data.
+ */
+message SetSessionFeetFramesRateRequestBody
+{
+	SessionFeetFramesRate feet_frames_rate = 1;
+}
+
+/**
+ * Structure that describes SetSessionAudioRatePullSettings request data.
+ */
+message SetSessionAudioRatePullSettingsRequestBody
+{
+	SessionRatePull audio_rate_pull = 1;
+}
+
+/**
+ * Structure that describes SetSessionVideoRatePullSettings request data.
+ */
+message SetSessionVideoRatePullSettingsRequestBody
+{
+	SessionRatePull video_rate_pull = 1;
+}
+
+/**
+ * Structure that describes SetSessionStartTime request data.
+ */
+message SetSessionStartTimeRequestBody
+{
+	string session_start_time = 1;
+	TrackOffsetOptions track_offset_opts = 2;
+	bool maintain_relative_position = 3;
+}
+
+/**
+ * Structure that describes SetSessionLength request data.
+ */
+message SetSessionLengthRequestBody
+{
+	string session_length = 1;
+}
+
+/**
+ * Structure that describes GetPTSLVersion response data.
+ */
+message GetPTSLVersionResponseBody
+{
+	int32 version = 1;	// version of PTSL Host
+}
+
+/**
+ * Structure that describes GetPlaybackMode response data.
+ */
+message GetPlaybackModeResponseBody
+{
+  repeated PM_PlaybackMode current_settings = 1;
+  repeated PM_PlaybackMode possible_settings = 2;
+}
+
+/**
+ * Structure that describes GetRecordMode response data.
+ */
+message GetRecordModeResponseBody
+{
+  RM_RecordMode current_setting = 1;
+  repeated RM_RecordMode possible_settings = 2;
+}
+
+/**
+ * Types of the transport state.
+ */
+enum TS_TransportState
+{
+	TS_TransportPlaying = 0;
+	TS_TransportStopped = 1;
+	TS_TransportRecording = 2;
+	TS_TransportPlayingHalfSpeed = 3;
+	TS_TransportRecordingHalfSpeed = 4;
+	TS_TransportFastForward = 5;
+	TS_TransportRewind = 6;
+	TS_TransportScrub = 7;
+	TS_TransportShuttle = 8;
+	TS_TransportPrimed = 9;
+	TS_TransportIsCueing = 10;
+	TS_TransportIsCued = 11;
+	TS_TransportIsCuedForPreview = 12;
+	TS_TransportIsStopping = 13;
+	TS_TransportIsPreviewing = 14;
+}
+
+/**
+ * Structure that describes GetTransportState response data.
+ */
+message GetTransportStateResponseBody
+{
+  TS_TransportState current_setting = 1;
+  repeated TS_TransportState possible_settings = 2;
+}
+
+/**
+ * Structure that describes GetTransportArmed response data.
+ */
+message GetTransportArmedResponseBody
+{
+  bool is_transport_armed = 1;
+}
+
+/**
+ * Structure that describes ClearMemoryLocation request data.
+ */
+message ClearMemoryLocationRequestBody
+{
+	/**
+	 * List of locations that needs to be cleared.
+	 */
+	repeated int32 location_list = 1;
+}
+
+/**
+ * Structure that describes ClearMemoryLocation response data.
+ */
+message ClearMemoryLocationResponseBody
+{
+	/**
+	 * Number of succeeded cleared memory locations.
+	 */
+	int32 success_count = 1;
+
+	/**
+	 * Number of memory locations that were not cleared.
+	 */
+	int32 failure_count = 2;
+
+	/**
+	 * List of memory locations that were not cleared.
+	 */
+	repeated int32 failure_list = 3;
+}
+
+/**
+ * Clips locations.
+ */
+enum CL_ClipLocation
+{
+	CL_ClipsList = 0;
+	CL_Timeline = 1;
+}
+
+/**
+ * Structure that describes RenameSelectedClip request data.
+ */
+message RenameSelectedClipRequestBody
+{
+	CL_ClipLocation clip_location = 1;
+	string new_name = 2;
+	bool rename_file = 3;
+}
+
+/**
+ * Structure that describes RenameTargetClip request data.
+ */
+message RenameTargetClipRequestBody
+{
+	string clip_name = 1;
+	string new_name = 2;
+	bool rename_file = 3;
+}
+
+/**
+ * Type of time properties.
+ */
+enum TimeProperties
+{
+	TP_Marker = 0;
+	TP_Selection = 1;
+	TP_None = 2;
+}
+
+/**
+ * Type of memory location reference.
+ */
+enum MemoryLocationReference
+{
+	MLR_BarBeat = 0;
+	MLR_Absolute = 1;
+	MLR_FollowTrackTimebase = 2;
+}
+
+/**
+ * Type of marker location.
+ */
+enum MarkerLocation
+{
+	MLC_Unknown = 0; // tech-only; don't use it in requests
+	MLC_MainRuler = 1;
+	MLC_Track = 2;
+}
+
+/**
+ * Structure that describes memory location.
+ */
+message MemoryLocation
+{
+	int32 number = 1;
+	string name = 2;
+	string start_time = 3;
+	string end_time = 4;
+	TimeProperties time_properties = 5;
+	MemoryLocationReference reference = 6;
+	MemoryLocationProperties general_properties = 7;
+	string comments = 8;
+	MarkerLocation location = 9;
+	string track_name = 10;
+	int32 color_index = 11;
+}
+
+/**
+ * Structure that describes memory location properties (flags).
+ */
+message MemoryLocationProperties
+{
+	bool zoom_settings = 1;
+	bool pre_post_roll_times = 2;
+	bool track_visibility = 3;
+	bool track_heights = 4;
+	bool group_enables = 5;
+	bool window_configuration = 6;
+	int32 window_configuration_index = 7;
+	string window_configuration_name = 8;
+	int32 venue_snapshot_index = 9;
+	string venue_snapshot_name = 10;
+}
+
+/**
+ * Structure that describes EditMemoryLocation request data.
+ */
+message EditMemoryLocationRequestBody
+{
+	int32 number = 1;
+	string name = 2;
+	string start_time = 3;
+	string end_time = 4;
+	TimeProperties time_properties = 5;
+	/**
+	 * Only MLR_FollowTrackTimebase option is supported. All other options are ignored when set.
+	 * Reference type is determined based on the start_time format instead.
+	 */
+	MemoryLocationReference reference = 6;
+	MemoryLocationProperties general_properties = 7;
+	string comments = 8;
+	int32 color_index = 9;
+	MarkerLocation location = 10;
+	string track_name = 11;
+}
+
+/**
+ * Structure that describes EditMemoryLocation response data.
+ */
+message EditMemoryLocationResponseBody
+{
+}
+
+/**
+ * Structure that describes CreateMemoryLocation request data.
+ */
+message CreateMemoryLocationRequestBody
+{
+	int32 number = 1;
+	string name = 2;
+	string start_time = 3;
+	string end_time = 4;
+	TimeProperties time_properties = 5;
+	/**
+	 * Only MLR_FollowTrackTimebase option is supported. All other options are ignored when set.
+	 * Reference type is determined based on the start_time format instead.
+	 */
+	MemoryLocationReference reference = 6;
+	MemoryLocationProperties general_properties = 7;
+	string comments = 8;
+	int32 color_index = 9;
+	MarkerLocation location = 10;
+	string track_name = 11;
+}
+
+/**
+ * Structure that describes CreateMemoryLocation response data.
+ */
+message CreateMemoryLocationResponseBody
+{
+}
+
+/**
+ * Structure that describes GetMemoryLocations request data.
+ */
+message GetMemoryLocationsRequestBody
+{
+	/**
+	 * @since Pro Tools 2023.12
+	 * Enable pagination and control limit and offset
+	 */
+	PaginationRequest pagination_request = 1;
+}
+
+/**
+ * Structure that describes GetMemoryLocations response data.
+ */
+message GetMemoryLocationsResponseBody
+{
+	repeated MemoryLocation memory_locations = 1;
+	/**
+	 * @deprecated since Pro Tools 2023.09, use pagination_response
+	 */
+	Pagination stats = 2;
+	/**
+	 * @since Pro Tools 2023.12
+	 */
+	PaginationResponse pagination_response = 3;
+}
+
+/**
+ * Structure that describes RegisterConnection request data.
+ */
+message RegisterConnectionRequestBody
+{
+	/**
+	 * The name of the company to which the application belongs.
+	 */
+	string company_name = 1;
+
+	/**
+	 * The name of the application that is registering the connection.
+	 */
+	string application_name = 2;
+}
+
+/**
+ * Structure that describes RegisterConnection response data.
+ */
+message RegisterConnectionResponseBody
+{
+	/**
+	 * The unique identifier for the PTSL connection. Please don't confuse it with Pro Tools sessions.
+	 */
+	string session_id = 1;
+}
+
+/**
+ * Enumeration that describes the position of the insertion point for a track.
+ *
+ * @since Pro Tools 2024.06
+ */
+enum TrackInsertionPoint
+{
+	/** 
+	 * Default value, the insertion point is determined by Pro Tools.
+	 */
+	TIPoint_Unknown = 0;
+	/** 
+	 * The insertion point is before the specified track.
+	 */
+	TIPoint_Before = 1;
+	/** 
+	 * The insertion point is after the specified track.
+	 */
+	TIPoint_After = 2;
+	/** 
+	 * The insertion point is either the first track in the session or the first member track of the specified folder track.
+	 */
+	TIPoint_First = 3;
+	/** 
+	 * The insertion point is either the last track in the session or the last member track of the specified folder track.
+	 */
+	TIPoint_Last = 4;
+}
+
+/**
+ * Structure that describes CreateNewTracks request data.
+ */
+message CreateNewTracksRequestBody
+{
+	int32 number_of_tracks = 1;
+	string track_name = 2;
+	TrackFormat track_format = 3;
+	TrackType track_type = 4;
+	TrackTimebase track_timebase = 5;
+	/** 
+	 * Non-default pagination_request values can be used to limit the response (CreateNewTracksResponseBody.created_track_names)
+	 *
+	 * @since Pro Tools 2024.06
+	 */
+	PaginationRequest pagination_request = 6;
+	/** 
+	 * @since Pro Tools 2024.06
+	 */
+	TrackInsertionPoint insertion_point_position = 7;
+	/** 
+	 * @since Pro Tools 2024.06
+	 */
+	string insertion_point_track_name = 8;
+}
+
+/**
+ * Structure that describes CreateNewTracks response data.
+ */
+message CreateNewTracksResponseBody
+{
+	/** 
+	 * @deprecated since Pro Tools 2024.06, use created_track_names/pagination_response
+	 */
+	int32 number_of_tracks = 1;
+	/** 
+	 * @since Pro Tools 2024.06
+	 */
+	repeated string created_track_names = 2;
+	/** 
+	 * @since Pro Tools 2024.06
+	 */
+	PaginationResponse pagination_response = 3;
+}
+
+/**
+ * Type of edit mode.
+ */
+enum EditMode
+{
+	EMO_Unknown = 0; // tech-only; don't use it in requests
+	EMO_Shuffle = 1;
+	EMO_Slip = 2;
+	EMO_Spot = 3;
+	EMO_GridAbsolute = 4;
+	EMO_GridRelative = 5;
+	EMO_ShuffleSnapToGridAbsolute = 6;
+	EMO_SlipSnapToGridAbsolute = 7;
+	EMO_SpotSnapToGridAbsolute = 8;
+	EMO_ShuffleSnapToGridRelative = 9;
+	EMO_SlipSnapToGridRelative = 10;
+	EMO_SpotSnapToGridRelative = 11;
+}
+
+/**
+ * Type of edit tool.
+ */
+enum EditTool
+{
+	ET_Unknown = 0; // tech-only; don't use it in requests
+	ET_ZoomNormal = 1;
+	ET_ZoomSingle = 2;
+	ET_TrimStandard = 3;
+	ET_TrimTce = 4;
+	ET_TrimScrub = 5;
+	ET_TrimLoop = 6;
+	ET_Selector = 7;
+	ET_GrabberTime = 8;
+	ET_GrabberSeparation = 9;
+	ET_GrabberObject = 10;
+	ET_SmartTool = 11;
+	ET_Scrubber = 12;
+	ET_PencilFreeHand = 13;
+	ET_PencilLine = 14;
+	ET_PencilTriangle = 15;
+	ET_PencilSquare = 16;
+	ET_PencilRandom = 17;
+	ET_PencilParabolic = 18;
+	ET_PencilSCurve = 19;
+}
+
+/**
+ * Structure that describes edit mode options.
+ */
+message EditModeOptions
+{
+	bool tab_to_transients = 1;
+	bool link_timeline_and_edit_selection = 2;
+	bool link_track_and_edit_selection = 3;
+	bool insertion_follows_playback = 4;
+	bool automation_follows_edit = 5;
+	bool markers_follow_edit = 6;
+	bool mirrored_midi_editing = 7;
+	bool layered_editing = 8;
+}
+
+/**
+ * Structure that describes GetEditMode response data.
+ */
+message GetEditModeResponseBody
+{
+	EditMode current_setting = 1;
+	repeated EditMode possible_settings = 2;
+}
+
+/**
+ * Structure that describes SetEditMode request data.
+ */
+message SetEditModeRequestBody
+{
+	EditMode edit_mode = 1;
+}
+
+/**
+ * Structure that describes GetEditTool response data.
+ */
+message GetEditToolResponseBody
+{
+	EditTool current_setting = 1;
+	repeated EditTool possible_settings = 2;
+}
+
+/**
+ * Structure that describes SetEditTool request data.
+ */
+message SetEditToolRequestBody
+{
+	EditTool edit_tool = 1;
+}
+
+/**
+ * Structure that describes RecallZoomPreset request data.
+ */
+message RecallZoomPresetRequestBody
+{
+	int32 zoom_preset = 1; // 1|2|3|4|5
+}
+
+/**
+ * Structure that describes GetEditModeOptions response data.
+ */
+message GetEditModeOptionsResponseBody
+{
+	EditModeOptions edit_mode_options = 1;
+}
+
+/**
+ * Structure that describes SetEditModeOptions request data.
+ */
+message SetEditModeOptionsRequestBody
+{
+	EditModeOptions edit_mode_options = 1;
+}
+
+/**
+ * Type of video synchronization mode.
+ */
+enum TimelineUpdateVideo
+{
+	TUV_Unknown = 0; // tech-only; don't use it in requests
+	TUV_None = 1;
+	TUV_In = 2;
+	TUV_Out = 3;
+}
+
+/**
+ * Structure that describes SetTimelineSelection request data.
+ */
+message SetTimelineSelectionRequestBody
+{
+	string play_start_marker_time = 1;
+	string in_time = 2;
+	string out_time = 3;
+	string pre_roll_start_time = 4;
+	string post_roll_stop_time = 5;
+	TripleBool pre_roll_enabled = 6;
+	TripleBool post_roll_enabled = 7;
+	TimelineUpdateVideo update_video_to = 8;
+	TripleBool propagate_to_satellites = 9;
+}
+
+/**
+ * Structure that describes GetTimelineSelection request data.
+ */
+message GetTimelineSelectionRequestBody
+{
+	TrackOffsetOptions time_scale = 1;
+}
+
+/**
+ * Structure that describes GetTimelineSelection response data.
+ */
+message GetTimelineSelectionResponseBody
+{
+	string play_start_marker_time = 1;
+	string in_time = 2;
+	string out_time = 3;
+	string pre_roll_start_time = 4;
+	string post_roll_stop_time = 5;
+	bool pre_roll_enabled = 6;
+	bool post_roll_enabled = 7;
+}
+
+/**
+ * Type of the track's possible selection.
+ */
+enum SelectionMode
+{
+	SM_Unknown = 0;		// tech-only; don't use it in requests
+	SM_Replace = 1;
+	SM_Add = 2;
+	SM_Subtract = 3;
+}
+
+/**
+ * Structure that describes SelectTracksByName request data.
+ */
+message SelectTracksByNameRequestBody
+{
+	repeated string track_names = 1;
+	SelectionMode selection_mode = 2;
+	PaginationRequest pagination_request = 3;
+}
+
+/**
+ * Structure that describes SelectTracksByName response data.
+ */
+message SelectTracksByNameResponseBody
+{
+	/** 
+	 * @deprecated since Pro Tools 2023.09, use pagination_response
+	 */
+	Pagination stats = 1;
+	repeated Track track_list = 2;
+	/** 
+	 * @since Pro Tools 2023.09
+	 */
+	PaginationResponse pagination_response = 3;
+}
+
+/**
+ * A file and the failure related to it during importing.
+ */
+ message ImportFailureInfo
+ {
+	 string file_path = 1;
+	 string failure_message = 2;
+ }
+
+ /**
+ * Structure that describes ImportVideo request data.
+ */
+message ImportVideoRequestBody
+{
+	repeated string video_file_list = 1;
+	MediaDestination destination = 2;
+	MediaLocation location = 3;
+	SpotLocationData spot_location_data = 4;
+	int32 gaps_between_clips = 5;
+	bool import_audio_from_file = 6;
+	string audio_destination_path = 7;
+	bool remove_existing_video_tracks = 8;
+	bool remove_existing_video_clips = 9;
+	bool clear_destination_video_track_playlist = 10;
+}
+
+/**
+ * Structure that describes ImportVideo response data.
+ */
+message ImportVideoResponseBody
+{
+	repeated ImportFailureInfo failure_list = 1;
+}
+
+/**
+ * Structure that describes SelectMemoryLocation request data.
+ */
+message SelectMemoryLocationRequestBody
+{
+	int32 number = 1;
+}
+
+/**
+ * Structure that describes SetTrackMuteState request data.
+ */
+message SetTrackMuteStateRequestBody
+{
+	repeated string track_names = 1;
+	bool enabled = 2;
+}
+
+/**
+ * Structure that describes SetTrackSoloState request data.
+ */
+message SetTrackSoloStateRequestBody
+{
+	repeated string track_names = 1;
+	bool enabled = 2;
+}
+
+/**
+ * Structure that describes SetTrackSoloSafeState request data.
+ */
+message SetTrackSoloSafeStateRequestBody
+{
+	repeated string track_names = 1;
+	bool enabled = 2;
+}
+
+/**
+ * Structure that describes SetTrackRecordEnableState request data.
+ */
+message SetTrackRecordEnableStateRequestBody
+{
+	repeated string track_names = 1;
+	bool enabled = 2;
+}
+
+/**
+ * Structure that describes SetTrackRecordSafeEnableState request data.
+ */
+message SetTrackRecordSafeEnableStateRequestBody
+{
+	repeated string track_names = 1;
+	bool enabled = 2;
+}
+
+/**
+ * Structure that describes SetTrackInputMonitorState request data.
+ */
+message SetTrackInputMonitorStateRequestBody
+{
+	repeated string track_names = 1;
+	/**
+	 * Note: when Preferences->Operation->Record->"PEC/Direct Style Input Monitoring" is ON, enabled=true means "PEC" and enabled=false means "Direct Style".
+	 */
+	bool enabled = 2;
+}
+
+/**
+ * Structure that describes SetTrackSmartDspState request data.
+ */
+message SetTrackSmartDspStateRequestBody
+{
+	repeated string track_names = 1;
+	bool enabled = 2;
+}
+
+/**
+ * Structure that describes SetTrackHiddenState request data.
+ */
+message SetTrackHiddenStateRequestBody
+{
+	repeated string track_names = 1;
+	bool enabled = 2;
+}
+
+/**
+ * Structure that describes SetTrackInactiveState request data.
+ */
+message SetTrackInactiveStateRequestBody
+{
+	repeated string track_names = 1;
+	bool enabled = 2;
+}
+
+/**
+ * Structure that describes SetTrackFrozenState request data.
+ */
+message SetTrackFrozenStateRequestBody
+{
+	repeated string track_names = 1;
+	bool enabled = 2;
+}
+
+/**
+ * Structure that describes SetTrackOnlineState request data.
+ */
+message SetTrackOnlineStateRequestBody
+{
+	string track_name = 1;
+	bool enabled = 2;
+}
+
+/**
+ * Structure that describes SetTrackOpenState request data.
+ */
+message SetTrackOpenStateRequestBody
+{
+	repeated string track_names = 1;
+	bool enabled = 2;
+}
+
+/**
+ * Structure that describes GetSessionIDs response data.
+ */
+message GetSessionIDsResponseBody
+{
+	string origin_id = 1;
+	string instance_id = 2;
+	string parent_id = 3;
+}
+
+/**
+ * Structure that describes GetMemoryLocationsManageMode response data.
+ *
+ * @since Pro Tools 2024.06
+ */
+message GetMemoryLocationsManageModeResponseBody
+{
+	/**
+	 * Whether the Memory Locations Manage Mode is enabled or disabled.
+	 */
+	bool enabled = 1;
+}
+
+/**
+ * Structure that describes SetMemoryLocationsManageMode request data.
+ *
+ * @since Pro Tools 2024.06
+ */
+message SetMemoryLocationsManageModeRequestBody
+{
+	/**
+	 * Whether to enable or disable the Memory Locations Manage Mode.
+	 */
+	bool enabled = 1;
+}
+
+/**
+ * Structure that describes whether Pro Tools is fully loaded to execute PTSL commands.
+ *
+ * @since Pro Tools 2024.06
+ */
+message HostReadyCheckResponseBody
+{
+	bool is_host_ready = 1;
+}
+
+/**
+ * Structure that describes SetMainCounterFormat request data.
+ *
+ * @since Pro Tools 2024.06
+ */
+message SetMainCounterFormatRequestBody
+{
+	/**
+	 * The time scale (type) of the counter.
+	 */
+	TrackOffsetOptions time_scale = 1;
+}
+
+/**
+ * Structure that describes SetSubCounterFormat request data.
+ *
+ * @since Pro Tools 2024.06
+ */
+message SetSubCounterFormatRequestBody
+{
+	/**
+	 * The time scale (type) of the counter.
+	 */
+	TrackOffsetOptions time_scale = 1;
+}
+
+/**
+ * Structure that describes GetMainCounterFormat response data.
+ *
+ * @since Pro Tools 2024.06
+ */
+message GetMainCounterFormatResponseBody
+{
+	/**
+	 * The time scale (type) of the counter.
+	 */
+	TrackOffsetOptions current_setting = 1;
+
+	/**
+	 * The supported time scales (types) of the counter (tier-depended).
+	 */
+	repeated TrackOffsetOptions possible_settings = 2;
+}
+
+/**
+ * Structure that describes GetSubCounterFormat response data.
+ *
+ * @since Pro Tools 2024.06
+ */
+message GetSubCounterFormatResponseBody
+{
+	/**
+	 * The time scale (type) of the counter.
+	 */
+	TrackOffsetOptions current_setting = 1;
+
+	/**
+	 * The supported time scales (types) of the counter (tier-depended).
+	 */
+	repeated TrackOffsetOptions possible_settings = 2;
+}
+
+/**
+ * A single Undo/Redo operation (see menu Window -> Undo History in the Pro Tools UI).
+ *
+ * @since Pro Tools 2024.06
+ */
+message UndoHistoryOperation
+{
+	/**
+	 * The time of the operation (ISO 8601 format).
+	 */
+	string time = 1;
+
+	/**
+	 * The name of the operation.
+	 */
+	string operation = 2;
+
+	/**
+	 * The details of the operation (if available).
+	 */
+	string details = 3;
+}
+
+/**
+ * Structure that describes Undo request data.
+ *
+ * @since Pro Tools 2024.06
+ */
+message UndoRequestBody
+{
+	/**
+	 * The number of levels to undo.
+	 */
+	int32 levels = 1;
+}
+
+/**
+ * Structure that describes Undo response data.
+ *
+ * @since Pro Tools 2024.06
+ */
+message UndoResponseBody
+{
+	/**
+	 * The list of successfully undone operations.
+	 */
+	repeated UndoHistoryOperation operations = 1;
+}
+
+/**
+ * Structure that describes Redo request data.
+ *
+ * @since Pro Tools 2024.06
+ */
+message RedoRequestBody
+{
+	/**
+	 * The number of levels to redo.
+	 */
+	int32 levels = 1;
+}
+
+/**
+ * Structure that describes Redo response data.
+ *
+ * @since Pro Tools 2024.06
+ */
+message RedoResponseBody
+{
+	/**
+	 * The list of successfully redone operations.
+	 */
+	repeated UndoHistoryOperation operations = 1;
+}
+
+/**
+ * Structure that describes UndoAll response data.
+ *
+ * @since Pro Tools 2024.06
+ */
+message UndoAllResponseBody
+{
+	/**
+	 * The list of successfully undone operations.
+	 */
+	repeated UndoHistoryOperation operations = 1;
+}
+
+/**
+ * Structure that describes RedoAll response data.
+ *
+ * @since Pro Tools 2024.06
+ */
+message RedoAllResponseBody
+{
+	/**
+	 * The list of successfully redone operations.
+	 */
+	repeated UndoHistoryOperation operations = 1;
+}
+
+/**
+ * Structure that describes SetTrackDSPModeSafeState request data.
+ *
+ * @since Pro Tools 2024.06
+ */
+message SetTrackDSPModeSafeStateRequestBody
+{
+	/**
+	 * Tracks to set the DSP Mode Safe state.
+	 */
+	repeated string track_names = 1;
+
+	/**
+	 * The state to set (`true` for enabling the DSP Mode Safe, `false` for disabling the DSP Mode Safe).
+	 */
+	bool enabled = 2;
+}
+
+/**
+ * Structure that describes GetSessionSystemDelayInfo response data.
+ *
+ * @since Pro Tools 2024.06
+ */
+message GetSessionSystemDelayInfoResponseBody
+{
+	/**
+	 * The System Delay value of the current session measured in samples.
+	 */
+	int32 samples = 1;
+
+	/**
+	 * Indicates whether the Delay Compensation is enabled (`true`) or disabled (`false`).
+	 */
+	bool delay_compensation_enabled = 2;
+}
+
+/**
+ * Possible reasons why clip groups could not be created on specific tracks.
+ *
+ * @since Pro Tools 2024.06
+ */
+enum TrackFromClipGroupExclusionReason
+{
+	/**
+	 * Tech-only value returned when the reason is unknown.
+	 */
+	TCGEReason_Unknown = 0;
+
+	/**
+	 * Clip groups cannot be created on particular track types (e.g. Aux Input, VCA or Master).
+	 */
+	TCGEReason_TrackTypeIsNotAllowed = 1;
+
+	/**
+	 * Clip groups cannot be created on frozen tracks.
+	 */
+	TCGEReason_TrackIsFrozen = 2;
+
+	/**
+	 * Clip groups cannot be created on closed Folder tracks.
+	 */
+	TCGEReason_TrackIsClosed = 3;
+
+	/**
+	 * Clip groups cannot be created on locked Video tracks.
+	 */
+	TCGEReason_TrackIsLocked = 4;
+
+	/**
+	 * Clip groups cannot be created on tracks in playlists view.
+	 */
+	TCGEReason_TrackIsInPlaylistView = 5;
+
+	/**
+	 * Clip groups with embedded fades are not supported on Elastic Audio-enabled tracks.
+	 */
+	TCGEReason_TrackIsElasticAudioWithFades = 6;
+}
+
+/**
+ * Structure that describes a track on which the clip group could not be created.
+ *
+ * @since Pro Tools 2024.06
+ */
+message TrackExcludedFromClipGroupInfo
+{
+	/**
+	 * The name of the track.
+	 */
+	string track_name = 1;
+
+	/**
+	 * The reason why the clip group could not be created on a particular track.
+	 */
+	TrackFromClipGroupExclusionReason reason = 2;
+}
+
+/**
+ * Structure that describes RepeatSelection request data.
+ *
+ * @since Pro Tools 2024.06
+ */
+message RepeatSelectionRequestBody
+{
+	/**
+	 * The number of repeats to repeat selection.
+	 */
+	int32 num_repeats = 1;
+}
+
+/**
+ * Types for global timeline times.
+ *
+ * @since Pro Tools 2024.10
+ */
+enum TimelineLocationType
+{
+	TLType_Unknown = 0;
+	TLType_Samples = 1;
+	TLType_Ticks = 2;
+	TLType_Frames = 3;
+	TLType_MinSecs = 4;
+	TLType_TimeCode = 5;
+	TLType_BarsBeats = 6;
+	TLType_FeetFrames = 7;
+	TLType_Seconds = 8;
+}
+
+/**
+ * One of the fundamental time units.
+ *
+ * @since Pro Tools 2024.10
+ */
+enum BasicTimeType
+{
+	BTType_Unknown = 0;
+	BTType_Samples = 1;
+	BTType_Ticks = 2;
+	BTType_Frames = 3;
+}
+
+/**
+ * Structure that represents a time in the Pro Tools timeline; 
+ * can be expressed in a variety of units.
+ *
+ * @since Pro Tools 2024.10
+ */
+message TimelineLocation
+{
+	/**
+	 * Location string, as appropriate for the unit.
+	 */
+	string location = 1;
+
+	/**
+	 * Type of the location time.
+	 */
+	TimelineLocationType time_type = 2;
+}
+
+/**
+ * Structure that represents an internal position within a piece of media. 
+ * Not relative to the global timeline. Can only be expressed in fundamental units, depending on media type.
+ *
+ * @since Pro Tools 2024.10
+ */
+message MediaTimePosition
+{
+	/**
+	 * Position, as appropriate for the unit.
+	 */
+	int64 position = 1;
+
+	/**
+	 * Type of the position time.
+	 */
+	 BasicTimeType time_type = 2;
+}
+
+/**
+ * Structure that represents a typed relative time position - can apply to both media and timeline times.  
+ * Not relative to the global timeline. Can only be expressed in fundamental units, depending on media type.
+ *
+ * @since Pro Tools 2024.10
+ */
+message TimeLength
+{
+	/**
+	 * Length, as appropriate for the unit. Can be positive or negative.
+	 */
+	 int64 length = 1;
+
+	/**
+	 * Type of the location time.
+	 */
+	 BasicTimeType time_type = 2;
+}
+
+/**
+ * Structure that describes ClearAllMemoryLocations response data.
+ *
+ * @since Pro Tools 2024.10
+ */
+message ClearAllMemoryLocationsResponseBody
+{
+	/**
+	* The number of successfully cleared memory locations.
+	*/
+	int32 success_count = 1;
+	
+	/**
+	* The number of memory locations which were not cleared.
+	*/
+	int32 failure_count = 2;
+	
+	/**
+	* The list of memory locations which were not cleared.
+	*/
+	repeated int32 failure_list = 3;
+}

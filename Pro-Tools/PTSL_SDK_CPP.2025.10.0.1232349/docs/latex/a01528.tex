@@ -1,0 +1,114 @@
+\hypertarget{a01528}{}\doxysection{EM\+\_\+\+Audio\+Info}
+\label{a01528}\index{EM\_AudioInfo@{EM\_AudioInfo}}
+
+
+{\ttfamily \#include $<$Cpp\+PTSLCommon.\+h$>$}
+
+
+
+\doxysubsection{Description}
+Structure that describes information for audio section in the Bounce Mix window. 
+
+\begin{DoxyRefDesc}{Deprecated}
+\item[\mbox{\hyperlink{a00467__deprecated000205}{Deprecated}}]All API-\/specific types in the C++ client lib are deprecated starting in Pro Tools 2024.\+10 since we introduced general JSON-\/based request/response. \end{DoxyRefDesc}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{a00491_a90cb193d66d42416efd9b9a8f3820ff3}{Compression\+Type}} \mbox{\hyperlink{a01528_a4d833bc75785a5c8c081921330c188b6}{compression\+Type}}
+\item 
+\mbox{\hyperlink{a00491_a64fa065d553d3ab2f1d734ab8b12858b}{Export\+Format}} \mbox{\hyperlink{a01528_ac3a223d96a348c3509cbdf5ef37eb221}{export\+Format}}
+\item 
+\mbox{\hyperlink{a00491_ab3060258f412a1504264931383b6e58d}{Bit\+Depth}} \mbox{\hyperlink{a01528_a1fadcc557c1be269d159955118365635}{bit\+Depth}}
+\item 
+\mbox{\hyperlink{a00491_a1ae5868da68e356fd97e81b9deff43f3}{Sample\+Rate}} \mbox{\hyperlink{a01528_afb7316112f9d8e74b30331957e7ca9b3}{sample\+Rate}}
+\item 
+\mbox{\hyperlink{a00491_a5a4c016feccbda0b32e3f0a6b1b3f246}{Triple\+Bool}} \mbox{\hyperlink{a01528_aba13c81b816bcc81f110f031bfaf2406}{pad\+To\+Frame\+Boundary}}
+\item 
+\mbox{\hyperlink{a00491_a8f581eec488551b75b296ae8d58cb541}{EM\+\_\+\+Delivery\+Format}} \mbox{\hyperlink{a01528_a29363691b5836689d37f2a6c7e767311}{delivery\+Format}}
+\item 
+int32\+\_\+t \mbox{\hyperlink{a01528_ad31fdd2630aa0796ba38b7a8dfb1553f}{sample\+Rate\+Custom}} = 0
+\begin{DoxyCompactList}\small\item\em Custom sample rate to override the sample\+Rate field. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{a01528_a4d833bc75785a5c8c081921330c188b6}\label{a01528_a4d833bc75785a5c8c081921330c188b6}} 
+\index{EM\_AudioInfo@{EM\_AudioInfo}!compressionType@{compressionType}}
+\index{compressionType@{compressionType}!EM\_AudioInfo@{EM\_AudioInfo}}
+\doxysubsubsection{\texorpdfstring{compressionType}{compressionType}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a00491_a90cb193d66d42416efd9b9a8f3820ff3}{Compression\+Type}} compression\+Type}
+
+
+
+Referenced by \mbox{\hyperlink{a01328_a2fb834727f02bdc4db8432508b5a8ed6}{Cpp\+PTSLClient\+::\+Export\+Mix()}}.
+
+\mbox{\Hypertarget{a01528_ac3a223d96a348c3509cbdf5ef37eb221}\label{a01528_ac3a223d96a348c3509cbdf5ef37eb221}} 
+\index{EM\_AudioInfo@{EM\_AudioInfo}!exportFormat@{exportFormat}}
+\index{exportFormat@{exportFormat}!EM\_AudioInfo@{EM\_AudioInfo}}
+\doxysubsubsection{\texorpdfstring{exportFormat}{exportFormat}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a00491_a64fa065d553d3ab2f1d734ab8b12858b}{Export\+Format}} export\+Format}
+
+
+
+Referenced by \mbox{\hyperlink{a01328_a2fb834727f02bdc4db8432508b5a8ed6}{Cpp\+PTSLClient\+::\+Export\+Mix()}}.
+
+\mbox{\Hypertarget{a01528_a1fadcc557c1be269d159955118365635}\label{a01528_a1fadcc557c1be269d159955118365635}} 
+\index{EM\_AudioInfo@{EM\_AudioInfo}!bitDepth@{bitDepth}}
+\index{bitDepth@{bitDepth}!EM\_AudioInfo@{EM\_AudioInfo}}
+\doxysubsubsection{\texorpdfstring{bitDepth}{bitDepth}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a00491_ab3060258f412a1504264931383b6e58d}{Bit\+Depth}} bit\+Depth}
+
+
+
+Referenced by \mbox{\hyperlink{a01328_a2fb834727f02bdc4db8432508b5a8ed6}{Cpp\+PTSLClient\+::\+Export\+Mix()}}.
+
+\mbox{\Hypertarget{a01528_afb7316112f9d8e74b30331957e7ca9b3}\label{a01528_afb7316112f9d8e74b30331957e7ca9b3}} 
+\index{EM\_AudioInfo@{EM\_AudioInfo}!sampleRate@{sampleRate}}
+\index{sampleRate@{sampleRate}!EM\_AudioInfo@{EM\_AudioInfo}}
+\doxysubsubsection{\texorpdfstring{sampleRate}{sampleRate}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a00491_a1ae5868da68e356fd97e81b9deff43f3}{Sample\+Rate}} sample\+Rate}
+
+
+
+Referenced by \mbox{\hyperlink{a01328_a2fb834727f02bdc4db8432508b5a8ed6}{Cpp\+PTSLClient\+::\+Export\+Mix()}}.
+
+\mbox{\Hypertarget{a01528_aba13c81b816bcc81f110f031bfaf2406}\label{a01528_aba13c81b816bcc81f110f031bfaf2406}} 
+\index{EM\_AudioInfo@{EM\_AudioInfo}!padToFrameBoundary@{padToFrameBoundary}}
+\index{padToFrameBoundary@{padToFrameBoundary}!EM\_AudioInfo@{EM\_AudioInfo}}
+\doxysubsubsection{\texorpdfstring{padToFrameBoundary}{padToFrameBoundary}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a00491_a5a4c016feccbda0b32e3f0a6b1b3f246}{Triple\+Bool}} pad\+To\+Frame\+Boundary}
+
+
+
+Referenced by \mbox{\hyperlink{a01328_a2fb834727f02bdc4db8432508b5a8ed6}{Cpp\+PTSLClient\+::\+Export\+Mix()}}.
+
+\mbox{\Hypertarget{a01528_a29363691b5836689d37f2a6c7e767311}\label{a01528_a29363691b5836689d37f2a6c7e767311}} 
+\index{EM\_AudioInfo@{EM\_AudioInfo}!deliveryFormat@{deliveryFormat}}
+\index{deliveryFormat@{deliveryFormat}!EM\_AudioInfo@{EM\_AudioInfo}}
+\doxysubsubsection{\texorpdfstring{deliveryFormat}{deliveryFormat}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a00491_a8f581eec488551b75b296ae8d58cb541}{EM\+\_\+\+Delivery\+Format}} delivery\+Format}
+
+
+
+Referenced by \mbox{\hyperlink{a01328_a2fb834727f02bdc4db8432508b5a8ed6}{Cpp\+PTSLClient\+::\+Export\+Mix()}}.
+
+\mbox{\Hypertarget{a01528_ad31fdd2630aa0796ba38b7a8dfb1553f}\label{a01528_ad31fdd2630aa0796ba38b7a8dfb1553f}} 
+\index{EM\_AudioInfo@{EM\_AudioInfo}!sampleRateCustom@{sampleRateCustom}}
+\index{sampleRateCustom@{sampleRateCustom}!EM\_AudioInfo@{EM\_AudioInfo}}
+\doxysubsubsection{\texorpdfstring{sampleRateCustom}{sampleRateCustom}}
+{\footnotesize\ttfamily int32\+\_\+t sample\+Rate\+Custom = 0}
+
+
+
+Custom sample rate to override the sample\+Rate field. 
+
+Use non zero values to enable this field.
+
+Supported starting in Pro Tools 2024.\+06 
+
+Referenced by \mbox{\hyperlink{a01328_a2fb834727f02bdc4db8432508b5a8ed6}{Cpp\+PTSLClient\+::\+Export\+Mix()}}.
+
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{a00050}{Cpp\+PTSLCommon.\+h}}\end{DoxyCompactItemize}

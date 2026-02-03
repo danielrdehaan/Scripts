@@ -1,0 +1,246 @@
+/**
+@page howto_batch_jobs How to use Batch Jobs
+
+## Overview
+
+Pro Tools 2025.10 release introduced batch job operations - a set of commands which allow client to wrap a long-running operation into a user-friendly Pro Tools modal dialog and restrict any user actions while it's running, manage progress bar and completion.
+
+## Creating batch job
+Use `CId_CreateBatchJob` command to initiate a Pro Tools modal dialog and start batch job. There are several options that let you customize its behavior:
+- `is_cancelable` - whether a user-facing batch job modal dialog can be cancelled using a _Cancel_ button.
+- `cancel_on_failure` - controls if overall operation is considered failed if any sub-command has failed. If this occurs, a `BatchJobStatusChanged` event is triggerd informing batch job status has changed to `BJStatus_Failed`.
+- `timeout` - a value in milliseconds that automatically finishes stale batch job, i.e. that didn't receive commands for specified amount of time. 0 means '_no timeout_'. If timeout happens, a `BatchJobStatusChanged` event is triggered informing batch job status has changed to `BJStatus_TimedOut`.
+
+Successful execution of `CId_CreateBatchJob` request returns batch job ID that can be used in other batch job commands:
+```json
+// response
+{
+  "id": "741062a2-c1fa-4d4e-bde9-bb1058609c71"
+}
+```
+
+Subsequent commands depend on client needs. You can call other PTSL commands as a part of batch job, like import audio, create clips, spot clips on a timeline, etc.
+To make PTSL command part of batch job include a `batch_job_header` into a request header with specified batch job id, like so:
+```json
+// header
+{
+  "header": {
+    ...
+    "versioned_request_header_json": "{ \"batch_job_header\": { \"id\": \"741062a2-c1fa-4d4e-bde9-bb1058609c71\" } }"
+  }
+}
+```
+Keep in mind, that while batch job is running, every other command without an appropriate batch job header will be postponed until batch job is finished. The exemptions are:
+- `CId_GetTaskStatus`
+- `CId_GetPTSLVersion`
+- `CId_RegisterConnection`
+- `CId_CompleteBatchJob`
+- `CId_GetBatchJobStatus`
+- `CId_SubscribeToEvents`
+- `CId_PollEvents`
+- `CId_UnsubscribeFromEvents`
+
+## Incrementing progress
+When working with batch job, you will likely want to update the modal dialog progress bar value to let the user know about the time remaining for batch job to complete.
+There is no dedicated command for that, however progress value can be passed in batch job header for any incoming command for ongoing batch job:
+```json
+// header
+{
+  "header": {
+    ...
+    "versioned_request_header_json": "{ \"batch_job_header\": { \"id\": \"741062a2-c1fa-4d4e-bde9-bb1058609c71\", \"progress\": 15 } }"
+  }
+}
+```
+Once command is finished, progress bar will update its value.
+Acceptable progress value range is [0, 100] and indicate a percentage of completion and not an increment to current progress.
+Note that new progress value cannot be lower than current progress value.
+
+One may also want to change progress without doing actual work on Pro Tools side. In this case, use a dummy command call with batch_job_header filled. For example, `CId_HostReadyCheck` will work for this purpose.
+
+## Completing or canceling batch job
+Once operation is ready to be completed make a `CId_CompleteBatchJob` request to initiate completion and close modal dialog.
+Once batch job is completed, a `BatchJobStatusChanged` event is triggered informing batch job status has changed to `BJStatus_Completed`.
+Note that you can not complete batch job that has a running command.
+```json
+// header
+{
+  "command": "CId_CompleteBatchJob",
+  "version": 2025,
+  "version_minor": 10,
+  "version_revision": 0
+}
+
+// request body
+{
+  "id": "741062a2-c1fa-4d4e-bde9-bb1058609c71"
+}
+```
+
+If you need to cancel batch job operation, use `CId_CancelBatchJob` request. Canceling will wait for any ongoing command to be finished and cancel batch job failing any other pending batch job commands.
+Once batch job is canceled, a `BatchJobStatusChanged` event is triggered informing batch job status has changed to `BJStatus_Canceled`.
+
+## Obtaining batch job status
+While batch job exists, you can ask for its current status using `CId_GetBatchJobStatus` request.
+
+```json
+// header
+{
+  "command": "CId_GetBatchJobStatus",
+  "version": 2025,
+  "version_minor": 10,
+  "version_revision": 0
+}
+
+// request body
+{
+  "id": "741062a2-c1fa-4d4e-bde9-bb1058609c71"
+}
+```
+
+Batch job is considered as `BJStatus_Pending` if it haven't receive any commands to execute yet. When at least one command is added, batch job status is changed to `BJStatus_Running`.
+Batch job can finish with one of these statuses: `BJStatus_Completed`, `BJStatus_Canceled`, `BJStatus_TimedOut` or `BJStatus_Failed`.
+
+## Complete example:
+
+### 1. Creating a batch job
+
+```json
+// header
+{
+  "command": "CId_CreateBatchJob",
+  "version": 2025,
+  "version_minor": 10,
+  "version_revision": 0
+}
+
+// request body
+{
+  "job": {
+    "name": "A long-running operation",
+    "description": "This will take a while, Please, wait.",
+    "timeout": 50000,
+    "is_cancelable": true,
+    "cancel_on_failure": false
+  }
+}
+```
+
+### 2 Moving the progress bar
+#### 2.1 Using a sub-command call
+
+```json
+// header
+{
+  "header": {
+    "command": "CId_ExportMix",
+    "version": 2025,
+    "version_minor": 10,
+    "version_revision": 0,
+    "versioned_request_header_json": "{ \"batch_job_header\": { \"id\": \"741062a2-c1fa-4d4e-bde9-bb1058609c71\", \"progress\": 15 } }"
+  },
+}
+
+// request body
+{
+  "offline_bounce": "TB_False",
+  "audio_info": {},
+  "location_info": {}
+}
+```
+
+#### 2.2 Using a "fake" call
+
+```json
+// header
+{
+  "header": {
+    "command": "CId_HostReadyCheck",
+    "version": 2025,
+    "version_minor": 10,
+    "version_revision": 0,
+    "versioned_request_header_json": "{ \"batch_job_header\": { \"id\": \"741062a2-c1fa-4d4e-bde9-bb1058609c71\", \"progress\": 12 } }"
+  },
+}
+
+// request body
+{ }
+```
+
+### 3. Getting batch job status
+```json
+// header
+{
+  "header": {
+    "command": "CId_GetBatchJobStatus",
+    "version": 2025,
+    "version_minor": 10,
+    "version_revision": 0
+  }
+}
+
+// request body
+{
+  "id": "741062a2-c1fa-4d4e-bde9-bb1058609c71"
+}
+```
+
+### 4. Subscribing for batch job status changes
+```json
+// header
+{
+  "header": {
+    "command": "CId_SubscribeToEvents",
+    "version": 2025,
+    "version_minor": 10,
+    "version_revision": 0
+  }
+}
+
+// request body
+{
+  "events": [ { "event_id": "EId_BatchJobStatusChanged", "event_data_json": "{ \"id\": \"741062a2-c1fa-4d4e-bde9-bb1058609c71\" }" } ]
+}
+```
+
+For more info on events, check out @ref howto_events
+
+### 3. Finishing batch job
+
+#### 3.1 Completing batch job
+```json
+// header
+{
+  "header": {
+    "command": "CId_CompleteBatchJob"
+    "version": 2025,
+    "version_minor": 10,
+    "version_revision": 0
+  }
+}
+
+// request body
+{
+  "id": "741062a2-c1fa-4d4e-bde9-bb1058609c71"
+}
+```
+
+#### 3.2 Canceling batch job
+```json
+// header
+{
+  "header": {
+    "command": "CId_CancelBatchJob"
+    "version": 2025,
+    "version_minor": 10,
+    "version_revision": 0
+  }
+}
+
+// request body
+{
+  "id": "741062a2-c1fa-4d4e-bde9-bb1058609c71"
+}
+```
+
+*/

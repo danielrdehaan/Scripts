@@ -1,0 +1,11 @@
+/**
+@page howto How To
+
+This page contains step-by-step procedures for using the Pro Tools Scripting Library
+
+## Available Guides
+
+- @ref howto_events "How to use the Event System" - Learn how to subscribe to events, poll for notifications, and handle real-time updates from Pro Tools
+- @ref howto_batch_jobs "How to use Batch Jobs" - Learn how to manage long running client side operations from creation to completion
+
+*/

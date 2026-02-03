@@ -1,0 +1,105 @@
+\hypertarget{a03084}{}\doxysection{Playlist\+Element}
+\label{a03084}\index{PlaylistElement@{PlaylistElement}}
+
+
+\doxysubsection{Description}
+Multi-\/channel playlist element, ordered from earliest to latest. 
+
+\begin{DoxySince}{Since}
+Pro Tools 2025.\+10 
+\end{DoxySince}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{a02680}{Timeline\+Location}} \mbox{\hyperlink{a03084_a14fe0550666f2b85041a443845d8ca33}{element\+\_\+location}} = 1
+\begin{DoxyCompactList}\small\item\em Anchoring location of this element. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{a02680}{Timeline\+Location}} \mbox{\hyperlink{a03084_ad2b55ccec2f232c00b50738d5d71e7b1}{start\+\_\+time}} = 2
+\begin{DoxyCompactList}\small\item\em Starting timeline time of the clip. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{a02680}{Timeline\+Location}} \mbox{\hyperlink{a03084_a5b5b4d1b873ea94449da6bcb0e42f332}{play\+\_\+time}} = 3
+\begin{DoxyCompactList}\small\item\em Starting timeline time of the clip. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{a02680}{Timeline\+Location}} \mbox{\hyperlink{a03084_a46f2407733c34038973480fbc7b55f91}{stop\+\_\+time}} = 4
+\begin{DoxyCompactList}\small\item\em Last exposed time of the clip. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{a02680}{Timeline\+Location}} \mbox{\hyperlink{a03084_a49d866076c6162502bd4ed8afcfdb129}{end\+\_\+time}} = 5
+\begin{DoxyCompactList}\small\item\em End time (start time plus clip length). \end{DoxyCompactList}\item 
+repeated \mbox{\hyperlink{a03096}{Playlist\+Element\+Clip}} \mbox{\hyperlink{a03084_a3fa66bc81900b9f49a23ccee59589a77}{channel\+\_\+clips}} = 6
+\begin{DoxyCompactList}\small\item\em One entry per channel of the track. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{a02752}{Clip\+Instance\+Attributes}} \mbox{\hyperlink{a03084_a8f90cb3ff4c33a5d960f5286fc1e9cd0}{clip\+\_\+instance\+\_\+attributes}} = 7
+\begin{DoxyCompactList}\small\item\em Various element specific attributes. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{a03084_a14fe0550666f2b85041a443845d8ca33}\label{a03084_a14fe0550666f2b85041a443845d8ca33}} 
+\index{PlaylistElement@{PlaylistElement}!element\_location@{element\_location}}
+\index{element\_location@{element\_location}!PlaylistElement@{PlaylistElement}}
+\doxysubsubsection{\texorpdfstring{element\_location}{element\_location}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a02680}{Timeline\+Location}} element\+\_\+location = 1}
+
+
+
+Anchoring location of this element. 
+
+Note that the start time and play time of the element may be from the location if its clip has a Sync Point that’s different from its Start Point or if there are overlapping neighbors \mbox{\Hypertarget{a03084_ad2b55ccec2f232c00b50738d5d71e7b1}\label{a03084_ad2b55ccec2f232c00b50738d5d71e7b1}} 
+\index{PlaylistElement@{PlaylistElement}!start\_time@{start\_time}}
+\index{start\_time@{start\_time}!PlaylistElement@{PlaylistElement}}
+\doxysubsubsection{\texorpdfstring{start\_time}{start\_time}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a02680}{Timeline\+Location}} start\+\_\+time = 2}
+
+
+
+Starting timeline time of the clip. 
+
+Note that if the clip is overlapped by its predecessor, the play time may be different. \mbox{\Hypertarget{a03084_a5b5b4d1b873ea94449da6bcb0e42f332}\label{a03084_a5b5b4d1b873ea94449da6bcb0e42f332}} 
+\index{PlaylistElement@{PlaylistElement}!play\_time@{play\_time}}
+\index{play\_time@{play\_time}!PlaylistElement@{PlaylistElement}}
+\doxysubsubsection{\texorpdfstring{play\_time}{play\_time}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a02680}{Timeline\+Location}} play\+\_\+time = 3}
+
+
+
+Starting timeline time of the clip. 
+
+Note that if the clip is overlapped by its predecessor, the play time may be different. \mbox{\Hypertarget{a03084_a46f2407733c34038973480fbc7b55f91}\label{a03084_a46f2407733c34038973480fbc7b55f91}} 
+\index{PlaylistElement@{PlaylistElement}!stop\_time@{stop\_time}}
+\index{stop\_time@{stop\_time}!PlaylistElement@{PlaylistElement}}
+\doxysubsubsection{\texorpdfstring{stop\_time}{stop\_time}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a02680}{Timeline\+Location}} stop\+\_\+time = 4}
+
+
+
+Last exposed time of the clip. 
+
+Differs from the end time if the next clip overlaps. \mbox{\Hypertarget{a03084_a49d866076c6162502bd4ed8afcfdb129}\label{a03084_a49d866076c6162502bd4ed8afcfdb129}} 
+\index{PlaylistElement@{PlaylistElement}!end\_time@{end\_time}}
+\index{end\_time@{end\_time}!PlaylistElement@{PlaylistElement}}
+\doxysubsubsection{\texorpdfstring{end\_time}{end\_time}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a02680}{Timeline\+Location}} end\+\_\+time = 5}
+
+
+
+End time (start time plus clip length). 
+
+\mbox{\Hypertarget{a03084_a3fa66bc81900b9f49a23ccee59589a77}\label{a03084_a3fa66bc81900b9f49a23ccee59589a77}} 
+\index{PlaylistElement@{PlaylistElement}!channel\_clips@{channel\_clips}}
+\index{channel\_clips@{channel\_clips}!PlaylistElement@{PlaylistElement}}
+\doxysubsubsection{\texorpdfstring{channel\_clips}{channel\_clips}}
+{\footnotesize\ttfamily repeated \mbox{\hyperlink{a03096}{Playlist\+Element\+Clip}} channel\+\_\+clips = 6}
+
+
+
+One entry per channel of the track. 
+
+\mbox{\Hypertarget{a03084_a8f90cb3ff4c33a5d960f5286fc1e9cd0}\label{a03084_a8f90cb3ff4c33a5d960f5286fc1e9cd0}} 
+\index{PlaylistElement@{PlaylistElement}!clip\_instance\_attributes@{clip\_instance\_attributes}}
+\index{clip\_instance\_attributes@{clip\_instance\_attributes}!PlaylistElement@{PlaylistElement}}
+\doxysubsubsection{\texorpdfstring{clip\_instance\_attributes}{clip\_instance\_attributes}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a02752}{Clip\+Instance\+Attributes}} clip\+\_\+instance\+\_\+attributes = 7}
+
+
+
+Various element specific attributes. 
+
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{a00464}{PTSL.\+proto}}\end{DoxyCompactItemize}

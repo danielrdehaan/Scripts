@@ -1,0 +1,146 @@
+\hypertarget{a01560}{}\doxysection{Export\+Mix\+Request}
+\label{a01560}\index{ExportMixRequest@{ExportMixRequest}}
+
+
+{\ttfamily \#include $<$Cpp\+PTSLCommon.\+h$>$}
+
+
+
+\doxysubsection{Description}
+Structure that describes Export\+Mix request data. 
+
+\begin{DoxyRefDesc}{Deprecated}
+\item[\mbox{\hyperlink{a00467__deprecated000214}{Deprecated}}]All API-\/specific types in the C++ client lib are deprecated starting in Pro Tools 2024.\+10 since we introduced general JSON-\/based request/response. \end{DoxyRefDesc}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::string \mbox{\hyperlink{a01560_a06e7d3329705df64121016c1908f62f2}{preset\+Path}}
+\item 
+std\+::string \mbox{\hyperlink{a01560_ac81f9269c8d57eed4d5b56f054fc84de}{file\+Name}}
+\item 
+\mbox{\hyperlink{a00491_a9a4ddeac406d8236efac50dd0a1a6756}{EM\+\_\+\+File\+Type}} \mbox{\hyperlink{a01560_af9da56d925f32652feb7584125be002d}{file\+Type}}
+\item 
+std\+::string \mbox{\hyperlink{a01560_a03872c274ecb2fbfd3a72bd5c526ea59}{files\+List}}
+\item 
+std\+::string \mbox{\hyperlink{a01560_a9db581b2f4561862231a80c4223fe94c}{mix\+Source\+List}}
+\item 
+\mbox{\hyperlink{a01528}{EM\+\_\+\+Audio\+Info}} \mbox{\hyperlink{a01560_ae7be885e1f3d68a7faab5d07b6f0c1a6}{audio\+Info}}
+\item 
+\mbox{\hyperlink{a01544}{EM\+\_\+\+Video\+Info}} \mbox{\hyperlink{a01560_a73d2e90f63fb80332144b468035cf284}{video\+Info}}
+\item 
+\mbox{\hyperlink{a01552}{EM\+\_\+\+Location\+Info}} \mbox{\hyperlink{a01560_a4c27def27bf75226a4dead4013243441}{location\+Info}}
+\item 
+\mbox{\hyperlink{a01556}{EM\+\_\+\+Dolby\+Atmos\+Info}} \mbox{\hyperlink{a01560_a8d8df590e7369ffa90996c928a732172}{dolby\+Atmos\+Info}}
+\item 
+\mbox{\hyperlink{a00491_a5a4c016feccbda0b32e3f0a6b1b3f246}{Triple\+Bool}} \mbox{\hyperlink{a01560_ab08edaaf2f58ff9c1a78dc9f2317f430}{offline\+Bounce}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{a01560_a06e7d3329705df64121016c1908f62f2}\label{a01560_a06e7d3329705df64121016c1908f62f2}} 
+\index{ExportMixRequest@{ExportMixRequest}!presetPath@{presetPath}}
+\index{presetPath@{presetPath}!ExportMixRequest@{ExportMixRequest}}
+\doxysubsubsection{\texorpdfstring{presetPath}{presetPath}}
+{\footnotesize\ttfamily std\+::string preset\+Path}
+
+
+
+Referenced by \mbox{\hyperlink{a01328_a2fb834727f02bdc4db8432508b5a8ed6}{Cpp\+PTSLClient\+::\+Export\+Mix()}}.
+
+\mbox{\Hypertarget{a01560_ac81f9269c8d57eed4d5b56f054fc84de}\label{a01560_ac81f9269c8d57eed4d5b56f054fc84de}} 
+\index{ExportMixRequest@{ExportMixRequest}!fileName@{fileName}}
+\index{fileName@{fileName}!ExportMixRequest@{ExportMixRequest}}
+\doxysubsubsection{\texorpdfstring{fileName}{fileName}}
+{\footnotesize\ttfamily std\+::string file\+Name}
+
+
+
+Referenced by \mbox{\hyperlink{a01328_a2fb834727f02bdc4db8432508b5a8ed6}{Cpp\+PTSLClient\+::\+Export\+Mix()}}.
+
+\mbox{\Hypertarget{a01560_af9da56d925f32652feb7584125be002d}\label{a01560_af9da56d925f32652feb7584125be002d}} 
+\index{ExportMixRequest@{ExportMixRequest}!fileType@{fileType}}
+\index{fileType@{fileType}!ExportMixRequest@{ExportMixRequest}}
+\doxysubsubsection{\texorpdfstring{fileType}{fileType}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a00491_a9a4ddeac406d8236efac50dd0a1a6756}{EM\+\_\+\+File\+Type}} file\+Type}
+
+
+
+Referenced by \mbox{\hyperlink{a01328_a2fb834727f02bdc4db8432508b5a8ed6}{Cpp\+PTSLClient\+::\+Export\+Mix()}}.
+
+\mbox{\Hypertarget{a01560_a03872c274ecb2fbfd3a72bd5c526ea59}\label{a01560_a03872c274ecb2fbfd3a72bd5c526ea59}} 
+\index{ExportMixRequest@{ExportMixRequest}!filesList@{filesList}}
+\index{filesList@{filesList}!ExportMixRequest@{ExportMixRequest}}
+\doxysubsubsection{\texorpdfstring{filesList}{filesList}}
+{\footnotesize\ttfamily std\+::string files\+List}
+
+\begin{DoxyRefDesc}{Deprecated}
+\item[\mbox{\hyperlink{a00467__deprecated000546}{Deprecated}}]files\+List is deprecated starting in Pro Tools 2023.\+03 Use \mbox{\hyperlink{a01560_a9db581b2f4561862231a80c4223fe94c}{Export\+Mix\+Request\+::mix\+Source\+List}} instead \end{DoxyRefDesc}
+
+
+Referenced by \mbox{\hyperlink{a01328_a2fb834727f02bdc4db8432508b5a8ed6}{Cpp\+PTSLClient\+::\+Export\+Mix()}}.
+
+\mbox{\Hypertarget{a01560_a9db581b2f4561862231a80c4223fe94c}\label{a01560_a9db581b2f4561862231a80c4223fe94c}} 
+\index{ExportMixRequest@{ExportMixRequest}!mixSourceList@{mixSourceList}}
+\index{mixSourceList@{mixSourceList}!ExportMixRequest@{ExportMixRequest}}
+\doxysubsubsection{\texorpdfstring{mixSourceList}{mixSourceList}}
+{\footnotesize\ttfamily std\+::string mix\+Source\+List}
+
+
+
+Referenced by \mbox{\hyperlink{a01328_a2fb834727f02bdc4db8432508b5a8ed6}{Cpp\+PTSLClient\+::\+Export\+Mix()}}.
+
+\mbox{\Hypertarget{a01560_ae7be885e1f3d68a7faab5d07b6f0c1a6}\label{a01560_ae7be885e1f3d68a7faab5d07b6f0c1a6}} 
+\index{ExportMixRequest@{ExportMixRequest}!audioInfo@{audioInfo}}
+\index{audioInfo@{audioInfo}!ExportMixRequest@{ExportMixRequest}}
+\doxysubsubsection{\texorpdfstring{audioInfo}{audioInfo}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a01528}{EM\+\_\+\+Audio\+Info}} audio\+Info}
+
+
+
+Referenced by \mbox{\hyperlink{a01328_a2fb834727f02bdc4db8432508b5a8ed6}{Cpp\+PTSLClient\+::\+Export\+Mix()}}.
+
+\mbox{\Hypertarget{a01560_a73d2e90f63fb80332144b468035cf284}\label{a01560_a73d2e90f63fb80332144b468035cf284}} 
+\index{ExportMixRequest@{ExportMixRequest}!videoInfo@{videoInfo}}
+\index{videoInfo@{videoInfo}!ExportMixRequest@{ExportMixRequest}}
+\doxysubsubsection{\texorpdfstring{videoInfo}{videoInfo}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a01544}{EM\+\_\+\+Video\+Info}} video\+Info}
+
+
+
+Referenced by \mbox{\hyperlink{a01328_a2fb834727f02bdc4db8432508b5a8ed6}{Cpp\+PTSLClient\+::\+Export\+Mix()}}.
+
+\mbox{\Hypertarget{a01560_a4c27def27bf75226a4dead4013243441}\label{a01560_a4c27def27bf75226a4dead4013243441}} 
+\index{ExportMixRequest@{ExportMixRequest}!locationInfo@{locationInfo}}
+\index{locationInfo@{locationInfo}!ExportMixRequest@{ExportMixRequest}}
+\doxysubsubsection{\texorpdfstring{locationInfo}{locationInfo}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a01552}{EM\+\_\+\+Location\+Info}} location\+Info}
+
+
+
+Referenced by \mbox{\hyperlink{a01328_a2fb834727f02bdc4db8432508b5a8ed6}{Cpp\+PTSLClient\+::\+Export\+Mix()}}.
+
+\mbox{\Hypertarget{a01560_a8d8df590e7369ffa90996c928a732172}\label{a01560_a8d8df590e7369ffa90996c928a732172}} 
+\index{ExportMixRequest@{ExportMixRequest}!dolbyAtmosInfo@{dolbyAtmosInfo}}
+\index{dolbyAtmosInfo@{dolbyAtmosInfo}!ExportMixRequest@{ExportMixRequest}}
+\doxysubsubsection{\texorpdfstring{dolbyAtmosInfo}{dolbyAtmosInfo}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a01556}{EM\+\_\+\+Dolby\+Atmos\+Info}} dolby\+Atmos\+Info}
+
+
+
+Referenced by \mbox{\hyperlink{a01328_a2fb834727f02bdc4db8432508b5a8ed6}{Cpp\+PTSLClient\+::\+Export\+Mix()}}.
+
+\mbox{\Hypertarget{a01560_ab08edaaf2f58ff9c1a78dc9f2317f430}\label{a01560_ab08edaaf2f58ff9c1a78dc9f2317f430}} 
+\index{ExportMixRequest@{ExportMixRequest}!offlineBounce@{offlineBounce}}
+\index{offlineBounce@{offlineBounce}!ExportMixRequest@{ExportMixRequest}}
+\doxysubsubsection{\texorpdfstring{offlineBounce}{offlineBounce}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a00491_a5a4c016feccbda0b32e3f0a6b1b3f246}{Triple\+Bool}} offline\+Bounce}
+
+
+
+Referenced by \mbox{\hyperlink{a01328_a2fb834727f02bdc4db8432508b5a8ed6}{Cpp\+PTSLClient\+::\+Export\+Mix()}}.
+
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{a00050}{Cpp\+PTSLCommon.\+h}}\end{DoxyCompactItemize}

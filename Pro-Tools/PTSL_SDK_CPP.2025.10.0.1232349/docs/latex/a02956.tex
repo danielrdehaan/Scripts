@@ -1,0 +1,65 @@
+\hypertarget{a02956}{}\doxysection{Track\+Control\+Breakpoint}
+\label{a02956}\index{TrackControlBreakpoint@{TrackControlBreakpoint}}
+
+
+\doxysubsection{Description}
+Structure that marks the time and value of a control. 
+
+Used for both setting static values and for setting a value at a specific time for automation.
+
+\begin{DoxySince}{Since}
+Pro Tools 2025.\+10 
+\end{DoxySince}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{a02680}{Timeline\+Location}} \mbox{\hyperlink{a02956_ac077f6c93164d172ea2fed33b3f5e4e5}{time}} = 1
+\begin{DoxyCompactList}\small\item\em Describes where on the timeline an automation breakpoint exists. \end{DoxyCompactList}\item 
+float \mbox{\hyperlink{a02956_a17956fe0129d3d4c94ebc06cfef2ad82}{value}} = 2
+\begin{DoxyCompactList}\small\item\em Establishes the value of an automation breakpoint. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{a02956_ac077f6c93164d172ea2fed33b3f5e4e5}\label{a02956_ac077f6c93164d172ea2fed33b3f5e4e5}} 
+\index{TrackControlBreakpoint@{TrackControlBreakpoint}!time@{time}}
+\index{time@{time}!TrackControlBreakpoint@{TrackControlBreakpoint}}
+\doxysubsubsection{\texorpdfstring{time}{time}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a02680}{Timeline\+Location}} time = 1}
+
+
+
+Describes where on the timeline an automation breakpoint exists. 
+
+A single breakpoint at time 0 is a static value for the control. \mbox{\Hypertarget{a02956_a17956fe0129d3d4c94ebc06cfef2ad82}\label{a02956_a17956fe0129d3d4c94ebc06cfef2ad82}} 
+\index{TrackControlBreakpoint@{TrackControlBreakpoint}!value@{value}}
+\index{value@{value}!TrackControlBreakpoint@{TrackControlBreakpoint}}
+\doxysubsubsection{\texorpdfstring{value}{value}}
+{\footnotesize\ttfamily float value = 2}
+
+
+
+Establishes the value of an automation breakpoint. 
+
+Allowed values depend on the control type for this breakpoint.
+
+\tabulinesep=1mm
+\begin{longtabu}spread 0pt [c]{*{3}{|X[-1]}|}
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Control type   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ {\ttfamily control\+\_\+type}   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ value    }\\\cline{1-3}
+\endfirsthead
+\hline
+\endfoot
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Control type   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ {\ttfamily control\+\_\+type}   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ value    }\\\cline{1-3}
+\endhead
+track volume   &\mbox{\hyperlink{a00494_ab7d941b61e512563cb464b14b2c54a2ea2cbbe588439d021696aa6df6834e6028}{TCType\+\_\+\+Volume}}   &min\+: -\/1.\+0 to max\+: 1.\+0    \\\cline{1-3}
+track lfe   &\mbox{\hyperlink{a00494_ab7d941b61e512563cb464b14b2c54a2eaa3d435feea48872cb6458d84424754ef}{TCType\+\_\+\+Lfe}}   &min\+: -\/1.\+0 to max\+: 1.\+0    \\\cline{1-3}
+track mute   &\mbox{\hyperlink{a00494_ab7d941b61e512563cb464b14b2c54a2ea394778a365af4a1ae5a9123656e2de37}{TCType\+\_\+\+Mute}}   &min\+: -\/1.\+0 to max\+: 1.\+0    \\\cline{1-3}
+track pan   &\mbox{\hyperlink{a00494_ab7d941b61e512563cb464b14b2c54a2eae65db60f1b48c7d4ef97403cbcf908f3}{TCType\+\_\+\+Pan}}   &See \mbox{\hyperlink{a00494_ac0685ec9d387e632efc9a12c1cbe4da2}{Pan\+Control\+Parameter}}    \\\cline{1-3}
+insert plugin   &\mbox{\hyperlink{a00494_ab7d941b61e512563cb464b14b2c54a2ea0b62a44042f01cdd02ee4af9561c6a89}{TCType\+\_\+\+Plugin\+Parameter}}   &min\+: -\/1.\+0 to max\+: 1.\+0   \\\cline{1-3}
+\end{longtabu}
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{a00464}{PTSL.\+proto}}\end{DoxyCompactItemize}

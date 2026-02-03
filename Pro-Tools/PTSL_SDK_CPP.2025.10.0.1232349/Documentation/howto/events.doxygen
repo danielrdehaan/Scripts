@@ -1,0 +1,166 @@
+/**
+@page howto_events How to use the Event System
+
+## Overview
+
+The Pro Tools Event System, introduced in the 2025.06 release, enables Pro Tools to send real-time notifications to subscribed clients. This system allows clients to subscribe to specific events, unsubscribe from them, and receive event notifications as they occur in real-time.
+
+The event system consists of three main API calls:
+- @ref ptsl::CId_SubscribeToEvents "SubscribeToEvents" - Subscribe to specific events
+- @ref ptsl::CId_PollEvents "PollEvents" - Receive real-time event notifications
+- @ref ptsl::CId_UnsubscribeFromEvents "UnsubscribeFromEvents" - Unsubscribe from events
+
+## Key Concepts
+
+### Event Subscriptions
+Each subscription is uniquely identified by the combination of:
+- PTSL session
+- EventId 
+- Filter data (optional)
+
+Any difference in filter data results in a new subscription, which is managed independently, even if they share the same EventId. For example, you can subscribe to track record-enabled state changes for multiple specific tracks by creating separate subscriptions with different track IDs in the filter data.
+
+### Event Priority
+All event-related APIs are processed with higher execution priority compared to normal API commands, ensuring timely delivery of events without blocking other API operations.
+
+## Workflow
+
+### Step 1: Subscribe to Events
+
+Use @ref ptsl::CId_SubscribeToEvents "SubscribeToEvents" to add specified events to the subscription list for your PTSL session.
+
+Request Example:
+```json
+{
+  "events": [
+    {
+      "event_id": "EId_TrackRecordEnabledStateChanged",
+      "event_data_json": "{\"track_id\": \"{00000000-2a000000-9a9525e4-f1611e09}\"}"
+    }
+  ]
+}
+```
+
+### Step 2: Start Polling for Events
+
+Use @ref ptsl::CId_PollEvents "PollEvents" to begin receiving real-time events. This is a long-polling API that streams events using the Intermediate Responses mechanism.
+
+Important Notes:
+- Operates indefinitely without a typical end condition
+- Only one active PollEvents connection is allowed per PTSL session
+- If a new PollEvents call is made, the previous call is terminated
+- Runs immediately, bypassing the command queue
+- Not affected by the timeout mechanism
+- Does not suppress Pro Tools UI alerts
+
+Response Example:
+```json
+{
+  "event": {
+    "event_id": "EId_TrackRecordEnabledStateChanged",
+    "event_data_json": "{\"track_id\": \"{00000000-2a000000-9a9525e4-f1611e09}\", \"state\": true}"
+  }
+}
+```
+
+### Step 3: Unsubscribe from Events (Optional)
+
+Use @ref ptsl::CId_UnsubscribeFromEvents "UnsubscribeFromEvents" to remove events from your subscription list.
+
+Request Example:
+```json
+{
+  "events": [
+    {
+      "event_id": "EId_TrackRecordEnabledStateChanged",
+      "event_data_json": "{\"track_id\": \"{00000000-2a000000-9a9525e4-f1611e09}\"}"
+    }
+  ]
+}
+```
+
+## Complete Example: Track Record-Enabled State Monitoring
+
+Here's a complete example showing how to monitor record-enabled state changes for a specific track:
+
+### 1. Subscribe to the Event
+
+```json
+// SubscribeToEvents Request
+{
+  "events": [
+    {
+      "event_id": "EId_TrackRecordEnabledStateChanged",
+      "event_data_json": "{\"track_id\": \"{00000000-2a000000-9a9525e4-f1611e09}\"}"
+    }
+  ]
+}
+```
+
+### 2. Start Polling
+
+```json
+// PollEvents Request (no parameters needed)
+{}
+```
+
+### 3. Receive Events
+
+When the track's record-enabled state changes, you'll receive:
+
+```json
+// PollEvents Response (Intermediate Response)
+{
+  "event": {
+    "event_id": "EId_TrackRecordEnabledStateChanged",
+    "event_data_json": "{\"track_id\": \"{00000000-2a000000-9a9525e4-f1611e09}\", \"state\": true}"
+  }
+}
+```
+
+### 4. Unsubscribe (when done)
+
+```json
+// UnsubscribeFromEvents Request
+{
+  "events": [
+    {
+      "event_id": "EId_TrackRecordEnabledStateChanged",
+      "event_data_json": "{\"track_id\": \"{00000000-2a000000-9a9525e4-f1611e09}\"}"
+    }
+  ]
+}
+```
+
+## C++ Client Usage
+
+For C++ clients, you can use the `responseCallback` parameter with `SendRequest` to process streamed events in real-time:
+
+```cpp
+#include <iostream>
+#include <PTSLC_CPP/CppPTSLClient.h>
+
+int main()
+{
+    PTSLC_CPP::CppPTSLClient client{PTSLC_CPP::ClientConfig
+    {
+        "localhost:31416", 
+        PTSLC_CPP::Mode::ProTools,
+        PTSLC_CPP::SkipHostLaunch::Yes
+    }};
+
+    PTSLC_CPP::CppPTSLRequest req{PTSLC_CPP::CommandId::CId_PollEvents, ""};
+    req.SetSessionId("c3ea3ad7-4274-4d84-93a1-894377b0ec99"); // Reuse the session id in which SubscribeToEvents was issued
+    
+    client.SendRequest(req, [](const PTSLC_CPP::CppPTSLResponse& response)
+    {
+        std::cout << response.GetResponseBodyJson() << std::endl;
+    }).get(); // Blocks here almost forever
+}
+```
+
+## Event-Specific Documentation
+
+For detailed information about specific events, including their filter and response data structures, refer to the individual event documentation - @ref ptsl::EventId "EventId"
+
+*/

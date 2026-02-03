@@ -1,0 +1,57 @@
+\hypertarget{a02692}{}\doxysection{Clear\+All\+Memory\+Locations\+Response\+Body}
+\label{a02692}\index{ClearAllMemoryLocationsResponseBody@{ClearAllMemoryLocationsResponseBody}}
+
+
+\doxysubsection{Description}
+Structure that describes Clear\+All\+Memory\+Locations response data. 
+
+\begin{DoxySince}{Since}
+Pro Tools 2024.\+10 
+\end{DoxySince}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+int32 \mbox{\hyperlink{a02692_a5a7d4eb4f640f480c8e7889a629d0929}{success\+\_\+count}} = 1
+\begin{DoxyCompactList}\small\item\em The number of successfully cleared memory locations. \end{DoxyCompactList}\item 
+int32 \mbox{\hyperlink{a02692_a5a440aa50cb2751e32d747f9b8bdbd20}{failure\+\_\+count}} = 2
+\begin{DoxyCompactList}\small\item\em The number of memory locations which were not cleared. \end{DoxyCompactList}\item 
+repeated int32 \mbox{\hyperlink{a02692_a8590c5ad2e264e853d1de905a740d4f9}{failure\+\_\+list}} = 3
+\begin{DoxyCompactList}\small\item\em The list of memory locations which were not cleared. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{a02692_a5a7d4eb4f640f480c8e7889a629d0929}\label{a02692_a5a7d4eb4f640f480c8e7889a629d0929}} 
+\index{ClearAllMemoryLocationsResponseBody@{ClearAllMemoryLocationsResponseBody}!success\_count@{success\_count}}
+\index{success\_count@{success\_count}!ClearAllMemoryLocationsResponseBody@{ClearAllMemoryLocationsResponseBody}}
+\doxysubsubsection{\texorpdfstring{success\_count}{success\_count}}
+{\footnotesize\ttfamily int32 success\+\_\+count = 1}
+
+
+
+The number of successfully cleared memory locations. 
+
+\mbox{\Hypertarget{a02692_a5a440aa50cb2751e32d747f9b8bdbd20}\label{a02692_a5a440aa50cb2751e32d747f9b8bdbd20}} 
+\index{ClearAllMemoryLocationsResponseBody@{ClearAllMemoryLocationsResponseBody}!failure\_count@{failure\_count}}
+\index{failure\_count@{failure\_count}!ClearAllMemoryLocationsResponseBody@{ClearAllMemoryLocationsResponseBody}}
+\doxysubsubsection{\texorpdfstring{failure\_count}{failure\_count}}
+{\footnotesize\ttfamily int32 failure\+\_\+count = 2}
+
+
+
+The number of memory locations which were not cleared. 
+
+\mbox{\Hypertarget{a02692_a8590c5ad2e264e853d1de905a740d4f9}\label{a02692_a8590c5ad2e264e853d1de905a740d4f9}} 
+\index{ClearAllMemoryLocationsResponseBody@{ClearAllMemoryLocationsResponseBody}!failure\_list@{failure\_list}}
+\index{failure\_list@{failure\_list}!ClearAllMemoryLocationsResponseBody@{ClearAllMemoryLocationsResponseBody}}
+\doxysubsubsection{\texorpdfstring{failure\_list}{failure\_list}}
+{\footnotesize\ttfamily repeated int32 failure\+\_\+list = 3}
+
+
+
+The list of memory locations which were not cleared. 
+
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{a00464}{PTSL.\+proto}}\end{DoxyCompactItemize}

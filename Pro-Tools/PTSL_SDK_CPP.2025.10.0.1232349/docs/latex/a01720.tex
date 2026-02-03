@@ -1,0 +1,61 @@
+\hypertarget{a01720}{}\doxysection{Clear\+Memory\+Location\+Response}
+\label{a01720}\index{ClearMemoryLocationResponse@{ClearMemoryLocationResponse}}
+
+
+{\ttfamily \#include $<$Cpp\+PTSLCommon.\+h$>$}
+
+
+
+\doxysubsection{Description}
+Structure that describes Clear\+Memory\+Location response data. 
+
+\begin{DoxyRefDesc}{Deprecated}
+\item[\mbox{\hyperlink{a00467__deprecated000270}{Deprecated}}]All API-\/specific types in the C++ client lib are deprecated starting in Pro Tools 2024.\+10 since we introduced general JSON-\/based request/response. \end{DoxyRefDesc}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+int32\+\_\+t \mbox{\hyperlink{a01720_a2b0740b567f13dc7a36347fd845f20f3}{success\+Count}}
+\begin{DoxyCompactList}\small\item\em Number of succeeded cleared memory locations. \end{DoxyCompactList}\item 
+int32\+\_\+t \mbox{\hyperlink{a01720_a38719f28f3f88d7128da304f3d465ccc}{failure\+Count}}
+\begin{DoxyCompactList}\small\item\em Number of memory locations that were not cleared. \end{DoxyCompactList}\item 
+std\+::unordered\+\_\+set$<$ int64\+\_\+t $>$ \mbox{\hyperlink{a01720_a9d7318faf0c87e09af450c16db3adfe3}{failure\+List}}
+\begin{DoxyCompactList}\small\item\em List of memory locations that were not cleared. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{a01720_a2b0740b567f13dc7a36347fd845f20f3}\label{a01720_a2b0740b567f13dc7a36347fd845f20f3}} 
+\index{ClearMemoryLocationResponse@{ClearMemoryLocationResponse}!successCount@{successCount}}
+\index{successCount@{successCount}!ClearMemoryLocationResponse@{ClearMemoryLocationResponse}}
+\doxysubsubsection{\texorpdfstring{successCount}{successCount}}
+{\footnotesize\ttfamily int32\+\_\+t success\+Count}
+
+
+
+Number of succeeded cleared memory locations. 
+
+\mbox{\Hypertarget{a01720_a38719f28f3f88d7128da304f3d465ccc}\label{a01720_a38719f28f3f88d7128da304f3d465ccc}} 
+\index{ClearMemoryLocationResponse@{ClearMemoryLocationResponse}!failureCount@{failureCount}}
+\index{failureCount@{failureCount}!ClearMemoryLocationResponse@{ClearMemoryLocationResponse}}
+\doxysubsubsection{\texorpdfstring{failureCount}{failureCount}}
+{\footnotesize\ttfamily int32\+\_\+t failure\+Count}
+
+
+
+Number of memory locations that were not cleared. 
+
+\mbox{\Hypertarget{a01720_a9d7318faf0c87e09af450c16db3adfe3}\label{a01720_a9d7318faf0c87e09af450c16db3adfe3}} 
+\index{ClearMemoryLocationResponse@{ClearMemoryLocationResponse}!failureList@{failureList}}
+\index{failureList@{failureList}!ClearMemoryLocationResponse@{ClearMemoryLocationResponse}}
+\doxysubsubsection{\texorpdfstring{failureList}{failureList}}
+{\footnotesize\ttfamily std\+::unordered\+\_\+set$<$int64\+\_\+t$>$ failure\+List}
+
+
+
+List of memory locations that were not cleared. 
+
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{a00050}{Cpp\+PTSLCommon.\+h}}\end{DoxyCompactItemize}

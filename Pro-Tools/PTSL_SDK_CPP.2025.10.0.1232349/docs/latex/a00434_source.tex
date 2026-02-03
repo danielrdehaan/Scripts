@@ -1,0 +1,27 @@
+\hypertarget{a00434_source}{}\doxysection{File\+Script\+Parser.\+h}
+\label{a00434_source}\index{FileScriptParser.h@{FileScriptParser.h}}
+\mbox{\hyperlink{a00434}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{comment}{// Copyright 2023-\/2024 by Avid Technology, Inc.}}
+\DoxyCodeLine{2 \textcolor{comment}{// CONFIDENTIAL: this document contains confidential information of Avid. Do not disclose to any third party. Use of the information contained in this document is subject to an Avid SDK license.}}
+\DoxyCodeLine{3 }
+\DoxyCodeLine{9 \textcolor{preprocessor}{\#pragma once}}
+\DoxyCodeLine{10 }
+\DoxyCodeLine{11 \textcolor{preprocessor}{\#include <optional>}}
+\DoxyCodeLine{12 \textcolor{preprocessor}{\#include <string>}}
+\DoxyCodeLine{13 \textcolor{preprocessor}{\#include <vector>}}
+\DoxyCodeLine{14 }
+\DoxyCodeLine{15 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{a00416}{PtslCmdCommandRequest.h}}"{}}}
+\DoxyCodeLine{16 }
+\DoxyCodeLine{20 \textcolor{keyword}{struct }\mbox{\hyperlink{a01996}{PtslCmdFileScript}}}
+\DoxyCodeLine{21 \{}
+\DoxyCodeLine{22     std::vector<PtslCmdCommandRequest> \mbox{\hyperlink{a01996_ad8b343cb50533def1dbd70df4b33563e}{CommandRequests}};}
+\DoxyCodeLine{23 \};}
+\DoxyCodeLine{24 }
+\DoxyCodeLine{28 \textcolor{keyword}{class }\mbox{\hyperlink{a02000}{FileScriptParser}}}
+\DoxyCodeLine{29 \{}
+\DoxyCodeLine{30 \textcolor{keyword}{public}:}
+\DoxyCodeLine{34     \textcolor{keyword}{static} std::optional<PtslCmdFileScript> \mbox{\hyperlink{a02000_a9f67db559db48252e620520670e2b430}{Parse}}(\textcolor{keyword}{const} std::string\& text);}
+\DoxyCodeLine{35 \};}
+
+\end{DoxyCode}

@@ -1,0 +1,296 @@
+\hypertarget{a02080}{}\doxysection{Track\+Attributes}
+\label{a02080}\index{TrackAttributes@{TrackAttributes}}
+
+
+\doxysubsection{Description}
+Structure that describes Pro Tools track attributes. \doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{a00494_a9fd856ff4ac630bceb38635f3c5a2cba}{Track\+Attribute\+State}} \mbox{\hyperlink{a02080_a0116842451763203dcfdf5958589df26}{is\+\_\+inactive}} = 1
+\begin{DoxyCompactList}\small\item\em active/inactive implicitly/explicitly \end{DoxyCompactList}\item 
+\mbox{\hyperlink{a00494_a9fd856ff4ac630bceb38635f3c5a2cba}{Track\+Attribute\+State}} \mbox{\hyperlink{a02080_af02933dd57da0bd93bb33cebeefa566a}{is\+\_\+hidden}} = 2
+\begin{DoxyCompactList}\small\item\em hidden/shown implicitly/explicitly \end{DoxyCompactList}\item 
+\mbox{\hyperlink{a00494_a9fd856ff4ac630bceb38635f3c5a2cba}{Track\+Attribute\+State}} \mbox{\hyperlink{a02080_adf49d2cb46f0b0be65e27126a521c75a}{is\+\_\+selected}} = 3
+\begin{DoxyCompactList}\small\item\em selected implicitly/explicitly \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{a02080_ac129ceb4e1a0d98fa4e3e4e1067f4b7d}{contains\+\_\+clips}} = 4
+\begin{DoxyCompactList}\small\item\em contains clips \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{a02080_aed0ce8a4899ca87ef4441d0da9da07c4}{contains\+\_\+automation}} = 5
+\begin{DoxyCompactList}\small\item\em contains automation \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{a02080_a302dcc24253e3f188445aa76edb4616a}{is\+\_\+soloed}} = 6
+\begin{DoxyCompactList}\small\item\em soloed/unsoloed \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{a02080_a556718b78cd4966816c5d5bd198c79c8}{is\+\_\+record\+\_\+enabled}} = 7
+\begin{DoxyCompactList}\small\item\em record enabled/non-\/record enabled \end{DoxyCompactList}\item 
+\mbox{\hyperlink{a00494_a9fd856ff4ac630bceb38635f3c5a2cba}{Track\+Attribute\+State}} \mbox{\hyperlink{a02080_ab2f21f87fc11117f335bb70ae7bbd389}{is\+\_\+input\+\_\+monitoring\+\_\+on}} = 8
+\begin{DoxyCompactList}\small\item\em input monitoring on/off implicitly/explicitly \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{a02080_a6c1130c6a503bd2d4c5e8a775cb71dd5}{is\+\_\+smart\+\_\+dsp\+\_\+on}} = 9
+\begin{DoxyCompactList}\small\item\em smart DSP state (on/off) \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{a02080_a456b2265dd534e49c5adff3a0ba758d1}{is\+\_\+locked}} = 10
+\begin{DoxyCompactList}\small\item\em locked state \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{a02080_acc2b8849a411ecdf5c3a4fdf013127be}{is\+\_\+muted}} = 11
+\begin{DoxyCompactList}\small\item\em muted state \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{a02080_ae605c620dd16e66c2f6c3d4cd2875ec9}{is\+\_\+frozen}} = 12
+\begin{DoxyCompactList}\small\item\em frozen state \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{a02080_a01cdff9fb397966eed50aae3e8f64d81}{is\+\_\+open}} = 13
+\begin{DoxyCompactList}\small\item\em open/closed state \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{a02080_a3ad9d087459e02e637cbc67bf4811e7a}{is\+\_\+online}} = 14
+\begin{DoxyCompactList}\small\item\em provides the status of a video track\textquotesingle{}s Video Online button \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{a02080_a3358cf03f9d1c47ebec4e5ba774b22f7}{is\+\_\+record\+\_\+enabled\+\_\+safe}} = 15
+\item 
+bool \mbox{\hyperlink{a02080_a67e1ab8cbfbfb16bfde875c0a92e4558}{is\+\_\+smart\+\_\+dsp\+\_\+on\+\_\+safe}} = 16
+\item 
+bool \mbox{\hyperlink{a02080_a2248474dcf30eccdd0fcfea6839762d0}{is\+\_\+soloed\+\_\+safe}} = 17
+\item 
+\mbox{\hyperlink{a00494_a9fd856ff4ac630bceb38635f3c5a2cba}{Track\+Attribute\+State}} \mbox{\hyperlink{a02080_a052c5475206dd8ff9dbb3f8802a7c3fd}{has\+\_\+edit\+\_\+selection}} = 18
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{a02080_a0116842451763203dcfdf5958589df26}\label{a02080_a0116842451763203dcfdf5958589df26}} 
+\index{TrackAttributes@{TrackAttributes}!is\_inactive@{is\_inactive}}
+\index{is\_inactive@{is\_inactive}!TrackAttributes@{TrackAttributes}}
+\doxysubsubsection{\texorpdfstring{is\_inactive}{is\_inactive}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a00494_a9fd856ff4ac630bceb38635f3c5a2cba}{Track\+Attribute\+State}} is\+\_\+inactive = 1}
+
+
+
+active/inactive implicitly/explicitly 
+
+
+
+Referenced by \mbox{\hyperlink{a01328_a2c249cfbb30bf5c402e1d086ba877497}{Cpp\+PTSLClient\+::\+Get\+Track\+List()}}, and \mbox{\hyperlink{a01328_a13d214d5eb1c91e130f92e406ac8fb69}{Cpp\+PTSLClient\+::\+Select\+Tracks\+By\+Name()}}.
+
+\mbox{\Hypertarget{a02080_af02933dd57da0bd93bb33cebeefa566a}\label{a02080_af02933dd57da0bd93bb33cebeefa566a}} 
+\index{TrackAttributes@{TrackAttributes}!is\_hidden@{is\_hidden}}
+\index{is\_hidden@{is\_hidden}!TrackAttributes@{TrackAttributes}}
+\doxysubsubsection{\texorpdfstring{is\_hidden}{is\_hidden}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a00494_a9fd856ff4ac630bceb38635f3c5a2cba}{Track\+Attribute\+State}} is\+\_\+hidden = 2}
+
+
+
+hidden/shown implicitly/explicitly 
+
+
+
+Referenced by \mbox{\hyperlink{a01328_a2c249cfbb30bf5c402e1d086ba877497}{Cpp\+PTSLClient\+::\+Get\+Track\+List()}}, and \mbox{\hyperlink{a01328_a13d214d5eb1c91e130f92e406ac8fb69}{Cpp\+PTSLClient\+::\+Select\+Tracks\+By\+Name()}}.
+
+\mbox{\Hypertarget{a02080_adf49d2cb46f0b0be65e27126a521c75a}\label{a02080_adf49d2cb46f0b0be65e27126a521c75a}} 
+\index{TrackAttributes@{TrackAttributes}!is\_selected@{is\_selected}}
+\index{is\_selected@{is\_selected}!TrackAttributes@{TrackAttributes}}
+\doxysubsubsection{\texorpdfstring{is\_selected}{is\_selected}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a00494_a9fd856ff4ac630bceb38635f3c5a2cba}{Track\+Attribute\+State}} is\+\_\+selected = 3}
+
+
+
+selected implicitly/explicitly 
+
+
+
+Referenced by \mbox{\hyperlink{a01328_a2c249cfbb30bf5c402e1d086ba877497}{Cpp\+PTSLClient\+::\+Get\+Track\+List()}}, and \mbox{\hyperlink{a01328_a13d214d5eb1c91e130f92e406ac8fb69}{Cpp\+PTSLClient\+::\+Select\+Tracks\+By\+Name()}}.
+
+\mbox{\Hypertarget{a02080_ac129ceb4e1a0d98fa4e3e4e1067f4b7d}\label{a02080_ac129ceb4e1a0d98fa4e3e4e1067f4b7d}} 
+\index{TrackAttributes@{TrackAttributes}!contains\_clips@{contains\_clips}}
+\index{contains\_clips@{contains\_clips}!TrackAttributes@{TrackAttributes}}
+\doxysubsubsection{\texorpdfstring{contains\_clips}{contains\_clips}}
+{\footnotesize\ttfamily bool contains\+\_\+clips = 4}
+
+
+
+contains clips 
+
+
+
+Referenced by \mbox{\hyperlink{a01328_a2c249cfbb30bf5c402e1d086ba877497}{Cpp\+PTSLClient\+::\+Get\+Track\+List()}}, and \mbox{\hyperlink{a01328_a13d214d5eb1c91e130f92e406ac8fb69}{Cpp\+PTSLClient\+::\+Select\+Tracks\+By\+Name()}}.
+
+\mbox{\Hypertarget{a02080_aed0ce8a4899ca87ef4441d0da9da07c4}\label{a02080_aed0ce8a4899ca87ef4441d0da9da07c4}} 
+\index{TrackAttributes@{TrackAttributes}!contains\_automation@{contains\_automation}}
+\index{contains\_automation@{contains\_automation}!TrackAttributes@{TrackAttributes}}
+\doxysubsubsection{\texorpdfstring{contains\_automation}{contains\_automation}}
+{\footnotesize\ttfamily bool contains\+\_\+automation = 5}
+
+
+
+contains automation 
+
+
+
+Referenced by \mbox{\hyperlink{a01328_a2c249cfbb30bf5c402e1d086ba877497}{Cpp\+PTSLClient\+::\+Get\+Track\+List()}}, and \mbox{\hyperlink{a01328_a13d214d5eb1c91e130f92e406ac8fb69}{Cpp\+PTSLClient\+::\+Select\+Tracks\+By\+Name()}}.
+
+\mbox{\Hypertarget{a02080_a302dcc24253e3f188445aa76edb4616a}\label{a02080_a302dcc24253e3f188445aa76edb4616a}} 
+\index{TrackAttributes@{TrackAttributes}!is\_soloed@{is\_soloed}}
+\index{is\_soloed@{is\_soloed}!TrackAttributes@{TrackAttributes}}
+\doxysubsubsection{\texorpdfstring{is\_soloed}{is\_soloed}}
+{\footnotesize\ttfamily bool is\+\_\+soloed = 6}
+
+
+
+soloed/unsoloed 
+
+
+
+Referenced by \mbox{\hyperlink{a01328_a2c249cfbb30bf5c402e1d086ba877497}{Cpp\+PTSLClient\+::\+Get\+Track\+List()}}, and \mbox{\hyperlink{a01328_a13d214d5eb1c91e130f92e406ac8fb69}{Cpp\+PTSLClient\+::\+Select\+Tracks\+By\+Name()}}.
+
+\mbox{\Hypertarget{a02080_a556718b78cd4966816c5d5bd198c79c8}\label{a02080_a556718b78cd4966816c5d5bd198c79c8}} 
+\index{TrackAttributes@{TrackAttributes}!is\_record\_enabled@{is\_record\_enabled}}
+\index{is\_record\_enabled@{is\_record\_enabled}!TrackAttributes@{TrackAttributes}}
+\doxysubsubsection{\texorpdfstring{is\_record\_enabled}{is\_record\_enabled}}
+{\footnotesize\ttfamily bool is\+\_\+record\+\_\+enabled = 7}
+
+
+
+record enabled/non-\/record enabled 
+
+
+
+Referenced by \mbox{\hyperlink{a01328_a2c249cfbb30bf5c402e1d086ba877497}{Cpp\+PTSLClient\+::\+Get\+Track\+List()}}, and \mbox{\hyperlink{a01328_a13d214d5eb1c91e130f92e406ac8fb69}{Cpp\+PTSLClient\+::\+Select\+Tracks\+By\+Name()}}.
+
+\mbox{\Hypertarget{a02080_ab2f21f87fc11117f335bb70ae7bbd389}\label{a02080_ab2f21f87fc11117f335bb70ae7bbd389}} 
+\index{TrackAttributes@{TrackAttributes}!is\_input\_monitoring\_on@{is\_input\_monitoring\_on}}
+\index{is\_input\_monitoring\_on@{is\_input\_monitoring\_on}!TrackAttributes@{TrackAttributes}}
+\doxysubsubsection{\texorpdfstring{is\_input\_monitoring\_on}{is\_input\_monitoring\_on}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a00494_a9fd856ff4ac630bceb38635f3c5a2cba}{Track\+Attribute\+State}} is\+\_\+input\+\_\+monitoring\+\_\+on = 8}
+
+
+
+input monitoring on/off implicitly/explicitly 
+
+
+
+Referenced by \mbox{\hyperlink{a01328_a2c249cfbb30bf5c402e1d086ba877497}{Cpp\+PTSLClient\+::\+Get\+Track\+List()}}, and \mbox{\hyperlink{a01328_a13d214d5eb1c91e130f92e406ac8fb69}{Cpp\+PTSLClient\+::\+Select\+Tracks\+By\+Name()}}.
+
+\mbox{\Hypertarget{a02080_a6c1130c6a503bd2d4c5e8a775cb71dd5}\label{a02080_a6c1130c6a503bd2d4c5e8a775cb71dd5}} 
+\index{TrackAttributes@{TrackAttributes}!is\_smart\_dsp\_on@{is\_smart\_dsp\_on}}
+\index{is\_smart\_dsp\_on@{is\_smart\_dsp\_on}!TrackAttributes@{TrackAttributes}}
+\doxysubsubsection{\texorpdfstring{is\_smart\_dsp\_on}{is\_smart\_dsp\_on}}
+{\footnotesize\ttfamily bool is\+\_\+smart\+\_\+dsp\+\_\+on = 9}
+
+
+
+smart DSP state (on/off) 
+
+
+
+Referenced by \mbox{\hyperlink{a01328_a2c249cfbb30bf5c402e1d086ba877497}{Cpp\+PTSLClient\+::\+Get\+Track\+List()}}, and \mbox{\hyperlink{a01328_a13d214d5eb1c91e130f92e406ac8fb69}{Cpp\+PTSLClient\+::\+Select\+Tracks\+By\+Name()}}.
+
+\mbox{\Hypertarget{a02080_a456b2265dd534e49c5adff3a0ba758d1}\label{a02080_a456b2265dd534e49c5adff3a0ba758d1}} 
+\index{TrackAttributes@{TrackAttributes}!is\_locked@{is\_locked}}
+\index{is\_locked@{is\_locked}!TrackAttributes@{TrackAttributes}}
+\doxysubsubsection{\texorpdfstring{is\_locked}{is\_locked}}
+{\footnotesize\ttfamily bool is\+\_\+locked = 10}
+
+
+
+locked state 
+
+
+
+Referenced by \mbox{\hyperlink{a01328_a2c249cfbb30bf5c402e1d086ba877497}{Cpp\+PTSLClient\+::\+Get\+Track\+List()}}, and \mbox{\hyperlink{a01328_a13d214d5eb1c91e130f92e406ac8fb69}{Cpp\+PTSLClient\+::\+Select\+Tracks\+By\+Name()}}.
+
+\mbox{\Hypertarget{a02080_acc2b8849a411ecdf5c3a4fdf013127be}\label{a02080_acc2b8849a411ecdf5c3a4fdf013127be}} 
+\index{TrackAttributes@{TrackAttributes}!is\_muted@{is\_muted}}
+\index{is\_muted@{is\_muted}!TrackAttributes@{TrackAttributes}}
+\doxysubsubsection{\texorpdfstring{is\_muted}{is\_muted}}
+{\footnotesize\ttfamily bool is\+\_\+muted = 11}
+
+
+
+muted state 
+
+
+
+Referenced by \mbox{\hyperlink{a01328_a2c249cfbb30bf5c402e1d086ba877497}{Cpp\+PTSLClient\+::\+Get\+Track\+List()}}, and \mbox{\hyperlink{a01328_a13d214d5eb1c91e130f92e406ac8fb69}{Cpp\+PTSLClient\+::\+Select\+Tracks\+By\+Name()}}.
+
+\mbox{\Hypertarget{a02080_ae605c620dd16e66c2f6c3d4cd2875ec9}\label{a02080_ae605c620dd16e66c2f6c3d4cd2875ec9}} 
+\index{TrackAttributes@{TrackAttributes}!is\_frozen@{is\_frozen}}
+\index{is\_frozen@{is\_frozen}!TrackAttributes@{TrackAttributes}}
+\doxysubsubsection{\texorpdfstring{is\_frozen}{is\_frozen}}
+{\footnotesize\ttfamily bool is\+\_\+frozen = 12}
+
+
+
+frozen state 
+
+
+
+Referenced by \mbox{\hyperlink{a01328_a2c249cfbb30bf5c402e1d086ba877497}{Cpp\+PTSLClient\+::\+Get\+Track\+List()}}, and \mbox{\hyperlink{a01328_a13d214d5eb1c91e130f92e406ac8fb69}{Cpp\+PTSLClient\+::\+Select\+Tracks\+By\+Name()}}.
+
+\mbox{\Hypertarget{a02080_a01cdff9fb397966eed50aae3e8f64d81}\label{a02080_a01cdff9fb397966eed50aae3e8f64d81}} 
+\index{TrackAttributes@{TrackAttributes}!is\_open@{is\_open}}
+\index{is\_open@{is\_open}!TrackAttributes@{TrackAttributes}}
+\doxysubsubsection{\texorpdfstring{is\_open}{is\_open}}
+{\footnotesize\ttfamily bool is\+\_\+open = 13}
+
+
+
+open/closed state 
+
+
+
+Referenced by \mbox{\hyperlink{a01328_a2c249cfbb30bf5c402e1d086ba877497}{Cpp\+PTSLClient\+::\+Get\+Track\+List()}}, and \mbox{\hyperlink{a01328_a13d214d5eb1c91e130f92e406ac8fb69}{Cpp\+PTSLClient\+::\+Select\+Tracks\+By\+Name()}}.
+
+\mbox{\Hypertarget{a02080_a3ad9d087459e02e637cbc67bf4811e7a}\label{a02080_a3ad9d087459e02e637cbc67bf4811e7a}} 
+\index{TrackAttributes@{TrackAttributes}!is\_online@{is\_online}}
+\index{is\_online@{is\_online}!TrackAttributes@{TrackAttributes}}
+\doxysubsubsection{\texorpdfstring{is\_online}{is\_online}}
+{\footnotesize\ttfamily bool is\+\_\+online = 14}
+
+
+
+provides the status of a video track\textquotesingle{}s Video Online button 
+
+
+
+Referenced by \mbox{\hyperlink{a01328_a2c249cfbb30bf5c402e1d086ba877497}{Cpp\+PTSLClient\+::\+Get\+Track\+List()}}, and \mbox{\hyperlink{a01328_a13d214d5eb1c91e130f92e406ac8fb69}{Cpp\+PTSLClient\+::\+Select\+Tracks\+By\+Name()}}.
+
+\mbox{\Hypertarget{a02080_a3358cf03f9d1c47ebec4e5ba774b22f7}\label{a02080_a3358cf03f9d1c47ebec4e5ba774b22f7}} 
+\index{TrackAttributes@{TrackAttributes}!is\_record\_enabled\_safe@{is\_record\_enabled\_safe}}
+\index{is\_record\_enabled\_safe@{is\_record\_enabled\_safe}!TrackAttributes@{TrackAttributes}}
+\doxysubsubsection{\texorpdfstring{is\_record\_enabled\_safe}{is\_record\_enabled\_safe}}
+{\footnotesize\ttfamily bool is\+\_\+record\+\_\+enabled\+\_\+safe = 15}
+
+\begin{DoxySince}{Since}
+Pro Tools 2024.\+03 
+\end{DoxySince}
+
+
+Referenced by \mbox{\hyperlink{a01328_a2c249cfbb30bf5c402e1d086ba877497}{Cpp\+PTSLClient\+::\+Get\+Track\+List()}}, and \mbox{\hyperlink{a01328_a13d214d5eb1c91e130f92e406ac8fb69}{Cpp\+PTSLClient\+::\+Select\+Tracks\+By\+Name()}}.
+
+\mbox{\Hypertarget{a02080_a67e1ab8cbfbfb16bfde875c0a92e4558}\label{a02080_a67e1ab8cbfbfb16bfde875c0a92e4558}} 
+\index{TrackAttributes@{TrackAttributes}!is\_smart\_dsp\_on\_safe@{is\_smart\_dsp\_on\_safe}}
+\index{is\_smart\_dsp\_on\_safe@{is\_smart\_dsp\_on\_safe}!TrackAttributes@{TrackAttributes}}
+\doxysubsubsection{\texorpdfstring{is\_smart\_dsp\_on\_safe}{is\_smart\_dsp\_on\_safe}}
+{\footnotesize\ttfamily bool is\+\_\+smart\+\_\+dsp\+\_\+on\+\_\+safe = 16}
+
+\begin{DoxySince}{Since}
+Pro Tools 2024.\+03 
+\end{DoxySince}
+
+
+Referenced by \mbox{\hyperlink{a01328_a2c249cfbb30bf5c402e1d086ba877497}{Cpp\+PTSLClient\+::\+Get\+Track\+List()}}, and \mbox{\hyperlink{a01328_a13d214d5eb1c91e130f92e406ac8fb69}{Cpp\+PTSLClient\+::\+Select\+Tracks\+By\+Name()}}.
+
+\mbox{\Hypertarget{a02080_a2248474dcf30eccdd0fcfea6839762d0}\label{a02080_a2248474dcf30eccdd0fcfea6839762d0}} 
+\index{TrackAttributes@{TrackAttributes}!is\_soloed\_safe@{is\_soloed\_safe}}
+\index{is\_soloed\_safe@{is\_soloed\_safe}!TrackAttributes@{TrackAttributes}}
+\doxysubsubsection{\texorpdfstring{is\_soloed\_safe}{is\_soloed\_safe}}
+{\footnotesize\ttfamily bool is\+\_\+soloed\+\_\+safe = 17}
+
+\begin{DoxySince}{Since}
+Pro Tools 2024.\+03 
+\end{DoxySince}
+
+
+Referenced by \mbox{\hyperlink{a01328_a2c249cfbb30bf5c402e1d086ba877497}{Cpp\+PTSLClient\+::\+Get\+Track\+List()}}, and \mbox{\hyperlink{a01328_a13d214d5eb1c91e130f92e406ac8fb69}{Cpp\+PTSLClient\+::\+Select\+Tracks\+By\+Name()}}.
+
+\mbox{\Hypertarget{a02080_a052c5475206dd8ff9dbb3f8802a7c3fd}\label{a02080_a052c5475206dd8ff9dbb3f8802a7c3fd}} 
+\index{TrackAttributes@{TrackAttributes}!has\_edit\_selection@{has\_edit\_selection}}
+\index{has\_edit\_selection@{has\_edit\_selection}!TrackAttributes@{TrackAttributes}}
+\doxysubsubsection{\texorpdfstring{has\_edit\_selection}{has\_edit\_selection}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a00494_a9fd856ff4ac630bceb38635f3c5a2cba}{Track\+Attribute\+State}} has\+\_\+edit\+\_\+selection = 18}
+
+\begin{DoxySince}{Since}
+Pro Tools 2025.\+06 
+\end{DoxySince}
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{a00464}{PTSL.\+proto}}\end{DoxyCompactItemize}

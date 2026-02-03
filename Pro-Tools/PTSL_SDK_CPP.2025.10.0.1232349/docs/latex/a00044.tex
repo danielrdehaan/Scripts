@@ -1,0 +1,36 @@
+\hypertarget{a00044}{}\doxysection{Cpp\+PTSLClient\+Internal.\+h File Reference}
+\label{a00044}\index{CppPTSLClientInternal.h@{CppPTSLClientInternal.h}}
+{\ttfamily \#include $<$list$>$}\newline
+{\ttfamily \#include $<$mutex$>$}\newline
+{\ttfamily \#include $<$grpcpp/grpcpp.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}PTSL.\+grpc.\+pb.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}Cpp\+PTSLClient.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}PTSL\+\_\+\+Versions.\+h\char`\"{}}\newline
+
+
+\doxysubsection{Description}
+Part of the \mbox{\hyperlink{a00017}{Cpp\+PTSLClient.\+h}} that should only be included in .cpp files. 
+
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{a01332}{Call\+Data}}
+\begin{DoxyCompactList}\small\item\em Common utility structure that contains grpc data which are transferring between the grpc async calls. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{a01336}{PTSLException}}
+\begin{DoxyCompactList}\small\item\em PTSL specific exception class. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{a01340}{Cpp\+PTSLClient\+::\+Internal\+Data}}
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{a01328}{Cpp\+PTSLClient}} data which can\textquotesingle{}t be used in public headers. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{a01344}{Cpp\+PTSLClient\+::\+Internal\+Data\+::\+Rpc\+Context}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{a00491}{PTSLC\+\_\+\+CPP}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+static google\+::protobuf\+::util\+::\+Json\+Options \mbox{\hyperlink{a00491_a6f182f9872f9fb59a13ddc248339ec08}{Default\+Json\+Write\+Options}} ()
+\item 
+static google\+::protobuf\+::util\+::\+Json\+Parse\+Options \mbox{\hyperlink{a00491_a9163390b1bfc4f32518cb1097dc77054}{Default\+Json\+Parse\+Options}} ()
+\end{DoxyCompactItemize}

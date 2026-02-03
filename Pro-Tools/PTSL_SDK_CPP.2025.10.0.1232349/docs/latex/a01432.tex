@@ -1,0 +1,60 @@
+\hypertarget{a01432}{}\doxysection{Get\+Track\+List\+Request}
+\label{a01432}\index{GetTrackListRequest@{GetTrackListRequest}}
+
+
+{\ttfamily \#include $<$Cpp\+PTSLCommon.\+h$>$}
+
+
+
+\doxysubsection{Description}
+Structure that describes Get\+Track\+List request data. 
+
+\begin{DoxyRefDesc}{Deprecated}
+\item[\mbox{\hyperlink{a00467__deprecated000164}{Deprecated}}]All API-\/specific types in the C++ client lib are deprecated starting in Pro Tools 2024.\+10 since we introduced general JSON-\/based request/response. \end{DoxyRefDesc}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{a01380}{Pagination\+Request}} \mbox{\hyperlink{a01432_a33aefd6050acf779e46b8a14d4078a40}{pagination\+Request}}
+\item 
+std\+::vector$<$ \mbox{\hyperlink{a01428}{Track\+List\+Invertible\+Filter}} $>$ \mbox{\hyperlink{a01432_aeb0aaa8689522853d0a7eada824a17be}{track\+Filters}}
+\item 
+bool \mbox{\hyperlink{a01432_ae6389b22383100a39c86057b2c9b87d8}{is\+Filter\+List\+Additive}} = true
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{a01432_a33aefd6050acf779e46b8a14d4078a40}\label{a01432_a33aefd6050acf779e46b8a14d4078a40}} 
+\index{GetTrackListRequest@{GetTrackListRequest}!paginationRequest@{paginationRequest}}
+\index{paginationRequest@{paginationRequest}!GetTrackListRequest@{GetTrackListRequest}}
+\doxysubsubsection{\texorpdfstring{paginationRequest}{paginationRequest}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a01380}{Pagination\+Request}} pagination\+Request}
+
+
+
+Referenced by \mbox{\hyperlink{a01328_a2c249cfbb30bf5c402e1d086ba877497}{Cpp\+PTSLClient\+::\+Get\+Track\+List()}}.
+
+\mbox{\Hypertarget{a01432_aeb0aaa8689522853d0a7eada824a17be}\label{a01432_aeb0aaa8689522853d0a7eada824a17be}} 
+\index{GetTrackListRequest@{GetTrackListRequest}!trackFilters@{trackFilters}}
+\index{trackFilters@{trackFilters}!GetTrackListRequest@{GetTrackListRequest}}
+\doxysubsubsection{\texorpdfstring{trackFilters}{trackFilters}}
+{\footnotesize\ttfamily std\+::vector$<$\mbox{\hyperlink{a01428}{Track\+List\+Invertible\+Filter}}$>$ track\+Filters}
+
+
+
+Referenced by \mbox{\hyperlink{a01328_a2c249cfbb30bf5c402e1d086ba877497}{Cpp\+PTSLClient\+::\+Get\+Track\+List()}}.
+
+\mbox{\Hypertarget{a01432_ae6389b22383100a39c86057b2c9b87d8}\label{a01432_ae6389b22383100a39c86057b2c9b87d8}} 
+\index{GetTrackListRequest@{GetTrackListRequest}!isFilterListAdditive@{isFilterListAdditive}}
+\index{isFilterListAdditive@{isFilterListAdditive}!GetTrackListRequest@{GetTrackListRequest}}
+\doxysubsubsection{\texorpdfstring{isFilterListAdditive}{isFilterListAdditive}}
+{\footnotesize\ttfamily bool is\+Filter\+List\+Additive = true}
+
+
+
+Referenced by \mbox{\hyperlink{a01328_a2c249cfbb30bf5c402e1d086ba877497}{Cpp\+PTSLClient\+::\+Get\+Track\+List()}}.
+
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{a00050}{Cpp\+PTSLCommon.\+h}}\end{DoxyCompactItemize}

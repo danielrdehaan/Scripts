@@ -1,0 +1,46 @@
+\hypertarget{a00440_source}{}\doxysection{Command\+Line\+Parser.\+h}
+\label{a00440_source}\index{CommandLineParser.h@{CommandLineParser.h}}
+\mbox{\hyperlink{a00440}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{comment}{// Copyright 2022-\/2024 by Avid Technology, Inc.}}
+\DoxyCodeLine{2 \textcolor{comment}{// CONFIDENTIAL: this document contains confidential information of Avid. Do not disclose to any third party. Use of the information contained in this document is subject to an Avid SDK license.}}
+\DoxyCodeLine{3 }
+\DoxyCodeLine{4 \textcolor{preprocessor}{\#pragma once}}
+\DoxyCodeLine{5 }
+\DoxyCodeLine{6 \textcolor{preprocessor}{\#include <map>}}
+\DoxyCodeLine{7 \textcolor{preprocessor}{\#include <optional>}}
+\DoxyCodeLine{8 \textcolor{preprocessor}{\#include <string>}}
+\DoxyCodeLine{9 \textcolor{preprocessor}{\#include <vector>}}
+\DoxyCodeLine{10 }
+\DoxyCodeLine{11 \textcolor{keyword}{using }\mbox{\hyperlink{a00440_a7e65606e31fd0fb4bc872b1278ef51d9}{ParamsArgsMap}} = std::map<std::string, std::vector<std::string>>;}
+\DoxyCodeLine{12 }
+\DoxyCodeLine{21 \textcolor{keyword}{class }\mbox{\hyperlink{a01988}{CommandLineParser}}}
+\DoxyCodeLine{22 \{}
+\DoxyCodeLine{23 \textcolor{keyword}{public}:}
+\DoxyCodeLine{24     \mbox{\hyperlink{a01988_a32976b84f32673dae09aeace19e40ef9}{CommandLineParser}}() = \textcolor{keyword}{delete};}
+\DoxyCodeLine{25     \mbox{\hyperlink{a01988_a32976b84f32673dae09aeace19e40ef9}{CommandLineParser}}(\textcolor{keywordtype}{int} argc, \textcolor{keywordtype}{char}* argv[], \textcolor{keywordtype}{bool} skipFirstParam = \textcolor{keyword}{true});}
+\DoxyCodeLine{26     \mbox{\hyperlink{a01988_a32976b84f32673dae09aeace19e40ef9}{CommandLineParser}}(std::vector<std::string> commandArguments, \textcolor{keywordtype}{bool} skipFirstParam = \textcolor{keyword}{true});}
+\DoxyCodeLine{27 }
+\DoxyCodeLine{32     \textcolor{keyword}{const} \mbox{\hyperlink{a00440_a7e65606e31fd0fb4bc872b1278ef51d9}{ParamsArgsMap}}\& \mbox{\hyperlink{a01988_a4ce268153c819e8035c511290eefdfbe}{GetParamsWithArgs}}()\textcolor{keyword}{ const}}
+\DoxyCodeLine{33 \textcolor{keyword}{    }\{}
+\DoxyCodeLine{34         \textcolor{keywordflow}{return} mParamsWithArgs;}
+\DoxyCodeLine{35     \}}
+\DoxyCodeLine{36 }
+\DoxyCodeLine{40     \textcolor{keywordtype}{bool} \mbox{\hyperlink{a01988_a8e12342fc420701fbffd97025421575a}{IsEmpty}}() \textcolor{keyword}{const};}
+\DoxyCodeLine{41 }
+\DoxyCodeLine{45     \textcolor{keywordtype}{bool} \mbox{\hyperlink{a01988_ae1ef67b343e3a56fe44ed9ec5747bba8}{HasParam}}(\textcolor{keyword}{const} std::string\& param) \textcolor{keyword}{const};}
+\DoxyCodeLine{46 }
+\DoxyCodeLine{52     std::optional<std::vector<std::string>> \mbox{\hyperlink{a01988_af276f9ce65bd4319b5c7dd8f34625ee1}{GetArgsForParam}}(\textcolor{keyword}{const} std::string\& param) \textcolor{keyword}{const};}
+\DoxyCodeLine{53 }
+\DoxyCodeLine{58     std::string \mbox{\hyperlink{a01988_a0e879ba52cd303c0c02ab7d22cf0baeb}{FirstOrDefault}}(\textcolor{keyword}{const} std::string\& param, \textcolor{keyword}{const} std::string\& defaultValue) \textcolor{keyword}{const};}
+\DoxyCodeLine{59 }
+\DoxyCodeLine{60     \textcolor{comment}{// FirstOrDefault with a default value of "{}"{} syntax sugar:}}
+\DoxyCodeLine{61     std::string \mbox{\hyperlink{a01988_adc9d6d47dcefe790c41d556252e7ebd4}{operator[]}}(\textcolor{keyword}{const} std::string\& param) \textcolor{keyword}{const};}
+\DoxyCodeLine{62 }
+\DoxyCodeLine{63 \textcolor{keyword}{private}:}
+\DoxyCodeLine{64     \textcolor{keywordtype}{void} ParseParamsWithArgs(\textcolor{keyword}{const} std::vector<std::string>\& cmdItems, \textcolor{keywordtype}{bool} skipFirst = \textcolor{keyword}{true});}
+\DoxyCodeLine{65 }
+\DoxyCodeLine{66     \mbox{\hyperlink{a00440_a7e65606e31fd0fb4bc872b1278ef51d9}{ParamsArgsMap}} mParamsWithArgs;}
+\DoxyCodeLine{67 \};}
+
+\end{DoxyCode}

@@ -1,0 +1,80 @@
+\hypertarget{a01552}{}\doxysection{EM\+\_\+\+Location\+Info}
+\label{a01552}\index{EM\_LocationInfo@{EM\_LocationInfo}}
+
+
+{\ttfamily \#include $<$Cpp\+PTSLCommon.\+h$>$}
+
+
+
+\doxysubsection{Description}
+Structure that describes information for location section in the Bounce Mix window. 
+
+\begin{DoxyRefDesc}{Deprecated}
+\item[\mbox{\hyperlink{a00467__deprecated000212}{Deprecated}}]All API-\/specific types in the C++ client lib are deprecated starting in Pro Tools 2024.\+10 since we introduced general JSON-\/based request/response. \end{DoxyRefDesc}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{a00491_a5a4c016feccbda0b32e3f0a6b1b3f246}{Triple\+Bool}} \mbox{\hyperlink{a01552_a60f6c7014015ec1647ad8e568c8c83f3}{import\+After\+Bounce}}
+\item 
+\mbox{\hyperlink{a01548}{EM\+\_\+\+Import\+Options}} \mbox{\hyperlink{a01552_a7e23a84ed1798cf2e618bfe73ee4be05}{import\+Options}}
+\item 
+\mbox{\hyperlink{a00491_a9d0a91e97ef11699d14ef723c994a752}{EM\+\_\+\+File\+Destination}} \mbox{\hyperlink{a01552_a6da54c5543d71915d804867ed58bbdc2}{file\+Destination}}
+\item 
+std\+::string \mbox{\hyperlink{a01552_a8b19015737da3ace9e6ec83c2d4e1464}{directory}}
+\begin{DoxyCompactList}\small\item\em Depending on the file\+Destination value, this field can be either\+: \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{a01552_a60f6c7014015ec1647ad8e568c8c83f3}\label{a01552_a60f6c7014015ec1647ad8e568c8c83f3}} 
+\index{EM\_LocationInfo@{EM\_LocationInfo}!importAfterBounce@{importAfterBounce}}
+\index{importAfterBounce@{importAfterBounce}!EM\_LocationInfo@{EM\_LocationInfo}}
+\doxysubsubsection{\texorpdfstring{importAfterBounce}{importAfterBounce}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a00491_a5a4c016feccbda0b32e3f0a6b1b3f246}{Triple\+Bool}} import\+After\+Bounce}
+
+
+
+Referenced by \mbox{\hyperlink{a01328_a2fb834727f02bdc4db8432508b5a8ed6}{Cpp\+PTSLClient\+::\+Export\+Mix()}}.
+
+\mbox{\Hypertarget{a01552_a7e23a84ed1798cf2e618bfe73ee4be05}\label{a01552_a7e23a84ed1798cf2e618bfe73ee4be05}} 
+\index{EM\_LocationInfo@{EM\_LocationInfo}!importOptions@{importOptions}}
+\index{importOptions@{importOptions}!EM\_LocationInfo@{EM\_LocationInfo}}
+\doxysubsubsection{\texorpdfstring{importOptions}{importOptions}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a01548}{EM\+\_\+\+Import\+Options}} import\+Options}
+
+
+
+Referenced by \mbox{\hyperlink{a01328_a2fb834727f02bdc4db8432508b5a8ed6}{Cpp\+PTSLClient\+::\+Export\+Mix()}}.
+
+\mbox{\Hypertarget{a01552_a6da54c5543d71915d804867ed58bbdc2}\label{a01552_a6da54c5543d71915d804867ed58bbdc2}} 
+\index{EM\_LocationInfo@{EM\_LocationInfo}!fileDestination@{fileDestination}}
+\index{fileDestination@{fileDestination}!EM\_LocationInfo@{EM\_LocationInfo}}
+\doxysubsubsection{\texorpdfstring{fileDestination}{fileDestination}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a00491_a9d0a91e97ef11699d14ef723c994a752}{EM\+\_\+\+File\+Destination}} file\+Destination}
+
+
+
+Referenced by \mbox{\hyperlink{a01328_a2fb834727f02bdc4db8432508b5a8ed6}{Cpp\+PTSLClient\+::\+Export\+Mix()}}.
+
+\mbox{\Hypertarget{a01552_a8b19015737da3ace9e6ec83c2d4e1464}\label{a01552_a8b19015737da3ace9e6ec83c2d4e1464}} 
+\index{EM\_LocationInfo@{EM\_LocationInfo}!directory@{directory}}
+\index{directory@{directory}!EM\_LocationInfo@{EM\_LocationInfo}}
+\doxysubsubsection{\texorpdfstring{directory}{directory}}
+{\footnotesize\ttfamily std\+::string directory}
+
+
+
+Depending on the file\+Destination value, this field can be either\+: 
+
+
+\begin{DoxyItemize}
+\item directory relative to the session directory (if file\+Destination is Session\+Folder)
+\item absolute path to a directory (if file\+Destination is Directory) 
+\end{DoxyItemize}
+
+Referenced by \mbox{\hyperlink{a01328_a2fb834727f02bdc4db8432508b5a8ed6}{Cpp\+PTSLClient\+::\+Export\+Mix()}}.
+
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{a00050}{Cpp\+PTSLCommon.\+h}}\end{DoxyCompactItemize}

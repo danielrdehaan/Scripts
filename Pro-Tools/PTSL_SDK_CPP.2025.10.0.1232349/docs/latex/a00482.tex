@@ -1,0 +1,20 @@
+\hypertarget{a00482}{}\doxysection{Version 2023.06}
+\label{a00482}\index{Version 2023.06@{Version 2023.06}}
+\hypertarget{a00482_release_notes_2023_06_compatibility}{}\doxysubsection{Compatibility}\label{a00482_release_notes_2023_06_compatibility}
+PTSL SDK 2023.\+06 uses \mbox{\hyperlink{a00446_a83c5961efacc6c06e3e75877c239ebb1}{PTSL\+\_\+\+VERSION}} 1 of the client interface
+
+Pro Tools 2023.\+6 is compatible with clients using \mbox{\hyperlink{a00446_a83c5961efacc6c06e3e75877c239ebb1}{PTSL\+\_\+\+VERSION}} 1 and higher\hypertarget{a00482_release_notes_2023_06_changelog}{}\doxysubsection{Changelog}\label{a00482_release_notes_2023_06_changelog}
+Reminder\+: \mbox{\hyperlink{a00481_release_notes_2023_03_changelog_developer_certificates_have_been_deprecated}{Developer certificates have been deprecated}}\hypertarget{a00482_release_notes_2023_06_changelog_command_changes}{}\doxysubsubsection{Command changes}\label{a00482_release_notes_2023_06_changelog_command_changes}
+
+\begin{DoxyItemize}
+\item All commands that receive a {\ttfamily Time} location value as an input can now use a simplified {\ttfamily Bars\+Beats} format without additional spaces
+\item \mbox{\hyperlink{a01328_a04ff523336df5090a8805fdd871d287a}{Edit\+Memory\+Location}} command is updated with a possibility to create a new memory location if its ID doesn\textquotesingle{}t exist
+\item \mbox{\hyperlink{a01328_a6e35bbc06f5d23ddaedffa90abcfdcd8}{Import}} command can now import audio files. This command now supports \mbox{\hyperlink{a00491_ad6786e58853168b405fc210dda69270d}{Import\+Type\+::Audio}} and has three new options for this type\+: {\ttfamily location\+Options}, {\ttfamily location\+Type}, {\ttfamily location\+Value} 
+\end{DoxyItemize}
+
+Other command changes\+:
+\begin{DoxyItemize}
+\item \mbox{\hyperlink{a01328_ae4cd6c55dbb07ab006453d9603c2cbc1}{Spot}} {\ttfamily track\+Offset\+Options} is now deprecated. Use {\ttfamily location\+Options} instead.
+\item \mbox{\hyperlink{a01328_a04ff523336df5090a8805fdd871d287a}{Edit\+Memory\+Location}} and \mbox{\hyperlink{a01328_a9cbea25d0d5e46ff2bc301d921eeb46a}{PTSLC\+\_\+\+CPP\+::\+Cpp\+PTSLClient\+::\+Create\+Memory\+Location}} \char`\"{}\+Create\+Memory\+Location\char`\"{} {\ttfamily reference} is now deprecated. Use {\ttfamily start\+Time} instead.
+\item \mbox{\hyperlink{a00491_a748e9be4b1ba274efcc9e3341c69c125}{PTSLC\+\_\+\+CPP\+::\+Audio\+Operations}} enumerator names have changed 
+\end{DoxyItemize}

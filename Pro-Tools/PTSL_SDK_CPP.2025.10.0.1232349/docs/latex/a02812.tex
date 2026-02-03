@@ -1,0 +1,81 @@
+\hypertarget{a02812}{}\doxysection{Batch\+Job\+Definition}
+\label{a02812}\index{BatchJobDefinition@{BatchJobDefinition}}
+
+
+\doxysubsection{Description}
+Structure that describes a batch job. 
+
+\begin{DoxySince}{Since}
+Pro Tools 2025.\+06 
+\end{DoxySince}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+string \mbox{\hyperlink{a02812_a8ccf841cb59e451791bcb2e1ac4f1edc}{name}} = 1
+\begin{DoxyCompactList}\small\item\em Name of the job that may be displayed on the GUI. \end{DoxyCompactList}\item 
+string \mbox{\hyperlink{a02812_a23af17c78302b71c14ef38ea40b8d1d7}{description}} = 2
+\begin{DoxyCompactList}\small\item\em Description of the job that may be displayed on the GUI. \end{DoxyCompactList}\item 
+int32 \mbox{\hyperlink{a02812_a8cd104ab8e910b92f625a12189e5f600}{timeout}} = 3
+\begin{DoxyCompactList}\small\item\em Time period in milliseconds after which the job will be automatically canceled if no requests with the corresponding job ID are received. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{a02812_a539fa21aafe5784229dea972cd6add8e}{is\+\_\+cancelable}} = 4
+\begin{DoxyCompactList}\small\item\em Can be canceled by the user via the GUI. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{a02812_a5301452a5a34b3e7ed3716e932c6c32e}{cancel\+\_\+on\+\_\+failure}} = 5
+\begin{DoxyCompactList}\small\item\em Will cancel the job if any request with the corresponding job ID fails. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{a02812_a8ccf841cb59e451791bcb2e1ac4f1edc}\label{a02812_a8ccf841cb59e451791bcb2e1ac4f1edc}} 
+\index{BatchJobDefinition@{BatchJobDefinition}!name@{name}}
+\index{name@{name}!BatchJobDefinition@{BatchJobDefinition}}
+\doxysubsubsection{\texorpdfstring{name}{name}}
+{\footnotesize\ttfamily string name = 1}
+
+
+
+Name of the job that may be displayed on the GUI. 
+
+\mbox{\Hypertarget{a02812_a23af17c78302b71c14ef38ea40b8d1d7}\label{a02812_a23af17c78302b71c14ef38ea40b8d1d7}} 
+\index{BatchJobDefinition@{BatchJobDefinition}!description@{description}}
+\index{description@{description}!BatchJobDefinition@{BatchJobDefinition}}
+\doxysubsubsection{\texorpdfstring{description}{description}}
+{\footnotesize\ttfamily string description = 2}
+
+
+
+Description of the job that may be displayed on the GUI. 
+
+Optional \mbox{\Hypertarget{a02812_a8cd104ab8e910b92f625a12189e5f600}\label{a02812_a8cd104ab8e910b92f625a12189e5f600}} 
+\index{BatchJobDefinition@{BatchJobDefinition}!timeout@{timeout}}
+\index{timeout@{timeout}!BatchJobDefinition@{BatchJobDefinition}}
+\doxysubsubsection{\texorpdfstring{timeout}{timeout}}
+{\footnotesize\ttfamily int32 timeout = 3}
+
+
+
+Time period in milliseconds after which the job will be automatically canceled if no requests with the corresponding job ID are received. 
+
+Optional \mbox{\Hypertarget{a02812_a539fa21aafe5784229dea972cd6add8e}\label{a02812_a539fa21aafe5784229dea972cd6add8e}} 
+\index{BatchJobDefinition@{BatchJobDefinition}!is\_cancelable@{is\_cancelable}}
+\index{is\_cancelable@{is\_cancelable}!BatchJobDefinition@{BatchJobDefinition}}
+\doxysubsubsection{\texorpdfstring{is\_cancelable}{is\_cancelable}}
+{\footnotesize\ttfamily bool is\+\_\+cancelable = 4}
+
+
+
+Can be canceled by the user via the GUI. 
+
+Optional \mbox{\Hypertarget{a02812_a5301452a5a34b3e7ed3716e932c6c32e}\label{a02812_a5301452a5a34b3e7ed3716e932c6c32e}} 
+\index{BatchJobDefinition@{BatchJobDefinition}!cancel\_on\_failure@{cancel\_on\_failure}}
+\index{cancel\_on\_failure@{cancel\_on\_failure}!BatchJobDefinition@{BatchJobDefinition}}
+\doxysubsubsection{\texorpdfstring{cancel\_on\_failure}{cancel\_on\_failure}}
+{\footnotesize\ttfamily bool cancel\+\_\+on\+\_\+failure = 5}
+
+
+
+Will cancel the job if any request with the corresponding job ID fails. 
+
+Optional 
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{a00464}{PTSL.\+proto}}\end{DoxyCompactItemize}

@@ -1,0 +1,71 @@
+\hypertarget{a02632}{}\doxysection{Get\+Sub\+Counter\+Format\+Response\+Body}
+\label{a02632}\index{GetSubCounterFormatResponseBody@{GetSubCounterFormatResponseBody}}
+
+
+\doxysubsection{Description}
+Structure that describes Get\+Sub\+Counter\+Format response data. 
+
+\begin{DoxySince}{Since}
+Pro Tools 2024.\+06 
+\end{DoxySince}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{a00494_a27f72771846794e9eb4d89b28011d50b}{Track\+Offset\+Options}} \mbox{\hyperlink{a02632_aa6998000044877ceb768ade17d00b122}{current\+\_\+setting}} = 1
+\item 
+repeated \mbox{\hyperlink{a00494_a27f72771846794e9eb4d89b28011d50b}{Track\+Offset\+Options}} \mbox{\hyperlink{a02632_a04de1d4998684b8413cbe47904956d07}{possible\+\_\+settings}} = 2
+\item 
+\mbox{\hyperlink{a00494_ae147cb28819b5a7002c8a0d8c58c362c}{Timeline\+Location\+Type}} \mbox{\hyperlink{a02632_adf21d8d8ac64913a35ab78e7dbb0408e}{current\+\_\+type}} = 3
+\begin{DoxyCompactList}\small\item\em The time scale (type) of the counter. \end{DoxyCompactList}\item 
+repeated \mbox{\hyperlink{a00494_ae147cb28819b5a7002c8a0d8c58c362c}{Timeline\+Location\+Type}} \mbox{\hyperlink{a02632_a84725bf91b1dabe6d79cff26788d08a4}{possible\+\_\+types}} = 4
+\begin{DoxyCompactList}\small\item\em The supported time scales (types) of the counter (tier-\/depended). \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{a02632_aa6998000044877ceb768ade17d00b122}\label{a02632_aa6998000044877ceb768ade17d00b122}} 
+\index{GetSubCounterFormatResponseBody@{GetSubCounterFormatResponseBody}!current\_setting@{current\_setting}}
+\index{current\_setting@{current\_setting}!GetSubCounterFormatResponseBody@{GetSubCounterFormatResponseBody}}
+\doxysubsubsection{\texorpdfstring{current\_setting}{current\_setting}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a00494_a27f72771846794e9eb4d89b28011d50b}{Track\+Offset\+Options}} current\+\_\+setting = 1}
+
+\begin{DoxyRefDesc}{Deprecated}
+\item[\mbox{\hyperlink{a00467__deprecated001249}{Deprecated}}]since Pro Tools 2025.\+06, use current\+\_\+type \end{DoxyRefDesc}
+\mbox{\Hypertarget{a02632_a04de1d4998684b8413cbe47904956d07}\label{a02632_a04de1d4998684b8413cbe47904956d07}} 
+\index{GetSubCounterFormatResponseBody@{GetSubCounterFormatResponseBody}!possible\_settings@{possible\_settings}}
+\index{possible\_settings@{possible\_settings}!GetSubCounterFormatResponseBody@{GetSubCounterFormatResponseBody}}
+\doxysubsubsection{\texorpdfstring{possible\_settings}{possible\_settings}}
+{\footnotesize\ttfamily repeated \mbox{\hyperlink{a00494_a27f72771846794e9eb4d89b28011d50b}{Track\+Offset\+Options}} possible\+\_\+settings = 2}
+
+\begin{DoxyRefDesc}{Deprecated}
+\item[\mbox{\hyperlink{a00467__deprecated001250}{Deprecated}}]since Pro Tools 2025.\+06, use possible\+\_\+types \end{DoxyRefDesc}
+\mbox{\Hypertarget{a02632_adf21d8d8ac64913a35ab78e7dbb0408e}\label{a02632_adf21d8d8ac64913a35ab78e7dbb0408e}} 
+\index{GetSubCounterFormatResponseBody@{GetSubCounterFormatResponseBody}!current\_type@{current\_type}}
+\index{current\_type@{current\_type}!GetSubCounterFormatResponseBody@{GetSubCounterFormatResponseBody}}
+\doxysubsubsection{\texorpdfstring{current\_type}{current\_type}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a00494_ae147cb28819b5a7002c8a0d8c58c362c}{Timeline\+Location\+Type}} current\+\_\+type = 3}
+
+
+
+The time scale (type) of the counter. 
+
+\begin{DoxySince}{Since}
+Pro Tools 2025.\+06 
+\end{DoxySince}
+\mbox{\Hypertarget{a02632_a84725bf91b1dabe6d79cff26788d08a4}\label{a02632_a84725bf91b1dabe6d79cff26788d08a4}} 
+\index{GetSubCounterFormatResponseBody@{GetSubCounterFormatResponseBody}!possible\_types@{possible\_types}}
+\index{possible\_types@{possible\_types}!GetSubCounterFormatResponseBody@{GetSubCounterFormatResponseBody}}
+\doxysubsubsection{\texorpdfstring{possible\_types}{possible\_types}}
+{\footnotesize\ttfamily repeated \mbox{\hyperlink{a00494_ae147cb28819b5a7002c8a0d8c58c362c}{Timeline\+Location\+Type}} possible\+\_\+types = 4}
+
+
+
+The supported time scales (types) of the counter (tier-\/depended). 
+
+\begin{DoxySince}{Since}
+Pro Tools 2025.\+06 
+\end{DoxySince}
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{a00464}{PTSL.\+proto}}\end{DoxyCompactItemize}

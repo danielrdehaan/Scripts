@@ -1,0 +1,51 @@
+\hypertarget{a01912}{}\doxysection{Get\+Main\+Counter\+Format\+Response}
+\label{a01912}\index{GetMainCounterFormatResponse@{GetMainCounterFormatResponse}}
+
+
+{\ttfamily \#include $<$Cpp\+PTSLCommon.\+h$>$}
+
+
+
+\doxysubsection{Description}
+Structure that describes Get\+Main\+Counter\+Format response data. 
+
+Supported starting in Pro Tools 2024.\+06
+
+\begin{DoxyRefDesc}{Deprecated}
+\item[\mbox{\hyperlink{a00467__deprecated000327}{Deprecated}}]All API-\/specific types in the C++ client lib are deprecated starting in Pro Tools 2024.\+10 since we introduced general JSON-\/based request/response. \end{DoxyRefDesc}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{a00491_aca704862f862634822651397791086c3}{Track\+Offset\+Options}} \mbox{\hyperlink{a01912_af1b5dcf89b5273d73584d3025b9d91fe}{current\+Setting}}
+\begin{DoxyCompactList}\small\item\em The time scale (type) of the counter. \end{DoxyCompactList}\item 
+std\+::vector$<$ \mbox{\hyperlink{a00491_aca704862f862634822651397791086c3}{Track\+Offset\+Options}} $>$ \mbox{\hyperlink{a01912_a1661176a62c4b62b22342e03016817ff}{possible\+Settings}}
+\begin{DoxyCompactList}\small\item\em The supported time scales (types) of the counter (tier-\/depended). \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{a01912_af1b5dcf89b5273d73584d3025b9d91fe}\label{a01912_af1b5dcf89b5273d73584d3025b9d91fe}} 
+\index{GetMainCounterFormatResponse@{GetMainCounterFormatResponse}!currentSetting@{currentSetting}}
+\index{currentSetting@{currentSetting}!GetMainCounterFormatResponse@{GetMainCounterFormatResponse}}
+\doxysubsubsection{\texorpdfstring{currentSetting}{currentSetting}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a00491_aca704862f862634822651397791086c3}{Track\+Offset\+Options}} current\+Setting}
+
+
+
+The time scale (type) of the counter. 
+
+\mbox{\Hypertarget{a01912_a1661176a62c4b62b22342e03016817ff}\label{a01912_a1661176a62c4b62b22342e03016817ff}} 
+\index{GetMainCounterFormatResponse@{GetMainCounterFormatResponse}!possibleSettings@{possibleSettings}}
+\index{possibleSettings@{possibleSettings}!GetMainCounterFormatResponse@{GetMainCounterFormatResponse}}
+\doxysubsubsection{\texorpdfstring{possibleSettings}{possibleSettings}}
+{\footnotesize\ttfamily std\+::vector$<$\mbox{\hyperlink{a00491_aca704862f862634822651397791086c3}{Track\+Offset\+Options}}$>$ possible\+Settings}
+
+
+
+The supported time scales (types) of the counter (tier-\/depended). 
+
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{a00050}{Cpp\+PTSLCommon.\+h}}\end{DoxyCompactItemize}

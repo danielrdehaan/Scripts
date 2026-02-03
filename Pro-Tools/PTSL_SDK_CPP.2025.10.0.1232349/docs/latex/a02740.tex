@@ -1,0 +1,57 @@
+\hypertarget{a02740}{}\doxysection{Import\+Audio\+To\+Clip\+List\+Response\+Entry\+File}
+\label{a02740}\index{ImportAudioToClipListResponseEntryFile@{ImportAudioToClipListResponseEntryFile}}
+
+
+\doxysubsection{Description}
+Import\+Audio\+To\+Clip\+List response entry for a single imported audio file. 
+
+\begin{DoxySince}{Since}
+Pro Tools 2025.\+06 
+\end{DoxySince}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+string \mbox{\hyperlink{a02740_aaee6f8ecfee8eb4f36f5c97e2f6295cb}{file\+\_\+id}} = 1
+\begin{DoxyCompactList}\small\item\em This is a session-\/specific ID to identify an audio file. \end{DoxyCompactList}\item 
+string \mbox{\hyperlink{a02740_ae64641dbcbf59b876c35ca152c875b62}{file\+\_\+path}} = 2
+\begin{DoxyCompactList}\small\item\em Location of the new audio file. \end{DoxyCompactList}\item 
+repeated string \mbox{\hyperlink{a02740_a18aeef91e78ea11b02ef176a068236e4}{clip\+\_\+id\+\_\+list}} = 3
+\begin{DoxyCompactList}\small\item\em ID(s) for the (whole-\/file) clip(s) representing the imported file. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{a02740_aaee6f8ecfee8eb4f36f5c97e2f6295cb}\label{a02740_aaee6f8ecfee8eb4f36f5c97e2f6295cb}} 
+\index{ImportAudioToClipListResponseEntryFile@{ImportAudioToClipListResponseEntryFile}!file\_id@{file\_id}}
+\index{file\_id@{file\_id}!ImportAudioToClipListResponseEntryFile@{ImportAudioToClipListResponseEntryFile}}
+\doxysubsubsection{\texorpdfstring{file\_id}{file\_id}}
+{\footnotesize\ttfamily string file\+\_\+id = 1}
+
+
+
+This is a session-\/specific ID to identify an audio file. 
+
+It\textquotesingle{}s not related to any IDs stamped into the file. This ID is persisted between runs and stored in the session, but may be different from one session to another that uses the same file. \mbox{\Hypertarget{a02740_ae64641dbcbf59b876c35ca152c875b62}\label{a02740_ae64641dbcbf59b876c35ca152c875b62}} 
+\index{ImportAudioToClipListResponseEntryFile@{ImportAudioToClipListResponseEntryFile}!file\_path@{file\_path}}
+\index{file\_path@{file\_path}!ImportAudioToClipListResponseEntryFile@{ImportAudioToClipListResponseEntryFile}}
+\doxysubsubsection{\texorpdfstring{file\_path}{file\_path}}
+{\footnotesize\ttfamily string file\+\_\+path = 2}
+
+
+
+Location of the new audio file. 
+
+\mbox{\Hypertarget{a02740_a18aeef91e78ea11b02ef176a068236e4}\label{a02740_a18aeef91e78ea11b02ef176a068236e4}} 
+\index{ImportAudioToClipListResponseEntryFile@{ImportAudioToClipListResponseEntryFile}!clip\_id\_list@{clip\_id\_list}}
+\index{clip\_id\_list@{clip\_id\_list}!ImportAudioToClipListResponseEntryFile@{ImportAudioToClipListResponseEntryFile}}
+\doxysubsubsection{\texorpdfstring{clip\_id\_list}{clip\_id\_list}}
+{\footnotesize\ttfamily repeated string clip\+\_\+id\+\_\+list = 3}
+
+
+
+ID(s) for the (whole-\/file) clip(s) representing the imported file. 
+
+Has multiple entries for multichannel files. 
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{a00464}{PTSL.\+proto}}\end{DoxyCompactItemize}

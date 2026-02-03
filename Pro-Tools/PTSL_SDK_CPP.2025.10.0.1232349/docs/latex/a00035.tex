@@ -1,0 +1,37 @@
+\hypertarget{a00035}{}\doxysection{Cpp\+Async.\+h File Reference}
+\label{a00035}\index{CppAsync.h@{CppAsync.h}}
+{\ttfamily \#include $<$chrono$>$}\newline
+{\ttfamily \#include $<$future$>$}\newline
+{\ttfamily \#include $<$iostream$>$}\newline
+{\ttfamily \#include $<$mutex$>$}\newline
+{\ttfamily \#include $<$stdexcept$>$}\newline
+{\ttfamily \#include $<$string$>$}\newline
+{\ttfamily \#include $<$utility$>$}\newline
+
+
+\doxysubsection{Description}
+Utilities for asynchronous operations. 
+
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{a01312}{Task\+Cancelled\+Exception}}
+\begin{DoxyCompactList}\small\item\em Class that describes specific Task\+Canceled\+Exception based on runtime\+\_\+error using to communicate task cancellation. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{a01316}{Safe\+Logger}}
+\begin{DoxyCompactList}\small\item\em Utility class for a thread-\/safe logging and printing error or warning messages. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{a00491}{PTSLC\+\_\+\+CPP}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$class T $>$ }\\bool \mbox{\hyperlink{a00491_a9a933726d2eba8ed84d84ee7a103d259}{Is\+Cancellation\+Requested}} (const std\+::future$<$ T $>$ \&cancellation)
+\begin{DoxyCompactList}\small\item\em Utility method that checks whether cancellation of Task (std\+::future$<$void$>$) is required. \end{DoxyCompactList}\item 
+{\footnotesize template$<$class T $>$ }\\void \mbox{\hyperlink{a00491_ac0f88800ff865784edd0d7339b3c884f}{Async\+Delay}} (const std\+::future$<$ T $>$ \&cancellation, std\+::chrono\+::milliseconds delay=std\+::chrono\+::milliseconds(1))
+\begin{DoxyCompactList}\small\item\em Utility method that asynchronously waits for the specified task to complete within a specified delay. \end{DoxyCompactList}\item 
+{\footnotesize template$<$class Request , class Response , class Client\+Ptr , class Client\+Function\+Ptr $>$ }\\std\+::shared\+\_\+ptr$<$ Response $>$ \mbox{\hyperlink{a00491_ab8c0fedcf58a25f377729071b93cc7cd}{Async\+Wait}} (Client\+Function\+Ptr func, Client\+Ptr ptr, const Request \&request)
+\begin{DoxyCompactList}\small\item\em Utility method that runs the function func asynchronously (potentially in a separate thread which might be a part of a thread pool) and waits for the result of this function, and returns the result. \end{DoxyCompactList}\item 
+{\footnotesize template$<$class Client\+Ptr , class Client\+Function , class... Args$>$ }\\void \mbox{\hyperlink{a00491_a7d0ba9b448b09495b2a043d621257085}{Async\+Wait2}} (Client\+Ptr caller, Client\+Function caller\+Func, Args \&\&... args)
+\end{DoxyCompactItemize}

@@ -1,0 +1,72 @@
+\hypertarget{a00419}{}\doxysection{File\+Script\+Parser.\+cpp File Reference}
+\label{a00419}\index{FileScriptParser.cpp@{FileScriptParser.cpp}}
+{\ttfamily \#include $<$iostream$>$}\newline
+{\ttfamily \#include $<$boost/algorithm/string.\+hpp$>$}\newline
+{\ttfamily \#include $<$boost/algorithm/string/join.\+hpp$>$}\newline
+{\ttfamily \#include $<$boost/config/warning\+\_\+disable.\+hpp$>$}\newline
+{\ttfamily \#include $<$boost/fusion/include/adapt\+\_\+struct.\+hpp$>$}\newline
+{\ttfamily \#include $<$boost/fusion/include/io.\+hpp$>$}\newline
+{\ttfamily \#include $<$boost/spirit/home/x3.\+hpp$>$}\newline
+{\ttfamily \#include $<$boost/spirit/home/x3/support/ast/position\+\_\+tagged.\+hpp$>$}\newline
+{\ttfamily \#include $<$boost/spirit/home/x3/support/utility/annotate\+\_\+on\+\_\+success.\+hpp$>$}\newline
+{\ttfamily \#include $<$boost/spirit/home/x3/support/utility/error\+\_\+reporting.\+hpp$>$}\newline
+{\ttfamily \#include $<$nlohmann/json.\+hpp$>$}\newline
+{\ttfamily \#include $<$optional$>$}\newline
+{\ttfamily \#include \char`\"{}Constants.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}File\+Script\+Parser.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}Ptsl\+Cmd\+Command\+Request.\+h\char`\"{}}\newline
+
+
+\doxysubsection{Description}
+Implementation of the ptslcmd file script parser. 
+
+\doxysubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{a00492}{comments}}
+\item 
+namespace \mbox{\hyperlink{a00493}{comments\+::parser}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+using \mbox{\hyperlink{a00419_ab701e3ac61a85b337ec5c1abaad6742d}{json}} = nlohmann\+::json
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{a00419_a035f785a3dfb6729846a267e95f35baf}{BOOST\+\_\+\+FUSION\+\_\+\+ADAPT\+\_\+\+STRUCT}} (\mbox{\hyperlink{a02008}{Ptsl\+Cmd\+Command\+Request}}, Command\+Name, Version, Request\+Body\+Json) BOOST\+\_\+\+FUSION\+\_\+\+ADAPT\+\_\+\+STRUCT(\mbox{\hyperlink{a01996}{Ptsl\+Cmd\+File\+Script}}
+\item 
+\mbox{\hyperlink{a00493_abb93ec5bd3811336ec91c60a016fd33a}{BOOST\+\_\+\+SPIRIT\+\_\+\+DEFINE}} (comments\+\_\+filter)
+\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+auto \mbox{\hyperlink{a00493_a881801ff9e9e4ea77c4d9dc463bb972e}{cppcomment}} = x3\+::omit\mbox{[}x3\+::lit(\char`\"{}//\char`\"{}) $>$$>$ $\ast$(x3\+::char\+\_\+ -\/ (x3\+::eol $\vert$ x3\+::eoi))\mbox{]}
+\item 
+auto \mbox{\hyperlink{a00493_af5008a792d5032916bf5cfdfa6dd6459}{ccomment}} = x3\+::omit\mbox{[}x3\+::lit(\char`\"{}/$\ast$\char`\"{}) $>$ $\ast$(x3\+::char\+\_\+ -\/ x3\+::lit(\char`\"{}$\ast$/\char`\"{})) $>$ x3\+::lit(\char`\"{}$\ast$/\char`\"{})\mbox{]}
+\item 
+auto \mbox{\hyperlink{a00493_a176e534fdfac8271bc01415f773684fc}{qstring\+\_\+simple}} = x3\+::lexeme\mbox{[}x3\+::char\+\_\+(\textquotesingle{}\char`\"{}\textquotesingle{}) $>$ $\ast$(x3\+::string(\char`\"{}\textbackslash{}\textbackslash{}\textbackslash{}\char`\"{}\char`\"{}) $\vert$ $\sim$x3\+::char\+\_\+(\textquotesingle{}\char`\"{}\textquotesingle{})) $>$ x3\+::char\+\_\+(\textquotesingle{}\char`\"{}\textquotesingle{})\mbox{]}
+\item 
+const x3\+::rule$<$ struct comments\+\_\+filter, std\+::vector$<$ std\+::string $>$ $>$ \mbox{\hyperlink{a00493_aa640437fe1d526b26d996ede3cf8be8d}{comments\+\_\+filter}} = \char`\"{}comments\+\_\+filter\char`\"{}
+\item 
+auto \mbox{\hyperlink{a00493_a1e808ac96c8efc210b4550282a4a33e6}{comments\+\_\+filter\+\_\+def}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Typedef Documentation}
+\mbox{\Hypertarget{a00419_ab701e3ac61a85b337ec5c1abaad6742d}\label{a00419_ab701e3ac61a85b337ec5c1abaad6742d}} 
+\index{FileScriptParser.cpp@{FileScriptParser.cpp}!json@{json}}
+\index{json@{json}!FileScriptParser.cpp@{FileScriptParser.cpp}}
+\doxysubsubsection{\texorpdfstring{json}{json}}
+{\footnotesize\ttfamily using \mbox{\hyperlink{a00002_ab701e3ac61a85b337ec5c1abaad6742d}{json}} =  nlohmann\+::json}
+
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{a00419_a035f785a3dfb6729846a267e95f35baf}\label{a00419_a035f785a3dfb6729846a267e95f35baf}} 
+\index{FileScriptParser.cpp@{FileScriptParser.cpp}!BOOST\_FUSION\_ADAPT\_STRUCT@{BOOST\_FUSION\_ADAPT\_STRUCT}}
+\index{BOOST\_FUSION\_ADAPT\_STRUCT@{BOOST\_FUSION\_ADAPT\_STRUCT}!FileScriptParser.cpp@{FileScriptParser.cpp}}
+\doxysubsubsection{\texorpdfstring{BOOST\_FUSION\_ADAPT\_STRUCT()}{BOOST\_FUSION\_ADAPT\_STRUCT()}}
+{\footnotesize\ttfamily BOOST\+\_\+\+FUSION\+\_\+\+ADAPT\+\_\+\+STRUCT (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{a02008}{Ptsl\+Cmd\+Command\+Request}}}]{,  }\item[{Command\+Name}]{,  }\item[{Version}]{,  }\item[{Request\+Body\+Json}]{ }\end{DoxyParamCaption})}
+

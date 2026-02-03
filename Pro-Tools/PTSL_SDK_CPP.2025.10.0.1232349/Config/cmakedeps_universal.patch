@@ -1,0 +1,13 @@
+diff --git a/cmakedeps_macros.cmake b/cmakedeps_macros.cmake
+index 0b78ee9..3da3487 100644
+--- a/cmakedeps_macros.cmake
++++ b/cmakedeps_macros.cmake
+@@ -25,7 +25,7 @@ function(conan_package_library_targets libraries package_libdir deps_target out_
+ 
+             # Create a micro-target for each lib/a found
+             # Allow only some characters for the target name
+-            string(REGEX REPLACE "[^A-Za-z0-9.+_-]" "_" _LIBRARY_NAME ${_LIBRARY_NAME})
++            string(REGEX REPLACE "[^A-Za-z0-9.+_-]" "_" _LIBRARY_NAME ${CONAN_FOUND_LIBRARY}) # cmakedeps_universal.patch: Forcing unique library name based on path, so the same library but with different architecture can be loaded twice
+             set(_LIB_NAME CONAN_LIB::${package_name}_${_LIBRARY_NAME}${config_suffix})
+             if(NOT TARGET ${_LIB_NAME})
+                 # Create a micro-target for each lib/a found

@@ -1,0 +1,102 @@
+# Copyright 2022-2023 by Avid Technology, Inc.
+# CONFIDENTIAL: this document contains confidential information of Avid. Do not disclose to any third party. Use of the information contained in this document is subject to an Avid SDK license.
+
+@PACKAGE_INIT@
+
+include(CMakeFindDependencyMacro)
+
+# Include dependencies target files first as those are required for the project.
+# It's not needed to include every one as this point as only the base cmake target is referenced.
+file(GLOB @PROJECT_NAME@_CURRENT_DEPENDENCIES_TARGET_FILES "${CMAKE_CURRENT_LIST_DIR}/@DEPENDENCIES_TARGET_FILE_BASE_NAME@-*.cmake")
+foreach(f ${@PROJECT_NAME@_CURRENT_DEPENDENCIES_TARGET_FILES})
+    message(STATUS "@PROJECT_NAME@: including dependencies: ${f}")
+    include(${f})
+endforeach()
+
+# Include the main targets file.
+include("${CMAKE_CURRENT_LIST_DIR}/@TARGETS_EXPORT_NAME@.cmake")
+
+# Because we can't distribute several build types in a single bundle (framework), provide a way to update the target thanks to CMake Targets structure.
+# This allows switching Debug/Release without doing reconfigure.
+
+unset(@PROJECT_NAME@_FOUND_CONFIGURATIONS_WITH_TARGETS_FILE)
+unset(@PROJECT_NAME@_DEPENDENCIES_TARGET_DIRECTORIES)
+
+# Only when multiple configuration types requested.
+if (CMAKE_CONFIGURATION_TYPES)
+    # Get already imported configurations.
+    get_target_property(@PROJECT_NAME@_IMPORTED_CONFIGURATIONS @PROJECT_NAMESPACE@@PROJECT_NAME@ IMPORTED_CONFIGURATIONS)
+
+    foreach(EXPECTED_CONFIGURATION IN LISTS CMAKE_CONFIGURATION_TYPES)
+        message(STATUS "@PROJECT_NAME@: checking ${EXPECTED_CONFIGURATION} configuration")
+        
+        string(TOUPPER "${EXPECTED_CONFIGURATION}" EXPECTED_CONFIGURATION_UPPER)
+        string(TOLOWER "${EXPECTED_CONFIGURATION}" EXPECTED_CONFIGURATION_LOWER)
+        set(@PROJECT_NAME@_CONFIGURATION_ROOT_NAME "@PROJECT_NAME@_${EXPECTED_CONFIGURATION_UPPER}_ROOT")
+
+        # We don't need to import again.
+        set(SKIP_EXPECTED_CONFIGURATION FALSE)
+        foreach(IMPORTED_CONFIGURATION IN LISTS @PROJECT_NAME@_IMPORTED_CONFIGURATIONS)
+            string(TOLOWER "${IMPORTED_CONFIGURATION}" IMPORTED_CONFIGURATION_LOWER)
+            if (EXPECTED_CONFIGURATION_LOWER STREQUAL IMPORTED_CONFIGURATION_LOWER)
+                set(SKIP_EXPECTED_CONFIGURATION TRUE)
+            endif()
+        endforeach()
+
+        if (SKIP_EXPECTED_CONFIGURATION)
+            continue()
+        endif()
+
+        # If the e.g. @PROJECT_NAME@_DEBUG_ROOT is defined in the cache - try to find the targets.
+        if (${@PROJECT_NAME@_CONFIGURATION_ROOT_NAME})
+            set(@PROJECT_NAME@_TARGET_FILE_TO_SEARCH "@TARGETS_EXPORT_NAME@-${EXPECTED_CONFIGURATION_LOWER}.cmake")
+            find_file(@PROJECT_NAME@_${EXPECTED_CONFIGURATION_UPPER}_TARGETS_FILE
+                "${@PROJECT_NAME@_TARGET_FILE_TO_SEARCH}"
+                PATHS
+                    "${${@PROJECT_NAME@_CONFIGURATION_ROOT_NAME}}/@PROJECT_NAME@/CMake"
+                    "${${@PROJECT_NAME@_CONFIGURATION_ROOT_NAME}}/@PROJECT_NAME@.framework/Resources/CMake"
+                    "${${@PROJECT_NAME@_CONFIGURATION_ROOT_NAME}}/CMake"
+                CACHE
+                NO_DEFAULT_PATH
+            )
+
+            # Maybe that configuration hasn't been built yet.
+            if(NOT @PROJECT_NAME@_${EXPECTED_CONFIGURATION_UPPER}_TARGETS_FILE)
+                message(WARNING "@PROJECT_NAME@: Skipping ${EXPECTED_CONFIGURATION}, '${@PROJECT_NAME@_TARGET_FILE_TO_SEARCH}' was not found")
+                continue()
+            endif()
+
+            # Alongside the targets file, we need to save the import prefix.
+            set(@PROJECT_NAME@_${EXPECTED_CONFIGURATION_UPPER}_TARGETS_FILE_IMPORT_PREFIX "${${@PROJECT_NAME@_CONFIGURATION_ROOT_NAME}}")
+            list(APPEND @PROJECT_NAME@_FOUND_CONFIGURATIONS_WITH_TARGETS_FILE "@PROJECT_NAME@_${EXPECTED_CONFIGURATION_UPPER}")
+
+            # Save the directory to include dependencies.
+            get_filename_component(@PROJECT_NAME@_TARGETS_FILE_DIR "${@PROJECT_NAME@_${EXPECTED_CONFIGURATION_UPPER}_TARGETS_FILE}" DIRECTORY)
+            list(APPEND @PROJECT_NAME@_DEPENDENCIES_TARGET_DIRECTORIES ${@PROJECT_NAME@_TARGETS_FILE_DIR})
+        else()
+            message(WARNING "@PROJECT_NAME@: Skipping ${EXPECTED_CONFIGURATION}, @PROJECT_NAME@_${EXPECTED_CONFIGURATION_UPPER}_ROOT is not set")
+        endif()
+    endforeach()
+endif()
+
+# Include targets from other configurations.
+
+# Include dependencies target files.
+foreach(d ${@PROJECT_NAME@_DEPENDENCIES_TARGET_DIRECTORIES})
+    file(GLOB @PROJECT_NAME@_CURRENT_DEPENDENCIES_TARGET_FILES "${d}/@DEPENDENCIES_TARGET_FILE_BASE_NAME@-*.cmake")
+    foreach(f ${@PROJECT_NAME@_CURRENT_DEPENDENCIES_TARGET_FILES})
+        message(STATUS "@PROJECT_NAME@: including dependencies: ${f}")
+        include(${f})
+    endforeach()
+endforeach()
+
+# Include the found targets files.
+foreach(f ${@PROJECT_NAME@_FOUND_CONFIGURATIONS_WITH_TARGETS_FILE})
+    message(STATUS "@PROJECT_NAME@: including targets: ${${f}_TARGETS_FILE}")
+    # Should be okay. If not - maybe the targets file there requires more preparations from here. Like setting _IMPORT_PREFIX below.
+    set(_IMPORT_PREFIX "${${f}_TARGETS_FILE_IMPORT_PREFIX}")
+    include("${${f}_TARGETS_FILE}")
+    unset(_IMPORT_PREFIX)
+endforeach()
+
+check_required_components("@PROJECT_NAME@")

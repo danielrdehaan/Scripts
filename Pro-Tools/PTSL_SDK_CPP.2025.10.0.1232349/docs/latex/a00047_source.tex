@@ -1,0 +1,55 @@
+\hypertarget{a00047_source}{}\doxysection{Cpp\+PTSLRequest.\+h}
+\label{a00047_source}\index{CppPTSLRequest.h@{CppPTSLRequest.h}}
+\mbox{\hyperlink{a00047}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{comment}{// Copyright 2024-\/2025 by Avid Technology, Inc.}}
+\DoxyCodeLine{2 \textcolor{comment}{// CONFIDENTIAL: this document contains confidential information of Avid. Do not disclose to any third party. Use of the information contained in this document is subject to an Avid SDK license.}}
+\DoxyCodeLine{3 }
+\DoxyCodeLine{11 \textcolor{preprocessor}{\#pragma once}}
+\DoxyCodeLine{12 }
+\DoxyCodeLine{13 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{a00050}{CppPTSLCommon.h}}"{}}}
+\DoxyCodeLine{14 \textcolor{preprocessor}{\#include "{}PtslCCppExport.h"{}}}
+\DoxyCodeLine{15 }
+\DoxyCodeLine{16 \textcolor{keyword}{namespace }\mbox{\hyperlink{a00491}{PTSLC\_CPP}}}
+\DoxyCodeLine{17 \{}
+\DoxyCodeLine{18     \textcolor{keyword}{class }PTSLC\_CPP\_EXPORT \mbox{\hyperlink{a01980}{CppPTSLRequest}}}
+\DoxyCodeLine{19     \{}
+\DoxyCodeLine{20     \textcolor{keyword}{public}:}
+\DoxyCodeLine{21         \mbox{\hyperlink{a01980_a52b2f4636c2590c247e03a5b303bcee6}{CppPTSLRequest}}() = \textcolor{keyword}{delete};}
+\DoxyCodeLine{22         \mbox{\hyperlink{a01980}{CppPTSLRequest}}(\mbox{\hyperlink{a00491_ae5152a79762c33c83fdb5752192e511c}{CommandId}} commandId, \textcolor{keyword}{const} std::string\& requestBodyJson = \textcolor{stringliteral}{"{}"{}});}
+\DoxyCodeLine{23 }
+\DoxyCodeLine{24         \mbox{\hyperlink{a00491_ae5152a79762c33c83fdb5752192e511c}{CommandId}} GetCommandId() \textcolor{keyword}{const};}
+\DoxyCodeLine{25         \textcolor{keywordtype}{void} SetCommandId(\textcolor{keyword}{const} \mbox{\hyperlink{a00491_ae5152a79762c33c83fdb5752192e511c}{CommandId}}\& commandId);}
+\DoxyCodeLine{26 }
+\DoxyCodeLine{27         int32\_t GetVersion() \textcolor{keyword}{const};}
+\DoxyCodeLine{28         \textcolor{keywordtype}{void} SetVersion(\textcolor{keyword}{const} int32\_t version);}
+\DoxyCodeLine{29 }
+\DoxyCodeLine{30         int32\_t GetVersionMinor() \textcolor{keyword}{const};}
+\DoxyCodeLine{31         \textcolor{keywordtype}{void} SetVersionMinor(\textcolor{keyword}{const} int32\_t versionMinor);}
+\DoxyCodeLine{32 }
+\DoxyCodeLine{33         int32\_t GetVersionRevision() \textcolor{keyword}{const};}
+\DoxyCodeLine{34         \textcolor{keywordtype}{void} SetVersionRevision(\textcolor{keyword}{const} int32\_t versionRevision);}
+\DoxyCodeLine{35 }
+\DoxyCodeLine{36         std::string GetSessionId() \textcolor{keyword}{const};}
+\DoxyCodeLine{37         \textcolor{keywordtype}{void} SetSessionId(\textcolor{keyword}{const} std::string\& sessionId);}
+\DoxyCodeLine{38 }
+\DoxyCodeLine{39         std::string GetVersionedRequestHeaderJson() \textcolor{keyword}{const};}
+\DoxyCodeLine{40         \textcolor{keywordtype}{void} SetVersionedRequestHeaderJson(\textcolor{keyword}{const} std::string\& versionedRequestHeaderJson);}
+\DoxyCodeLine{41 }
+\DoxyCodeLine{42         std::string GetRequestBodyJson() \textcolor{keyword}{const};}
+\DoxyCodeLine{43         \textcolor{keywordtype}{void} SetRequestBodyJson(\textcolor{keyword}{const} std::string\& requestBodyJson);}
+\DoxyCodeLine{44     \textcolor{keyword}{private}:}
+\DoxyCodeLine{45         \textcolor{comment}{// data of request header}}
+\DoxyCodeLine{46         \mbox{\hyperlink{a00491_ae5152a79762c33c83fdb5752192e511c}{CommandId}} mCommandId = \mbox{\hyperlink{a00491_ae5152a79762c33c83fdb5752192e511ca4ef09114e92ba09563b8842a38837f6b}{CommandId::CId\_None}};}
+\DoxyCodeLine{47         int32\_t mVersion = 0;}
+\DoxyCodeLine{48         int32\_t mVersionMinor = 0;}
+\DoxyCodeLine{49         int32\_t mVersionRevision = 0;}
+\DoxyCodeLine{50         std::string mSessionId = \textcolor{stringliteral}{"{}"{}};}
+\DoxyCodeLine{51         std::string mVersionedRequestHeaderJson = \textcolor{stringliteral}{"{}"{}};}
+\DoxyCodeLine{52 }
+\DoxyCodeLine{53         \textcolor{comment}{// data of request body}}
+\DoxyCodeLine{54         std::string mRequestBodyJson = \textcolor{stringliteral}{"{}"{}};}
+\DoxyCodeLine{55     \};}
+\DoxyCodeLine{56 \} \textcolor{comment}{// namespace PTSLC\_CPP}}
+
+\end{DoxyCode}

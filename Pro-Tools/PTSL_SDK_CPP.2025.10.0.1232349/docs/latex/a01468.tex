@@ -1,0 +1,108 @@
+\hypertarget{a01468}{}\doxysection{Export\+Clips\+As\+Files\+Request}
+\label{a01468}\index{ExportClipsAsFilesRequest@{ExportClipsAsFilesRequest}}
+
+
+{\ttfamily \#include $<$Cpp\+PTSLCommon.\+h$>$}
+
+
+
+\doxysubsection{Description}
+Structure that describes Export\+Clips\+As\+Files request data. 
+
+\begin{DoxyRefDesc}{Deprecated}
+\item[\mbox{\hyperlink{a00467__deprecated000176}{Deprecated}}]All API-\/specific types in the C++ client lib are deprecated starting in Pro Tools 2024.\+10 since we introduced general JSON-\/based request/response. \end{DoxyRefDesc}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::string \mbox{\hyperlink{a01468_aa770d80493fae04dd6a59446cceb8e75}{file\+Path}}
+\item 
+\mbox{\hyperlink{a00491_a64fa065d553d3ab2f1d734ab8b12858b}{Export\+Format}} \mbox{\hyperlink{a01468_a70b72468054e7b08e6b51ba8adf3d70a}{format}}
+\item 
+\mbox{\hyperlink{a00491_aeb1f43bea31f7f2687eb5a50e1be6629}{Export\+File\+Type}} \mbox{\hyperlink{a01468_a2f66a2872a889e6912d4be865283a030}{file\+Type}}
+\item 
+\mbox{\hyperlink{a00491_ab3060258f412a1504264931383b6e58d}{Bit\+Depth}} \mbox{\hyperlink{a01468_a1fadcc557c1be269d159955118365635}{bit\+Depth}}
+\item 
+\mbox{\hyperlink{a00491_a909adda5ed5d7b0efb5b8b61254897f0}{Resolve\+Duplicate\+Names\+By}} \mbox{\hyperlink{a01468_a070317baee5cd7e79e915abe0aa96777}{duplicate\+Names}}
+\item 
+bool \mbox{\hyperlink{a01468_a856201f5065a1efa591577212a4bd050}{enforce\+Avid\+Compatibility}}
+\item 
+int32\+\_\+t \mbox{\hyperlink{a01468_ad31fdd2630aa0796ba38b7a8dfb1553f}{sample\+Rate\+Custom}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{a01468_aa770d80493fae04dd6a59446cceb8e75}\label{a01468_aa770d80493fae04dd6a59446cceb8e75}} 
+\index{ExportClipsAsFilesRequest@{ExportClipsAsFilesRequest}!filePath@{filePath}}
+\index{filePath@{filePath}!ExportClipsAsFilesRequest@{ExportClipsAsFilesRequest}}
+\doxysubsubsection{\texorpdfstring{filePath}{filePath}}
+{\footnotesize\ttfamily std\+::string file\+Path}
+
+
+
+Referenced by \mbox{\hyperlink{a01328_a6366ca4697d2141e7eed0f1f13d8fc0b}{Cpp\+PTSLClient\+::\+Export\+Clips\+As\+Files()}}.
+
+\mbox{\Hypertarget{a01468_a70b72468054e7b08e6b51ba8adf3d70a}\label{a01468_a70b72468054e7b08e6b51ba8adf3d70a}} 
+\index{ExportClipsAsFilesRequest@{ExportClipsAsFilesRequest}!format@{format}}
+\index{format@{format}!ExportClipsAsFilesRequest@{ExportClipsAsFilesRequest}}
+\doxysubsubsection{\texorpdfstring{format}{format}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a00491_a64fa065d553d3ab2f1d734ab8b12858b}{Export\+Format}} format}
+
+
+
+Referenced by \mbox{\hyperlink{a01328_a6366ca4697d2141e7eed0f1f13d8fc0b}{Cpp\+PTSLClient\+::\+Export\+Clips\+As\+Files()}}.
+
+\mbox{\Hypertarget{a01468_a2f66a2872a889e6912d4be865283a030}\label{a01468_a2f66a2872a889e6912d4be865283a030}} 
+\index{ExportClipsAsFilesRequest@{ExportClipsAsFilesRequest}!fileType@{fileType}}
+\index{fileType@{fileType}!ExportClipsAsFilesRequest@{ExportClipsAsFilesRequest}}
+\doxysubsubsection{\texorpdfstring{fileType}{fileType}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a00491_aeb1f43bea31f7f2687eb5a50e1be6629}{Export\+File\+Type}} file\+Type}
+
+
+
+Referenced by \mbox{\hyperlink{a01328_a6366ca4697d2141e7eed0f1f13d8fc0b}{Cpp\+PTSLClient\+::\+Export\+Clips\+As\+Files()}}.
+
+\mbox{\Hypertarget{a01468_a1fadcc557c1be269d159955118365635}\label{a01468_a1fadcc557c1be269d159955118365635}} 
+\index{ExportClipsAsFilesRequest@{ExportClipsAsFilesRequest}!bitDepth@{bitDepth}}
+\index{bitDepth@{bitDepth}!ExportClipsAsFilesRequest@{ExportClipsAsFilesRequest}}
+\doxysubsubsection{\texorpdfstring{bitDepth}{bitDepth}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a00491_ab3060258f412a1504264931383b6e58d}{Bit\+Depth}} bit\+Depth}
+
+
+
+Referenced by \mbox{\hyperlink{a01328_a6366ca4697d2141e7eed0f1f13d8fc0b}{Cpp\+PTSLClient\+::\+Export\+Clips\+As\+Files()}}.
+
+\mbox{\Hypertarget{a01468_a070317baee5cd7e79e915abe0aa96777}\label{a01468_a070317baee5cd7e79e915abe0aa96777}} 
+\index{ExportClipsAsFilesRequest@{ExportClipsAsFilesRequest}!duplicateNames@{duplicateNames}}
+\index{duplicateNames@{duplicateNames}!ExportClipsAsFilesRequest@{ExportClipsAsFilesRequest}}
+\doxysubsubsection{\texorpdfstring{duplicateNames}{duplicateNames}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a00491_a909adda5ed5d7b0efb5b8b61254897f0}{Resolve\+Duplicate\+Names\+By}} duplicate\+Names}
+
+
+
+Referenced by \mbox{\hyperlink{a01328_a6366ca4697d2141e7eed0f1f13d8fc0b}{Cpp\+PTSLClient\+::\+Export\+Clips\+As\+Files()}}.
+
+\mbox{\Hypertarget{a01468_a856201f5065a1efa591577212a4bd050}\label{a01468_a856201f5065a1efa591577212a4bd050}} 
+\index{ExportClipsAsFilesRequest@{ExportClipsAsFilesRequest}!enforceAvidCompatibility@{enforceAvidCompatibility}}
+\index{enforceAvidCompatibility@{enforceAvidCompatibility}!ExportClipsAsFilesRequest@{ExportClipsAsFilesRequest}}
+\doxysubsubsection{\texorpdfstring{enforceAvidCompatibility}{enforceAvidCompatibility}}
+{\footnotesize\ttfamily bool enforce\+Avid\+Compatibility}
+
+
+
+Referenced by \mbox{\hyperlink{a01328_a6366ca4697d2141e7eed0f1f13d8fc0b}{Cpp\+PTSLClient\+::\+Export\+Clips\+As\+Files()}}.
+
+\mbox{\Hypertarget{a01468_ad31fdd2630aa0796ba38b7a8dfb1553f}\label{a01468_ad31fdd2630aa0796ba38b7a8dfb1553f}} 
+\index{ExportClipsAsFilesRequest@{ExportClipsAsFilesRequest}!sampleRateCustom@{sampleRateCustom}}
+\index{sampleRateCustom@{sampleRateCustom}!ExportClipsAsFilesRequest@{ExportClipsAsFilesRequest}}
+\doxysubsubsection{\texorpdfstring{sampleRateCustom}{sampleRateCustom}}
+{\footnotesize\ttfamily int32\+\_\+t sample\+Rate\+Custom}
+
+
+
+Referenced by \mbox{\hyperlink{a01328_a6366ca4697d2141e7eed0f1f13d8fc0b}{Cpp\+PTSLClient\+::\+Export\+Clips\+As\+Files()}}.
+
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{a00050}{Cpp\+PTSLCommon.\+h}}\end{DoxyCompactItemize}

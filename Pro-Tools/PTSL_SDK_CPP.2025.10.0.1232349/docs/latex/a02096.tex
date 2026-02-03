@@ -1,0 +1,132 @@
+\hypertarget{a02096}{}\doxysection{Create\+Session\+Request\+Body}
+\label{a02096}\index{CreateSessionRequestBody@{CreateSessionRequestBody}}
+
+
+\doxysubsection{Description}
+Structure that describes Create\+Session request data. \doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+string \mbox{\hyperlink{a02096_a1ed16bb3a55cd6442e01d14a4779e37f}{session\+\_\+name}} = 1
+\item 
+bool \mbox{\hyperlink{a02096_a4c56d8a91eb95914770e2d9a3ac333cd}{create\+\_\+from\+\_\+template}} = 2
+\item 
+string \mbox{\hyperlink{a02096_adb7962515a708d1fc5a2536d3b138fc4}{template\+\_\+group}} = 3
+\item 
+string \mbox{\hyperlink{a02096_a99f314c6ca228bb68505f4208a23adf2}{template\+\_\+name}} = 4
+\item 
+\mbox{\hyperlink{a00494_a2c794c5c13ab4dd7e65bad031dbe41c3}{File\+Type}} \mbox{\hyperlink{a02096_a7ea487a26790d4213c9bc8a27394f3b0}{file\+\_\+type}} = 5
+\begin{DoxyCompactList}\small\item\em Acceptable values (WAVE$\vert$\+AIFF$\vert$\+AAF$\vert$\+OMF). \end{DoxyCompactList}\item 
+\mbox{\hyperlink{a00494_af2a9590cc0fd8bf11342cc6c0cc15f1a}{Sample\+Rate}} \mbox{\hyperlink{a02096_a174ee7ba38e1bdb69e85e762d4f09341}{sample\+\_\+rate}} = 6
+\begin{DoxyCompactList}\small\item\em Acceptable values (44100$\vert$48000$\vert$88200$\vert$96000$\vert$176400$\vert$192000). \end{DoxyCompactList}\item 
+\mbox{\hyperlink{a00494_a4feff08c79df80f2a77f47961be2d298}{IOSettings}} \mbox{\hyperlink{a02096_a3ef95a02b6ea0380001cde8c2e45e3ec}{input\+\_\+output\+\_\+settings}} = 7
+\item 
+bool \mbox{\hyperlink{a02096_acef040393108cd7c50411a03c0fdf651}{is\+\_\+interleaved}} = 8
+\item 
+string \mbox{\hyperlink{a02096_af4ee54f0608b314a9cc683b87fb2580e}{session\+\_\+location}} = 9
+\item 
+bool \mbox{\hyperlink{a02096_a2a0fa318cfca23b21337a6b0af5fa88d}{is\+\_\+cloud\+\_\+project}} = 10
+\item 
+bool \mbox{\hyperlink{a02096_ae0dea10df7aa4cb6175a3bb79273956f}{create\+\_\+from\+\_\+aaf}} = 11
+\item 
+string \mbox{\hyperlink{a02096_a58215b20af7c6d7c841843c3d3ded6d5}{path\+\_\+to\+\_\+aaf}} = 12
+\item 
+\mbox{\hyperlink{a00494_a1c8b18f3d81c2eb76de467806f5962ef}{Bit\+Depth}} \mbox{\hyperlink{a02096_a5dee8fe382ed235691acd9246f704222}{bit\+\_\+depth}} = 13
+\begin{DoxyCompactList}\small\item\em Acceptable values (16$\vert$24$\vert$32). \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{a02096_a1ed16bb3a55cd6442e01d14a4779e37f}\label{a02096_a1ed16bb3a55cd6442e01d14a4779e37f}} 
+\index{CreateSessionRequestBody@{CreateSessionRequestBody}!session\_name@{session\_name}}
+\index{session\_name@{session\_name}!CreateSessionRequestBody@{CreateSessionRequestBody}}
+\doxysubsubsection{\texorpdfstring{session\_name}{session\_name}}
+{\footnotesize\ttfamily string session\+\_\+name = 1}
+
+\mbox{\Hypertarget{a02096_a4c56d8a91eb95914770e2d9a3ac333cd}\label{a02096_a4c56d8a91eb95914770e2d9a3ac333cd}} 
+\index{CreateSessionRequestBody@{CreateSessionRequestBody}!create\_from\_template@{create\_from\_template}}
+\index{create\_from\_template@{create\_from\_template}!CreateSessionRequestBody@{CreateSessionRequestBody}}
+\doxysubsubsection{\texorpdfstring{create\_from\_template}{create\_from\_template}}
+{\footnotesize\ttfamily bool create\+\_\+from\+\_\+template = 2}
+
+\mbox{\Hypertarget{a02096_adb7962515a708d1fc5a2536d3b138fc4}\label{a02096_adb7962515a708d1fc5a2536d3b138fc4}} 
+\index{CreateSessionRequestBody@{CreateSessionRequestBody}!template\_group@{template\_group}}
+\index{template\_group@{template\_group}!CreateSessionRequestBody@{CreateSessionRequestBody}}
+\doxysubsubsection{\texorpdfstring{template\_group}{template\_group}}
+{\footnotesize\ttfamily string template\+\_\+group = 3}
+
+\mbox{\Hypertarget{a02096_a99f314c6ca228bb68505f4208a23adf2}\label{a02096_a99f314c6ca228bb68505f4208a23adf2}} 
+\index{CreateSessionRequestBody@{CreateSessionRequestBody}!template\_name@{template\_name}}
+\index{template\_name@{template\_name}!CreateSessionRequestBody@{CreateSessionRequestBody}}
+\doxysubsubsection{\texorpdfstring{template\_name}{template\_name}}
+{\footnotesize\ttfamily string template\+\_\+name = 4}
+
+\mbox{\Hypertarget{a02096_a7ea487a26790d4213c9bc8a27394f3b0}\label{a02096_a7ea487a26790d4213c9bc8a27394f3b0}} 
+\index{CreateSessionRequestBody@{CreateSessionRequestBody}!file\_type@{file\_type}}
+\index{file\_type@{file\_type}!CreateSessionRequestBody@{CreateSessionRequestBody}}
+\doxysubsubsection{\texorpdfstring{file\_type}{file\_type}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a00494_a2c794c5c13ab4dd7e65bad031dbe41c3}{File\+Type}} file\+\_\+type = 5}
+
+
+
+Acceptable values (WAVE$\vert$\+AIFF$\vert$\+AAF$\vert$\+OMF). 
+
+\mbox{\Hypertarget{a02096_a174ee7ba38e1bdb69e85e762d4f09341}\label{a02096_a174ee7ba38e1bdb69e85e762d4f09341}} 
+\index{CreateSessionRequestBody@{CreateSessionRequestBody}!sample\_rate@{sample\_rate}}
+\index{sample\_rate@{sample\_rate}!CreateSessionRequestBody@{CreateSessionRequestBody}}
+\doxysubsubsection{\texorpdfstring{sample\_rate}{sample\_rate}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a00494_af2a9590cc0fd8bf11342cc6c0cc15f1a}{Sample\+Rate}} sample\+\_\+rate = 6}
+
+
+
+Acceptable values (44100$\vert$48000$\vert$88200$\vert$96000$\vert$176400$\vert$192000). 
+
+\mbox{\Hypertarget{a02096_a3ef95a02b6ea0380001cde8c2e45e3ec}\label{a02096_a3ef95a02b6ea0380001cde8c2e45e3ec}} 
+\index{CreateSessionRequestBody@{CreateSessionRequestBody}!input\_output\_settings@{input\_output\_settings}}
+\index{input\_output\_settings@{input\_output\_settings}!CreateSessionRequestBody@{CreateSessionRequestBody}}
+\doxysubsubsection{\texorpdfstring{input\_output\_settings}{input\_output\_settings}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a00494_a4feff08c79df80f2a77f47961be2d298}{IOSettings}} input\+\_\+output\+\_\+settings = 7}
+
+\mbox{\Hypertarget{a02096_acef040393108cd7c50411a03c0fdf651}\label{a02096_acef040393108cd7c50411a03c0fdf651}} 
+\index{CreateSessionRequestBody@{CreateSessionRequestBody}!is\_interleaved@{is\_interleaved}}
+\index{is\_interleaved@{is\_interleaved}!CreateSessionRequestBody@{CreateSessionRequestBody}}
+\doxysubsubsection{\texorpdfstring{is\_interleaved}{is\_interleaved}}
+{\footnotesize\ttfamily bool is\+\_\+interleaved = 8}
+
+\mbox{\Hypertarget{a02096_af4ee54f0608b314a9cc683b87fb2580e}\label{a02096_af4ee54f0608b314a9cc683b87fb2580e}} 
+\index{CreateSessionRequestBody@{CreateSessionRequestBody}!session\_location@{session\_location}}
+\index{session\_location@{session\_location}!CreateSessionRequestBody@{CreateSessionRequestBody}}
+\doxysubsubsection{\texorpdfstring{session\_location}{session\_location}}
+{\footnotesize\ttfamily string session\+\_\+location = 9}
+
+\mbox{\Hypertarget{a02096_a2a0fa318cfca23b21337a6b0af5fa88d}\label{a02096_a2a0fa318cfca23b21337a6b0af5fa88d}} 
+\index{CreateSessionRequestBody@{CreateSessionRequestBody}!is\_cloud\_project@{is\_cloud\_project}}
+\index{is\_cloud\_project@{is\_cloud\_project}!CreateSessionRequestBody@{CreateSessionRequestBody}}
+\doxysubsubsection{\texorpdfstring{is\_cloud\_project}{is\_cloud\_project}}
+{\footnotesize\ttfamily bool is\+\_\+cloud\+\_\+project = 10}
+
+\mbox{\Hypertarget{a02096_ae0dea10df7aa4cb6175a3bb79273956f}\label{a02096_ae0dea10df7aa4cb6175a3bb79273956f}} 
+\index{CreateSessionRequestBody@{CreateSessionRequestBody}!create\_from\_aaf@{create\_from\_aaf}}
+\index{create\_from\_aaf@{create\_from\_aaf}!CreateSessionRequestBody@{CreateSessionRequestBody}}
+\doxysubsubsection{\texorpdfstring{create\_from\_aaf}{create\_from\_aaf}}
+{\footnotesize\ttfamily bool create\+\_\+from\+\_\+aaf = 11}
+
+\mbox{\Hypertarget{a02096_a58215b20af7c6d7c841843c3d3ded6d5}\label{a02096_a58215b20af7c6d7c841843c3d3ded6d5}} 
+\index{CreateSessionRequestBody@{CreateSessionRequestBody}!path\_to\_aaf@{path\_to\_aaf}}
+\index{path\_to\_aaf@{path\_to\_aaf}!CreateSessionRequestBody@{CreateSessionRequestBody}}
+\doxysubsubsection{\texorpdfstring{path\_to\_aaf}{path\_to\_aaf}}
+{\footnotesize\ttfamily string path\+\_\+to\+\_\+aaf = 12}
+
+\mbox{\Hypertarget{a02096_a5dee8fe382ed235691acd9246f704222}\label{a02096_a5dee8fe382ed235691acd9246f704222}} 
+\index{CreateSessionRequestBody@{CreateSessionRequestBody}!bit\_depth@{bit\_depth}}
+\index{bit\_depth@{bit\_depth}!CreateSessionRequestBody@{CreateSessionRequestBody}}
+\doxysubsubsection{\texorpdfstring{bit\_depth}{bit\_depth}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a00494_a1c8b18f3d81c2eb76de467806f5962ef}{Bit\+Depth}} bit\+\_\+depth = 13}
+
+
+
+Acceptable values (16$\vert$24$\vert$32). 
+
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{a00464}{PTSL.\+proto}}\end{DoxyCompactItemize}

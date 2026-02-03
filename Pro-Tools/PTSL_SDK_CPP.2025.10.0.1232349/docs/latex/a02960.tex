@@ -1,0 +1,54 @@
+\hypertarget{a02960}{}\doxysection{Get\+Track\+Control\+Info\+Request\+Body}
+\label{a02960}\index{GetTrackControlInfoRequestBody@{GetTrackControlInfoRequestBody}}
+
+
+\doxysubsection{Description}
+Structure that describes Get\+Track\+Control\+Info request data. 
+
+See \mbox{\hyperlink{a00494_aaf8d2069e2c6bbecf4aa8f9819028e8aa02fb9c48c42d2995ae880343393b60e4}{CId\+\_\+\+Get\+Track\+Control\+Info}}. \doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+repeated string \mbox{\hyperlink{a02960_a8cbcf6a38855c67a0062761b460aec46}{track\+\_\+ids}} = 1
+\begin{DoxyCompactList}\small\item\em Provide the ID string of the track(s) the controls of interest are attached to. \end{DoxyCompactList}\item 
+repeated string \mbox{\hyperlink{a02960_a8b3874c231b6e693bb654078d7f05e69}{track\+\_\+names}} = 2
+\begin{DoxyCompactList}\small\item\em Provide the name of the track that the control is attached to. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{a02948}{Track\+Control\+Id}} \mbox{\hyperlink{a02960_ab1150cf390a97472df7938a55c06cc6f}{control\+\_\+id}} = 3
+\begin{DoxyCompactList}\small\item\em Locate the control of interest on the track. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{a02960_a8cbcf6a38855c67a0062761b460aec46}\label{a02960_a8cbcf6a38855c67a0062761b460aec46}} 
+\index{GetTrackControlInfoRequestBody@{GetTrackControlInfoRequestBody}!track\_ids@{track\_ids}}
+\index{track\_ids@{track\_ids}!GetTrackControlInfoRequestBody@{GetTrackControlInfoRequestBody}}
+\doxysubsubsection{\texorpdfstring{track\_ids}{track\_ids}}
+{\footnotesize\ttfamily repeated string track\+\_\+ids = 1}
+
+
+
+Provide the ID string of the track(s) the controls of interest are attached to. 
+
+\mbox{\Hypertarget{a02960_a8b3874c231b6e693bb654078d7f05e69}\label{a02960_a8b3874c231b6e693bb654078d7f05e69}} 
+\index{GetTrackControlInfoRequestBody@{GetTrackControlInfoRequestBody}!track\_names@{track\_names}}
+\index{track\_names@{track\_names}!GetTrackControlInfoRequestBody@{GetTrackControlInfoRequestBody}}
+\doxysubsubsection{\texorpdfstring{track\_names}{track\_names}}
+{\footnotesize\ttfamily repeated string track\+\_\+names = 2}
+
+
+
+Provide the name of the track that the control is attached to. 
+
+Either this or track\+\_\+id is required. \mbox{\Hypertarget{a02960_ab1150cf390a97472df7938a55c06cc6f}\label{a02960_ab1150cf390a97472df7938a55c06cc6f}} 
+\index{GetTrackControlInfoRequestBody@{GetTrackControlInfoRequestBody}!control\_id@{control\_id}}
+\index{control\_id@{control\_id}!GetTrackControlInfoRequestBody@{GetTrackControlInfoRequestBody}}
+\doxysubsubsection{\texorpdfstring{control\_id}{control\_id}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a02948}{Track\+Control\+Id}} control\+\_\+id = 3}
+
+
+
+Locate the control of interest on the track. 
+
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{a00464}{PTSL.\+proto}}\end{DoxyCompactItemize}

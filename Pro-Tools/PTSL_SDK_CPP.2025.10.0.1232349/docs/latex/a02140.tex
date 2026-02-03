@@ -1,0 +1,61 @@
+\hypertarget{a02140}{}\doxysection{Get\+Track\+List\+Request\+Body}
+\label{a02140}\index{GetTrackListRequestBody@{GetTrackListRequestBody}}
+
+
+\doxysubsection{Description}
+Structure that describes Get\+Track\+List request data. \doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+int32 \mbox{\hyperlink{a02140_a5fd5f2662579f44d6aea0ddd8ce6082d}{page\+\_\+limit}} = 1
+\item 
+repeated \mbox{\hyperlink{a02136}{Track\+List\+Invertible\+Filter}} \mbox{\hyperlink{a02140_a106eda63b5224cf2d1f1905ddb69f1b7}{track\+\_\+filter\+\_\+list}} = 2
+\item 
+bool \mbox{\hyperlink{a02140_a55fb01f868d67572181e23d51a9e97da}{is\+\_\+filter\+\_\+list\+\_\+additive}} = 3
+\begin{DoxyCompactList}\small\item\em TRUE for OR, FALSE for AND. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{a02068}{Pagination\+Request}} \mbox{\hyperlink{a02140_a4e3c2dae8310ae3f4086bebe2d455e9a}{pagination\+\_\+request}} = 4
+\begin{DoxyCompactList}\small\item\em Enable pagination and control limit and offset. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{a02140_a5fd5f2662579f44d6aea0ddd8ce6082d}\label{a02140_a5fd5f2662579f44d6aea0ddd8ce6082d}} 
+\index{GetTrackListRequestBody@{GetTrackListRequestBody}!page\_limit@{page\_limit}}
+\index{page\_limit@{page\_limit}!GetTrackListRequestBody@{GetTrackListRequestBody}}
+\doxysubsubsection{\texorpdfstring{page\_limit}{page\_limit}}
+{\footnotesize\ttfamily int32 page\+\_\+limit = 1}
+
+\begin{DoxyRefDesc}{Deprecated}
+\item[\mbox{\hyperlink{a00467__deprecated001019}{Deprecated}}]since Pro Tools 2023.\+09, use pagination\+\_\+request \end{DoxyRefDesc}
+\mbox{\Hypertarget{a02140_a106eda63b5224cf2d1f1905ddb69f1b7}\label{a02140_a106eda63b5224cf2d1f1905ddb69f1b7}} 
+\index{GetTrackListRequestBody@{GetTrackListRequestBody}!track\_filter\_list@{track\_filter\_list}}
+\index{track\_filter\_list@{track\_filter\_list}!GetTrackListRequestBody@{GetTrackListRequestBody}}
+\doxysubsubsection{\texorpdfstring{track\_filter\_list}{track\_filter\_list}}
+{\footnotesize\ttfamily repeated \mbox{\hyperlink{a02136}{Track\+List\+Invertible\+Filter}} track\+\_\+filter\+\_\+list = 2}
+
+\mbox{\Hypertarget{a02140_a55fb01f868d67572181e23d51a9e97da}\label{a02140_a55fb01f868d67572181e23d51a9e97da}} 
+\index{GetTrackListRequestBody@{GetTrackListRequestBody}!is\_filter\_list\_additive@{is\_filter\_list\_additive}}
+\index{is\_filter\_list\_additive@{is\_filter\_list\_additive}!GetTrackListRequestBody@{GetTrackListRequestBody}}
+\doxysubsubsection{\texorpdfstring{is\_filter\_list\_additive}{is\_filter\_list\_additive}}
+{\footnotesize\ttfamily bool is\+\_\+filter\+\_\+list\+\_\+additive = 3}
+
+
+
+TRUE for OR, FALSE for AND. 
+
+\mbox{\Hypertarget{a02140_a4e3c2dae8310ae3f4086bebe2d455e9a}\label{a02140_a4e3c2dae8310ae3f4086bebe2d455e9a}} 
+\index{GetTrackListRequestBody@{GetTrackListRequestBody}!pagination\_request@{pagination\_request}}
+\index{pagination\_request@{pagination\_request}!GetTrackListRequestBody@{GetTrackListRequestBody}}
+\doxysubsubsection{\texorpdfstring{pagination\_request}{pagination\_request}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a02068}{Pagination\+Request}} pagination\+\_\+request = 4}
+
+
+
+Enable pagination and control limit and offset. 
+
+\begin{DoxySince}{Since}
+Pro Tools 2023.\+09 
+\end{DoxySince}
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{a00464}{PTSL.\+proto}}\end{DoxyCompactItemize}

@@ -1,0 +1,81 @@
+\hypertarget{a02788}{}\doxysection{Create\+Audio\+Clip\+Request\+Entry}
+\label{a02788}\index{CreateAudioClipRequestEntry@{CreateAudioClipRequestEntry}}
+
+
+\doxysubsection{Description}
+Structure that describes Create\+Audio\+Clip single multi-\/channel clip request data. 
+
+\begin{DoxySince}{Since}
+Pro Tools 2025.\+06 
+\end{DoxySince}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+string \mbox{\hyperlink{a02788_a8ccf841cb59e451791bcb2e1ac4f1edc}{name}} = 1
+\begin{DoxyCompactList}\small\item\em Base name of the multichannel clip (excluding channel name). \end{DoxyCompactList}\item 
+\mbox{\hyperlink{a00494_a999565e0d7e844183026916ee443c836}{Stem\+Format}} \mbox{\hyperlink{a02788_ad86225f071ce9141dc49ba38ccc01791}{channel\+\_\+format}} = 2
+\begin{DoxyCompactList}\small\item\em Channel format of the clip. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{a02680}{Timeline\+Location}} \mbox{\hyperlink{a02788_a59e209a499ad641286e75a455246b905}{original\+\_\+timestamp}} = 3
+\begin{DoxyCompactList}\small\item\em Original timestamp for the start of subclips. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{a02680}{Timeline\+Location}} \mbox{\hyperlink{a02788_a5fc7a77c74e9fe7a219f7a384502e4ad}{user\+\_\+timestamp}} = 4
+\begin{DoxyCompactList}\small\item\em User timestamp for the start of subclips. \end{DoxyCompactList}\item 
+repeated \mbox{\hyperlink{a02796}{Create\+Audio\+Clip\+Request\+Entry\+Clip\+Info}} \mbox{\hyperlink{a02788_a82289d0326d4ad7a3fbf4ae82a2626b0}{clip\+\_\+info}} = 5
+\begin{DoxyCompactList}\small\item\em List of subclips to create. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{a02788_a8ccf841cb59e451791bcb2e1ac4f1edc}\label{a02788_a8ccf841cb59e451791bcb2e1ac4f1edc}} 
+\index{CreateAudioClipRequestEntry@{CreateAudioClipRequestEntry}!name@{name}}
+\index{name@{name}!CreateAudioClipRequestEntry@{CreateAudioClipRequestEntry}}
+\doxysubsubsection{\texorpdfstring{name}{name}}
+{\footnotesize\ttfamily string name = 1}
+
+
+
+Base name of the multichannel clip (excluding channel name). 
+
+Optional. If not provided, file name of the first subclip (clip\+\_\+info) is used. \mbox{\Hypertarget{a02788_ad86225f071ce9141dc49ba38ccc01791}\label{a02788_ad86225f071ce9141dc49ba38ccc01791}} 
+\index{CreateAudioClipRequestEntry@{CreateAudioClipRequestEntry}!channel\_format@{channel\_format}}
+\index{channel\_format@{channel\_format}!CreateAudioClipRequestEntry@{CreateAudioClipRequestEntry}}
+\doxysubsubsection{\texorpdfstring{channel\_format}{channel\_format}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a00494_a999565e0d7e844183026916ee443c836}{Stem\+Format}} channel\+\_\+format = 2}
+
+
+
+Channel format of the clip. 
+
+Optional. If not provided, generic .A1, .A2, etc. channel names are used for subclips; no channel name for a single subclip in the clip\+\_\+info. \mbox{\Hypertarget{a02788_a59e209a499ad641286e75a455246b905}\label{a02788_a59e209a499ad641286e75a455246b905}} 
+\index{CreateAudioClipRequestEntry@{CreateAudioClipRequestEntry}!original\_timestamp@{original\_timestamp}}
+\index{original\_timestamp@{original\_timestamp}!CreateAudioClipRequestEntry@{CreateAudioClipRequestEntry}}
+\doxysubsubsection{\texorpdfstring{original\_timestamp}{original\_timestamp}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a02680}{Timeline\+Location}} original\+\_\+timestamp = 3}
+
+
+
+Original timestamp for the start of subclips. 
+
+Optional. If not provided, the timestamp will follow the original timestamp from the file, and be offset by the src\+\_\+start\+\_\+point amount from the start of the file (applied for all subclips independently). \mbox{\Hypertarget{a02788_a5fc7a77c74e9fe7a219f7a384502e4ad}\label{a02788_a5fc7a77c74e9fe7a219f7a384502e4ad}} 
+\index{CreateAudioClipRequestEntry@{CreateAudioClipRequestEntry}!user\_timestamp@{user\_timestamp}}
+\index{user\_timestamp@{user\_timestamp}!CreateAudioClipRequestEntry@{CreateAudioClipRequestEntry}}
+\doxysubsubsection{\texorpdfstring{user\_timestamp}{user\_timestamp}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a02680}{Timeline\+Location}} user\+\_\+timestamp = 4}
+
+
+
+User timestamp for the start of subclips. 
+
+Optional. If not provided, the timestamp will follow the user timestamp from the file, and be offset by the src\+\_\+start\+\_\+point amount from the start of the file (applied for all subclips independently). \mbox{\Hypertarget{a02788_a82289d0326d4ad7a3fbf4ae82a2626b0}\label{a02788_a82289d0326d4ad7a3fbf4ae82a2626b0}} 
+\index{CreateAudioClipRequestEntry@{CreateAudioClipRequestEntry}!clip\_info@{clip\_info}}
+\index{clip\_info@{clip\_info}!CreateAudioClipRequestEntry@{CreateAudioClipRequestEntry}}
+\doxysubsubsection{\texorpdfstring{clip\_info}{clip\_info}}
+{\footnotesize\ttfamily repeated \mbox{\hyperlink{a02796}{Create\+Audio\+Clip\+Request\+Entry\+Clip\+Info}} clip\+\_\+info = 5}
+
+
+
+List of subclips to create. 
+
+One subclip per channel. 
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{a00464}{PTSL.\+proto}}\end{DoxyCompactItemize}

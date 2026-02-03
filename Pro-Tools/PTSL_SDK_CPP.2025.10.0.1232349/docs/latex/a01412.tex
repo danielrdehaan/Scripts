@@ -1,0 +1,254 @@
+\hypertarget{a01412}{}\doxysection{Import\+Request}
+\label{a01412}\index{ImportRequest@{ImportRequest}}
+
+
+{\ttfamily \#include $<$Cpp\+PTSLCommon.\+h$>$}
+
+
+
+\doxysubsection{Description}
+Structure that describes Import request data. 
+
+\begin{DoxyRefDesc}{Deprecated}
+\item[\mbox{\hyperlink{a00467__deprecated000157}{Deprecated}}]All API-\/specific types in the C++ client lib are deprecated starting in Pro Tools 2024.\+10 since we introduced general JSON-\/based request/response. \end{DoxyRefDesc}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::string \mbox{\hyperlink{a01412_ab29492508771c451705e79c21a4d7c3b}{session\+Path}}
+\item 
+\mbox{\hyperlink{a00491_ad6786e58853168b405fc210dda69270d}{Import\+Type}} \mbox{\hyperlink{a01412_a8d3d3b32540b7f86bb47e8b5e888b61f}{import\+Type}}
+\item 
+\mbox{\hyperlink{a00491_afbdab642f6e26e896650b7e91b51664b}{Audio\+Media\+Options}} \mbox{\hyperlink{a01412_ae4cd5641f46e01af41cac52d911eba5a}{audio\+Options}}
+\item 
+int32\+\_\+t \mbox{\hyperlink{a01412_a001412457ddb20d7da28395d119aa0c8}{audio\+Handle\+Size}}
+\item 
+\mbox{\hyperlink{a00491_a54e66a87af2b587408ac25ef220f791c}{Video\+Media\+Options}} \mbox{\hyperlink{a01412_a367dc7cbc5a86b94cbd11de6b041b610}{video\+Options}}
+\item 
+\mbox{\hyperlink{a00491_a26a879f1a436d25791d4198e608dc8a6}{Match\+Track\+Options}} \mbox{\hyperlink{a01412_ac53f2c05883fd3084512aa92d745c0a3}{match\+Options}}
+\item 
+\mbox{\hyperlink{a00491_a78e56a97adfaa4d9093a44196cc53357}{Main\+Playlist\+Options}} \mbox{\hyperlink{a01412_adbae47f9e0da7179de1e3ab100731c04}{playlist\+Options}}
+\item 
+std\+::string \mbox{\hyperlink{a01412_ab7f693868cb4cf62cebae994e434f0b5}{track\+Data\+Preset\+Path}}
+\item 
+bool \mbox{\hyperlink{a01412_a3e757dba230f6ee036c28b2775b03591}{clip\+Gain}}
+\item 
+bool \mbox{\hyperlink{a01412_a4af8ad47d1f48674f239e9048241dc10}{clips\+And\+Media}}
+\item 
+bool \mbox{\hyperlink{a01412_a6e0ebefd0a545202f00350fc87d83925}{volume\+Automation}}
+\item 
+\mbox{\hyperlink{a00491_a7e7df4aa5977e47fa153563b42df13e3}{Time\+Code\+Mapping\+Options}} \mbox{\hyperlink{a01412_aad15acfa0ee32e1815a4d533e12256de}{time\+Code\+Mapping\+Units}}
+\item 
+std\+::string \mbox{\hyperlink{a01412_a93cdfad09318b2f4102c3a1a586abe53}{time\+Code\+Mapping\+Start\+Time}}
+\item 
+bool \mbox{\hyperlink{a01412_a141f458ea44294b356b9e529d78ba9e4}{adjust\+Session\+Start\+Time\+To\+Match\+Source}}
+\item 
+\mbox{\hyperlink{a01400}{Audio\+Data}} \mbox{\hyperlink{a01412_a2d2dc846822cd25fee9fd4d0a7600ca1}{audio\+Data}}
+\item 
+\mbox{\hyperlink{a00491_aca704862f862634822651397791086c3}{Track\+Offset\+Options}} \mbox{\hyperlink{a01412_a53f0b5e33897514e2cd7db24ff5be345}{location\+Options}}
+\item 
+\mbox{\hyperlink{a00491_a647ec29d7ede961faa6c3d9f9dd528b1}{Spot\+Location\+Type}} \mbox{\hyperlink{a01412_aab39fcaa2bb5f1e1c66be453935faece}{location\+Type}}
+\item 
+std\+::string \mbox{\hyperlink{a01412_ae14f8af0d574b4324e4e8157449f67d0}{location\+Value}}
+\item 
+\mbox{\hyperlink{a01408}{Spot\+Location\+Data}} \mbox{\hyperlink{a01412_a204a7aaf19bb81592f7d36ef1ed2bdcc}{spot\+Location\+Data}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{a01412_ab29492508771c451705e79c21a4d7c3b}\label{a01412_ab29492508771c451705e79c21a4d7c3b}} 
+\index{ImportRequest@{ImportRequest}!sessionPath@{sessionPath}}
+\index{sessionPath@{sessionPath}!ImportRequest@{ImportRequest}}
+\doxysubsubsection{\texorpdfstring{sessionPath}{sessionPath}}
+{\footnotesize\ttfamily std\+::string session\+Path}
+
+
+
+Referenced by \mbox{\hyperlink{a01328_a6e35bbc06f5d23ddaedffa90abcfdcd8}{Cpp\+PTSLClient\+::\+Import()}}.
+
+\mbox{\Hypertarget{a01412_a8d3d3b32540b7f86bb47e8b5e888b61f}\label{a01412_a8d3d3b32540b7f86bb47e8b5e888b61f}} 
+\index{ImportRequest@{ImportRequest}!importType@{importType}}
+\index{importType@{importType}!ImportRequest@{ImportRequest}}
+\doxysubsubsection{\texorpdfstring{importType}{importType}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a00491_ad6786e58853168b405fc210dda69270d}{Import\+Type}} import\+Type}
+
+
+
+Referenced by \mbox{\hyperlink{a01328_a6e35bbc06f5d23ddaedffa90abcfdcd8}{Cpp\+PTSLClient\+::\+Import()}}.
+
+\mbox{\Hypertarget{a01412_ae4cd5641f46e01af41cac52d911eba5a}\label{a01412_ae4cd5641f46e01af41cac52d911eba5a}} 
+\index{ImportRequest@{ImportRequest}!audioOptions@{audioOptions}}
+\index{audioOptions@{audioOptions}!ImportRequest@{ImportRequest}}
+\doxysubsubsection{\texorpdfstring{audioOptions}{audioOptions}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a00491_afbdab642f6e26e896650b7e91b51664b}{Audio\+Media\+Options}} audio\+Options}
+
+
+
+Referenced by \mbox{\hyperlink{a01328_a6e35bbc06f5d23ddaedffa90abcfdcd8}{Cpp\+PTSLClient\+::\+Import()}}.
+
+\mbox{\Hypertarget{a01412_a001412457ddb20d7da28395d119aa0c8}\label{a01412_a001412457ddb20d7da28395d119aa0c8}} 
+\index{ImportRequest@{ImportRequest}!audioHandleSize@{audioHandleSize}}
+\index{audioHandleSize@{audioHandleSize}!ImportRequest@{ImportRequest}}
+\doxysubsubsection{\texorpdfstring{audioHandleSize}{audioHandleSize}}
+{\footnotesize\ttfamily int32\+\_\+t audio\+Handle\+Size}
+
+
+
+Referenced by \mbox{\hyperlink{a01328_a6e35bbc06f5d23ddaedffa90abcfdcd8}{Cpp\+PTSLClient\+::\+Import()}}.
+
+\mbox{\Hypertarget{a01412_a367dc7cbc5a86b94cbd11de6b041b610}\label{a01412_a367dc7cbc5a86b94cbd11de6b041b610}} 
+\index{ImportRequest@{ImportRequest}!videoOptions@{videoOptions}}
+\index{videoOptions@{videoOptions}!ImportRequest@{ImportRequest}}
+\doxysubsubsection{\texorpdfstring{videoOptions}{videoOptions}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a00491_a54e66a87af2b587408ac25ef220f791c}{Video\+Media\+Options}} video\+Options}
+
+
+
+Referenced by \mbox{\hyperlink{a01328_a6e35bbc06f5d23ddaedffa90abcfdcd8}{Cpp\+PTSLClient\+::\+Import()}}.
+
+\mbox{\Hypertarget{a01412_ac53f2c05883fd3084512aa92d745c0a3}\label{a01412_ac53f2c05883fd3084512aa92d745c0a3}} 
+\index{ImportRequest@{ImportRequest}!matchOptions@{matchOptions}}
+\index{matchOptions@{matchOptions}!ImportRequest@{ImportRequest}}
+\doxysubsubsection{\texorpdfstring{matchOptions}{matchOptions}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a00491_a26a879f1a436d25791d4198e608dc8a6}{Match\+Track\+Options}} match\+Options}
+
+
+
+Referenced by \mbox{\hyperlink{a01328_a6e35bbc06f5d23ddaedffa90abcfdcd8}{Cpp\+PTSLClient\+::\+Import()}}.
+
+\mbox{\Hypertarget{a01412_adbae47f9e0da7179de1e3ab100731c04}\label{a01412_adbae47f9e0da7179de1e3ab100731c04}} 
+\index{ImportRequest@{ImportRequest}!playlistOptions@{playlistOptions}}
+\index{playlistOptions@{playlistOptions}!ImportRequest@{ImportRequest}}
+\doxysubsubsection{\texorpdfstring{playlistOptions}{playlistOptions}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a00491_a78e56a97adfaa4d9093a44196cc53357}{Main\+Playlist\+Options}} playlist\+Options}
+
+
+
+Referenced by \mbox{\hyperlink{a01328_a6e35bbc06f5d23ddaedffa90abcfdcd8}{Cpp\+PTSLClient\+::\+Import()}}.
+
+\mbox{\Hypertarget{a01412_ab7f693868cb4cf62cebae994e434f0b5}\label{a01412_ab7f693868cb4cf62cebae994e434f0b5}} 
+\index{ImportRequest@{ImportRequest}!trackDataPresetPath@{trackDataPresetPath}}
+\index{trackDataPresetPath@{trackDataPresetPath}!ImportRequest@{ImportRequest}}
+\doxysubsubsection{\texorpdfstring{trackDataPresetPath}{trackDataPresetPath}}
+{\footnotesize\ttfamily std\+::string track\+Data\+Preset\+Path}
+
+
+
+Referenced by \mbox{\hyperlink{a01328_a6e35bbc06f5d23ddaedffa90abcfdcd8}{Cpp\+PTSLClient\+::\+Import()}}.
+
+\mbox{\Hypertarget{a01412_a3e757dba230f6ee036c28b2775b03591}\label{a01412_a3e757dba230f6ee036c28b2775b03591}} 
+\index{ImportRequest@{ImportRequest}!clipGain@{clipGain}}
+\index{clipGain@{clipGain}!ImportRequest@{ImportRequest}}
+\doxysubsubsection{\texorpdfstring{clipGain}{clipGain}}
+{\footnotesize\ttfamily bool clip\+Gain}
+
+
+
+Referenced by \mbox{\hyperlink{a01328_a6e35bbc06f5d23ddaedffa90abcfdcd8}{Cpp\+PTSLClient\+::\+Import()}}.
+
+\mbox{\Hypertarget{a01412_a4af8ad47d1f48674f239e9048241dc10}\label{a01412_a4af8ad47d1f48674f239e9048241dc10}} 
+\index{ImportRequest@{ImportRequest}!clipsAndMedia@{clipsAndMedia}}
+\index{clipsAndMedia@{clipsAndMedia}!ImportRequest@{ImportRequest}}
+\doxysubsubsection{\texorpdfstring{clipsAndMedia}{clipsAndMedia}}
+{\footnotesize\ttfamily bool clips\+And\+Media}
+
+
+
+Referenced by \mbox{\hyperlink{a01328_a6e35bbc06f5d23ddaedffa90abcfdcd8}{Cpp\+PTSLClient\+::\+Import()}}.
+
+\mbox{\Hypertarget{a01412_a6e0ebefd0a545202f00350fc87d83925}\label{a01412_a6e0ebefd0a545202f00350fc87d83925}} 
+\index{ImportRequest@{ImportRequest}!volumeAutomation@{volumeAutomation}}
+\index{volumeAutomation@{volumeAutomation}!ImportRequest@{ImportRequest}}
+\doxysubsubsection{\texorpdfstring{volumeAutomation}{volumeAutomation}}
+{\footnotesize\ttfamily bool volume\+Automation}
+
+
+
+Referenced by \mbox{\hyperlink{a01328_a6e35bbc06f5d23ddaedffa90abcfdcd8}{Cpp\+PTSLClient\+::\+Import()}}.
+
+\mbox{\Hypertarget{a01412_aad15acfa0ee32e1815a4d533e12256de}\label{a01412_aad15acfa0ee32e1815a4d533e12256de}} 
+\index{ImportRequest@{ImportRequest}!timeCodeMappingUnits@{timeCodeMappingUnits}}
+\index{timeCodeMappingUnits@{timeCodeMappingUnits}!ImportRequest@{ImportRequest}}
+\doxysubsubsection{\texorpdfstring{timeCodeMappingUnits}{timeCodeMappingUnits}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a00491_a7e7df4aa5977e47fa153563b42df13e3}{Time\+Code\+Mapping\+Options}} time\+Code\+Mapping\+Units}
+
+
+
+Referenced by \mbox{\hyperlink{a01328_a6e35bbc06f5d23ddaedffa90abcfdcd8}{Cpp\+PTSLClient\+::\+Import()}}.
+
+\mbox{\Hypertarget{a01412_a93cdfad09318b2f4102c3a1a586abe53}\label{a01412_a93cdfad09318b2f4102c3a1a586abe53}} 
+\index{ImportRequest@{ImportRequest}!timeCodeMappingStartTime@{timeCodeMappingStartTime}}
+\index{timeCodeMappingStartTime@{timeCodeMappingStartTime}!ImportRequest@{ImportRequest}}
+\doxysubsubsection{\texorpdfstring{timeCodeMappingStartTime}{timeCodeMappingStartTime}}
+{\footnotesize\ttfamily std\+::string time\+Code\+Mapping\+Start\+Time}
+
+
+
+Referenced by \mbox{\hyperlink{a01328_a6e35bbc06f5d23ddaedffa90abcfdcd8}{Cpp\+PTSLClient\+::\+Import()}}.
+
+\mbox{\Hypertarget{a01412_a141f458ea44294b356b9e529d78ba9e4}\label{a01412_a141f458ea44294b356b9e529d78ba9e4}} 
+\index{ImportRequest@{ImportRequest}!adjustSessionStartTimeToMatchSource@{adjustSessionStartTimeToMatchSource}}
+\index{adjustSessionStartTimeToMatchSource@{adjustSessionStartTimeToMatchSource}!ImportRequest@{ImportRequest}}
+\doxysubsubsection{\texorpdfstring{adjustSessionStartTimeToMatchSource}{adjustSessionStartTimeToMatchSource}}
+{\footnotesize\ttfamily bool adjust\+Session\+Start\+Time\+To\+Match\+Source}
+
+
+
+Referenced by \mbox{\hyperlink{a01328_a6e35bbc06f5d23ddaedffa90abcfdcd8}{Cpp\+PTSLClient\+::\+Import()}}.
+
+\mbox{\Hypertarget{a01412_a2d2dc846822cd25fee9fd4d0a7600ca1}\label{a01412_a2d2dc846822cd25fee9fd4d0a7600ca1}} 
+\index{ImportRequest@{ImportRequest}!audioData@{audioData}}
+\index{audioData@{audioData}!ImportRequest@{ImportRequest}}
+\doxysubsubsection{\texorpdfstring{audioData}{audioData}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a01400}{Audio\+Data}} audio\+Data}
+
+
+
+Referenced by \mbox{\hyperlink{a01328_a6e35bbc06f5d23ddaedffa90abcfdcd8}{Cpp\+PTSLClient\+::\+Import()}}.
+
+\mbox{\Hypertarget{a01412_a53f0b5e33897514e2cd7db24ff5be345}\label{a01412_a53f0b5e33897514e2cd7db24ff5be345}} 
+\index{ImportRequest@{ImportRequest}!locationOptions@{locationOptions}}
+\index{locationOptions@{locationOptions}!ImportRequest@{ImportRequest}}
+\doxysubsubsection{\texorpdfstring{locationOptions}{locationOptions}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a00491_aca704862f862634822651397791086c3}{Track\+Offset\+Options}} location\+Options}
+
+\begin{DoxyRefDesc}{Deprecated}
+\item[\mbox{\hyperlink{a00467__deprecated000446}{Deprecated}}]location\+Options is deprecated starting in Pro Tools 2023.\+12 Use Import\+Request\+::\+Spot\+Location\+Data\+::location\+Options instead \end{DoxyRefDesc}
+
+
+Referenced by \mbox{\hyperlink{a01328_a6e35bbc06f5d23ddaedffa90abcfdcd8}{Cpp\+PTSLClient\+::\+Import()}}.
+
+\mbox{\Hypertarget{a01412_aab39fcaa2bb5f1e1c66be453935faece}\label{a01412_aab39fcaa2bb5f1e1c66be453935faece}} 
+\index{ImportRequest@{ImportRequest}!locationType@{locationType}}
+\index{locationType@{locationType}!ImportRequest@{ImportRequest}}
+\doxysubsubsection{\texorpdfstring{locationType}{locationType}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a00491_a647ec29d7ede961faa6c3d9f9dd528b1}{Spot\+Location\+Type}} location\+Type}
+
+\begin{DoxyRefDesc}{Deprecated}
+\item[\mbox{\hyperlink{a00467__deprecated000447}{Deprecated}}]location\+Type is deprecated starting in Pro Tools 2023.\+12 Use Import\+Request\+::\+Spot\+Location\+Data\+::location\+Type instead \end{DoxyRefDesc}
+
+
+Referenced by \mbox{\hyperlink{a01328_a6e35bbc06f5d23ddaedffa90abcfdcd8}{Cpp\+PTSLClient\+::\+Import()}}.
+
+\mbox{\Hypertarget{a01412_ae14f8af0d574b4324e4e8157449f67d0}\label{a01412_ae14f8af0d574b4324e4e8157449f67d0}} 
+\index{ImportRequest@{ImportRequest}!locationValue@{locationValue}}
+\index{locationValue@{locationValue}!ImportRequest@{ImportRequest}}
+\doxysubsubsection{\texorpdfstring{locationValue}{locationValue}}
+{\footnotesize\ttfamily std\+::string location\+Value}
+
+\begin{DoxyRefDesc}{Deprecated}
+\item[\mbox{\hyperlink{a00467__deprecated000448}{Deprecated}}]location\+Value is deprecated starting in Pro Tools 2023.\+12 Use Import\+Request\+::\+Spot\+Location\+Data\+::location\+Value instead \end{DoxyRefDesc}
+
+
+Referenced by \mbox{\hyperlink{a01328_a6e35bbc06f5d23ddaedffa90abcfdcd8}{Cpp\+PTSLClient\+::\+Import()}}.
+
+\mbox{\Hypertarget{a01412_a204a7aaf19bb81592f7d36ef1ed2bdcc}\label{a01412_a204a7aaf19bb81592f7d36ef1ed2bdcc}} 
+\index{ImportRequest@{ImportRequest}!spotLocationData@{spotLocationData}}
+\index{spotLocationData@{spotLocationData}!ImportRequest@{ImportRequest}}
+\doxysubsubsection{\texorpdfstring{spotLocationData}{spotLocationData}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a01408}{Spot\+Location\+Data}} spot\+Location\+Data}
+
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{a00050}{Cpp\+PTSLCommon.\+h}}\end{DoxyCompactItemize}

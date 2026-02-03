@@ -1,0 +1,47 @@
+\hypertarget{a01768}{}\doxysection{Create\+New\+Tracks\+Response}
+\label{a01768}\index{CreateNewTracksResponse@{CreateNewTracksResponse}}
+
+
+{\ttfamily \#include $<$Cpp\+PTSLCommon.\+h$>$}
+
+
+
+\doxysubsection{Description}
+Structure that describes Create\+New\+Tracks response data. 
+
+\begin{DoxyRefDesc}{Deprecated}
+\item[\mbox{\hyperlink{a00467__deprecated000288}{Deprecated}}]All API-\/specific types in the C++ client lib are deprecated starting in Pro Tools 2024.\+10 since we introduced general JSON-\/based request/response. \end{DoxyRefDesc}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+int32\+\_\+t \mbox{\hyperlink{a01768_aebe97f7bb01c7e6e27f965b323aa5786}{number\+Of\+Tracks}} \{ 0 \}
+\item 
+std\+::vector$<$ std\+::string $>$ \mbox{\hyperlink{a01768_adec293be3ae4b5239ac2f040688b1a2a}{created\+Track\+Names}}
+\begin{DoxyCompactList}\small\item\em Supported starting in Pro Tools 2024.\+06. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{a01768_aebe97f7bb01c7e6e27f965b323aa5786}\label{a01768_aebe97f7bb01c7e6e27f965b323aa5786}} 
+\index{CreateNewTracksResponse@{CreateNewTracksResponse}!numberOfTracks@{numberOfTracks}}
+\index{numberOfTracks@{numberOfTracks}!CreateNewTracksResponse@{CreateNewTracksResponse}}
+\doxysubsubsection{\texorpdfstring{numberOfTracks}{numberOfTracks}}
+{\footnotesize\ttfamily int32\+\_\+t number\+Of\+Tracks \{ 0 \}}
+
+\begin{DoxyRefDesc}{Deprecated}
+\item[\mbox{\hyperlink{a00467__deprecated000633}{Deprecated}}]since Pro Tools 2024.\+06, use created\+Track\+Names \end{DoxyRefDesc}
+\mbox{\Hypertarget{a01768_adec293be3ae4b5239ac2f040688b1a2a}\label{a01768_adec293be3ae4b5239ac2f040688b1a2a}} 
+\index{CreateNewTracksResponse@{CreateNewTracksResponse}!createdTrackNames@{createdTrackNames}}
+\index{createdTrackNames@{createdTrackNames}!CreateNewTracksResponse@{CreateNewTracksResponse}}
+\doxysubsubsection{\texorpdfstring{createdTrackNames}{createdTrackNames}}
+{\footnotesize\ttfamily std\+::vector$<$std\+::string$>$ created\+Track\+Names}
+
+
+
+Supported starting in Pro Tools 2024.\+06. 
+
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{a00050}{Cpp\+PTSLCommon.\+h}}\end{DoxyCompactItemize}

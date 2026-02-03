@@ -1,0 +1,133 @@
+\hypertarget{a00023}{}\doxysection{Cpp\+PTSLC\+\_\+\+Default\+Request.\+h File Reference}
+\label{a00023}\index{CppPTSLC\_DefaultRequest.h@{CppPTSLC\_DefaultRequest.h}}
+{\ttfamily \#include \char`\"{}Cpp\+PTSLClient.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}Cpp\+PTSLClient\+Internal.\+h\char`\"{}}\newline
+{\ttfamily \#include $<$algorithm$>$}\newline
+{\ttfamily \#include $<$string$>$}\newline
+{\ttfamily \#include $<$tuple$>$}\newline
+{\ttfamily \#include $<$utility$>$}\newline
+
+
+\doxysubsection{Description}
+Base functionality for PTSL request handlers. 
+
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{a01320}{Default\+Request\+Handler}}
+\begin{DoxyCompactList}\small\item\em Common request handler for processing specific grpc requests and responses. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{a01324}{Default\+Request\+Handler\+::\+State}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{a00491}{PTSLC\+\_\+\+CPP}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{a00023_a970444c7bb1f588f120415d7764e509d}{INIT\+\_\+\+HNDLR}}(CMD)
+\item 
+\#define \mbox{\hyperlink{a00023_abf5892af3a9ad83b3dd316df38633ea8}{INIT\+\_\+\+HNDLR\+\_\+\+OVRD}}(CMD)
+\item 
+\#define \mbox{\hyperlink{a00023_abe765ab5926a335828c163e0aa91bbed}{CREATE\+\_\+\+STATE\+\_\+\+OVRD}}(CMD)
+\item 
+\#define \mbox{\hyperlink{a00023_ac61506f99035fc3573e9c8761268da0b}{MAKE\+\_\+\+RESP\+\_\+\+OVRD}}(CMD)
+\item 
+\#define \mbox{\hyperlink{a00023_a18785599017f06817b6c0fb4eb115ca1}{MAKE\+\_\+\+REQUEST}}(CMD,  HAS\+\_\+\+REQ,  IS\+\_\+\+STREAMING)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Macro Definition Documentation}
+\mbox{\Hypertarget{a00023_a970444c7bb1f588f120415d7764e509d}\label{a00023_a970444c7bb1f588f120415d7764e509d}} 
+\index{CppPTSLC\_DefaultRequest.h@{CppPTSLC\_DefaultRequest.h}!INIT\_HNDLR@{INIT\_HNDLR}}
+\index{INIT\_HNDLR@{INIT\_HNDLR}!CppPTSLC\_DefaultRequest.h@{CppPTSLC\_DefaultRequest.h}}
+\doxysubsubsection{\texorpdfstring{INIT\_HNDLR}{INIT\_HNDLR}}
+{\footnotesize\ttfamily \#define INIT\+\_\+\+HNDLR(\begin{DoxyParamCaption}\item[{}]{CMD }\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{    CMD\#\#Handler()                                                                                                     \(\backslash\)}
+\DoxyCodeLine{    \{                                                                                                                  \(\backslash\)}
+\DoxyCodeLine{    \}                                                                                                                  \(\backslash\)}
+\DoxyCodeLine{                                                                                                                       \(\backslash\)}
+\DoxyCodeLine{    CMD\#\#Handler(\textcolor{keyword}{const} CommandRequest\& request)                                                                        \(\backslash\)}
+\DoxyCodeLine{    \{                                                                                                                  \(\backslash\)}
+\DoxyCodeLine{    \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{a00023_abf5892af3a9ad83b3dd316df38633ea8}\label{a00023_abf5892af3a9ad83b3dd316df38633ea8}} 
+\index{CppPTSLC\_DefaultRequest.h@{CppPTSLC\_DefaultRequest.h}!INIT\_HNDLR\_OVRD@{INIT\_HNDLR\_OVRD}}
+\index{INIT\_HNDLR\_OVRD@{INIT\_HNDLR\_OVRD}!CppPTSLC\_DefaultRequest.h@{CppPTSLC\_DefaultRequest.h}}
+\doxysubsubsection{\texorpdfstring{INIT\_HNDLR\_OVRD}{INIT\_HNDLR\_OVRD}}
+{\footnotesize\ttfamily \#define INIT\+\_\+\+HNDLR\+\_\+\+OVRD(\begin{DoxyParamCaption}\item[{}]{CMD }\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{    CMD\#\#Handler()                                                                                                     \(\backslash\)}
+\DoxyCodeLine{    \{                                                                                                                  \(\backslash\)}
+\DoxyCodeLine{    \}                                                                                                                  \(\backslash\)}
+\DoxyCodeLine{                                                                                                                       \(\backslash\)}
+\DoxyCodeLine{    CMD\#\#Handler(\textcolor{keyword}{const} CMD\#\#Request\& request)                                                                          \(\backslash\)}
+\DoxyCodeLine{    \{                                                                                                                  \(\backslash\)}
+\DoxyCodeLine{        std::string jsonBody = request.directJsonBody;                                                                 \(\backslash\)}
+\DoxyCodeLine{        if (!jsonBody.empty() \&\& !std::all\_of(jsonBody.begin(), jsonBody.end(), isspace))                              \(\backslash\)}
+\DoxyCodeLine{        \{                                                                                                              \(\backslash\)}
+\DoxyCodeLine{            google::protobuf::util::JsonStringToMessage(jsonBody, \&mGrpcRequestBody);                                  \(\backslash\)}
+\DoxyCodeLine{        \}                                                                                                              \(\backslash\)}
+\DoxyCodeLine{        else                                                                                                           \(\backslash\)}
+\DoxyCodeLine{        \{                                                                                                              \(\backslash\)}
+\DoxyCodeLine{            this-\/>FillGrpcRequest(request);                                                                            \(\backslash\)}
+\DoxyCodeLine{        \}                                                                                                              \(\backslash\)}
+\DoxyCodeLine{    \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{a00023_abe765ab5926a335828c163e0aa91bbed}\label{a00023_abe765ab5926a335828c163e0aa91bbed}} 
+\index{CppPTSLC\_DefaultRequest.h@{CppPTSLC\_DefaultRequest.h}!CREATE\_STATE\_OVRD@{CREATE\_STATE\_OVRD}}
+\index{CREATE\_STATE\_OVRD@{CREATE\_STATE\_OVRD}!CppPTSLC\_DefaultRequest.h@{CppPTSLC\_DefaultRequest.h}}
+\doxysubsubsection{\texorpdfstring{CREATE\_STATE\_OVRD}{CREATE\_STATE\_OVRD}}
+{\footnotesize\ttfamily \#define CREATE\+\_\+\+STATE\+\_\+\+OVRD(\begin{DoxyParamCaption}\item[{}]{CMD }\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{    \textcolor{keywordtype}{void} CreateState() override                                                                                        \(\backslash\)}
+\DoxyCodeLine{    \{                                                                                                                  \(\backslash\)}
+\DoxyCodeLine{        mState = std::make\_shared<CMD\#\#State>();                                                                       \(\backslash\)}
+\DoxyCodeLine{    \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{a00023_ac61506f99035fc3573e9c8761268da0b}\label{a00023_ac61506f99035fc3573e9c8761268da0b}} 
+\index{CppPTSLC\_DefaultRequest.h@{CppPTSLC\_DefaultRequest.h}!MAKE\_RESP\_OVRD@{MAKE\_RESP\_OVRD}}
+\index{MAKE\_RESP\_OVRD@{MAKE\_RESP\_OVRD}!CppPTSLC\_DefaultRequest.h@{CppPTSLC\_DefaultRequest.h}}
+\doxysubsubsection{\texorpdfstring{MAKE\_RESP\_OVRD}{MAKE\_RESP\_OVRD}}
+{\footnotesize\ttfamily \#define MAKE\+\_\+\+RESP\+\_\+\+OVRD(\begin{DoxyParamCaption}\item[{}]{CMD }\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{    \textcolor{keywordtype}{void} MakeResponse() override                                                                                       \(\backslash\)}
+\DoxyCodeLine{    \{                                                                                                                  \(\backslash\)}
+\DoxyCodeLine{        mResponse = std::make\_shared<CMD\#\#Response>();                                                                 \(\backslash\)}
+\DoxyCodeLine{    \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{a00023_a18785599017f06817b6c0fb4eb115ca1}\label{a00023_a18785599017f06817b6c0fb4eb115ca1}} 
+\index{CppPTSLC\_DefaultRequest.h@{CppPTSLC\_DefaultRequest.h}!MAKE\_REQUEST@{MAKE\_REQUEST}}
+\index{MAKE\_REQUEST@{MAKE\_REQUEST}!CppPTSLC\_DefaultRequest.h@{CppPTSLC\_DefaultRequest.h}}
+\doxysubsubsection{\texorpdfstring{MAKE\_REQUEST}{MAKE\_REQUEST}}
+{\footnotesize\ttfamily \#define MAKE\+\_\+\+REQUEST(\begin{DoxyParamCaption}\item[{}]{CMD,  }\item[{}]{HAS\+\_\+\+REQ,  }\item[{}]{IS\+\_\+\+STREAMING }\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{    std::shared\_ptr<DefaultRequestHandler> hndlr;                                                                      \(\backslash\)}
+\DoxyCodeLine{                                                                                                                       \(\backslash\)}
+\DoxyCodeLine{    if (HAS\_REQ)                                                                                                       \(\backslash\)}
+\DoxyCodeLine{        hndlr = std::make\_shared<CMD\#\#Handler>(request);                                                               \(\backslash\)}
+\DoxyCodeLine{    else                                                                                                               \(\backslash\)}
+\DoxyCodeLine{        hndlr = std::make\_shared<CMD\#\#Handler>();                                                                      \(\backslash\)}
+\DoxyCodeLine{                                                                                                                       \(\backslash\)}
+\DoxyCodeLine{    if (IS\_STREAMING)                                                                                                  \(\backslash\)}
+\DoxyCodeLine{        this-\/>MakeStreamingRequest(hndlr, CommandId::CId\_\#\#CMD);                                                       \(\backslash\)}
+\DoxyCodeLine{    else                                                                                                               \(\backslash\)}
+\DoxyCodeLine{        this-\/>MakeRequest(hndlr, CommandId::CId\_\#\#CMD);}
+
+\end{DoxyCode}

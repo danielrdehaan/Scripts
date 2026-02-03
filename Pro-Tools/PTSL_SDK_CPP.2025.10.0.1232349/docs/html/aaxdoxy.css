@@ -1,0 +1,1000 @@
+/*
+ *
+ * Copyright 2013, 2016, 2019, 2021-2023 by Avid Technology, Inc.
+ *
+ */
+
+/* CSS for the Avid Audio Extensions SDK
+
+	Original Doxygen CSS modified by RossCairns.com
+	Updated Doxygen DSS modified by DSE at Avid Technology, Inc.
+*/
+
+/*****************************
+ 	DSE
+ *****************************/
+
+/* TODO: Use Avid fonts via public CDN */
+
+@font-face {
+    font-family: 'AvidLight'; 
+    src: local('./GT-Walsheim-Avid-Light.otf');
+	     /* url('https://cdn-www.avid.com/Content/fonts/GT-Walsheim-Avid-Light.otf.woff') format('woff'); */
+	font-style: normal;
+}
+
+@font-face {
+    font-family: 'AvidLight'; 
+    src: local('./GT-Walsheim-Avid-Light-Oblique.otf');
+	     /* url('https://cdn-www.avid.com/Content/fonts/GT-Walsheim-Avid-Light-Oblique.otf.woff') format('woff'); */
+	font-style: oblique;
+}
+
+@font-face {
+    font-family: 'AvidMedium'; 
+    src: local('./GT-Walsheim-Avid-Regular.otf');
+	     /* url('https://cdn-www.avid.com/Content/fonts/GT-Walsheim-Avid-Regular.otf.woff') format('woff'); */
+	font-style: normal;
+}
+
+@font-face {
+    font-family: 'AvidMedium'; 
+    src: local('./GT-Walsheim-Avid-Regular-Oblique.otf');
+	     /* url('https://cdn-www.avid.com/Content/fonts/GT-Walsheim-Avid-Regular-Oblique.otf.woff') format('woff'); */
+	font-style: oblique;
+}
+
+@font-face {
+    font-family: 'AvidBold'; 
+    src: local('./GT-Walsheim-Avid-Medium.otf');
+	     /* url('https://cdn-www.avid.com/Content/fonts/GT-Walsheim-Avid-Medium.otf.woff') format('woff'); */
+	font-style: normal;
+}
+
+@font-face {
+    font-family: 'AvidBold'; 
+    src: local('./GT-Walsheim-Avid-Medium-Oblique.otf');
+	     /* url('https://cdn-www.avid.com/Content/fonts/GT-Walsheim-Avid-Medium-Oblique.otf.woff') format('woff'); */
+	font-style: oblique;
+}
+
+/* Centering images and dot captions */
+img.centered {
+	display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 12px; /* match this to the imagecaption margin-bottom for equal top/bottom spacing */
+}
+
+img.leftaligned {
+	display: block;
+    margin-left: 12px;
+    margin-right: auto;
+    margin-top: 12px; /* match this to the imagecaption margin-bottom for equal top/bottom spacing */
+    text-align: left;
+}
+
+/* Center images in 'mscgraph' divs */
+div.mscgraph {
+	text-align: center;
+	margin: 2em;
+	padding: 1.5em;
+}
+
+.mscgraph .caption {
+	font-style: italic;
+	font-size: 12px;
+	text-align: center;	
+	margin-top: 1.5em;
+}
+
+div.image {
+	text-align: center; /* Center images in 'image' divs */
+	margin-top: 14px; /* match this to the imagecaption margin-bottom for equal top/bottom spacing */
+}
+
+.dotgraph {
+	margin: 2em;
+	padding: 1.5em;
+}
+
+.dotgraph .caption {
+	font-style: italic;
+	font-size: 12px;
+	text-align: center;
+/*	display: block;*/
+/*    margin-left: auto;*/
+/*    margin-right: auto;*/
+}
+
+caption {
+	font-style: italic;
+	font-size: 12px;
+}
+
+/* Custom class for code fragment captions */
+.fragmentcaption {
+	font-style: italic;
+	font-size: 12px;
+	
+	/* to match fragment class */
+	margin-left: 2em;
+	padding-left: 1.5em;
+	padding-bottom: 1.5em;
+	padding-right: 1.5em;
+}
+
+/* Custom class for image captions */
+.imagecaption {
+	font-style: italic;
+	font-size: 12px;
+	text-align: left;
+	margin-bottom: 14px; /* match this to the image margin-top for equal top/bottom spacing */
+	margin-left: 10px;
+}
+
+/* Use Helvetica for most fonts */
+body, table, div, p, dl {
+	/* font-family: Lucida Grande, Verdana, Geneva, Arial, sans-serif; */
+	/* font-size: 12px; */
+	
+	font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+	font-size: 14px;
+}
+
+/* Formatting for code fragment lines */
+div.line {
+	font-family: monospace, fixed;
+	font-size: 80%;
+	white-space: pre;
+}
+
+/* Set a margin for the page contents */
+div.contents {
+	margin-right: 45px;
+	margin-left: 45px;
+}
+
+/* Add a buffer above directory trees */
+div.directory {
+	margin-top: 2em;
+}
+
+/* Tighten spacing between member list elements */
+td.memSeparator {
+  height: 6px;
+  font-size: 6px;
+}
+
+/* Align field cells (e.g. in an enum value table) to top */
+td.fieldname {
+  vertical-align: top;
+  padding-top: 15px;
+  border-right: medium inset;
+  border-right-color: #f9f9f9;
+  border-top: 4px hidden;
+}
+
+td.fielddoc {
+  vertical-align: top;
+  border-top: 4px hidden;
+}
+
+dl.section.note {
+  color:#343434;
+  font-style: italic;
+  font-size: 12px;
+}
+
+
+/* Custom div class for all text within a documentation section */
+div.section {
+  margin-left: 2em;
+  padding-top: 0.375em;
+  padding-bottom: 0.375em;
+}
+
+/* Extra spacing between list items in "section" divs */
+div.section ul li, div.section ol li {
+  padding-bottom: 0.375em;
+}
+
+/* Custom div class for sub-section headings */
+div.SectionHead {
+	font-family: 'AvidBold', 'gtwalsheim-b', GTWalsheim, Walsheim, 'Arial Bold', 'Arial Black', sans-serif;
+  padding-top: 27px;
+}
+
+/* Custom div classes for special indented text sections */
+div.TextInd1 {
+  margin-left: 2em;
+  padding-bottom: 6px;
+}
+
+div.TextInd2 {
+  margin-left: 4em;
+  padding-bottom: 6px;
+}
+
+div.TextInd3 {
+  margin-left: 6em;
+  padding-bottom: 6px;
+}
+
+
+/* Custom div class for legal text in the footer */
+div.FooterLegal {
+  font-style: italic;
+  font-size: 12px;
+  padding-top: 6px;
+  padding-bottom: 12px;
+}
+
+
+/* Custom heading styles */
+
+h1,h2,h3,h4,h5,h6 {
+	font-family: 'AvidLight', GTWalsheim, Walsheim, Arial, sans-serif;
+	font-size: 2em;
+}
+
+h1 {
+	font-size: 2em;
+	text-transform: uppercase;
+}
+
+h2 {
+	font-size: 1.5em;
+	text-transform: uppercase;
+}
+
+h3 {
+	font-family: 'AvidMedium', GTWalsheim, Walsheim, Arial, sans-serif;
+	font-size: 1.2em;
+	text-transform: uppercase;
+}
+
+h4,h5,h6 {
+	font-family: 'AvidMedium', GTWalsheim, Walsheim, Arial, sans-serif;
+	font-size: 1em;
+}
+
+h4 {
+/*  font-size: 14px;*/
+/*  font-weight: bold;*/
+  padding-top: 10px;
+}
+
+/*h5 {*/
+/*  font-size: 14px;*/
+/*  font-weight: bold;*/
+/*}*/
+
+h6 {
+/*  font-size: 14px;*/
+/*  font-weight: normal;*/
+  font-style: oblique;
+}
+
+.groupheader {
+	color: #7826e7;
+}
+
+.memtitle {
+	text-transform: unset;
+	font-size: 1.35em;
+	border: none;
+	background-image: none;
+	background-color: #F7F7F7;
+}
+
+/* Custom unordered list with no bullets */
+ul.paragraphs {
+  list-style-type: none;
+}
+
+.navpath ul {
+	background-image: none;
+	border: none;
+	background-color: #f8f8f8;
+}
+
+div.header {
+	background-image: none;
+	background-color: white;
+	border: none;
+}
+
+
+/* Custom EM */
+em.Bold {
+  font-family: 'AvidBold', 'gtwalsheim-b', GTWalsheim, Walsheim, 'Arial Bold', 'Arial Black', Arial, sans-serif;;
+  font-style: normal;
+  font-weight: normal;
+}
+
+em.Italic {
+  font-style: italic;
+  font-weight: inherit;
+}
+
+em.BoldItalic {
+  font-family: 'AvidBold', 'gtwalsheim-b', GTWalsheim, Walsheim, 'Arial Bold', 'Arial Black', Arial, sans-serif;;
+  font-style: oblique;
+  font-weight: normal;
+}
+
+
+/****/
+/* Table stuff
+
+/* from central_style.css */
+.head > li {
+	font-family: 'AvidBold', 'gtwalsheim-b', GTWalsheim, Walsheim, 'Arial Bold', 'Arial Black', Arial, sans-serif;;
+}
+
+/* doxygen-specific table class */
+table.doxtable {
+	border-collapse:collapse;
+    margin-left:5%; 
+    margin-right:auto;
+}
+
+table.doxtable td, table.doxtable th {
+	padding: 3px 7px 2px;
+}
+
+table.doxtable td {
+/*	border: 0px solid #153788;*/
+	border-style: none;
+}
+
+table.doxtable th {
+	background-color: #343434;
+	color: #FFFFFF;
+	font-size: 110%;
+	padding-bottom: 4px;
+	padding-top: 5px;
+	text-align:center;
+	border-style: solid;
+	border: 1px solid #FFFFFF;
+}
+
+/* anchors in table headers */
+table.doxtable th a {
+	color: #FFFFFF;
+}
+
+table.doxtable th a.el {
+	color: #FFFFFF;
+}
+
+table.doxtable th.subhead {
+	background-color: #535353;
+}
+
+table.doxtable td.bordered {
+	border-style: solid;
+	border: 1px solid #CCCCCC;
+}
+
+table.doxtable td.unbordered {
+	border-style: hidden;
+}
+
+table.doxtable tr.shaded td {
+	background-color: #E6E6E6;
+}
+
+
+/* custom table class */
+
+table.invis {
+	border-collapse:collapse;
+    margin-left:5%; 
+    margin-right:auto;
+}
+
+table.invis td, table.invis th {
+	padding: 3px 7px 2px;
+	border-style: hidden;
+}
+
+
+
+/*****************************
+ 	RossCairns.com
+ *****************************/
+
+p, div, dl {
+	color:#343434;
+}
+
+div.contents p {
+	
+/*	font-family:Monaco, courier;*/
+	font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+	
+}
+
+/* @group Heading Levels */
+
+h1 {
+/*	margin-bottom: 10px;*/
+/*	font-size: 30px;*/
+	margin-top: 10px;
+	margin-bottom: 6px;
+/*	font-size: 26px;*/
+/*	padding: 0px 0px 20px 0px ;*/
+  padding: 20px 0px 4px 0px;
+	
+	border-bottom:1px dotted #E0E0E0;
+}
+
+h2 {
+	padding-top: 30px;
+/*	font-size: 17px;*/
+	color:#1ba3b3;
+/*	font-family: Lucida Grande, Verdana, Geneva, Arial, sans-serif;*/
+}
+
+h2.memtitle a, h2.memtitle a:visited, h2.memtitle a:active, h2.memtitle a:hover {
+	color:#1ba3b3;
+	text-decoration: none;
+}
+
+/*h3 {*/
+/*	font-size: 17px;*/
+/*	font-family: Lucida Grande, Verdana, Geneva, Arial, sans-serif;*/
+/*}*/
+
+dt {
+	font-weight: bold;
+}
+
+div.multicol {
+	-moz-column-gap: 1em;
+	-webkit-column-gap: 1em;
+	column-gap: 1em;
+	-moz-column-count: 3;
+	-webkit-column-count: 3;
+	column-count: 3;
+}
+
+p.startli, p.startdd, p.starttd {
+	margin-top: 2px;
+}
+
+p.endli {
+	margin-bottom: 0px;
+}
+
+p.enddd {
+	margin-bottom: 4px;
+}
+
+p.endtd {
+	margin-bottom: 2px;
+}
+
+/* @end */
+
+/* DSE - Caption style defined above */
+/*
+caption {
+	font-weight: bold;
+}
+*/
+
+span.legend {
+        font-size: 70%;
+        text-align: center;
+}
+
+h3.version {
+        font-size: 90%;
+		padding-bottom:10px;
+		border-bottom:1px dotted #E0E0E0;
+}
+
+div.qindex, div.navtab{
+	background-color: #E6E6E6;
+	border: 1px solid #CBCBCB;
+	text-align: center;
+	margin: 2px;
+	padding: 2px;
+}
+
+div.qindex, div.navpath {
+	width: 100%;
+	line-height: 140%;
+}
+
+div.navtab {
+	margin-right: 15px;
+}
+
+/* @group Link Styling */
+
+a {
+/*	color: #153788;*/
+	color: #1B25A5;
+	text-decoration: none;
+}
+
+.contents a:visited {
+/*	color: #1b77c5;*/
+	color: #1B25A5;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a.qindex {
+	font-weight: bold;
+}
+
+a.qindexHL {
+	font-weight: bold;
+	background-color: #CBCBCB;
+	color: #ffffff;
+	border: 1px double #E6E6E6;
+}
+
+.contents a.qindexHL:visited {
+        color: #ffffff;
+}
+
+/*a.el {*/
+/*	font-weight: bold;*/
+/*}*/
+
+/*a.elRef {*/
+/*}*/
+
+a.code {
+/*	color: #3030f0;*/
+	color: #1B25A5;
+}
+
+a.codeRef {
+/*	color: #3030f0;*/
+	color: #1B25A5;
+}
+
+/* @end */
+
+dl.el {
+	margin-left: -1cm;
+}
+
+.fragment {
+	font-family: monospace, fixed;
+	font-size: 105%;
+	margin-left: 2em; /* DSE */
+	padding: 1.5em; /* DSE */
+}
+
+pre.fragment {
+	border: 1px solid #CCCCCC;
+	background-color: #f5f5f5;
+	padding: 4px 6px;
+	margin: 4px 8px 4px 2px;
+	overflow: auto;
+	word-wrap: break-word;
+	font-size:  9pt;
+	line-height: 125%;
+}
+
+div.ah {
+	background-color: black;
+	font-weight: bold;
+	color: #ffffff;
+	margin-bottom: 3px;
+	margin-top: 3px
+}
+
+div.groupHeader {
+/*	margin-left: 16px;*/
+	margin-top: 12px;
+	margin-bottom: 6px;
+	font-weight: bold;
+	
+	/* DSE */
+	font-size: 16px;
+	border-bottom:1px dotted #E0E0E0;
+}
+
+div.groupText {
+	margin-left: 16px;
+	font-style: italic;
+}
+
+body {
+	background: white;
+	color: black;
+	margin-right: 20px;
+	margin-left: 20px;
+}
+
+td.indexkey {
+	background-color: #FFFFFF;
+	font-weight: bold;
+	border: 1px solid #CBCBCB;
+	margin: 2px 0px 2px 0;
+	padding: 2px 10px;
+}
+
+td.indexvalue {
+	background-color: #FFFFFF;
+	border: 1px solid #CBCBCB;
+	padding: 2px 10px;
+	margin: 2px 0px;
+}
+
+tr.memlist {
+	background-color: #E6E6E6;
+}
+
+p.formulaDsp {
+	text-align: center;
+}
+
+/*img.formulaDsp {*/
+/*}*/
+
+img.formulaInl {
+	vertical-align: middle;
+}
+
+div.center {
+	text-align: center;
+        margin-top: 0px;
+        margin-bottom: 0px;
+        padding: 0px;
+}
+
+div.center img {
+	border: 0px;
+}
+
+img.footer {
+	border: 0px;
+	vertical-align: middle;
+}
+
+/* @group Code Colorization */
+
+span.keyword {
+	color: #008000
+}
+
+span.keywordtype {
+	color: #604020
+}
+
+span.keywordflow {
+	color: #e08000
+}
+
+span.comment {
+	color: #800000
+}
+
+span.preprocessor {
+	color: #806020
+}
+
+span.stringliteral {
+	color: #002080
+}
+
+span.charliteral {
+	color: #008080
+}
+
+span.vhdldigit { 
+	color: #ff00ff 
+}
+
+span.vhdlchar { 
+	color: #000000 
+}
+
+span.vhdlkeyword { 
+	color: #700070 
+}
+
+span.vhdllogic { 
+	color: #ff0000 
+}
+
+/* @end */
+
+.search {
+	color: #343434;
+	font-weight: bold;
+}
+
+form.search {
+	margin-bottom: 0px;
+	margin-top: 0px;
+}
+
+input.search {
+	font-size: 75%;
+	color: #343434;
+	font-weight: normal;
+	background-color: #E6E6E6;
+}
+
+td.tiny {
+	font-size: 75%;
+}
+
+.dirtab {
+	padding: 4px;
+	border-collapse: collapse;
+	border: 1px solid #CBCBCB;
+}
+
+th.dirtab {
+	background: #E6E6E6;
+	font-weight: bold;
+}
+
+hr {
+	height: 0;
+	border: none;
+	border-top: 1px solid #343434;
+}
+
+/* @group Member Descriptions */
+
+.mdescLeft, .mdescRight,
+.memItemLeft, .memItemRight,
+.memTemplItemLeft, .memTemplItemRight, .memTemplParams {
+/*	background-color: #FAFAFA; */ /* DSE */
+	border: none;
+	margin: 4px;
+	padding: 1px 0 0 8px;
+}
+
+.mdescLeft, .mdescRight {
+	padding: 0px 8px 4px 8px;
+	color: #343434;
+}
+
+/* DSE - Remove table shading and border from member descriptions */
+/*
+.memItemLeft, .memItemRight, .memTemplParams {
+	border-top: 1px solid #ccc;
+	background-color: #F9F9F9;
+}
+*/
+
+.memItemLeft, .memTemplItemLeft {
+        white-space: nowrap;
+}
+
+.memTemplParams {
+	color: #343434;
+        white-space: nowrap;
+}
+
+/* @end */
+
+/* @group Member Details */
+
+/* Styles for detailed member documentation */
+
+.memtemplate {
+	font-size: 80%;
+	color: #343434;
+	font-weight: normal;
+	margin-left: 3px;
+}
+
+.memnav {
+	background-color: #E6E6E6;
+	border: 1px solid #CBCBCB;
+	text-align: center;
+	margin: 2px;
+	margin-right: 15px;
+	padding: 2px;
+}
+
+.memitem {
+	padding: 0;
+	margin-bottom: 30px;
+}
+
+.memname {
+	white-space: nowrap;
+	font-weight: bold;
+	color:#343434;
+	padding:3px 5px;
+}
+
+.memproto, .memdoc {
+	border: 1px dotted #F7F7F7;
+}
+
+.memproto {
+	padding: 0;
+	background-color: #F7F7F7;
+	font-weight: bold;
+        -webkit-box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.15);
+        -moz-box-shadow: rgba(0, 0, 0, 0.15) 5px 5px 5px;
+		box-shadow: rgba(0, 0, 0, 0.15) 5px 5px 5px;
+	
+}
+
+.memdoc {
+	padding: 2px 20px 20px;
+/*	background-color: #FFFFFF;*/
+  background-color: #FEFEFC;
+	border-top-width: 0;
+        -webkit-box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.15);
+        -moz-box-shadow: rgba(0, 0, 0, 0.15) 5px 5px 5px;
+        box-shadow: rgba(0, 0, 0, 0.15) 5px 5px 5px;
+}
+
+.paramkey {
+	text-align: right;
+}
+
+.paramtype {
+	white-space: nowrap;
+}
+
+.paramname {
+	color: #7826e7;
+	white-space: nowrap;
+}
+.paramname em {
+	font-style: normal;
+}
+
+/* @end */
+
+/* @group Directory (tree) */
+
+/* for the tree view */
+
+.ftvtree {
+	font-family: sans-serif;
+	margin: 0.5em;
+}
+
+/* these are for tree view when used as main index */
+
+.directory {
+/*	font-size: 9pt;*/
+/*	font-weight: bold;*/
+	font-size: 10pt;
+}
+
+.directory h3 {
+	margin: 0px;
+	margin-top: 1em;
+	font-size: 12pt;
+}
+
+/*
+The following two styles can be used to replace the root node title
+with an image of your choice.  Simply uncomment the next two styles,
+specify the name of your image and be sure to set 'height' to the
+proper pixel height of your image.
+*/
+
+/*
+.directory h3.swap {
+	height: 61px;
+	background-repeat: no-repeat;
+	background-image: url("yourimage.gif");
+}
+.directory h3.swap span {
+	display: none;
+}
+*/
+
+.directory > h3 {
+	margin-top: 0;
+}
+
+.directory p {
+	margin: 0px;
+	white-space: nowrap;
+}
+
+.directory div {
+	display: none;
+	margin: 0px;
+}
+
+.directory img {
+	vertical-align: -30%;
+}
+
+/* these are for tree view when not used as main index */
+
+.directory-alt {
+	font-size: 100%;
+	font-weight: bold;
+}
+
+.directory-alt h3 {
+	margin: 0px;
+	margin-top: 1em;
+	font-size: 11pt;
+}
+
+.directory-alt > h3 {
+	margin-top: 0;
+}
+
+.directory-alt p {
+	margin: 0px;
+	white-space: nowrap;
+}
+
+.directory-alt div {
+	display: none;
+	margin: 0px;
+}
+
+.directory-alt img {
+	vertical-align: -30%;
+}
+
+/* @end */
+
+address {
+	font-style: normal;
+	color: #343434;
+}
+
+hr {
+	border-top:1px dotted #E0E0E0;
+	border-bottom:1px dotted #E0E0E0;
+	margin-top:30px;
+	padding-top:10px;
+}
+
+.contents {
+	padding-top: 30px;
+}
+
+h1 {
+	margin-top:0;
+}
+.contents .dynsection {
+	margin-top:10px;
+}
+
+/* Title text */
+#projectname {
+  font-family: 'AvidLight', GTWalsheim, Walsheim, Arial, sans-serif;
+  color: #7826e7;
+  font-size: 1.8em;
+  text-transform: uppercase;
+}
+
+#projectnumber {
+	font-family: 'AvidLight', GTWalsheim, Walsheim, Arial, sans-serif;
+	color: #7826e7;
+	font-size: 1.0em;
+	text-transform: uppercase;
+  }
+  
+#projectbrief {
+  font-family: 'AvidLight', GTWalsheim, Walsheim, Arial, sans-serif;
+  color: #7826e7;
+  font-size: 1.0em;
+}
+
+#projectlogo {
+  padding: 25px;
+}

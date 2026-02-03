@@ -1,0 +1,109 @@
+\hypertarget{a02036}{}\doxysection{Request\+Header}
+\label{a02036}\index{RequestHeader@{RequestHeader}}
+
+
+\doxysubsection{Description}
+Structure that describes common data of Pro Tools request struct. \doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+string \mbox{\hyperlink{a02036_ab8fb5adee6b678b5d3d9c38be5df9d10}{task\+\_\+id}} = 1
+\begin{DoxyCompactList}\small\item\em unique identifier for each command, fill on Server side \end{DoxyCompactList}\item 
+\mbox{\hyperlink{a00494_aaf8d2069e2c6bbecf4aa8f9819028e8a}{Command\+Id}} \mbox{\hyperlink{a02036_a6d73277ea08aa1deaa4e5233adf11f90}{command}} = 2
+\begin{DoxyCompactList}\small\item\em type of the command \end{DoxyCompactList}\item 
+int32 \mbox{\hyperlink{a02036_a1403c9ca4289d8a9417e8c4da2b94c0e}{version}} = 3
+\begin{DoxyCompactList}\small\item\em current version of PTSL Client API -\/ the year (2024) \end{DoxyCompactList}\item 
+string \mbox{\hyperlink{a02036_a5c0d03475c8363bf2274213bc1c86e1f}{session\+\_\+id}} = 4
+\begin{DoxyCompactList}\small\item\em client\textquotesingle{}s session ID (it\textquotesingle{}s received as a result of the Register\+Connection command) \end{DoxyCompactList}\item 
+int32 \mbox{\hyperlink{a02036_a09c035a9bbb8296a09dfcfcc0c62de56}{version\+\_\+minor}} = 5
+\begin{DoxyCompactList}\small\item\em Minor version of PTSL Client API -\/ the month (10) \end{DoxyCompactList}\item 
+int32 \mbox{\hyperlink{a02036_ac3eea2a8ad35f84eeb9f00174f197679}{version\+\_\+revision}} = 6
+\begin{DoxyCompactList}\small\item\em Revision version of PTSL Client API. \end{DoxyCompactList}\item 
+string \mbox{\hyperlink{a02036_a49ae58cc7084e67d7d0f8180a987db5d}{versioned\+\_\+request\+\_\+header\+\_\+json}} = 7
+\begin{DoxyCompactList}\small\item\em JSON string with \mbox{\hyperlink{a02040}{Versioned\+Request\+Header}} data. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{a02036_ab8fb5adee6b678b5d3d9c38be5df9d10}\label{a02036_ab8fb5adee6b678b5d3d9c38be5df9d10}} 
+\index{RequestHeader@{RequestHeader}!task\_id@{task\_id}}
+\index{task\_id@{task\_id}!RequestHeader@{RequestHeader}}
+\doxysubsubsection{\texorpdfstring{task\_id}{task\_id}}
+{\footnotesize\ttfamily string task\+\_\+id = 1}
+
+
+
+unique identifier for each command, fill on Server side 
+
+\mbox{\Hypertarget{a02036_a6d73277ea08aa1deaa4e5233adf11f90}\label{a02036_a6d73277ea08aa1deaa4e5233adf11f90}} 
+\index{RequestHeader@{RequestHeader}!command@{command}}
+\index{command@{command}!RequestHeader@{RequestHeader}}
+\doxysubsubsection{\texorpdfstring{command}{command}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a00494_aaf8d2069e2c6bbecf4aa8f9819028e8a}{Command\+Id}} command = 2}
+
+
+
+type of the command 
+
+\mbox{\Hypertarget{a02036_a1403c9ca4289d8a9417e8c4da2b94c0e}\label{a02036_a1403c9ca4289d8a9417e8c4da2b94c0e}} 
+\index{RequestHeader@{RequestHeader}!version@{version}}
+\index{version@{version}!RequestHeader@{RequestHeader}}
+\doxysubsubsection{\texorpdfstring{version}{version}}
+{\footnotesize\ttfamily int32 version = 3}
+
+
+
+current version of PTSL Client API -\/ the year (2024) 
+
+\mbox{\Hypertarget{a02036_a5c0d03475c8363bf2274213bc1c86e1f}\label{a02036_a5c0d03475c8363bf2274213bc1c86e1f}} 
+\index{RequestHeader@{RequestHeader}!session\_id@{session\_id}}
+\index{session\_id@{session\_id}!RequestHeader@{RequestHeader}}
+\doxysubsubsection{\texorpdfstring{session\_id}{session\_id}}
+{\footnotesize\ttfamily string session\+\_\+id = 4}
+
+
+
+client\textquotesingle{}s session ID (it\textquotesingle{}s received as a result of the Register\+Connection command) 
+
+\mbox{\Hypertarget{a02036_a09c035a9bbb8296a09dfcfcc0c62de56}\label{a02036_a09c035a9bbb8296a09dfcfcc0c62de56}} 
+\index{RequestHeader@{RequestHeader}!version\_minor@{version\_minor}}
+\index{version\_minor@{version\_minor}!RequestHeader@{RequestHeader}}
+\doxysubsubsection{\texorpdfstring{version\_minor}{version\_minor}}
+{\footnotesize\ttfamily int32 version\+\_\+minor = 5}
+
+
+
+Minor version of PTSL Client API -\/ the month (10) 
+
+\begin{DoxySince}{Since}
+Pro Tools 2025.\+06 
+\end{DoxySince}
+\mbox{\Hypertarget{a02036_ac3eea2a8ad35f84eeb9f00174f197679}\label{a02036_ac3eea2a8ad35f84eeb9f00174f197679}} 
+\index{RequestHeader@{RequestHeader}!version\_revision@{version\_revision}}
+\index{version\_revision@{version\_revision}!RequestHeader@{RequestHeader}}
+\doxysubsubsection{\texorpdfstring{version\_revision}{version\_revision}}
+{\footnotesize\ttfamily int32 version\+\_\+revision = 6}
+
+
+
+Revision version of PTSL Client API. 
+
+\begin{DoxySince}{Since}
+Pro Tools 2025.\+06 
+\end{DoxySince}
+\mbox{\Hypertarget{a02036_a49ae58cc7084e67d7d0f8180a987db5d}\label{a02036_a49ae58cc7084e67d7d0f8180a987db5d}} 
+\index{RequestHeader@{RequestHeader}!versioned\_request\_header\_json@{versioned\_request\_header\_json}}
+\index{versioned\_request\_header\_json@{versioned\_request\_header\_json}!RequestHeader@{RequestHeader}}
+\doxysubsubsection{\texorpdfstring{versioned\_request\_header\_json}{versioned\_request\_header\_json}}
+{\footnotesize\ttfamily string versioned\+\_\+request\+\_\+header\+\_\+json = 7}
+
+
+
+JSON string with \mbox{\hyperlink{a02040}{Versioned\+Request\+Header}} data. 
+
+\begin{DoxySince}{Since}
+Pro Tools 2025.\+06 
+\end{DoxySince}
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{a00464}{PTSL.\+proto}}\end{DoxyCompactItemize}

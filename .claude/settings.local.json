@@ -15,7 +15,20 @@
       "Bash(python3:*)",
       "Bash(xxd:*)",
       "Bash(npm install:*)",
-      "Bash(npm run build:*)"
+      "Bash(npm run build:*)",
+      "WebFetch(domain:docs.obsidian.md)",
+      "WebFetch(domain:marcusolsson.github.io)",
+      "Bash(cd:*)",
+      "Bash(git add:*)",
+      "Bash(git commit -m \"$\\(cat <<''EOF''\nAdd multi-project support with file/folder pickers to FMOD sync plugin\n\n- Each project now has independent output folder, JSON path, and enable toggle\n- Added native OS file picker for JSON file selection\n- Added vault folder picker modal for output folder selection\n- Shows fuzzy picker with \"Sync All\" option when multiple projects configured\n- Added project name to frontmatter for filtering/grouping notes\n\nCo-Authored-By: Claude Opus 4.5 <noreply@anthropic.com>\nEOF\n\\)\")",
+      "Bash(git push)",
+      "WebFetch(domain:github.com)",
+      "Bash(plutil:*)",
+      "Bash(\"/Applications/FMOD Studio.app/Contents/MacOS/fmodstudio\" --version)",
+      "Bash(node:*)",
+      "WebFetch(domain:qa.fmod.com)",
+      "Bash(git commit -m \"$\\(cat <<''EOF''\nAdd newer export detection and remember last export directory\n\nObsidian plugin:\n- Auto-detect newer JSON exports in the same directory\n- Show badge on project card when newer export is available\n- Highlight sync button and use newer file automatically\n- Poll for updates every 30 seconds while settings tab is open\n\nFMOD script:\n- Remember last export directory per project\n- Store preference in .obsidian-fmod-sync-prefs file\n\nCo-Authored-By: Claude Opus 4.5 <noreply@anthropic.com>\nEOF\n\\)\")",
+      "Bash(git commit:*)"
     ]
   }
 }

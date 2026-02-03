@@ -1,0 +1,146 @@
+\hypertarget{a00446_source}{}\doxysection{PTSL\+\_\+\+Versions.\+h}
+\label{a00446_source}\index{PTSL\_Versions.h@{PTSL\_Versions.h}}
+\mbox{\hyperlink{a00446}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{comment}{// Copyright 2022-\/2025 by Avid Technology, Inc.}}
+\DoxyCodeLine{2 \textcolor{comment}{// CONFIDENTIAL: this document contains confidential information of Avid. Do not disclose to any third party. Use of the information contained in this document is subject to an Avid SDK license.}}
+\DoxyCodeLine{3 }
+\DoxyCodeLine{30 \textcolor{preprocessor}{\#pragma once}}
+\DoxyCodeLine{31 }
+\DoxyCodeLine{32 \textcolor{preprocessor}{\#include <map>}}
+\DoxyCodeLine{33 \textcolor{preprocessor}{\#include <string>}}
+\DoxyCodeLine{34 }
+\DoxyCodeLine{38 \textcolor{keyword}{static} \textcolor{keyword}{const} int32\_t \mbox{\hyperlink{a00446_a83c5961efacc6c06e3e75877c239ebb1}{PTSL\_VERSION}} = 2025;}
+\DoxyCodeLine{39 }
+\DoxyCodeLine{40 \textcolor{comment}{/*}}
+\DoxyCodeLine{41 \textcolor{comment}{* Alias for PTSL\_VERSION constant for consistency with other version constants.}}
+\DoxyCodeLine{42 \textcolor{comment}{*}}
+\DoxyCodeLine{43 \textcolor{comment}{* Supported starting in Pro Tools 2024.10}}
+\DoxyCodeLine{44 \textcolor{comment}{*/}}
+\DoxyCodeLine{45 \textcolor{keyword}{static} \textcolor{keyword}{const} int32\_t \mbox{\hyperlink{a00446_a319bb998f296db332fcf141a17ddde51}{PTSL\_VERSION\_MAJOR}} = \mbox{\hyperlink{a00446_a83c5961efacc6c06e3e75877c239ebb1}{PTSL\_VERSION}};}
+\DoxyCodeLine{46 }
+\DoxyCodeLine{51 \textcolor{keyword}{static} \textcolor{keyword}{const} int32\_t \mbox{\hyperlink{a00446_aebd924e2eb16cd106f649341a704a181}{PTSL\_VERSION\_MINOR}} = 10;}
+\DoxyCodeLine{52 }
+\DoxyCodeLine{57 \textcolor{keyword}{static} \textcolor{keyword}{const} int32\_t \mbox{\hyperlink{a00446_adfe4744878f39a2ac2cd8035f26067c8}{PTSL\_VERSION\_REVISION}} = 0;}
+\DoxyCodeLine{58 }
+\DoxyCodeLine{62 \textcolor{keyword}{static} \textcolor{keyword}{const} std::map<std::string, int32\_t> \mbox{\hyperlink{a00446_a2ec9138f29c475b3c7bd7ed90974e35f}{PTSL\_CLIENT\_API\_VERSIONS}} = \{}
+\DoxyCodeLine{63     \{ \textcolor{stringliteral}{"{}CreateSession"{}}, 1 \},}
+\DoxyCodeLine{64     \{ \textcolor{stringliteral}{"{}OpenSession"{}}, 1 \},}
+\DoxyCodeLine{65     \{ \textcolor{stringliteral}{"{}Import"{}}, 1 \},}
+\DoxyCodeLine{66     \{ \textcolor{stringliteral}{"{}GetTrackList"{}}, 1 \},}
+\DoxyCodeLine{67     \{ \textcolor{stringliteral}{"{}SelectAllClipsOnTrack"{}}, 1 \},}
+\DoxyCodeLine{68     \{ \textcolor{stringliteral}{"{}ExtendSelectionToTargetTracks"{}}, 1 \},}
+\DoxyCodeLine{69     \{ \textcolor{stringliteral}{"{}TrimToSelection"{}}, 1 \},}
+\DoxyCodeLine{70     \{ \textcolor{stringliteral}{"{}CreateFadesBasedOnPreset"{}}, 1 \},}
+\DoxyCodeLine{71     \{ \textcolor{stringliteral}{"{}RenameTargetTrack"{}}, 1 \},}
+\DoxyCodeLine{72     \{ \textcolor{stringliteral}{"{}ConsolidateClip"{}}, 1 \},}
+\DoxyCodeLine{73     \{ \textcolor{stringliteral}{"{}ExportClipsAsFiles"{}}, 1 \},}
+\DoxyCodeLine{74     \{ \textcolor{stringliteral}{"{}ExportSelectedTracksAsAAFOMF"{}}, 1 \},}
+\DoxyCodeLine{75     \{ \textcolor{stringliteral}{"{}GetTaskStatus"{}}, 1 \},}
+\DoxyCodeLine{76     \{ \textcolor{stringliteral}{"{}HostReadyCheck"{}}, 2 \},}
+\DoxyCodeLine{77     \{ \textcolor{stringliteral}{"{}RefreshTargetAudioFiles"{}}, 1 \},}
+\DoxyCodeLine{78     \{ \textcolor{stringliteral}{"{}RefreshAllModifiedAudioFiles"{}}, 1 \},}
+\DoxyCodeLine{79     \{ \textcolor{stringliteral}{"{}GetFileLocation"{}}, 1 \},}
+\DoxyCodeLine{80     \{ \textcolor{stringliteral}{"{}CloseSession"{}}, 1 \},}
+\DoxyCodeLine{81     \{ \textcolor{stringliteral}{"{}SaveSession"{}}, 1 \},}
+\DoxyCodeLine{82     \{ \textcolor{stringliteral}{"{}SaveSessionAs"{}}, 1 \},}
+\DoxyCodeLine{83     \{ \textcolor{stringliteral}{"{}Cut"{}}, 1 \},}
+\DoxyCodeLine{84     \{ \textcolor{stringliteral}{"{}Copy"{}}, 1 \},}
+\DoxyCodeLine{85     \{ \textcolor{stringliteral}{"{}Paste"{}}, 1 \},}
+\DoxyCodeLine{86     \{ \textcolor{stringliteral}{"{}Clear"{}}, 1 \},}
+\DoxyCodeLine{87     \{ \textcolor{stringliteral}{"{}CutSpecial"{}}, 1 \},}
+\DoxyCodeLine{88     \{ \textcolor{stringliteral}{"{}CopySpecial"{}}, 1 \},}
+\DoxyCodeLine{89     \{ \textcolor{stringliteral}{"{}ClearSpecial"{}}, 1 \},}
+\DoxyCodeLine{90     \{ \textcolor{stringliteral}{"{}PasteSpecial"{}}, 1 \},}
+\DoxyCodeLine{91     \{ \textcolor{stringliteral}{"{}ExportMix"{}}, 1 \},}
+\DoxyCodeLine{92     \{ \textcolor{stringliteral}{"{}Spot"{}}, 1 \},}
+\DoxyCodeLine{93     \{ \textcolor{stringliteral}{"{}ExportSessionInfoAsText"{}}, 1 \},}
+\DoxyCodeLine{94     \{ \textcolor{stringliteral}{"{}GetDynamicProperties"{}}, 1 \},}
+\DoxyCodeLine{95     \{ \textcolor{stringliteral}{"{}SetPlaybackMode"{}}, 1 \},}
+\DoxyCodeLine{96     \{ \textcolor{stringliteral}{"{}SetRecordMode"{}}, 1 \},}
+\DoxyCodeLine{97     \{ \textcolor{stringliteral}{"{}GetSessionAudioFormat"{}}, 1 \},}
+\DoxyCodeLine{98     \{ \textcolor{stringliteral}{"{}GetSessionSampleRate"{}}, 1 \},}
+\DoxyCodeLine{99     \{ \textcolor{stringliteral}{"{}GetSessionBitDepth"{}}, 1 \},}
+\DoxyCodeLine{100     \{ \textcolor{stringliteral}{"{}GetSessionInterleavedState"{}}, 1 \},}
+\DoxyCodeLine{101     \{ \textcolor{stringliteral}{"{}GetSessionTimeCodeRate"{}}, 1 \},}
+\DoxyCodeLine{102     \{ \textcolor{stringliteral}{"{}GetSessionFeetFramesRate"{}}, 1 \},}
+\DoxyCodeLine{103     \{ \textcolor{stringliteral}{"{}GetSessionAudioRatePullSettings"{}}, 1 \},}
+\DoxyCodeLine{104     \{ \textcolor{stringliteral}{"{}GetSessionVideoRatePullSettings"{}}, 1 \},}
+\DoxyCodeLine{105     \{ \textcolor{stringliteral}{"{}GetSessionName"{}}, 1 \},}
+\DoxyCodeLine{106     \{ \textcolor{stringliteral}{"{}GetSessionPath"{}}, 1 \},}
+\DoxyCodeLine{107     \{ \textcolor{stringliteral}{"{}GetSessionStartTime"{}}, 1 \},}
+\DoxyCodeLine{108     \{ \textcolor{stringliteral}{"{}GetSessionLength"{}}, 1 \},}
+\DoxyCodeLine{109     \{ \textcolor{stringliteral}{"{}SetSessionAudioFormat"{}}, 1 \},}
+\DoxyCodeLine{110     \{ \textcolor{stringliteral}{"{}SetSessionBitDepth"{}}, 1 \},}
+\DoxyCodeLine{111     \{ \textcolor{stringliteral}{"{}SetSessionInterleavedState"{}}, 1 \},}
+\DoxyCodeLine{112     \{ \textcolor{stringliteral}{"{}SetSessionTimeCodeRate"{}}, 1 \},}
+\DoxyCodeLine{113     \{ \textcolor{stringliteral}{"{}SetSessionFeetFramesRate"{}}, 1 \},}
+\DoxyCodeLine{114     \{ \textcolor{stringliteral}{"{}SetSessionAudioRatePullSettings"{}}, 1 \},}
+\DoxyCodeLine{115     \{ \textcolor{stringliteral}{"{}SetSessionVideoRatePullSettings"{}}, 1 \},}
+\DoxyCodeLine{116     \{ \textcolor{stringliteral}{"{}SetSessionStartTime"{}}, 1 \},}
+\DoxyCodeLine{117     \{ \textcolor{stringliteral}{"{}SetSessionLength"{}}, 1 \},}
+\DoxyCodeLine{118     \{ \textcolor{stringliteral}{"{}GetPTSLVersion"{}}, 1 \},}
+\DoxyCodeLine{119     \{ \textcolor{stringliteral}{"{}GetPlaybackMode"{}}, 1 \},}
+\DoxyCodeLine{120     \{ \textcolor{stringliteral}{"{}GetRecordMode"{}}, 1 \},}
+\DoxyCodeLine{121     \{ \textcolor{stringliteral}{"{}GetTransportArmed"{}}, 1 \},}
+\DoxyCodeLine{122     \{ \textcolor{stringliteral}{"{}GetTransportState"{}}, 1 \},}
+\DoxyCodeLine{123     \{ \textcolor{stringliteral}{"{}ClearMemoryLocation"{}}, 1 \},}
+\DoxyCodeLine{124     \{ \textcolor{stringliteral}{"{}RenameSelectedClip"{}}, 1 \},}
+\DoxyCodeLine{125     \{ \textcolor{stringliteral}{"{}RenameTargetClip"{}}, 1 \},}
+\DoxyCodeLine{126     \{ \textcolor{stringliteral}{"{}TogglePlayState"{}}, 1 \},}
+\DoxyCodeLine{127     \{ \textcolor{stringliteral}{"{}ToggleRecordEnable"{}}, 1 \},}
+\DoxyCodeLine{128     \{ \textcolor{stringliteral}{"{}PlayHalfSpeed"{}}, 1 \},}
+\DoxyCodeLine{129     \{ \textcolor{stringliteral}{"{}RecordHalfSpeed"{}}, 1 \},}
+\DoxyCodeLine{130     \{ \textcolor{stringliteral}{"{}EditMemoryLocation"{}}, 1 \},}
+\DoxyCodeLine{131     \{ \textcolor{stringliteral}{"{}CreateMemoryLocation"{}}, 1 \},}
+\DoxyCodeLine{132     \{ \textcolor{stringliteral}{"{}GetMemoryLocations"{}}, 1 \},}
+\DoxyCodeLine{133     \{ \textcolor{stringliteral}{"{}RegisterConnection"{}}, 1 \},}
+\DoxyCodeLine{134     \{ \textcolor{stringliteral}{"{}CreateNewTracks"{}}, 1 \},}
+\DoxyCodeLine{135     \{ \textcolor{stringliteral}{"{}GetEditMode"{}}, 1 \},}
+\DoxyCodeLine{136     \{ \textcolor{stringliteral}{"{}SetEditMode"{}}, 1 \},}
+\DoxyCodeLine{137     \{ \textcolor{stringliteral}{"{}GetEditTool"{}}, 1 \},}
+\DoxyCodeLine{138     \{ \textcolor{stringliteral}{"{}SetEditTool"{}}, 1 \},}
+\DoxyCodeLine{139     \{ \textcolor{stringliteral}{"{}RecallZoomPreset"{}}, 1 \},}
+\DoxyCodeLine{140     \{ \textcolor{stringliteral}{"{}GetEditModeOptions"{}}, 1 \},}
+\DoxyCodeLine{141     \{ \textcolor{stringliteral}{"{}SetEditModeOptions"{}}, 1 \},}
+\DoxyCodeLine{142     \{ \textcolor{stringliteral}{"{}SetTimelineSelection"{}}, 1 \},}
+\DoxyCodeLine{143     \{ \textcolor{stringliteral}{"{}GetTimelineSelection"{}}, 1 \},}
+\DoxyCodeLine{144     \{ \textcolor{stringliteral}{"{}SelectTracksByName"{}}, 1 \},}
+\DoxyCodeLine{145     \{ \textcolor{stringliteral}{"{}ImportVideo"{}}, 1 \},}
+\DoxyCodeLine{146     \{ \textcolor{stringliteral}{"{}SelectMemoryLocation"{}}, 1 \},}
+\DoxyCodeLine{147     \{ \textcolor{stringliteral}{"{}SetTrackMuteState"{}}, 1 \},}
+\DoxyCodeLine{148     \{ \textcolor{stringliteral}{"{}SetTrackSoloState"{}}, 1 \},}
+\DoxyCodeLine{149     \{ \textcolor{stringliteral}{"{}SetTrackSoloSafeState"{}}, 1 \},}
+\DoxyCodeLine{150     \{ \textcolor{stringliteral}{"{}SetTrackRecordEnableState"{}}, 1 \},}
+\DoxyCodeLine{151     \{ \textcolor{stringliteral}{"{}SetTrackRecordSafeEnableState"{}}, 1 \},}
+\DoxyCodeLine{152     \{ \textcolor{stringliteral}{"{}SetTrackInputMonitorState"{}}, 1 \},}
+\DoxyCodeLine{153     \{ \textcolor{stringliteral}{"{}SetTrackSmartDspState"{}}, 1 \},}
+\DoxyCodeLine{154     \{ \textcolor{stringliteral}{"{}SetTrackHiddenState"{}}, 1 \},}
+\DoxyCodeLine{155     \{ \textcolor{stringliteral}{"{}SetTrackInactiveState"{}}, 1 \},}
+\DoxyCodeLine{156     \{ \textcolor{stringliteral}{"{}SetTrackFrozenState"{}}, 1 \},}
+\DoxyCodeLine{157     \{ \textcolor{stringliteral}{"{}SetTrackOnlineState"{}}, 1 \},}
+\DoxyCodeLine{158     \{ \textcolor{stringliteral}{"{}SetTrackOpenState"{}}, 1 \},}
+\DoxyCodeLine{159     \{ \textcolor{stringliteral}{"{}GetSessionIDs"{}}, 1 \},}
+\DoxyCodeLine{160     \{ \textcolor{stringliteral}{"{}GetMemoryLocationsManageMode"{}}, 1 \},}
+\DoxyCodeLine{161     \{ \textcolor{stringliteral}{"{}SetMemoryLocationsManageMode"{}}, 1 \},}
+\DoxyCodeLine{162     \{ \textcolor{stringliteral}{"{}SetMainCounterFormat"{}}, 1 \},}
+\DoxyCodeLine{163     \{ \textcolor{stringliteral}{"{}SetSubCounterFormat"{}}, 1 \},}
+\DoxyCodeLine{164     \{ \textcolor{stringliteral}{"{}GetMainCounterFormat"{}}, 1 \},}
+\DoxyCodeLine{165     \{ \textcolor{stringliteral}{"{}GetSubCounterFormat"{}}, 1 \},}
+\DoxyCodeLine{166     \{ \textcolor{stringliteral}{"{}Undo"{}}, 1 \},}
+\DoxyCodeLine{167     \{ \textcolor{stringliteral}{"{}Redo"{}}, 1 \},}
+\DoxyCodeLine{168     \{ \textcolor{stringliteral}{"{}UndoAll"{}}, 1 \},}
+\DoxyCodeLine{169     \{ \textcolor{stringliteral}{"{}RedoAll"{}}, 1 \},}
+\DoxyCodeLine{170     \{ \textcolor{stringliteral}{"{}ClearUndoQueue"{}}, 1 \},}
+\DoxyCodeLine{171     \{ \textcolor{stringliteral}{"{}SetTrackDSPModeSafeState"{}}, 1 \},}
+\DoxyCodeLine{172     \{ \textcolor{stringliteral}{"{}GetSessionSystemDelayInfo"{}}, 1 \},}
+\DoxyCodeLine{173     \{ \textcolor{stringliteral}{"{}GroupClips"{}}, 1 \},}
+\DoxyCodeLine{174     \{ \textcolor{stringliteral}{"{}UngroupClips"{}}, 1 \},}
+\DoxyCodeLine{175     \{ \textcolor{stringliteral}{"{}UngroupAllClips"{}}, 1 \},}
+\DoxyCodeLine{176     \{ \textcolor{stringliteral}{"{}RegroupClips"{}}, 1 \},}
+\DoxyCodeLine{177     \{ \textcolor{stringliteral}{"{}RepeatSelection"{}}, 1 \},}
+\DoxyCodeLine{178     \{ \textcolor{stringliteral}{"{}DuplicateSelection"{}}, 1 \},}
+\DoxyCodeLine{179     \{ \textcolor{stringliteral}{"{}ClearAllMemoryLocations"{}}, 1 \},}
+\DoxyCodeLine{180 \};}
+
+\end{DoxyCode}

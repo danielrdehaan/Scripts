@@ -1,0 +1,28 @@
+\hypertarget{a02804}{}\doxysection{Create\+Audio\+Clips\+Response\+Body}
+\label{a02804}\index{CreateAudioClipsResponseBody@{CreateAudioClipsResponseBody}}
+
+
+\doxysubsection{Description}
+Structure that describes Create\+Audio\+Clips response data. \doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+repeated \mbox{\hyperlink{a02792}{Create\+Audio\+Clip\+Response\+Entry}} \mbox{\hyperlink{a02804_abb28531dfabcc8ffa680c6a8350ebcd3}{clip\+\_\+list}} = 1
+\begin{DoxyCompactList}\small\item\em List of created multichannel clips. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{a02804_abb28531dfabcc8ffa680c6a8350ebcd3}\label{a02804_abb28531dfabcc8ffa680c6a8350ebcd3}} 
+\index{CreateAudioClipsResponseBody@{CreateAudioClipsResponseBody}!clip\_list@{clip\_list}}
+\index{clip\_list@{clip\_list}!CreateAudioClipsResponseBody@{CreateAudioClipsResponseBody}}
+\doxysubsubsection{\texorpdfstring{clip\_list}{clip\_list}}
+{\footnotesize\ttfamily repeated \mbox{\hyperlink{a02792}{Create\+Audio\+Clip\+Response\+Entry}} clip\+\_\+list = 1}
+
+
+
+List of created multichannel clips. 
+
+The order of entries corresponds to the order of multichannel clips in the request (\mbox{\hyperlink{a02800_a89764e6a8d987495ad21616c97bd694e}{Create\+Audio\+Clips\+Request\+Body.\+clip\+\_\+list}}). Failed clips are indicated by an empty list of clip\+\_\+ids. 
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{a00464}{PTSL.\+proto}}\end{DoxyCompactItemize}
