@@ -1,0 +1,23 @@
+{
+  "featured": {
+    "reaper": [
+      {
+        "name": "Random Containers",
+        "description": "Add random container functionality to items in Reaper.",
+        "url": "https://github.com/danielrdehaan/Random-Containers-for-Reaper"
+      },
+      {
+        "name": "ReaMOD",
+        "description": "Control FMOD from within Reaper.",
+        "url": "https://github.com/danielrdehaan/ReaMOD"
+      }
+    ]
+  },
+  "categoryDisplayNames": {
+    "Items-Takes": "Items & Takes",
+    "Grid-Navigation": "Grid & Navigation",
+    "FMOD-Integration": "FMOD Integration",
+    "Import-Export": "Import & Export"
+  },
+  "exclude": ["__pycache__", "Fonts", "README.md", "*.alias", "*OLD*"]
+}
